@@ -8,28 +8,37 @@
 
 /* Begin PBXBuildFile section */
 		488BFC4C3F9CD91316242BF2 /* Pods_Chain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9539F426077247B971C0FA27 /* Pods_Chain.framework */; };
+		68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D375238DC8DA00AD4DC8 /* ChristiansLibrary.swift */; };
+		68A5D37F238DC8DA00AD4DC8 /* MemoryHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D376238DC8DA00AD4DC8 /* MemoryHelp.swift */; };
+		68A5D380238DC8DA00AD4DC8 /* GlobalAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D377238DC8DA00AD4DC8 /* GlobalAttributes.swift */; };
+		68A5D381238DC8DA00AD4DC8 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D378238DC8DA00AD4DC8 /* LoadingView.swift */; };
+		68A5D382238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D379238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift */; };
+		68A5D383238DC8DA00AD4DC8 /* ChristiansFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37A238DC8DA00AD4DC8 /* ChristiansFirebase.swift */; };
+		68A5D384238DC8DA00AD4DC8 /* CustomSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37B238DC8DA00AD4DC8 /* CustomSpinner.swift */; };
+		68A5D385238DC8DA00AD4DC8 /* DecodableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37C238DC8DA00AD4DC8 /* DecodableObject.swift */; };
+		68A5D386238DC8DA00AD4DC8 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37D238DC8DA00AD4DC8 /* EmptyTableView.swift */; };
+		68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
 		FA7E366F238DB12A00488000 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366E238DB12A00488000 /* ViewController.swift */; };
 		FA7E3672238DB12A00488000 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3670238DB12A00488000 /* Main.storyboard */; };
 		FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3673238DB12C00488000 /* Assets.xcassets */; };
 		FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3675238DB12C00488000 /* LaunchScreen.storyboard */; };
-		FA7E3680238DB98800488000 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA7E367F238DB98800488000 /* GoogleService-Info.plist */; };
-		FA7E3694238DBA2C00488000 /* DecodableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3684238DBA2C00488000 /* DecodableObject.swift */; };
-		FA7E3695238DBA2C00488000 /* ChristiansLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3685238DBA2C00488000 /* ChristiansLibrary.swift */; };
-		FA7E3696238DBA2C00488000 /* BeautifulLoadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3686238DBA2C00488000 /* BeautifulLoadScreen.swift */; };
-		FA7E3698238DBA2D00488000 /* ChristiansFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */; };
-		FA7E3699238DBA2D00488000 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3689238DBA2C00488000 /* EmptyTableView.swift */; };
-		FA7E369A238DBA2D00488000 /* CustomSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368A238DBA2C00488000 /* CustomSpinner.swift */; };
-		FA7E369C238DBA2D00488000 /* MemoryHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368C238DBA2C00488000 /* MemoryHelp.swift */; };
-		FA7E369D238DBA2D00488000 /* EasyNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368D238DBA2C00488000 /* EasyNavBar.swift */; };
-		FA7E369E238DBA2D00488000 /* GlobalAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */; };
-		FA7E36A2238DBA2D00488000 /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3693238DBA2C00488000 /* LoadingView.swift */; };
 		FA7E36A4238DBB7600488000 /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36A3238DBB7600488000 /* enums.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		207DFFD991FA8BD53EFB529F /* Pods-Chain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.debug.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.debug.xcconfig"; sourceTree = "<group>"; };
 		462EAC724C4472993DD039D0 /* Pods-Chain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.release.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.release.xcconfig"; sourceTree = "<group>"; };
+		68A5D375238DC8DA00AD4DC8 /* ChristiansLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansLibrary.swift; sourceTree = "<group>"; };
+		68A5D376238DC8DA00AD4DC8 /* MemoryHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryHelp.swift; sourceTree = "<group>"; };
+		68A5D377238DC8DA00AD4DC8 /* GlobalAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAttributes.swift; sourceTree = "<group>"; };
+		68A5D378238DC8DA00AD4DC8 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		68A5D379238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeautifulLoadScreen.swift; sourceTree = "<group>"; };
+		68A5D37A238DC8DA00AD4DC8 /* ChristiansFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansFirebase.swift; sourceTree = "<group>"; };
+		68A5D37B238DC8DA00AD4DC8 /* CustomSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSpinner.swift; sourceTree = "<group>"; };
+		68A5D37C238DC8DA00AD4DC8 /* DecodableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableObject.swift; sourceTree = "<group>"; };
+		68A5D37D238DC8DA00AD4DC8 /* EmptyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTableView.swift; sourceTree = "<group>"; };
+		68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		9539F426077247B971C0FA27 /* Pods_Chain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E366A238DB12A00488000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -38,17 +47,6 @@
 		FA7E3673238DB12C00488000 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FA7E3676238DB12C00488000 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA7E3678238DB12C00488000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FA7E367F238DB98800488000 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Desktop/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		FA7E3684238DBA2C00488000 /* DecodableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableObject.swift; sourceTree = "<group>"; };
-		FA7E3685238DBA2C00488000 /* ChristiansLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansLibrary.swift; sourceTree = "<group>"; };
-		FA7E3686238DBA2C00488000 /* BeautifulLoadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeautifulLoadScreen.swift; sourceTree = "<group>"; };
-		FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansFirebase.swift; sourceTree = "<group>"; };
-		FA7E3689238DBA2C00488000 /* EmptyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTableView.swift; sourceTree = "<group>"; };
-		FA7E368A238DBA2C00488000 /* CustomSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSpinner.swift; sourceTree = "<group>"; };
-		FA7E368C238DBA2C00488000 /* MemoryHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryHelp.swift; sourceTree = "<group>"; };
-		FA7E368D238DBA2C00488000 /* EasyNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyNavBar.swift; sourceTree = "<group>"; };
-		FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAttributes.swift; sourceTree = "<group>"; };
-		FA7E3693238DBA2C00488000 /* LoadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
 		FA7E36A3238DBB7600488000 /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -111,7 +109,7 @@
 				FA7E3673238DB12C00488000 /* Assets.xcassets */,
 				FA7E3675238DB12C00488000 /* LaunchScreen.storyboard */,
 				FA7E3678238DB12C00488000 /* Info.plist */,
-				FA7E367F238DB98800488000 /* GoogleService-Info.plist */,
+				68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */,
 			);
 			path = Chain;
 			sourceTree = "<group>";
@@ -142,16 +140,15 @@
 		FA7E3683238DBA2C00488000 /* Christians Library */ = {
 			isa = PBXGroup;
 			children = (
-				FA7E3684238DBA2C00488000 /* DecodableObject.swift */,
-				FA7E3685238DBA2C00488000 /* ChristiansLibrary.swift */,
-				FA7E3686238DBA2C00488000 /* BeautifulLoadScreen.swift */,
-				FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */,
-				FA7E3689238DBA2C00488000 /* EmptyTableView.swift */,
-				FA7E368A238DBA2C00488000 /* CustomSpinner.swift */,
-				FA7E368C238DBA2C00488000 /* MemoryHelp.swift */,
-				FA7E368D238DBA2C00488000 /* EasyNavBar.swift */,
-				FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */,
-				FA7E3693238DBA2C00488000 /* LoadingView.swift */,
+				68A5D379238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift */,
+				68A5D37A238DC8DA00AD4DC8 /* ChristiansFirebase.swift */,
+				68A5D375238DC8DA00AD4DC8 /* ChristiansLibrary.swift */,
+				68A5D37B238DC8DA00AD4DC8 /* CustomSpinner.swift */,
+				68A5D37C238DC8DA00AD4DC8 /* DecodableObject.swift */,
+				68A5D37D238DC8DA00AD4DC8 /* EmptyTableView.swift */,
+				68A5D377238DC8DA00AD4DC8 /* GlobalAttributes.swift */,
+				68A5D378238DC8DA00AD4DC8 /* LoadingView.swift */,
+				68A5D376238DC8DA00AD4DC8 /* MemoryHelp.swift */,
 			);
 			name = "Christians Library";
 			path = "../../Christians Library";
@@ -219,7 +216,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
-				FA7E3680238DB98800488000 /* GoogleService-Info.plist in Resources */,
+				68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
 			);
@@ -291,19 +288,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA7E369A238DBA2D00488000 /* CustomSpinner.swift in Sources */,
+				68A5D384238DC8DA00AD4DC8 /* CustomSpinner.swift in Sources */,
+				68A5D386238DC8DA00AD4DC8 /* EmptyTableView.swift in Sources */,
 				FA7E36A4238DBB7600488000 /* enums.swift in Sources */,
-				FA7E3695238DBA2C00488000 /* ChristiansLibrary.swift in Sources */,
-				FA7E3699238DBA2D00488000 /* EmptyTableView.swift in Sources */,
+				68A5D37F238DC8DA00AD4DC8 /* MemoryHelp.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ViewController.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
-				FA7E3694238DBA2C00488000 /* DecodableObject.swift in Sources */,
-				FA7E3698238DBA2D00488000 /* ChristiansFirebase.swift in Sources */,
-				FA7E369D238DBA2D00488000 /* EasyNavBar.swift in Sources */,
-				FA7E369E238DBA2D00488000 /* GlobalAttributes.swift in Sources */,
-				FA7E369C238DBA2D00488000 /* MemoryHelp.swift in Sources */,
-				FA7E3696238DBA2C00488000 /* BeautifulLoadScreen.swift in Sources */,
-				FA7E36A2238DBA2D00488000 /* LoadingView.swift in Sources */,
+				68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */,
+				68A5D382238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift in Sources */,
+				68A5D381238DC8DA00AD4DC8 /* LoadingView.swift in Sources */,
+				68A5D380238DC8DA00AD4DC8 /* GlobalAttributes.swift in Sources */,
+				68A5D385238DC8DA00AD4DC8 /* DecodableObject.swift in Sources */,
+				68A5D383238DC8DA00AD4DC8 /* ChristiansFirebase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -449,7 +445,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Z4R7549C4;
+				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -469,7 +465,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 9Z4R7549C4;
+				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
