@@ -20,6 +20,12 @@
 	<string>1</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSCameraUsageDescription</key>
+	<string>required to take images</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Recording Video</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Gotta get your pics</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

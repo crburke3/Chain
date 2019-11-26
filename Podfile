@@ -49,5 +49,7 @@ target 'Chain' do
   # pod 'Stripe'
   pod 'SwipeMenuViewController'
   # pod 'CurrencyTextField'
+  pod 'CameraKit-iOS'
+
 
 end
