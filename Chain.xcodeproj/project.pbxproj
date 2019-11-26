@@ -24,6 +24,14 @@
 		FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3673238DB12C00488000 /* Assets.xcassets */; };
 		FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3675238DB12C00488000 /* LaunchScreen.storyboard */; };
 		FA7E36A4238DBB7600488000 /* enums.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36A3238DBB7600488000 /* enums.swift */; };
+		FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36A8238DCD3B00488000 /* SignInViewController.swift */; };
+		FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7E36A9238DCD3B00488000 /* SignInViewController.xib */; };
+		FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36AE238DCD5C00488000 /* SignUpViewController.swift */; };
+		FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7E36AF238DCD5C00488000 /* SignUpViewController.xib */; };
+		FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36B4238DD20400488000 /* CameraViewController.swift */; };
+		FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7E36B5238DD20400488000 /* CameraViewController.xib */; };
+		FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36B8238DD55800488000 /* FirstViewController.swift */; };
+		FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36BA238DDDB100488000 /* SceneDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +56,14 @@
 		FA7E3676238DB12C00488000 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FA7E3678238DB12C00488000 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FA7E36A3238DBB7600488000 /* enums.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = enums.swift; sourceTree = "<group>"; };
+		FA7E36A8238DCD3B00488000 /* SignInViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewController.swift; sourceTree = "<group>"; };
+		FA7E36A9238DCD3B00488000 /* SignInViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignInViewController.xib; sourceTree = "<group>"; };
+		FA7E36AE238DCD5C00488000 /* SignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		FA7E36AF238DCD5C00488000 /* SignUpViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignUpViewController.xib; sourceTree = "<group>"; };
+		FA7E36B4238DD20400488000 /* CameraViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		FA7E36B5238DD20400488000 /* CameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
+		FA7E36B8238DD55800488000 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
+		FA7E36BA238DDDB100488000 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -100,10 +116,12 @@
 		FA7E3669238DB12A00488000 /* Chain */ = {
 			isa = PBXGroup;
 			children = (
+				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
+				FA7E36A7238DCCFD00488000 /* Authentication Views */,
 				FA7E367E238DB91100488000 /* Main View */,
-				FA7E3681238DB9C100488000 /* Profile View */,
+				FA7E36B2238DD1EB00488000 /* Misc Views */,
 				FA7E3682238DB9EB00488000 /* Structs */,
 				FA7E3683238DBA2C00488000 /* Christians Library */,
 				FA7E3673238DB12C00488000 /* Assets.xcassets */,
@@ -152,6 +170,52 @@
 			);
 			name = "Christians Library";
 			path = "../../Christians Library";
+			sourceTree = "<group>";
+		};
+		FA7E36A7238DCCFD00488000 /* Authentication Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA7E36B8238DD55800488000 /* FirstViewController.swift */,
+				FA7E36AC238DCD4100488000 /* Sign In */,
+				FA7E36AD238DCD4500488000 /* Sign Up */,
+			);
+			path = "Authentication Views";
+			sourceTree = "<group>";
+		};
+		FA7E36AC238DCD4100488000 /* Sign In */ = {
+			isa = PBXGroup;
+			children = (
+				FA7E36A8238DCD3B00488000 /* SignInViewController.swift */,
+				FA7E36A9238DCD3B00488000 /* SignInViewController.xib */,
+			);
+			path = "Sign In";
+			sourceTree = "<group>";
+		};
+		FA7E36AD238DCD4500488000 /* Sign Up */ = {
+			isa = PBXGroup;
+			children = (
+				FA7E36AE238DCD5C00488000 /* SignUpViewController.swift */,
+				FA7E36AF238DCD5C00488000 /* SignUpViewController.xib */,
+			);
+			path = "Sign Up";
+			sourceTree = "<group>";
+		};
+		FA7E36B2238DD1EB00488000 /* Misc Views */ = {
+			isa = PBXGroup;
+			children = (
+				FA7E36B3238DD1F600488000 /* Camera View */,
+				FA7E3681238DB9C100488000 /* Profile View */,
+			);
+			path = "Misc Views";
+			sourceTree = "<group>";
+		};
+		FA7E36B3238DD1F600488000 /* Camera View */ = {
+			isa = PBXGroup;
+			children = (
+				FA7E36B4238DD20400488000 /* CameraViewController.swift */,
+				FA7E36B5238DD20400488000 /* CameraViewController.xib */,
+			);
+			path = "Camera View";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,9 +279,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */,
+				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
 				68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
+				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -293,11 +360,16 @@
 				FA7E36A4238DBB7600488000 /* enums.swift in Sources */,
 				68A5D37F238DC8DA00AD4DC8 /* MemoryHelp.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ViewController.swift in Sources */,
+				FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
+				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,
 				68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */,
+				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
 				68A5D382238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift in Sources */,
 				68A5D381238DC8DA00AD4DC8 /* LoadingView.swift in Sources */,
+				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
 				68A5D380238DC8DA00AD4DC8 /* GlobalAttributes.swift in Sources */,
+				FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */,
 				68A5D385238DC8DA00AD4DC8 /* DecodableObject.swift in Sources */,
 				68A5D383238DC8DA00AD4DC8 /* ChristiansFirebase.swift in Sources */,
 			);
@@ -445,9 +517,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2PT4RQSY99;
+				DEVELOPMENT_TEAM = 9Z4R7549C4;
 				INFOPLIST_FILE = Chain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -465,9 +537,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2PT4RQSY99;
+				DEVELOPMENT_TEAM = 9Z4R7549C4;
 				INFOPLIST_FILE = Chain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

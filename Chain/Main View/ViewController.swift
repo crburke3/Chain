@@ -15,8 +15,9 @@ class MainViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    //
-
-
+    @IBAction func plusClicked(_ sender: Any) {
+        let cameraVC = CameraViewController()
+        self.show(cameraVC, sender: nil)
+    }
 }
 
