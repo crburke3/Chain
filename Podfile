@@ -28,7 +28,7 @@ target 'Chain' do
   pod 'UIEmptyState'
   pod 'PopupDialog'
   pod 'SHSearchBar'
-  pod 'SideMenu'
+  # pod 'SideMenu'
   pod 'InfiniteCarouselCollectionView'
   pod 'UICircularProgressRing'
   pod 'FanMenu'

@@ -20,7 +20,6 @@
 		FA7E3698238DBA2D00488000 /* ChristiansFirebase.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */; };
 		FA7E3699238DBA2D00488000 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E3689238DBA2C00488000 /* EmptyTableView.swift */; };
 		FA7E369A238DBA2D00488000 /* CustomSpinner.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368A238DBA2C00488000 /* CustomSpinner.swift */; };
-		FA7E369B238DBA2D00488000 /* MapStuff.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368B238DBA2C00488000 /* MapStuff.swift */; };
 		FA7E369C238DBA2D00488000 /* MemoryHelp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368C238DBA2C00488000 /* MemoryHelp.swift */; };
 		FA7E369D238DBA2D00488000 /* EasyNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368D238DBA2C00488000 /* EasyNavBar.swift */; };
 		FA7E369E238DBA2D00488000 /* GlobalAttributes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */; };
@@ -46,7 +45,6 @@
 		FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansFirebase.swift; sourceTree = "<group>"; };
 		FA7E3689238DBA2C00488000 /* EmptyTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EmptyTableView.swift; sourceTree = "<group>"; };
 		FA7E368A238DBA2C00488000 /* CustomSpinner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSpinner.swift; sourceTree = "<group>"; };
-		FA7E368B238DBA2C00488000 /* MapStuff.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapStuff.swift; sourceTree = "<group>"; };
 		FA7E368C238DBA2C00488000 /* MemoryHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryHelp.swift; sourceTree = "<group>"; };
 		FA7E368D238DBA2C00488000 /* EasyNavBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EasyNavBar.swift; sourceTree = "<group>"; };
 		FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAttributes.swift; sourceTree = "<group>"; };
@@ -150,7 +148,6 @@
 				FA7E3688238DBA2C00488000 /* ChristiansFirebase.swift */,
 				FA7E3689238DBA2C00488000 /* EmptyTableView.swift */,
 				FA7E368A238DBA2C00488000 /* CustomSpinner.swift */,
-				FA7E368B238DBA2C00488000 /* MapStuff.swift */,
 				FA7E368C238DBA2C00488000 /* MemoryHelp.swift */,
 				FA7E368D238DBA2C00488000 /* EasyNavBar.swift */,
 				FA7E368E238DBA2C00488000 /* GlobalAttributes.swift */,
@@ -299,7 +296,6 @@
 				FA7E3695238DBA2C00488000 /* ChristiansLibrary.swift in Sources */,
 				FA7E3699238DBA2D00488000 /* EmptyTableView.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ViewController.swift in Sources */,
-				FA7E369B238DBA2D00488000 /* MapStuff.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
 				FA7E3694238DBA2C00488000 /* DecodableObject.swift in Sources */,
 				FA7E3698238DBA2D00488000 /* ChristiansFirebase.swift in Sources */,
