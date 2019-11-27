@@ -12,5 +12,12 @@ import Foundation
 enum SaveKeys:String{
     case username
     case password
+    case phoneNumber
     
+}
+
+enum LoadState:String{
+    case NOT_LOADED
+    case LOADING
+    case LOADED
 }

@@ -8,16 +8,36 @@
 
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: UIViewController, ChainImageDelegate {
 
+    var mainChain:PostChain!
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.delegate = self
+        tableView.dataSource = self
+        masterFire.loadChain(chainID: "firstChain") { (loadedChain) in
+            if let chain = loadedChain{
+                self.mainChain = chain
+                for post in self.mainChain.posts{
+                    post.delegate = self
+                }
+                self.tableView.reloadData()
+            }
+        }
         // Do any additional setup after loading the view.
     }
     
     @IBAction func plusClicked(_ sender: Any) {
         let cameraVC = CameraViewController()
         self.show(cameraVC, sender: nil)
+    }
+    
+    func imageDidLoad(chainImage: ChainImage) {
+        DispatchQueue.main.async {
+            self.tableView.reloadRows(at: [IndexPath(row: chainImage.localIndex, section: 0)], with: .fade)
+        }
     }
 }
 

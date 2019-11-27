@@ -8,9 +8,13 @@
 
 import UIKit
 import Firebase
+import MapKit
 
 var masterNav:UINavigationController!
 var masterStoryBoard:UIStoryboard!
+var masterAuth = ChainAuth()
+var masterFire = ChainFireStore()
+let masterLocator = CLLocationManager()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
