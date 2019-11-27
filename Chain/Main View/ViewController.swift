@@ -26,7 +26,7 @@ class MainViewController: UIViewController, ChainImageDelegate {
                 self.tableView.reloadData()
             }
         }
-        // Do any additional setup after loading the view.
+        // Do anjhjhhhhy additional setup after loading the view.
     }
     
     @IBAction func plusClicked(_ sender: Any) {
