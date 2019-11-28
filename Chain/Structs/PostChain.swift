@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 import Geofirestore
 
+
 class PostChain{
     var chainID:String
     var birthDate:Date
@@ -90,3 +91,33 @@ class PostChain{
 protocol PostChainDelegate {
     func chainDidLoad(chain: PostChain)
 }
+
+/*
+extension CLLocationManager{
+    func getCurrentLocation()->CLLocation?{
+        if( CLLocationManager.authorizationStatus() == .authorizedWhenInUse ||
+            CLLocationManager.authorizationStatus() ==  .authorizedAlways){
+            if let appleLocation = self.location{
+                return appleLocation
+            }
+        }else{
+            print("user has not authorized location management")
+        }
+        return nil
+    }
+}
+ */
+/*
+extension GeoFirestore{
+    public static func getFirestoreData(for coordinate: CLLocationCoordinate2D)->[String:Any]?{
+        let lat = coordinate.latitude
+        let lon = coordinate.longitude
+        if let geoHash = GFGeoHash(location: coordinate).geoHashValue {
+    return ["l" : [lat,lon], "g": geoHash]
+        }
+        return nil
+    }
+}
+
+*/
+
