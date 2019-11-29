@@ -18,6 +18,7 @@
 		68A5D385238DC8DA00AD4DC8 /* DecodableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37C238DC8DA00AD4DC8 /* DecodableObject.swift */; };
 		68A5D386238DC8DA00AD4DC8 /* EmptyTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D37D238DC8DA00AD4DC8 /* EmptyTableView.swift */; };
 		68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */; };
+		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
 		FA63C87D238DE92B00B30312 /* PostChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C87C238DE92B00B30312 /* PostChain.swift */; };
@@ -58,6 +59,7 @@
 		68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
+		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFirestoreExtensions.swift; sourceTree = "<group>"; };
 		68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerExtensions.swift; sourceTree = "<group>"; };
 		9539F426077247B971C0FA27 /* Pods_Chain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -186,6 +188,7 @@
 				FA63C883238DF4D800B30312 /* ChainUser.swift */,
 				68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */,
 				FA63C87C238DE92B00B30312 /* PostChain.swift */,
+				68CE9B8B2391002E00E8483D /* Invite.swift */,
 			);
 			path = Structs;
 			sourceTree = "<group>";
@@ -404,6 +407,7 @@
 				FA63C886238E07A400B30312 /* MainTableView.swift in Sources */,
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,
 				68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */,
+				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */,
 				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
@@ -563,7 +567,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Z4R7549C4;
 				INFOPLIST_FILE = Chain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -583,7 +587,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 9Z4R7549C4;
 				INFOPLIST_FILE = Chain/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
