@@ -75,6 +75,8 @@ class ChainImage{
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
+    
+    
 }
 
 

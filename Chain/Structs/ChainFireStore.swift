@@ -34,6 +34,7 @@ class ChainFireStore {
     }
     
     //Will be deprecated later, just for use during testing
+    //Added "index" so once chain is loaded it starts in the correct spot
     func loadChain(chainID:String, chain: @escaping (PostChain?)->()){
         let ref = Firestore.firestore().collection("chains").document(chainID)
         ref.getDocument { (snap, err) in
@@ -47,13 +48,35 @@ class ChainFireStore {
     }
     
     //Added
-    func appendChain(chain:PostChain, image:ChainImage, error: @escaping (String?)->()) {
+    func appendChain(chain:PostChain, image:UIImage, error: @escaping (String?)->()) {
         let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)
+        let data = image.jpegData(compressionQuality: 1.0)!
+        let imageName = UUID().uuidString
+        let imageReference = Storage.storage().reference().child("Chain Images").child(imageName) //
+        let metaDataForImage = StorageMetadata() //
+        metaDataForImage.contentType = "image/jpeg" //
         
+        imageReference.putData(data, metadata: metaDataForImage) { (meta, err) in //metadata: nil to metaDataForImage
+        if let err = err {
+                print("Error sending photo to cloud")
+                return
+        }
+        imageReference.downloadURL(completion: { (url, err) in
+        if let err = err {
+                print("Error loading URL")
+                return
+        }
+        guard let url = url else{
+                print("Error loading URL")
+                return
+        }
+        let dataRef = Firestore.firestore().collection("chains").document("firstChain")
+        let defaults = UserDefaults.standard
+        let urlString = url.absoluteString //Hold URL
         
-        
+        let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
         firestoreRef.updateData([
-            "posts": FieldValue.arrayUnion([image.toDict()]), "likes": chain.likes += 1 //Need to increment correctly
+            "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "likes": chain.likes += 1 //Need to increment correctly
         ]) { (err1) in
             if let error1 = err1{
                 masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
@@ -65,6 +88,8 @@ class ChainFireStore {
         
         //let ref = FirestoreReferenceManager
     }
+    
+    //func removeFromChain()
     //TODO: Make better chain function
     //Will user for good, could return a lot of IDs, we can paginate this also, which we will need to do
 //    func loadChainIDs(){
@@ -126,10 +151,21 @@ class ChainFireStore {
     }
     
     func inviteFriend(chainID: String, sendUser: String, index: Int, error: @escaping (String?)->()) {
+        //In Invitation object for now
         
         
     }
-    
+    func getCurrentUsersData(currentUser: String, error: @escaping (String?)->()) {
+        //When user signs in, gather their data
+        
+    }
+    func updateFriendsFeed(chainID: String, error: @escaping (String?)->()) {
+        //Place created chain or involved-in chain onto every friend's feed
+        
+    }
+    func loadNextFewPhotos() {
+        
+    }
     //Function to get basic of chain (Title, tags, description, length, likes, count, etc.)
     
 }

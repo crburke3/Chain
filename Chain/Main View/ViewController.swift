@@ -39,5 +39,16 @@ class MainViewController: UIViewController, ChainImageDelegate {
             self.tableView.reloadRows(at: [IndexPath(row: chainImage.localIndex, section: 0)], with: .fade)
         }
     }
+    
+    func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
+        //indexPathsForVisibleItems -> Collection View
+        //indexPathsForVisibleRow -> Table View
+        let upperIndex = currentIndex + loadRadius
+        var newIndex = currentIndex + 1
+        while (newIndex < upperIndex) {
+            //KingFisher load function
+            newIndex += 1
+        }
+    }
 }
 
