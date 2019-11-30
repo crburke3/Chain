@@ -75,8 +75,9 @@ class ChainImage{
         URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
     
-    
-    
+    func uploadImage(completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        
+    }
 }
 
 

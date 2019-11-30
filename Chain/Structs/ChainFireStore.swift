@@ -49,31 +49,33 @@ class ChainFireStore {
     
     //Added
     func appendChain(chain:PostChain, image:UIImage, error: @escaping (String?)->()) {
+        var urlString = "" //Will hold URL string to create Chain Image
         let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
-        let imageReference = Storage.storage().reference().child("Chain Images").child(imageName) //
+        let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
         let metaDataForImage = StorageMetadata() //
         metaDataForImage.contentType = "image/jpeg" //
-        
         imageReference.putData(data, metadata: metaDataForImage) { (meta, err) in //metadata: nil to metaDataForImage
-        if let err = err {
+            if let err = err {
                 print("Error sending photo to cloud")
                 return
+            }
+            imageReference.downloadURL(completion: { (url, err) in
+                if let err = err {
+                    print("Error loading URL")
+                    return
+                }
+                guard let url = url else{
+                    print("Error loading URL")
+                    return
+                }
+                //var myURL = url
+                //let dataRef = Firestore.firestore().collection("Users").document("mbrutkow")
+                //let defaults = UserDefaults.standard
+                urlString = url.absoluteString //Hold URL
+            })
         }
-        imageReference.downloadURL(completion: { (url, err) in
-        if let err = err {
-                print("Error loading URL")
-                return
-        }
-        guard let url = url else{
-                print("Error loading URL")
-                return
-        }
-        let dataRef = Firestore.firestore().collection("chains").document("firstChain")
-        let defaults = UserDefaults.standard
-        let urlString = url.absoluteString //Hold URL
-        
         let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
         firestoreRef.updateData([
             "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "likes": chain.likes += 1 //Need to increment correctly
@@ -85,8 +87,6 @@ class ChainFireStore {
                 error(nil)
             }
         }
-        
-        //let ref = FirestoreReferenceManager
     }
     
     //func removeFromChain()
@@ -121,7 +121,32 @@ class ChainFireStore {
                    }
         }
     }
-    
+    func removeFriend(currentUser: String, friend: String, error: @escaping (String?)->()) {
+        //Add other user to current user's friend list
+        var firestoreRef = Firestore.firestore().collection("users").document(currentUser)
+        firestoreRef.updateData([
+            "friends": FieldValue.arrayRemove([friend])
+        ]) { (err1) in
+                   if let error1 = err1{
+                       masterNav.showPopUp(_title: "Error removing friend from friends list", _message: error1.localizedDescription)
+                       error(error1.localizedDescription)
+                   }else{
+                       error(nil)
+                   }
+        }
+        //Add current user to other user's friends list
+        firestoreRef = Firestore.firestore().collection("users").document(friend)
+        firestoreRef.updateData([
+            "friends": FieldValue.arrayRemove([currentUser])
+        ]) { (err1) in
+                   if let error1 = err1{
+                       masterNav.showPopUp(_title: "Error removing friend from friends list", _message: error1.localizedDescription)
+                       error(error1.localizedDescription)
+                   }else{
+                       error(nil)
+                   }
+        }
+    }
     func signUpUser(docData: [String : Any], error: @escaping (String?)->()) {
         Firestore.firestore().collection("users").document(docData["username"] as! String).setData(docData) { err in
             if let err = err {
