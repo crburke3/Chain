@@ -10,22 +10,46 @@ import Foundation
 import UIKit
 import MapKit
 import Geofirestore
+import FirebaseAuth
 
 class FirstViewController : UIViewController, CLLocationManagerDelegate{
+    
+    let phoneNumber = "+19802550653"
+    let testVerificationCode = "123456"
     
     override func viewDidLoad() {
         masterNav = self.navigationController!
         masterStoryBoard = self.storyboard!
         
-        if let phoneNumber = loadString(ident: .phoneNumber){
-            //Try and log in automatically
-            ChainUser.initFromFirestore(with: phoneNumber) { (loadedUser) in
-                if let user = loadedUser{
-                    masterAuth.currUser = user
-                }
-            }
-        }
+        //Verify
+         Auth.auth().languageCode = "en"; //Set language
+        //Send Verification code
+         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
+           if let error = error {
+             print(error.localizedDescription)
+            print("Not working")
+             return
+           }
+           // Sign in using the verificationID and the code sent to the user
+           // ...
+            print("Verification Code: \(verificationID ?? "None")")
+             UserDefaults.standard.set(verificationID, forKey: "authVerificationID") //Save verification ID
+             
+         }
         
+         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
+         
+         
+         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: testVerificationCode) //Load object
+         //Sign In
+         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+           if let error = error {
+             // ...
+             return
+           }
+           // User is signed in
+           // ...
+         }
     }
     
     @IBAction func enterTapped(_ sender: Any) {

@@ -47,6 +47,7 @@
 /* Begin PBXFileReference section */
 		207DFFD991FA8BD53EFB529F /* Pods-Chain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.debug.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.debug.xcconfig"; sourceTree = "<group>"; };
 		462EAC724C4472993DD039D0 /* Pods-Chain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.release.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.release.xcconfig"; sourceTree = "<group>"; };
+		68676B9E23AEB29D00DAD539 /* Chain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chain.entitlements; sourceTree = "<group>"; };
 		68A5D375238DC8DA00AD4DC8 /* ChristiansLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansLibrary.swift; sourceTree = "<group>"; };
 		68A5D376238DC8DA00AD4DC8 /* MemoryHelp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MemoryHelp.swift; sourceTree = "<group>"; };
 		68A5D377238DC8DA00AD4DC8 /* GlobalAttributes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalAttributes.swift; sourceTree = "<group>"; };
@@ -145,6 +146,7 @@
 		FA7E3669238DB12A00488000 /* Chain */ = {
 			isa = PBXGroup;
 			children = (
+				68676B9E23AEB29D00DAD539 /* Chain.entitlements */,
 				68F92F25238F81A3000F05AA /* Extensions */,
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
@@ -564,6 +566,7 @@
 			baseConfigurationReference = 207DFFD991FA8BD53EFB529F /* Pods-Chain.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
@@ -572,7 +575,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -584,6 +587,7 @@
 			baseConfigurationReference = 462EAC724C4472993DD039D0 /* Pods-Chain.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
@@ -592,7 +596,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
