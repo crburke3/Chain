@@ -14,7 +14,7 @@ class ChainImage{
     
     var link:String
     var user:String
-    var time:Date
+    var time:String
     var image:UIImage?
     var loadState = LoadState.NOT_LOADED
     var delegate:ChainImageDelegate?
@@ -26,13 +26,13 @@ class ChainImage{
         self.image = image
         self.link = link
         self.user = user
-        self.time = Date()
+        self.time = Date().toChainString() //Convert to string
     }
     
     //When pulled from firestore
     init(dict:[String:Any]){
         self.link = dict["Link"] as! String
-        self.time = Date(chainString: dict["Time"] as! String)
+        self.time = dict["Time"] as! String
         self.user = dict["user"] as! String
     }
     

@@ -70,23 +70,21 @@ class ChainFireStore {
                     print("Error loading URL")
                     return
                 }
-                //var myURL = url
-                //let dataRef = Firestore.firestore().collection("Users").document("mbrutkow")
-                //let defaults = UserDefaults.standard
                 urlString = url.absoluteString //Hold URL
-            })
-        }
-        let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
-        firestoreRef.updateData([
-            "posts": FieldValue.arrayUnion([uploadImage.toDict()])
-        ]) { (err1) in
-            if let error1 = err1{
-                masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
-                error(error1.localizedDescription)
-            }else{
-                error(nil)
+                print(urlString)
+                let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
+                firestoreRef.updateData([
+                    "posts": FieldValue.arrayUnion([uploadImage.toDict()])
+                ]) { (err1) in
+                    if let error1 = err1{
+                        masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
+                        error(error1.localizedDescription)
+                    } else{
+                        error(nil)
+                    }
+                   }
+                })
             }
-        }
     }
     
     //func removeFromChain()

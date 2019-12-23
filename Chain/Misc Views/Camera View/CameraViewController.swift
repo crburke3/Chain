@@ -34,13 +34,7 @@ class CameraViewController: UIViewController {
         //Capture Image
         captureImage()
         //Confirm Image, if denied then take another image
-        masterFire.appendChain(chainID: chainID, image: imageView.image!) { (error) in
-            if let error = error {
-                print("Error appending to chain")
-            } else {
-                
-            }
-        }
+        
         //Once confirmed, upload to FireBase and then append to chain
         
     }
@@ -62,8 +56,17 @@ class CameraViewController: UIViewController {
             print(self.imageView.frame)
             self.cameraButton.isHidden = true
             //Present confirm or denie buttons
+            
+            masterFire.appendChain(chainID: self.chainID, image: self.imageView.image!) { (error) in
+                if let error = error {
+                    print("Error appending to chain \(error)")
+                } else {
+                    
+                }
+            }
+            
         }) { (error) in
-            print("Session Cpature failed to capture image.")
+           
         }
     }
 }
