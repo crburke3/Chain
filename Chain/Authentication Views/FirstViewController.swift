@@ -18,43 +18,16 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     let testVerificationCode = "123456"
     
     override func viewDidLoad() {
-        masterNav = self.navigationController!
+        //masterNav = self.navigationController! //Guessing you were trying to get the current Nav Controller
         masterStoryBoard = self.storyboard!
         
-        //Verify
-         Auth.auth().languageCode = "en"; //Set language
-        //Send Verification code
-         PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-           if let error = error {
-             print(error.localizedDescription)
-            print("Not working")
-             return
-           }
-           // Sign in using the verificationID and the code sent to the user
-           // ...
-            print("Verification Code: \(verificationID ?? "None")")
-             UserDefaults.standard.set(verificationID, forKey: "authVerificationID") //Save verification ID
-             
-         }
-        
-         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
-         
-         
-         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: testVerificationCode) //Load object
-         //Sign In
-         Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-           if let error = error {
-             // ...
-             return
-           }
-           // User is signed in
-           // ...
-         }
     }
     
     @IBAction func enterTapped(_ sender: Any) {
         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
-        masterNav.pushViewController(mainVC, animated: true)
+        //Use performSegue instead
+        performSegue(withIdentifier: "signUp", sender: self)
+        //masterNav.pushViewController(mainVC, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
