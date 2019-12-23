@@ -26,7 +26,7 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     @IBAction func enterTapped(_ sender: Any) {
         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
         //Use performSegue instead
-        performSegue(withIdentifier: "signUp", sender: self)
+        performSegue(withIdentifier: "toMain", sender: self)
         //masterNav.pushViewController(mainVC, animated: true)
     }
     

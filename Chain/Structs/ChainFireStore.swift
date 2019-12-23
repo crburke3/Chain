@@ -48,9 +48,9 @@ class ChainFireStore {
     }
     
     //Added
-    func appendChain(chain:PostChain, image:UIImage, error: @escaping (String?)->()) {
+    func appendChain(chainID: String, image:UIImage, error: @escaping (String?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -78,7 +78,7 @@ class ChainFireStore {
         }
         let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
         firestoreRef.updateData([
-            "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "likes": chain.likes += 1 //Need to increment correctly
+            "posts": FieldValue.arrayUnion([uploadImage.toDict()])
         ]) { (err1) in
             if let error1 = err1{
                 masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
@@ -174,6 +174,8 @@ class ChainFireStore {
         }
         
     }
+    
+    
     
     func inviteFriend(chainID: String, sendUser: String, index: Int, error: @escaping (String?)->()) {
         //In Invitation object for now
