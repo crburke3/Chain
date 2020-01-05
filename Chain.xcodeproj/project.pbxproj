@@ -147,7 +147,6 @@
 			isa = PBXGroup;
 			children = (
 				68676B9E23AEB29D00DAD539 /* Chain.entitlements */,
-				68F92F25238F81A3000F05AA /* Extensions */,
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
@@ -155,6 +154,7 @@
 				FA7E367E238DB91100488000 /* Main View */,
 				FA7E36B2238DD1EB00488000 /* Misc Views */,
 				FA7E3682238DB9EB00488000 /* Structs */,
+				68F92F25238F81A3000F05AA /* Extensions */,
 				FA7E3683238DBA2C00488000 /* Christians Library */,
 				FA7E3673238DB12C00488000 /* Assets.xcassets */,
 				FA7E3675238DB12C00488000 /* LaunchScreen.storyboard */,
@@ -243,6 +243,7 @@
 		FA7E36B2238DD1EB00488000 /* Misc Views */ = {
 			isa = PBXGroup;
 			children = (
+				FAAF0A3623C18E0400838B0E /* Explore Page */,
 				FA7E36B3238DD1F600488000 /* Camera View */,
 				FA7E3681238DB9C100488000 /* Profile View */,
 			);
@@ -256,6 +257,13 @@
 				FA7E36B5238DD20400488000 /* CameraViewController.xib */,
 			);
 			path = "Camera View";
+			sourceTree = "<group>";
+		};
+		FAAF0A3623C18E0400838B0E /* Explore Page */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = "Explore Page";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
