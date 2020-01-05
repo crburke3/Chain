@@ -23,6 +23,8 @@ class PostChain{
     var coordinate:CLLocationCoordinate2D
     var posts:[ChainImage] = []
     var loaded: LoadState
+    var delegates: [String:PostChainDelegate] = [:]
+    var firstImageLink:String?
     
     init(_chainID:String, _birthDate:Date, _deathDate:Date, _tags:[String]?, firstImageLink:String, firstImage:UIImage){
         self.chainID = _chainID
@@ -48,6 +50,9 @@ class PostChain{
         self.coordinate = CLLocationCoordinate2D()
         self.posts = []
         self.loaded = .NOT_LOADED
+        if load{
+            self.load(loaded: nil)
+        }
     }
     
     init(dict:[String:Any]){
@@ -65,6 +70,7 @@ class PostChain{
         let latLong = dict["l"] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
         self.loaded = .LOADED
+        self.firstImageLink = dict["firstImageLink"] as? String
     }
     
     func toDict()->[String:Any]{
@@ -99,9 +105,37 @@ class PostChain{
     
     
     //TODO: Make load function
-//    func load(){
-//
-//    }
+    func load(loaded:(()->())?){
+        masterFire.loadChain(chainID: self.chainID) { (chain) in
+            if chain != nil{
+                self.birthDate = chain!.birthDate
+                self.deathDate = chain!.deathDate
+                self.likes = chain!.likes
+                self.count = chain!.count
+                self.tags = chain!.tags
+                self.contributors = chain!.contributors
+                self.coordinate = chain!.coordinate
+                self.posts = chain!.posts
+                self.firstImageLink = chain!.firstImageLink
+                self.loaded = .LOADED
+                for delegate in self.delegates.values{
+                    delegate.chainDidLoad(chain: self)
+                }
+            }
+        }
+    }
+    
+    func addDelegate(delegateID:String, delegate: PostChainDelegate){
+        self.delegates[delegateID] = delegate
+    }
+    
+    func removeDelegate(delegateID:String){
+        self.delegates.removeValue(forKey: delegateID)
+    }
+    
+    func removeAllDelegates(){
+        self.delegates = [:]
+    }
 }
 
 protocol PostChainDelegate {

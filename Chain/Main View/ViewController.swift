@@ -12,6 +12,7 @@ class MainViewController: UIViewController, ChainImageDelegate {
 
     var mainChain:PostChain!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var timerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,12 +21,14 @@ class MainViewController: UIViewController, ChainImageDelegate {
         masterFire.loadChain(chainID: "firstChain") { (loadedChain) in
             if let chain = loadedChain{
                 self.mainChain = chain
+                self.listenToDate()
                 for post in self.mainChain.posts{
                     post.delegate = self
                 }
                 self.tableView.reloadData()
             }
         }
+
     }
     
     @IBAction func plusClicked(_ sender: Any) {
@@ -41,6 +44,12 @@ class MainViewController: UIViewController, ChainImageDelegate {
         }
     }
     
+    func listenToDate(){
+        mainChain.deathDate.timeTillDeath { (timeLeft) in
+            self.timerLabel.text = timeLeft
+        }
+    }
+
     func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
         //indexPathsForVisibleItems -> Collection View
         //indexPathsForVisibleRow -> Table View

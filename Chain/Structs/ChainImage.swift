@@ -49,7 +49,7 @@ class ChainImage{
         }
         //firestore pull initialization
         self.loadState = .LOADING
-        print("Downloading: \(self.link)")
+        //print("Downloading: \(self.link)")
         if let url =  URL(string: self.link){
             getData(from: url) { data, response, error in
                 guard let data = data, error == nil else { return }

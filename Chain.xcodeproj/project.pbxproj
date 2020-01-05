@@ -42,6 +42,11 @@
 		FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7E36B5238DD20400488000 /* CameraViewController.xib */; };
 		FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36B8238DD55800488000 /* FirstViewController.swift */; };
 		FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36BA238DDDB100488000 /* SceneDelegate.swift */; };
+		FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3723C1911800838B0E /* ExploreViewController.swift */; };
+		FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */; };
+		FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */; };
+		FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */; };
+		FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3F23C198D400838B0E /* DateExtensions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -85,6 +90,11 @@
 		FA7E36B5238DD20400488000 /* CameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		FA7E36B8238DD55800488000 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		FA7E36BA238DDDB100488000 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FAAF0A3723C1911800838B0E /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePageCell.swift; sourceTree = "<group>"; };
+		FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePageFireFuncs.swift; sourceTree = "<group>"; };
+		FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePageCollectionView.swift; sourceTree = "<group>"; };
+		FAAF0A3F23C198D400838B0E /* DateExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateExtensions.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +131,7 @@
 			children = (
 				68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */,
 				68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */,
+				FAAF0A3F23C198D400838B0E /* DateExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -262,6 +273,10 @@
 		FAAF0A3623C18E0400838B0E /* Explore Page */ = {
 			isa = PBXGroup;
 			children = (
+				FAAF0A3723C1911800838B0E /* ExploreViewController.swift */,
+				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
+				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
+				FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */,
 			);
 			path = "Explore Page";
 			sourceTree = "<group>";
@@ -415,19 +430,24 @@
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
 				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,
 				FA63C886238E07A400B30312 /* MainTableView.swift in Sources */,
+				FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */,
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,
 				68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */,
+				FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */,
 				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */,
 				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
 				68A5D382238DC8DA00AD4DC8 /* BeautifulLoadScreen.swift in Sources */,
 				68A5D381238DC8DA00AD4DC8 /* LoadingView.swift in Sources */,
+				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
 				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
 				68A5D380238DC8DA00AD4DC8 /* GlobalAttributes.swift in Sources */,
+				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
 				FA63C888238E084200B30312 /* MainCell.swift in Sources */,
 				FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */,
 				68A5D385238DC8DA00AD4DC8 /* DecodableObject.swift in Sources */,
+				FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */,
 				FA63C882238DF4CB00B30312 /* ChainAuth.swift in Sources */,
 				68A5D383238DC8DA00AD4DC8 /* ChristiansFirebase.swift in Sources */,
 			);
