@@ -10,6 +10,7 @@ import UIKit
 import CameraKit_iOS
 import Kingfisher
 import Firebase
+import iOSPhotoEditor
 
 class CameraViewController: UIViewController {
 
@@ -34,13 +35,7 @@ class CameraViewController: UIViewController {
         //Capture Image
         captureImage()
         //Confirm Image, if denied then take another image
-        masterFire.appendChain(chainID: chainID, image: imageView.image!) { (error) in
-            if let error = error {
-                print("Error appending to chain")
-            } else {
-                
-            }
-        }
+        
         //Once confirmed, upload to FireBase and then append to chain
         
     }
@@ -62,8 +57,34 @@ class CameraViewController: UIViewController {
             print(self.imageView.frame)
             self.cameraButton.isHidden = true
             //Present confirm or denie buttons
+            
+                let photoEditor = UIStoryboard(name: "Main", bundle: Bundle(for: PhotoEditorViewController.self)).instantiateViewController(withIdentifier: "PhotoEditorViewController") as! PhotoEditorViewController
+
+                //PhotoEditorDelegate
+                photoEditor.photoEditorDelegate = self as! PhotoEditorDelegate
+
+                //The image to be edited
+                photoEditor.image = image
+
+                //Stickers that the user will choose from to add on the image
+                photoEditor.stickers.append(UIImage(named: "sticker" )!)
+
+                //To hide controls - array of enum control
+                photoEditor.hiddenControls = [.crop, .draw, .share]
+
+                //Present the View Controller
+                self.present(photoEditor, animated: true, completion: nil)
+            
+            masterFire.appendChain(chainID: self.chainID, image: self.imageView.image!) { (error) in
+                if let error = error {
+                    print("Error appending to chain \(error)")
+                } else {
+                    
+                }
+            }
+            
         }) { (error) in
-            print("Session Cpature failed to capture image.")
+           
         }
     }
 }

@@ -34,7 +34,7 @@ class MainViewController: UIViewController, ChainImageDelegate {
     @IBAction func plusClicked(_ sender: Any) {
         //Load Global Object
         let cameraVC = CameraViewController()
-        cameraVC.chainID = "firstChain"
+        cameraVC.chainID = "firstChain" //Get chain ID from chain being viewed
         self.show(cameraVC, sender: nil)
     }
     
