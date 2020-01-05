@@ -110,8 +110,8 @@
             filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "25"
-            endingLineNumber = "25"
+            startingLineNumber = "26"
+            endingLineNumber = "26"
             landmarkName = "viewDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -126,8 +126,8 @@
             filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "40"
-            endingLineNumber = "40"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "cameraTouched(_:)"
             landmarkType = "7">
             <Locations>
@@ -174,58 +174,10 @@
             filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
+            startingLineNumber = "56"
+            endingLineNumber = "56"
             landmarkName = "captureImage()"
             landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D0960AE8-BB1A-4737-BC06-AF12A98033AA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "64"
-            endingLineNumber = "64"
-            landmarkName = "captureImage()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D0960AE8-BB1A-4737-BC06-AF12A98033AA - 55e0ad6737d8bcf8"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (__C.UIImage, __C.AVCaptureResolvedPhotoSettings) -&gt; () in Chain.CameraViewController.captureImage() -&gt; ()"
-                  moduleName = "Chain"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mbr/Documents/Chain/Chain/Misc%20Views/Camera%20View/CameraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "65"
-                  endingLineNumber = "65"
-                  offsetFromSymbolStart = "1588">
-               </Location>
-               <Location
-                  uuid = "D0960AE8-BB1A-4737-BC06-AF12A98033AA - 2c226b038e69c1d8"
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #2 (Swift.Error) -&gt; () in Chain.CameraViewController.captureImage() -&gt; ()"
-                  moduleName = "Chain"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/mbr/Documents/Chain/Chain/Misc%20Views/Camera%20View/CameraViewController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "66"
-                  endingLineNumber = "66"
-                  offsetFromSymbolStart = "48">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -238,8 +190,8 @@
             filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "60"
-            endingLineNumber = "60"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "captureImage()"
             landmarkType = "7">
             <Locations>
@@ -304,8 +256,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "89"
             endingLineNumber = "89"
-            landmarkName = "appendChain(chainID:image:error:)"
-            landmarkType = "7">
+            landmarkName = "ChainFireStore"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -318,8 +270,24 @@
             filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "54"
-            endingLineNumber = "54"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "captureImage()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "821271CF-0C77-4D8A-AA7F-94F0F7A0C8F6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chain/Misc Views/Camera View/CameraViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
             landmarkName = "captureImage()"
             landmarkType = "7">
          </BreakpointContent>

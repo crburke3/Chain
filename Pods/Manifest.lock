@@ -98,19 +98,6 @@ PODS:
     - FirebaseAuthInterop (~> 1.0)
     - FirebaseCore (~> 5.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FireStore (1.0.0):
-    - FirebaseFirestore (~> 0.14)
-    - FireStore/Core (= 1.0.0)
-    - FireStore/ReactiveSwift (= 1.0.0)
-    - SwiftXtend (~> 1.1)
-  - FireStore/Core (1.0.0):
-    - FirebaseFirestore (~> 0.14)
-    - SwiftXtend (~> 1.1)
-  - FireStore/ReactiveSwift (1.0.0):
-    - FirebaseFirestore (~> 0.14)
-    - FireStore/Core
-    - ReactiveSwift (~> 4.0)
-    - SwiftXtend (~> 1.1)
   - FloatingPanel (1.7.0)
   - GeoFire (3.0.0):
     - Firebase/Database (~> 5.0)
@@ -159,8 +146,9 @@ PODS:
     - gRPC-Core/Interface (= 1.14.0)
     - nanopb (~> 0.3)
   - gRPC-Core/Interface (1.14.0)
-  - GTMSessionFetcher/Core (1.2.2)
+  - GTMSessionFetcher/Core (1.3.0)
   - InfiniteCarouselCollectionView (0.1.1)
+  - iOSPhotoEditor (1.0.0)
   - IQKeyboardManager (6.5.0)
   - Kingfisher (5.8.2):
     - Kingfisher/Core (= 5.8.2)
@@ -179,17 +167,8 @@ PODS:
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - Protobuf (3.10.0)
-  - ReactiveSwift (4.0.0):
-    - Result (~> 4.0)
-  - Result (4.1.0)
   - SHSearchBar (1.7.0)
   - SkyFloatingLabelTextField (3.7.0)
-  - SwiftXtend (1.4.0):
-    - SwiftXtend/Core (= 1.4.0)
-    - SwiftXtend/UIKit (= 1.4.0)
-  - SwiftXtend/Core (1.4.0)
-  - SwiftXtend/UIKit (1.4.0):
-    - SwiftXtend/Core
   - SwiftyStoreKit (0.15.0)
   - SwipeMenuViewController (4.0.0)
   - SWXMLHash (5.0.1)
@@ -206,15 +185,14 @@ DEPENDENCIES:
   - FanMenu
   - Firebase/Analytics
   - Firebase/Auth
-  - Firebase/Core
   - Firebase/Firestore
   - Firebase/Functions
   - Firebase/Messaging
   - Firebase/Storage
-  - FireStore
   - FloatingPanel
   - Geofirestore
   - InfiniteCarouselCollectionView
+  - iOSPhotoEditor
   - IQKeyboardManager
   - Kingfisher (~> 5.0)
   - KKPinCodeTextField
@@ -249,7 +227,6 @@ SPEC REPOS:
     - FirebaseInstanceID
     - FirebaseMessaging
     - FirebaseStorage
-    - FireStore
     - FloatingPanel
     - GeoFire
     - Geofirestore
@@ -259,6 +236,7 @@ SPEC REPOS:
     - gRPC-Core
     - GTMSessionFetcher
     - InfiniteCarouselCollectionView
+    - iOSPhotoEditor
     - IQKeyboardManager
     - Kingfisher
     - KKPinCodeTextField
@@ -269,11 +247,8 @@ SPEC REPOS:
     - nanopb
     - PopupDialog
     - Protobuf
-    - ReactiveSwift
-    - Result
     - SHSearchBar
     - SkyFloatingLabelTextField
-    - SwiftXtend
     - SwiftyStoreKit
     - SwipeMenuViewController
     - SWXMLHash
@@ -311,7 +286,6 @@ SPEC CHECKSUMS:
   FirebaseInstanceID: e2fa4cb35ef5558c200f7f0ad8a53e212215f93e
   FirebaseMessaging: b412996f6a09337d232bb3a6676ce4d1f353d024
   FirebaseStorage: 3d22c041370593e639fba013d1eb698a8dae2881
-  FireStore: e90b5b02454dc25d2d73cf9763a8ebe8a1bd1135
   FloatingPanel: f686602da8eff56375e577f19be37348a95f4e24
   GeoFire: e3ae6f4be3f2466c3467ef6c1c203db3af935c59
   Geofirestore: ad548ea5e3c1ae595c746c7b796df5534d8202f3
@@ -319,8 +293,9 @@ SPEC CHECKSUMS:
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
   "gRPC-C++": 19eec1ffd34de29453f5fab5b4697ad0f240ad51
   gRPC-Core: f4836515817c0eb479aeeb9cc27c91c4ba62a9f6
-  GTMSessionFetcher: 61bb0f61a4cb560030f1222021178008a5727a23
+  GTMSessionFetcher: 43b8b64263023d4f32caa0b40f4c8bfa3c5f36d8
   InfiniteCarouselCollectionView: b2467cf428e172cb5876faa148c3c7a1a31ac71b
+  iOSPhotoEditor: 2951f35246a31dcb428b6292248a9c065582d03e
   IQKeyboardManager: 700e5155d6a292383b54e8678aec769e14fc78fc
   Kingfisher: 3adc15096595f5aed800bb0d5cb757fc58b2d2dd
   KKPinCodeTextField: 63a1fb841fd6a412cf664ef64dc065fc6767bd3c
@@ -331,17 +306,14 @@ SPEC CHECKSUMS:
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   Protobuf: a4dc852ad69c027ca2166ed287b856697814375b
-  ReactiveSwift: a2bb9ace428a109e9c0209615645d9d286c8c433
-  Result: bd966fac789cc6c1563440b348ab2598cc24d5c7
   SHSearchBar: 9fcc9daff8a3264386b975961de6c485f33439d4
   SkyFloatingLabelTextField: 4b46db0ab1ccde0919cded29c656e6b4805eda04
-  SwiftXtend: 12539d07f953ee1ce6b9653b51f681909a21e913
   SwiftyStoreKit: 033d06b6f87955405d3f844a18a7687c2438592a
   SwipeMenuViewController: c2c1f9b62022ce6b904b2553f0fa340c9008becd
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
   UIEmptyState: 767376694d9402452fb3c0a5a5283176c6a53c92
 
-PODFILE CHECKSUM: be192c0439ab37613d23137692db6a4094aa77a4
+PODFILE CHECKSUM: dcb5b86febcbed7339b978fc7aa90f4abd25728a
 
 COCOAPODS: 1.8.4

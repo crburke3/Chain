@@ -50,6 +50,6 @@ target 'Chain' do
   pod 'SwipeMenuViewController'
   # pod 'CurrencyTextField'
   pod 'CameraKit-iOS'
-
+  pod 'iOSPhotoEditor'
 
 end
