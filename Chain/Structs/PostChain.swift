@@ -22,6 +22,7 @@ class PostChain{
     var contributors:[String]
     var coordinate:CLLocationCoordinate2D
     var posts:[ChainImage] = []
+    var loaded: LoadState
     
     init(_chainID:String, _birthDate:Date, _deathDate:Date, _tags:[String]?, firstImageLink:String, firstImage:UIImage){
         self.chainID = _chainID
@@ -33,6 +34,20 @@ class PostChain{
         self.contributors = [masterAuth.currUser.username]
         self.coordinate = masterLocator.getCurrentLocation()!.coordinate
         self.posts = [ChainImage(link: firstImageLink, user: masterAuth.currUser.username, image: firstImage)]
+        self.loaded = .LOADED
+    }
+    
+    init(chainID:String, load:Bool = true){
+        self.chainID = chainID
+        self.birthDate = Date()
+        self.deathDate = Date()
+        self.likes = 0
+        self.count = 0
+        self.tags = []
+        self.contributors = []
+        self.coordinate = CLLocationCoordinate2D()
+        self.posts = []
+        self.loaded = .NOT_LOADED
     }
     
     init(dict:[String:Any]){
@@ -49,6 +64,7 @@ class PostChain{
         }
         let latLong = dict["l"] as! [Double]
         self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
+        self.loaded = .LOADED
     }
     
     func toDict()->[String:Any]{
