@@ -12,5 +12,7 @@ class MainCell: UITableViewCell {
     
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
+
+    
     
 }

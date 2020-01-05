@@ -174,7 +174,6 @@ class ChainFireStore {
     }
     
     
-    
     func inviteFriend(chainID: String, sendUser: String, index: Int, error: @escaping (String?)->()) {
         //In Invitation object for now
         

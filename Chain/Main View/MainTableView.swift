@@ -16,6 +16,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         let post = mainChain.posts[indexPath.row]
         cell.user.text = post.user
         cell.imgView.image = post.image
+        cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
         switch post.loadState{
         case .NOT_LOADED:
             post.load()
