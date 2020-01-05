@@ -19,6 +19,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         let chain = topChains[indexPath.row]
         if chain.loaded == .LOADED{
             cell.loadingView.isHidden = true
+            cell.previewImageView.roundCorners(corners: [.allCorners], radius: 5)
             if chain.firstImageLink != nil{
                 cell.previewImageView.downloaded(from: chain.firstImageLink!)
             }
