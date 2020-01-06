@@ -1,7 +1,7 @@
 ${PODS_ROOT}/Target Support Files/Pods-Chain/Pods-Chain-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework
-${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework
+${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
 ${BUILT_PRODUCTS_DIR}/CRRefresh/CRRefresh.framework
 ${BUILT_PRODUCTS_DIR}/CTKFlagPhoneNumber/CTKFlagPhoneNumber.framework
 ${BUILT_PRODUCTS_DIR}/CameraKit-iOS/CameraKit_iOS.framework

@@ -18,8 +18,8 @@
 #import <FirebaseAuthInterop/FIRAuthInterop.h>
 #import <FirebaseCore/FIRComponent.h>
 #import <FirebaseCore/FIRComponentContainer.h>
-#import <FirebaseCore/FIRComponentRegistrant.h>
 #import <FirebaseCore/FIRDependency.h>
+#import <FirebaseCore/FIRLibrary.h>
 
 #import "FIRError.h"
 #import "FIRHTTPSCallable+Internal.h"
@@ -29,10 +29,17 @@
 #import "FUNSerializer.h"
 #import "FUNUsageValidation.h"
 
-#import "FIRApp.h"
-#import "FIRAppInternal.h"
-#import "FIROptions.h"
-#import "GTMSessionFetcherService.h"
+#import <FirebaseCore/FIRApp.h>
+#import <FirebaseCore/FIRAppInternal.h>
+#import <FirebaseCore/FIROptions.h>
+#import <GTMSessionFetcher/GTMSessionFetcherService.h>
+
+// The following two macros supply the incantation so that the C
+// preprocessor does not try to parse the version as a floating
+// point number. See
+// https://www.guyrutenberg.com/2008/12/20/expanding-macros-into-string-constants-in-c/
+#define STR(x) STR_EXPAND(x)
+#define STR_EXPAND(x) #x
 
 NS_ASSUME_NONNULL_BEGIN
 
@@ -43,7 +50,7 @@ NSString *const kFUNDefaultRegion = @"us-central1";
 @protocol FIRFunctionsInstanceProvider
 @end
 
-@interface FIRFunctions () <FIRComponentRegistrant, FIRFunctionsInstanceProvider> {
+@interface FIRFunctions () <FIRLibrary, FIRFunctionsInstanceProvider> {
   // The network client to use for http requests.
   GTMSessionFetcherService *_fetcherService;
   // The projectID to use for all function references.
@@ -68,7 +75,8 @@ NSString *const kFUNDefaultRegion = @"us-central1";
 @implementation FIRFunctions
 
 + (void)load {
-  [FIRComponentContainer registerAsComponentRegistrant:self];
+  NSString *version = [NSString stringWithUTF8String:(const char *const)STR(FIRFunctions_VERSION)];
+  [FIRApp registerInternalLibrary:(Class<FIRLibrary>)self withName:@"fire-fun" withVersion:version];
 }
 
 + (NSArray<FIRComponent *> *)componentsToRegister {
@@ -77,8 +85,8 @@ NSString *const kFUNDefaultRegion = @"us-central1";
     *isCacheable = YES;
     return [self functionsForApp:container.app];
   };
-  FIRDependency *auth =
-      [FIRDependency dependencyWithProtocol:@protocol(FIRAuthInterop) isRequired:NO];
+  FIRDependency *auth = [FIRDependency dependencyWithProtocol:@protocol(FIRAuthInterop)
+                                                   isRequired:NO];
   FIRComponent *internalProvider =
       [FIRComponent componentWithProtocol:@protocol(FIRFunctionsInstanceProvider)
                       instantiationTiming:FIRInstantiationTimingLazy
@@ -151,6 +159,7 @@ NSString *const kFUNDefaultRegion = @"us-central1";
 
 - (void)callFunction:(NSString *)name
           withObject:(nullable id)data
+             timeout:(NSTimeInterval)timeout
           completion:(void (^)(FIRHTTPSCallableResult *_Nullable result,
                                NSError *_Nullable error))completion {
   [_contextProvider getContext:^(FUNContext *_Nullable context, NSError *_Nullable error) {
@@ -160,16 +169,25 @@ NSString *const kFUNDefaultRegion = @"us-central1";
       }
       return;
     }
-    return [self callFunction:name withObject:data context:context completion:completion];
+    return [self callFunction:name
+                   withObject:data
+                      timeout:timeout
+                      context:context
+                   completion:completion];
   }];
 }
 
 - (void)callFunction:(NSString *)name
           withObject:(nullable id)data
+             timeout:(NSTimeInterval)timeout
              context:(FUNContext *)context
           completion:(void (^)(FIRHTTPSCallableResult *_Nullable result,
                                NSError *_Nullable error))completion {
-  GTMSessionFetcher *fetcher = [_fetcherService fetcherWithURLString:[self URLWithName:name]];
+  NSURL *url = [NSURL URLWithString:[self URLWithName:name]];
+  NSURLRequest *request = [NSURLRequest requestWithURL:url
+                                           cachePolicy:NSURLRequestUseProtocolCachePolicy
+                                       timeoutInterval:timeout];
+  GTMSessionFetcher *fetcher = [_fetcherService fetcherWithRequest:request];
 
   NSMutableDictionary *body = [NSMutableDictionary dictionary];
   // Encode the data in the body.
@@ -217,6 +235,11 @@ NSString *const kFUNDefaultRegion = @"us-central1";
       if ([error.domain isEqualToString:kGTMSessionFetcherStatusDomain]) {
         error = FUNErrorForResponse(error.code, data, serializer);
       }
+      if ([error.domain isEqualToString:NSURLErrorDomain]) {
+        if (error.code == NSURLErrorTimedOut) {
+          error = FUNErrorForCode(FIRFunctionsErrorCodeDeadlineExceeded);
+        }
+      }
     } else {
       // If there wasn't an HTTP error, see if there was an error in the body.
       error = FUNErrorForResponse(200, data, serializer);
@@ -252,8 +275,7 @@ NSString *const kFUNDefaultRegion = @"us-central1";
       dataJSON = responseJSON[@"result"];
     }
     if (!dataJSON) {
-      NSDictionary *userInfo =
-          @{NSLocalizedDescriptionKey : @"Response did not include data field."};
+      NSDictionary *userInfo = @{NSLocalizedDescriptionKey : @"Response is missing data field."};
       error = [NSError errorWithDomain:FIRFunctionsErrorDomain
                                   code:FIRFunctionsErrorCodeInternal
                               userInfo:userInfo];

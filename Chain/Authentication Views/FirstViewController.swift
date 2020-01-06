@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
-import Geofirestore
+//import Geofirestore
 import FirebaseAuth
 
 class FirstViewController : UIViewController, CLLocationManagerDelegate{

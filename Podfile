@@ -6,14 +6,15 @@ target 'Chain' do
   use_frameworks!
 
   # Pods for Chain
-  pod 'Firebase/Firestore' #, '~> 5.20.2'
-  # pod 'Firebase/Core', '~> 5.20.2' #last working was 5.5.0
+  pod 'Firebase/Core'
+  pod 'Firebase/Firestore', '~> 6.5.0'
+  
   pod 'Firebase/Auth'
   pod 'Firebase/Storage'
   pod 'Firebase/Analytics'
   pod 'Firebase/Messaging'
   pod 'Firebase/Functions'
-  pod 'Geofirestore'
+  #pod 'Geofirestore'
 
 
   # pod 'Google-Mobile-Ads-SDK'
@@ -51,5 +52,6 @@ target 'Chain' do
   # pod 'CurrencyTextField'
   pod 'CameraKit-iOS'
   pod 'iOSPhotoEditor'
-
+  
+  
 end

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "photoEditor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "photoEditor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>

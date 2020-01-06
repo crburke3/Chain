@@ -45,11 +45,12 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     
     func captureImage() {
         session.capture({ (image, settings) in
-            self.previewView.isHidden = true
+           /* self.previewView.isHidden = true
             self.imageView.image = image
             self.imageView.isHidden = false
             print(self.imageView.frame)
             self.cameraButton.isHidden = true
+            */
             let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
             photoEditor.photoEditorDelegate = self
             photoEditor.image = image
@@ -63,13 +64,22 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     }
     
     func doneEditing(image: UIImage) {
-        masterFire.appendChain(chainID: self.chainID, image: self.imageView.image!) { (error) in
+        masterFire.appendChain(chainID: self.chainID, image: image) { (error) in
             if let error = error {
                 print("Error appending to chain \(error)")
             } else {
 
             }
         }
+        let indexOfPost = 
+        masterFire.updateFriendsFeed(chainID: self.chainID, userID: "mbrutkow") { (error) in
+            if let error = error {
+                print("Error updating friend's feed")
+            } else {
+                
+            }
+        }
+        self.presentingViewController?.dismiss(animated: true, completion:nil)
     }
     
     func canceledEditing() {

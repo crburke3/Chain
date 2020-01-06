@@ -8,7 +8,7 @@
 
 import Foundation
 import CoreLocation
-import Geofirestore
+//import Geofirestore
 import Firebase
 import FirebaseFirestore
 
@@ -74,7 +74,7 @@ class ChainFireStore {
                 print(urlString)
                 let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
                 firestoreRef.updateData([
-                    "posts": FieldValue.arrayUnion([uploadImage.toDict()])
+                    "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "count": FieldValue.increment(Int64(1))
                 ]) { (err1) in
                     if let error1 = err1{
                         masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
@@ -183,8 +183,36 @@ class ChainFireStore {
         //When user signs in, gather their data
         
     }
-    func updateFriendsFeed(chainID: String, error: @escaping (String?)->()) {
+    func updateFriendsFeed(chainID: String, userID: String, error: @escaping (String?)->()) {
         //Place created chain or involved-in chain onto every friend's feed
+       // let friendsRef = db
+        //.collection("users").document("mbrutkow")
+        //.collection("messages").document("message1")
+        let feedDict = ["chain": chainID, "user": userID] as [String : Any]
+       //Upload to all feeds
+        db.collection("users").document("mbrutkow").collection("friends").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        let givenFriend = document.documentID
+                        //Append
+                        let firestoreRef = Firestore.firestore().collection("userFeeds").document(givenFriend)
+                        firestoreRef.updateData([
+                            "posts": FieldValue.arrayUnion([feedDict])
+                        ]) { (err1) in
+                                   if let error1 = err1{
+                                       //masterNav.showPopUp(_title: "Error adding friend to friends list", _message: error1.localizedDescription)
+                                       error(error1.localizedDescription)
+                                   }else{
+                                       error(nil)
+                                   }
+                        }
+                        
+                    }
+                }
+        }
         
     }
     func loadNextFewPhotos() {

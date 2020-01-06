@@ -35,7 +35,7 @@ class MainViewController: UIViewController, ChainImageDelegate {
         //Load Global Object
         let cameraVC = CameraViewController()
         cameraVC.chainID = "firstChain" //Get chain ID from chain being viewed
-        self.show(cameraVC, sender: nil)
+        self.present(cameraVC, animated: true)
     }
     
     func imageDidLoad(chainImage: ChainImage) {
@@ -60,5 +60,6 @@ class MainViewController: UIViewController, ChainImageDelegate {
             newIndex += 1
         }
     }
+    
 }
 

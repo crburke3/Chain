@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import MapKit
-import Geofirestore
+//import Geofirestore
 
 
 class PostChain{
@@ -75,7 +75,7 @@ class PostChain{
     
     func toDict()->[String:Any]{
         
-        let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
+        //let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
         
         let retDict:[String:Any] = ["chainID" : self.chainID,
                                     "birthDate" : self.birthDate.toChainString(),
@@ -84,9 +84,10 @@ class PostChain{
                                     "count": self.count,
                                     "tags" : self.tags,
                                     "contributors" : self.contributors,
-                                    "posts": self.postsData(),
-                                    "l" : geoData["l"] as! [Double],
-                                    "g" : geoData["g"] as! String]
+                                    "posts": self.postsData()]
+        /*
+        "l" : geoData["l"] as! [Double],
+        "g" : geoData["g"] as! String] */
         return retDict
     }
     

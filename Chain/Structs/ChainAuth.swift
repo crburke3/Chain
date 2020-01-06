@@ -9,7 +9,7 @@
 import Foundation
 import FirebaseAuth
 import FirebaseFirestore
-import FirebaseDatabase
+//import FirebaseDatabase
 import Firebase
 
 //This class will handle functions related to the user logging in and creating an account.
