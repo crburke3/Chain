@@ -17,6 +17,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         cell.user.text = post.user
         cell.imgView.image = post.image
         cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
+        cell.row = indexPath.row
         switch post.loadState{
         case .NOT_LOADED:
             post.load()
@@ -25,6 +26,7 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         case .LOADED:
             break
         }
+        cell.cellDidLoad()
         return cell
     }
     
@@ -39,5 +41,6 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
         return cell.frame.height
     }
+    
     
 }

@@ -360,10 +360,15 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="menu" translatesAutoresizingMaskIntoConstraints="NO" id="cNJ-fM-OX4">
-                                                    <rect key="frame" x="15" y="11" width="42" height="28"/>
+                                                <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbK-hP-ceq" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
+                                                    <rect key="frame" x="21" y="11" width="30" height="30"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                </imageView>
+                                                    <state key="normal" image="menu"/>
+                                                    <connections>
+                                                        <action selector="popUpMenu:" destination="BYZ-38-t0r" eventType="touchUpInside" id="QV4-L1-qf5"/>
+                                                        <action selector="popUpMenu:" destination="clx-Iz-NuC" eventType="touchUpInside" id="TJW-cT-bGZ"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerX" secondItem="drC-NI-6dT" secondAttribute="centerX" id="0L8-sT-tEj"/>
