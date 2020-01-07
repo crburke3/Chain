@@ -14,6 +14,7 @@ class MainCell: UITableViewCell {
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
     
+    var post = ChainImage(dict: [:])
     var row: Int = 0
     
     @IBAction func popUpMenu(_ sender: Any) {
