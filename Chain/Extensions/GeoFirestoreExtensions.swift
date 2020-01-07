@@ -10,6 +10,7 @@ import Foundation
 //import Geofirestore
 //import GeoFire
 import MapKit
+import UIKit
 /*
 extension GeoFirestore{
     public static func getFirestoreData(for coordinate: CLLocationCoordinate2D)->[String:Any]?{
