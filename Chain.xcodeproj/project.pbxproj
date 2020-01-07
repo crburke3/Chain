@@ -28,6 +28,10 @@
 		FA63C884238DF4D800B30312 /* ChainUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C883238DF4D800B30312 /* ChainUser.swift */; };
 		FA63C886238E07A400B30312 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C885238E07A400B30312 /* MainTableView.swift */; };
 		FA63C888238E084200B30312 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C887238E084200B30312 /* MainCell.swift */; };
+		FA6A862523C536B700E57413 /* NewChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A862223C536B700E57413 /* NewChainViewController.swift */; };
+		FA6A862623C536B700E57413 /* NewChainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6A862323C536B700E57413 /* NewChainViewController.xib */; };
+		FA6A862723C536B700E57413 /* NewChainAnimators.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A862423C536B700E57413 /* NewChainAnimators.swift */; };
+		FA6A862923C536C700E57413 /* PanGestureExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6A862823C536C700E57413 /* PanGestureExtensions.swift */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
 		FA7E366F238DB12A00488000 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366E238DB12A00488000 /* ViewController.swift */; };
 		FA7E3672238DB12A00488000 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3670238DB12A00488000 /* Main.storyboard */; };
@@ -74,6 +78,10 @@
 		FA63C883238DF4D800B30312 /* ChainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUser.swift; sourceTree = "<group>"; };
 		FA63C885238E07A400B30312 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		FA63C887238E084200B30312 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		FA6A862223C536B700E57413 /* NewChainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChainViewController.swift; path = "../../../../../../Documents/JK2Designs/Chain-master/Chain/Misc Views/New Chain View/NewChainViewController.swift"; sourceTree = "<group>"; };
+		FA6A862323C536B700E57413 /* NewChainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = NewChainViewController.xib; path = "../../../../../../Documents/JK2Designs/Chain-master/Chain/Misc Views/New Chain View/NewChainViewController.xib"; sourceTree = "<group>"; };
+		FA6A862423C536B700E57413 /* NewChainAnimators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = NewChainAnimators.swift; path = "../../../../../../Documents/JK2Designs/Chain-master/Chain/Misc Views/New Chain View/NewChainAnimators.swift"; sourceTree = "<group>"; };
+		FA6A862823C536C700E57413 /* PanGestureExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PanGestureExtensions.swift; path = "../../../../../Documents/JK2Designs/Chain-master/Chain/Extensions/PanGestureExtensions.swift"; sourceTree = "<group>"; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E366A238DB12A00488000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA7E366E238DB12A00488000 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -121,6 +129,7 @@
 		68F92F25238F81A3000F05AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				FA6A862823C536C700E57413 /* PanGestureExtensions.swift */,
 				68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */,
 				68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */,
 				FAAF0A3F23C198D400838B0E /* DateExtensions.swift */,
@@ -134,6 +143,16 @@
 				D598370E0D7CDF870307C38C /* Pods_Chain.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FA6A862123C536A500E57413 /* New Chain View */ = {
+			isa = PBXGroup;
+			children = (
+				FA6A862423C536B700E57413 /* NewChainAnimators.swift */,
+				FA6A862223C536B700E57413 /* NewChainViewController.swift */,
+				FA6A862323C536B700E57413 /* NewChainViewController.xib */,
+			);
+			path = "New Chain View";
 			sourceTree = "<group>";
 		};
 		FA7E365E238DB12A00488000 = {
@@ -254,6 +273,7 @@
 		FA7E36B2238DD1EB00488000 /* Misc Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA6A862123C536A500E57413 /* New Chain View */,
 				FAAF0A3623C18E0400838B0E /* Explore Page */,
 				FA7E36B3238DD1F600488000 /* Camera View */,
 				FA7E3681238DB9C100488000 /* Profile View */,
@@ -348,6 +368,7 @@
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
+				FA6A862623C536B700E57413 /* NewChainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -416,7 +437,9 @@
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,
 				68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */,
 				FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */,
+				FA6A862523C536B700E57413 /* NewChainViewController.swift in Sources */,
 				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
+				FA6A862923C536C700E57413 /* PanGestureExtensions.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				68A5D37E238DC8DA00AD4DC8 /* ChristiansLibrary.swift in Sources */,
 				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
@@ -424,6 +447,7 @@
 				68A5D381238DC8DA00AD4DC8 /* LoadingView.swift in Sources */,
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
 				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
+				FA6A862723C536B700E57413 /* NewChainAnimators.swift in Sources */,
 				68A5D380238DC8DA00AD4DC8 /* GlobalAttributes.swift in Sources */,
 				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
 				FA63C888238E084200B30312 /* MainCell.swift in Sources */,
