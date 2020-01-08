@@ -20,23 +20,22 @@ class ChainViewController: UIViewController, ChainImageDelegate {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        masterFire.loadChain(chainID: "firstChain") { (loadedChain) in
-            if let chain = loadedChain{
-                self.mainChain = chain
-                self.listenToDate()
-                for post in self.mainChain.posts{
-                    post.delegate = self
-                }
-                self.tableView.reloadData()
+        mainChain.load { (err) in
+            if err != nil{
+                print(err!); return
             }
+            self.listenToDate()
+            for post in self.mainChain.posts{
+                post.delegate = self
+            }
+            self.tableView.reloadData()
         }
-
     }
     
     @IBAction func plusClicked(_ sender: Any) {
         //Load Global Object
         let cameraVC = CameraViewController()
-        cameraVC.chainID = "firstChain" //Get chain ID from chain being viewed
+        cameraVC.chainID = self.mainChain.chainID //Get chain ID from chain being viewed
         self.present(cameraVC, animated: true)
     }
     

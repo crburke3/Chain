@@ -53,7 +53,9 @@ class PostChain{
         self.posts = []
         self.loaded = .NOT_LOADED
         if load{
-            self.load(loaded: nil)
+            self.load { (error) in
+                print(error)
+            }
         }
     }
     
@@ -114,7 +116,7 @@ class PostChain{
         return postsData
     }
     
-    func load(loaded:(()->())?){
+    func load(error: @escaping ((String?)->())){
         masterFire.loadChain(chainID: self.chainID) { (chain) in
             if chain != nil{
                 self.birthDate = chain!.birthDate
@@ -130,6 +132,9 @@ class PostChain{
                 for delegate in self.delegates.values{
                     delegate.chainDidLoad(chain: self)
                 }
+                error(nil)
+            }else{
+                error("Error loading")
             }
         }
     }
