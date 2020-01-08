@@ -48,7 +48,7 @@ class ChainFireStore {
     }
     
     //Added
-    func appendChain(chainID: String, image:UIImage, error: @escaping (String?)->()) {
+    func appendChain(chainID: String, image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
         let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
         let data = image.jpegData(compressionQuality: 1.0)!
@@ -56,21 +56,12 @@ class ChainFireStore {
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
         let metaDataForImage = StorageMetadata() //
         metaDataForImage.contentType = "image/jpeg" //
-        imageReference.putData(data, metadata: metaDataForImage) { (meta, err) in //metadata: nil to metaDataForImage
-            if let err = err {
-                print("Error sending photo to cloud")
-                return
-            }
-            imageReference.downloadURL(completion: { (url, err) in
-                if let err = err {
-                    print("Error loading URL")
-                    return
-                }
-                guard let url = url else{
-                    print("Error loading URL")
-                    return
-                }
-                urlString = url.absoluteString //Hold URL
+        imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
+            if err1 != nil {completion("Error uploading to cloud", nil); return}
+            imageReference.downloadURL(completion: { (url, err2) in
+                if err2 != nil {completion("Error getting URL", nil); return}
+                if url == nil {completion("Error loading URL", nil); return}
+                urlString = url!.absoluteString //Hold URL
                 print(urlString)
                 let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
                 firestoreRef.updateData([
@@ -78,9 +69,9 @@ class ChainFireStore {
                 ]) { (err1) in
                     if let error1 = err1{
                         masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
-                        error(error1.localizedDescription)
+                        completion(error1.localizedDescription, nil)
                     } else{
-                        error(nil)
+                        completion(nil, uploadImage)
                     }
                    }
                 })

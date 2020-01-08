@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-extension MainViewController: UITableViewDataSource, UITableViewDelegate{
+extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
@@ -18,15 +18,15 @@ extension MainViewController: UITableViewDataSource, UITableViewDelegate{
         cell.imgView.image = post.image
         cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
         cell.row = indexPath.row
+        cell.post = post
         switch post.loadState{
         case .NOT_LOADED:
             post.load()
         case .LOADING:
             break
         case .LOADED:
-            break
+            cell.isPostLoaded = true
         }
-        cell.cellDidLoad()
         return cell
     }
     

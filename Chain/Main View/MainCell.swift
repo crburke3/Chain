@@ -14,18 +14,19 @@ class MainCell: UITableViewCell {
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
     
-    var post = ChainImage(dict: [:])
+    var post: ChainImage!
     var row: Int = 0
+    var isPostLoaded = false
     
     @IBAction func popUpMenu(_ sender: Any) {
         //Center or pass image
-        globalRow = self.row
-        globalImage = self.imgView.image ?? UIImage()
+        if isPostLoaded{
+            let chainVC = masterNav.findViewController(with: "ChainViewController") as! ChainViewController
+            chainVC.showOptionsPopup(post_row: self.row, post_image: self.post!.image!)
+        }
     }
     
     func cellDidLoad(){
         
     }
-    
-    
 }

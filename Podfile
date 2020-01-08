@@ -15,6 +15,8 @@ target 'Chain' do
   pod 'Firebase/Messaging'
   pod 'Firebase/Functions'
   #pod 'Geofirestore'
+  pod 'lottie-ios'
+2
 
 
   # pod 'Google-Mobile-Ads-SDK'

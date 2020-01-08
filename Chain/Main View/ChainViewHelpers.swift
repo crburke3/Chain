@@ -1,31 +1,24 @@
 //
-//  ViewController.swift
+//  PopupMenuExtension.swift
 //  Chain
 //
-//  Created by Christian Burke on 11/26/19.
-//  Copyright © 2019 Christian Burke. All rights reserved.
+//  Created by Christian Burke on 1/8/20.
+//  Copyright © 2020 Christian Burke. All rights reserved.
 //
-var globalRow: Int = 0
-var globalImage = UIImage()
 
-import UIKit
+import Foundation
 import PopupDialog
 
-class MainViewController: UIViewController, ChainImageDelegate {
-
-    var mainChain:PostChain!
-    @IBOutlet var tableView: UITableView!
-    @IBOutlet var timerLabel: UILabel!
-    
-    @IBAction func popUpMenu(_ sender: Any) {
+extension ChainViewController{
+    func showOptionsPopup(post_row: Int, post_image: UIImage){
         let title = "Image Options"
         let message = "Select one of the actions below or press cancel"
-        print(globalRow)
+        //print(globalRow)
         //Scroll and center cell
-        let indexPath = NSIndexPath(row: globalRow, section: 0)
+        let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
-        let image = cropToBounds(image: globalImage, width: 200, height: 200)
+        let image = cropToBounds(image: post_image, width: 200, height: 200)
         let popup = PopupDialog(title: title, message: message, image: image) //Image arguement is optional
         // Create buttons
         let cancelButton = CancelButton(title: "CANCEL") {
@@ -33,7 +26,7 @@ class MainViewController: UIViewController, ChainImageDelegate {
         }
         // This button will not the dismiss the dialog
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            print("Photo: \(globalRow)")
+            print("Photo: \(post_row)")
             print("Chain Shared!")
         }
 
@@ -42,58 +35,14 @@ class MainViewController: UIViewController, ChainImageDelegate {
         }
         popup.addButtons([shareButton, reportButton, cancelButton])
         present(popup, animated: true, completion: nil)
-        
-    }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        tableView.delegate = self
-        tableView.dataSource = self
-        masterFire.loadChain(chainID: "firstChain") { (loadedChain) in
-            if let chain = loadedChain{
-                self.mainChain = chain
-                self.listenToDate()
-                for post in self.mainChain.posts{
-                    post.delegate = self
-                }
-                self.tableView.reloadData()
-            }
-        }
-
     }
     
-    @IBAction func plusClicked(_ sender: Any) {
-        //Load Global Object
-        let cameraVC = CameraViewController()
-        cameraVC.chainID = "firstChain" //Get chain ID from chain being viewed
-        self.present(cameraVC, animated: true)
+    static func initFrom(chain: PostChain)->ChainViewController{
+        let vc = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+        vc.mainChain = chain
+        return vc
     }
     
-    func imageDidLoad(chainImage: ChainImage) {
-        DispatchQueue.main.async {
-            self.tableView.reloadRows(at: [IndexPath(row: chainImage.localIndex, section: 0)], with: .fade)
-        }
-    }
-    
-    func listenToDate(){
-        mainChain.deathDate.timeTillDeath { (timeLeft) in
-            self.timerLabel.text = timeLeft
-        }
-    }
-
-    func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
-        //indexPathsForVisibleItems -> Collection View
-        //indexPathsForVisibleRow -> Table View
-        let upperIndex = currentIndex + loadRadius
-        var newIndex = currentIndex + 1
-        while (newIndex < upperIndex) {
-            //KingFisher load function
-            newIndex += 1
-        }
-    }
-    
-}
-
-extension MainViewController {
     func cropToBounds(image: UIImage, width: Double, height: Double) -> UIImage {
 
         let cgimage = image.cgImage!

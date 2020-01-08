@@ -8,6 +8,7 @@
 
 import UIKit
 import SkyFloatingLabelTextField
+import Lottie
 
 class NewChainViewController: UIViewController {
 
@@ -20,8 +21,9 @@ class NewChainViewController: UIViewController {
     @IBOutlet var swipeableView: UIView!
     @IBOutlet var swipeHeightConstraint: NSLayoutConstraint!
     @IBOutlet var swipeToPostLabel: UILabel!
-    @IBOutlet var backButtonHeight: NSLayoutConstraint!
-    
+    @IBOutlet var backButtonHeight: NSLayoutConstraint!    
+    @IBOutlet var animatorHolder: UIView!
+    @IBOutlet var bottomLabel: UILabel!
     
     let submitLimit :CGFloat = 100
     var verticalLimit : CGFloat!
@@ -30,39 +32,19 @@ class NewChainViewController: UIViewController {
     var backgroundColor : UIColor!
     let colorSensitivity:CGFloat  = 2 //Lower = more change
     
+    let animationView = AnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
+    var displayLink: CADisplayLink?
+
     var h: CGFloat = 0
     var s: CGFloat = 0
     var b: CGFloat = 0
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        backButtonHeight.constant = view.frame.height  - 280
-        backgroundColor = view.backgroundColor!
-        if backgroundColor.getHue(&h, saturation: &s, brightness: &b, alpha: nil) {
-            
-        } else {
-            print("Failed with color space")
-        }
-        swipeableView.roundCorners(corners: [.bottomRight, .bottomLeft], radius: 5)
-        swipeableView.addObserver(self, forKeyPath:"frame", options:.new, context:nil)
-
-        constraintHeight = swipeHeightConstraint.constant
-        verticalLimit = constraintHeight
-        totalTranslation = constraintHeight
-
-        imageHolderView.addShadow()
-        
-        let panGestureRecognizer = PanDirectionGestureRecognizer(direction: .vertical, target: self, action: #selector(handlePanGesture(_:)))
-        panGestureRecognizer.cancelsTouchesInView = false
-        swipeableView.addGestureRecognizer(panGestureRecognizer)
-        postImageView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(mainImageTapped(sender:))))
+        setupUI()
+        setupAnimatorView()
     }
-    
-    override class func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        //print("value of \(keyPath) changed: \(change![keyPath!])")
 
-    }
-    
     @objc func mainImageTapped(sender: Any){
         print("image tapped")
     }
@@ -75,5 +57,25 @@ class NewChainViewController: UIViewController {
     
     @IBAction func backPressed(_ sender: Any) {
         masterNav.popViewController(animated: true)
+    }
+    
+    func willPostChain(){
+        animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.loop)
+        let name = chainTitleField.text!
+        let death = Date().add(days: 1)
+        let tempTags = tagsField.text!.split(separator: " ")
+        var tags:[String] = []
+        for tag in tempTags{
+            tags.append(String(tag))
+        }
+        let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
+        postChain.post { (err) in
+            if err != nil{
+                self.showPopUp(_title: "Error Posting Chain", _message: err!)
+            }else{
+                masterNav.popViewController(animated: false)
+                masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+            }
+        }
     }
 }

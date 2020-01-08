@@ -144,6 +144,7 @@ PODS:
   - KKPinCodeTextField (1.0.0)
   - leveldb-library (1.22)
   - libPhoneNumber-iOS (0.9.15)
+  - lottie-ios (3.1.5)
   - Macaw (0.9.5):
     - SWXMLHash
   - MBRadioCheckboxButton (2.0)
@@ -184,6 +185,7 @@ DEPENDENCIES:
   - IQKeyboardManager
   - Kingfisher (~> 5.0)
   - KKPinCodeTextField
+  - lottie-ios
   - MBRadioCheckboxButton
   - PopupDialog
   - SHSearchBar
@@ -227,6 +229,7 @@ SPEC REPOS:
     - KKPinCodeTextField
     - leveldb-library
     - libPhoneNumber-iOS
+    - lottie-ios
     - Macaw
     - MBRadioCheckboxButton
     - nanopb
@@ -283,6 +286,7 @@ SPEC CHECKSUMS:
   KKPinCodeTextField: 63a1fb841fd6a412cf664ef64dc065fc6767bd3c
   leveldb-library: 55d93ee664b4007aac644a782d11da33fba316f7
   libPhoneNumber-iOS: 0a32a9525cf8744fe02c5206eb30d571e38f7d75
+  lottie-ios: 32bf84389337d86fbc8b12266e88452e0abf1dee
   Macaw: 10bf9e327cb75f24e3225d5229a80ed544df85f0
   MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
@@ -296,6 +300,6 @@ SPEC CHECKSUMS:
   UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
   UIEmptyState: 767376694d9402452fb3c0a5a5283176c6a53c92
 
-PODFILE CHECKSUM: dc3eb7ec08a025311009766926a111f6a0f055c3
+PODFILE CHECKSUM: 97ca31cda548a5d480aa9dd4224b2d03e3930b60
 
 COCOAPODS: 1.8.4

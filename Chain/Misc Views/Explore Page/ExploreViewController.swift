@@ -36,4 +36,8 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         let chainIndex = collViewIndexReference[chain.chainID]!
         collectionView.reloadItems(at: [chainIndex])
     }
+    
+    @IBAction func addChain(_ sender: Any) {
+        masterNav.pushViewController(NewChainViewController(), animated: true)
+    }
 }

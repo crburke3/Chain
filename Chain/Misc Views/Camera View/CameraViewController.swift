@@ -64,7 +64,7 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     }
     
     func doneEditing(image: UIImage) {
-        masterFire.appendChain(chainID: self.chainID, image: image) { (error) in
+        masterFire.appendChain(chainID: self.chainID, image: image) { (error, imgWithLink) in
             if let error = error {
                 print("Error appending to chain \(error)")
             } else {

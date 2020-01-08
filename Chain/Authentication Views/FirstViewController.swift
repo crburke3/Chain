@@ -19,16 +19,17 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     let testVerificationCode = "123456"
     
     override func viewDidLoad() {
-        //masterNav = self.navigationController! //Guessing you were trying to get the current Nav Controller
+        masterNav = self.navigationController! //Guessing you were trying to get the current Nav Controller
         masterStoryBoard = self.storyboard!
         
     }
     
     @IBAction func enterTapped(_ sender: Any) {
-        let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "MainViewController") as! MainViewController
+        let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+        mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
         //Use performSegue instead
-        performSegue(withIdentifier: "toMain", sender: self)
-        //masterNav.pushViewController(mainVC, animated: true)
+        //performSegue(withIdentifier: "toMain", sender: self)
+        masterNav.pushViewController(mainVC, animated: true)
     }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {

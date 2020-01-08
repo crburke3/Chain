@@ -31,5 +31,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let chainID = topChains[indexPath.row]
+    }
     
 }

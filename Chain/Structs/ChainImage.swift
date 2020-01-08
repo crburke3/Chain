@@ -30,7 +30,11 @@ class ChainImage{
     }
     
     //When pulled from firestore
-    init(dict:[String:Any]){
+    init?(dict:[String:Any]){
+        if (dict["Link"] as? String) == nil{return nil}
+        if (dict["Time"] as? String) == nil{return nil}
+        if (dict["user"] as? String) == nil{return nil}
+
         self.link = dict["Link"] as! String
         self.time = dict["Time"] as! String
         self.user = dict["user"] as! String
@@ -53,7 +57,7 @@ class ChainImage{
         if let url =  URL(string: self.link){
             getData(from: url) { data, response, error in
                 guard let data = data, error == nil else { return }
-                print("Downloaded: \(self.link)")
+                //print("Downloaded: \(self.link)")
                 //DispatchQueue.main.async() {
                 self.image = UIImage(data: data)
                 if self.image == nil{
