@@ -78,12 +78,16 @@ class ChainFireStore {
             }
     }
     
-    //func removeFromChain()
-    //TODO: Make better chain function
-    //Will user for good, could return a lot of IDs, we can paginate this also, which we will need to do
-//    func loadChainIDs(){
-//
-//    }
+    func removeFromChain(chainID: String, post:[String:Any], completion: @escaping (String?)->()) {
+        var urlString = "" //Will hold URL string to create Chain Image
+        let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
+        firestoreRef.updateData([
+            "posts": FieldValue.arrayRemove([post]), "count": FieldValue.increment(Int64(1))
+        ])
+        
+    }
+    
+    
     func addFriend(currentUser: String, friend: String, error: @escaping (String?)->()) {
         //Add other user to current user's friend list
         var firestoreRef = Firestore.firestore().collection("users").document(currentUser)

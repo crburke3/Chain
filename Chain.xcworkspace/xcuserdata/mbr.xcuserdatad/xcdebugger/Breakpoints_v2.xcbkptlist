@@ -192,7 +192,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "76"
             endingLineNumber = "76"
-            landmarkName = "appendChain(chainID:image:error:)"
+            landmarkName = "appendChain(chainID:image:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

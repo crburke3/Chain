@@ -13,6 +13,11 @@ extension ChainViewController{
     func showOptionsPopup(post_row: Int, post_image: UIImage){
         let title = "Image Options"
         let message = "Select one of the actions below or press cancel"
+        var postUser = ""
+        let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
+        let givenPost = givenCell.post.toDict() as [String:Any]
+        postUser = givenPost["user"] as! String
+        
         //print(globalRow)
         //Scroll and center cell
         let indexPath = NSIndexPath(row: post_row, section: 0)
@@ -33,7 +38,27 @@ extension ChainViewController{
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Image Reported")
         }
-        popup.addButtons([shareButton, reportButton, cancelButton])
+        let removeButton = DefaultButton(title: "Remove your Image") {
+            print("Photo: \(post_row)")
+            print("Chain Removed")
+            masterFire.removeFromChain(chainID: "firstChain", post: givenPost) { (error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("Post removed") //
+                    self.mainChain.posts.remove(at: post_row)
+                    self.tableView.reloadData()
+                    
+                }
+            }
+            
+        }
+        //
+        if postUser == "mbrutkow" {
+            popup.addButtons([shareButton, reportButton, removeButton, cancelButton])
+        } else {
+            popup.addButtons([shareButton, reportButton, cancelButton])
+        }
         present(popup, animated: true, completion: nil)
     }
     
