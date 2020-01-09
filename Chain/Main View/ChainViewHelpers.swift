@@ -31,8 +31,13 @@ extension ChainViewController{
         }
         // This button will not the dismiss the dialog
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            print("Photo: \(post_row)")
-            print("Chain Shared!")
+            let menuVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuViewController") as! UserMenuViewController
+            menuVC.modalPresentationStyle = .overCurrentContext
+            menuVC.modalTransitionStyle = .crossDissolve
+            //masterNav.pushViewController(menuVC, animated: true)
+            //presentingViewController(
+            //Present UserMenuViewController
+            self.present(menuVC, animated: true)
         }
 
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
@@ -46,11 +51,10 @@ extension ChainViewController{
                     print(error)
                 } else {
                     print("Post removed") //
-                    self.mainChain.posts.remove(at: post_row)
-                    self.tableView.reloadData()
-                    
                 }
             }
+            //self.mainChain.posts.remove(at: post_row)
+            self.tableView.reloadData()
             
         }
         //
