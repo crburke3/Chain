@@ -8,6 +8,7 @@
 
 import Foundation
 import PopupDialog
+import FloatingPanel
 
 extension ChainViewController{
     func showOptionsPopup(post_row: Int, post_image: UIImage){
@@ -17,9 +18,6 @@ extension ChainViewController{
         let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
         let givenPost = givenCell.post.toDict() as [String:Any]
         postUser = givenPost["user"] as! String
-        
-        //print(globalRow)
-        //Scroll and center cell
         let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
@@ -29,15 +27,15 @@ extension ChainViewController{
         let cancelButton = CancelButton(title: "CANCEL") {
             print("Canceled")
         }
-        // This button will not the dismiss the dialog
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            let menuVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuViewController") as! UserMenuViewController
-            menuVC.modalPresentationStyle = .overCurrentContext
-            menuVC.modalTransitionStyle = .crossDissolve
-            //masterNav.pushViewController(menuVC, animated: true)
-            //presentingViewController(
-            //Present UserMenuViewController
-            self.present(menuVC, animated: true)
+            self.fpc = FloatingPanelController()
+            self.fpc.delegate = self // Optional
+            let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
+            //Set conentVC array to hold currentUsers friends
+            self.fpc.set(contentViewController: contentVC)
+            self.fpc.track(scrollView: contentVC.tableView)
+            self.fpc.isRemovalInteractionEnabled = true
+            self.fpc.addPanel(toParent: self)
         }
 
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
@@ -50,12 +48,10 @@ extension ChainViewController{
                 if let error = error {
                     print(error)
                 } else {
-                    print("Post removed") //
+                    print("Post removed")
                 }
             }
-            //self.mainChain.posts.remove(at: post_row)
             self.tableView.reloadData()
-            
         }
         //
         if postUser == "mbrutkow" {

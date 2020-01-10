@@ -8,13 +8,15 @@
 
 import UIKit
 import PopupDialog
+import FloatingPanel
 
-class ChainViewController: UIViewController, ChainImageDelegate {
+class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate {
 
+    var fpc: FloatingPanelController!
+    
     var mainChain:PostChain!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +32,15 @@ class ChainViewController: UIViewController, ChainImageDelegate {
             }
             self.tableView.reloadData()
         }
+        
+         
+       
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // Remove the views managed by the `FloatingPanelController` object from self.view.
+        fpc.removePanelFromParent(animated: true)
     }
     
     @IBAction func plusClicked(_ sender: Any) {

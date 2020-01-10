@@ -42,5 +42,13 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         return cell.frame.height
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if fpc != nil {
+            self.fpc.removePanelFromParent(animated: true)
+            print("Removing Menu")
+        } else {
+            print("Menu not set yet")
+        }
+    }
     
 }
