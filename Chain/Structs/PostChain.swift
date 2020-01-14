@@ -74,7 +74,7 @@ class PostChain{
             }
         }
         self.loaded = .LOADED
-        let latLong = dict["l"] as! [Double]
+        let latLong = dict["l"] as? [Double] ?? [0.0, 0.0]
         self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
         self.firstImageLink = dict["firstImageLink"] as? String
         if (self.firstImageLink == nil) && (self.posts.count > 0){

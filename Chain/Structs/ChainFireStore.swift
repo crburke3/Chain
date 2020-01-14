@@ -213,6 +213,34 @@ class ChainFireStore {
     func loadNextFewPhotos() {
         
     }
-    //Function to get basic of chain (Title, tags, description, length, likes, count, etc.)
     
+    func reportImage(chainID: String, image: ChainImage, error: @escaping (String?)->()) {
+        //Create and upload doc
+        var ref: DocumentReference? = nil
+        ref = db.collection("reportedPosts").addDocument(data: image.toDict()) { err in
+            if let err = err {
+                print("Error Reporting: \(err)")
+            } else {
+                print("Successfully Reported: \(ref!.documentID)")
+            }
+        }
+        
+    }
+    
+    func shareChain(chainID: String, sender: ChainUser, receivers: [ChainUser], index: Int, error: @escaping (String?)->()) {
+        let invite = ["chain": chainID, "sentBy": sender.username, "index": index] as [String : Any]
+        for user in receivers {
+            let firestoreRef = Firestore.firestore().collection("users").document(user.phoneNumber)
+            firestoreRef.updateData([
+                "invites": FieldValue.arrayUnion([invite])
+            ]) { (err1) in
+                       if let error1 = err1{
+                           masterNav.showPopUp(_title: "Error sending invite", _message: error1.localizedDescription)
+                           error(error1.localizedDescription)
+                       }else{
+                           error(nil)
+                       }
+            }
+        }
+    }
 }

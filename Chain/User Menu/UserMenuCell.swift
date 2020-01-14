@@ -9,8 +9,11 @@
 import UIKit
 
 class UserMenuCell: UITableViewCell {
+    
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    
+    var hasBeenSelected: Bool = false
     
     func cellDidLoad() {
         

@@ -28,6 +28,7 @@ extension ChainViewController{
             print("Canceled")
         }
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
+            self.sendButton.isHidden = false
             self.fpc = FloatingPanelController()
             self.fpc.delegate = self // Optional
             let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
@@ -36,10 +37,21 @@ extension ChainViewController{
             self.fpc.track(scrollView: contentVC.tableView)
             self.fpc.isRemovalInteractionEnabled = true
             self.fpc.addPanel(toParent: self)
+            //self.fpc.
+            self.view.bringSubviewToFront(self.sendButton)
+            //let window :UIWindow = UIApplication.shared.keyWindow!
+            //window.addSubview(self.sendButton)
         }
 
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
-            print("Image Reported")
+            print("Report Image")
+            masterFire.reportImage(chainID: self.mainChain.chainID, image: ChainImage(dict: givenPost)!) { (error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    //Successfully reported
+                }
+            }
         }
         let removeButton = DefaultButton(title: "Remove your Image") {
             print("Photo: \(post_row)")
@@ -101,4 +113,22 @@ extension ChainViewController{
 
         return image
     }
+ 
+    func createSendButton(){
+        self.sendButton.isHidden = true
+        self.sendButton.backgroundColor = .red
+        self.sendButton.setTitle("Send", for: .normal)
+        tableView.addSubview(self.sendButton)
+        // set position
+        var X_Position:CGFloat? = 50.0 //use your X position here
+        var Y_Position:CGFloat? = 50.0 //use your Y position here
+        //sendButton.frame.width = 100.0 as CGFloat
+        //sendButton.frame.height = 100.0 as CGFloat
+        
+        sendButton.frame = CGRect(x: X_Position!, y: Y_Position!, width: sendButton.frame.width, height: sendButton.frame.height)
+        
+        self.sendButton.heightAnchor.constraint(equalToConstant: 50).isActive = true // specify the height of the view
+        self.sendButton.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.6)
+    }
+    
 }

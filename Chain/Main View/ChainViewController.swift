@@ -13,13 +13,15 @@ import FloatingPanel
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate {
 
     var fpc: FloatingPanelController!
-    
+    let sendButton = UIButton()
     var mainChain:PostChain!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        createSendButton()
+        
         tableView.delegate = self
         tableView.dataSource = self
         mainChain.load { (err) in
@@ -40,7 +42,10 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // Remove the views managed by the `FloatingPanelController` object from self.view.
-        fpc.removePanelFromParent(animated: true)
+        if fpc != nil {
+            fpc.removePanelFromParent(animated: true)
+        }
+        sendButton.isHidden = true
     }
     
     @IBAction func plusClicked(_ sender: Any) {

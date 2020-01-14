@@ -102,6 +102,7 @@ public extension FloatingPanelLayout {
 
     var supportedPositions: Set<FloatingPanelPosition> {
         return Set([.full, .half, .tip])
+        //return Set([.full, .half])
     }
 
     func prepareLayout(surfaceView: UIView, in view: UIView) -> [NSLayoutConstraint] {
@@ -131,7 +132,7 @@ public class FloatingPanelDefaultLayout: FloatingPanelLayout {
         switch position {
         case .full: return 18.0
         case .half: return 262.0
-        case .tip: return 69.0
+        case .tip: return -88.0
         case .hidden: return nil
         }
     }

@@ -71,8 +71,9 @@ public enum FloatingPanelPosition: Int {
     case tip
     case hidden
 
-    static var allCases: [FloatingPanelPosition] {
+    static var allCases: [FloatingPanelPosition] { //Removed .tip
         return [.full, .half, .tip, .hidden]
+        //return [.full, .half, .hidden]
     }
 
     func next(in positions: [FloatingPanelPosition]) -> FloatingPanelPosition {
