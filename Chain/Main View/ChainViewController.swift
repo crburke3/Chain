@@ -9,7 +9,7 @@
 import UIKit
 import PopupDialog
 import FloatingPanel
-
+import FanMenu
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate {
 
     var fpc: FloatingPanelController!
@@ -17,11 +17,13 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     var mainChain:PostChain!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
+    @IBOutlet weak var fanMenu: FanMenu!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createSendButton()
-        
+        view.bringSubviewToFront(fanMenu)
         tableView.delegate = self
         tableView.dataSource = self
         mainChain.load { (err) in
@@ -34,9 +36,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             }
             self.tableView.reloadData()
         }
-        
-         
-       
+        //
+        fanMenuSetUp()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -76,6 +77,32 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             //KingFisher load function
             newIndex += 1
         }
+    }
+    
+    func fanMenuSetUp() {
+        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .red)
+        fanMenu.interval = (0, -(Double.pi)) //In radians
+        fanMenu.menuBackground = .clear
+        fanMenu.layer.backgroundColor = UIColor.clear.cgColor
+        fanMenu.backgroundColor = UIColor.clear
+        //May add append chain
+        fanMenu.items = [
+            FanMenuButton(
+                id: "jumpToEnd",
+                image: "end",
+                color: .green
+            ),
+            FanMenuButton(
+                id: "jumpToRandom",
+                image: "random",
+                color: .blue
+            ),
+            FanMenuButton(
+                id: "jumpToNextFriendsPost",
+                image: "friends",
+                color: .teal
+            )
+        ]
     }
     
 }

@@ -11,9 +11,14 @@ import FloatingPanel
 
 var currentUser = ChainUser(_username: "mbrutkow", _phoneNumber: "+19802550653", _name: "Mike")
 
-class UserMenuTableViewController: UITableViewController {
-
-    var userArray = ["", "Christian", "Alex", "Joe", "69420", "Mike", "Chris", "Shin", "John", "A", "B", "C", "D", "E", "F", "G", "H"] //Will hold ChainUser objects and be set while loading view controller
+class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var textBox: UITextField!
+    @IBOutlet weak var textBoxHolder: UIView!
+    
+    
+    var userArray = ["Christian", "Alex", "Joe", "69420", "Mike", "Chris", "Shin", "John", "A", "B", "C", "D", "E", "F", "G", "H"] //Will hold ChainUser objects and be set while loading view controller
     
     //var headerHeightConstraint:NSLayoutConstraint!
     var index: Int = 0
@@ -26,8 +31,9 @@ class UserMenuTableViewController: UITableViewController {
         tableView.dataSource = self
         tableView.allowsMultipleSelection = true
             
-        
+        textBoxHolder.layer.cornerRadius = 12
         //self.view.bringSubviewToFront(self.sendButton)
+        
         
     }
     //
@@ -35,13 +41,13 @@ class UserMenuTableViewController: UITableViewController {
     //
   
     //
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         return userArray.count
     }
 
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "user") as! UserMenuCell
         cell.userName.text = userArray[indexPath.row] //currentUser.friends[indexPath.index]["user"]
         cell.profilePic.image = UIImage()
@@ -54,12 +60,12 @@ class UserMenuTableViewController: UITableViewController {
         return cell
     }
     
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cell = tableView.dequeueReusableCell(withIdentifier: "user") as! UserMenuCell
         return cell.frame.height
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         //Be able to select multiple
         //let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
         let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
@@ -67,27 +73,11 @@ class UserMenuTableViewController: UITableViewController {
         cell.contentView.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3)
     }
     
-    override func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
         print("Deselected \(cell.userName.text)")
         cell.contentView.backgroundColor = UIColor.white
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView()
-        view.frame = CGRect(x: 0, y: 0, width: self.view.frame.width, height: 500)
-        
-        view.backgroundColor = UIColor.white
-        let button = UIButton(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 50))
-        button.backgroundColor = UIColor(displayP3Red: 252/255, green: 186/255, blue: 3/255, alpha: 0.5)
-        button.setTitle("Send Invites", for: .normal)
-        
-        button.addTarget(self, action: #selector(showDetail(_:)), for: .touchUpInside)
-        view.addSubview(button)
-
-        return view
-    }
-
     
     @objc func showDetail(_ button:UIButton) -> Int{
         //Gather array of users
