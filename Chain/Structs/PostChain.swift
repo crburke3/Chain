@@ -9,6 +9,8 @@
 import Foundation
 import UIKit
 import MapKit
+import FirebaseFirestore
+import FirebaseStorage
 //import Geofirestore
 
 
@@ -54,7 +56,7 @@ class PostChain{
         self.loaded = .NOT_LOADED
         if load{
             self.load { (error) in
-                print(error)
+                if error != nil{ print("Failed loading chain \(self.chainID): \(error!)")}
             }
         }
     }
@@ -146,13 +148,72 @@ class PostChain{
         
         masterFire.db.collection("chains").document(self.chainID).setData(self.toDict(withPosts: false), merge: true) { (err1) in
             if err1 != nil{error(err1!.localizedDescription); return}
-            
-            masterFire.appendChain(chainID: self.chainID, image: self.posts[0].image!) { (err2, postedImage) in
+            self.append(image: self.posts[0].image!) { (err2, postedImage) in
                 if err2 != nil{error(err2); return}
-                
                 self.posts[0] = postedImage!    //This will now have the link
                 error(nil)
             }
+        }
+    }
+    
+    func append(image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
+        var urlString = "" //Will hold URL string to create Chain Image
+        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainID)
+        let data = image.jpegData(compressionQuality: 1.0)!
+        let imageName = UUID().uuidString
+        let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
+        let metaDataForImage = StorageMetadata() //
+        metaDataForImage.contentType = "image/jpeg" //
+        imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
+            if err1 != nil {completion("Error uploading to cloud: \(err1!.localizedDescription)", nil); return}
+            imageReference.downloadURL(completion: { (url, err2) in
+                if err2 != nil {completion("Error getting URL", nil); return}
+                if url == nil {completion("Error loading URL", nil); return}
+                urlString = url!.absoluteString //Hold URL
+                print(urlString)
+                let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
+                firestoreRef.updateData([
+                    "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "count": FieldValue.increment(Int64(1))
+                ]) { (err1) in
+                    if let error1 = err1{
+                        masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
+                        completion(error1.localizedDescription, nil)
+                    } else{
+                        completion(nil, uploadImage)
+                    }
+                   }
+                })
+            }
+    }
+    
+    private var hasLoadedInitial = false
+    func listenForChanges(includeFirst:Bool = false){
+        let chainRef = Firestore.firestore().collection("chains").document(self.chainID)
+        chainRef.addSnapshotListener { (snap, err) in
+            if snap == nil{ return}
+            let data = snap!.data()!
+            let tempChain = PostChain(dict: data)
+
+            var fuck:ChainImage!
+            var locPostCount = 0
+            for locPost in self.posts{
+                var badPost = false
+                for tempPost in tempChain.posts{
+                    if locPost.link == tempPost.link{
+                        badPost = true
+                        fuck = tempPost
+                        break
+                    }
+                }
+                if !badPost{
+                    self.posts.insert(fuck, at: locPostCount)
+                    locPostCount += 1
+                }
+                locPostCount += 1
+            }
+
+            self.hasLoadedInitial = true
+            
         }
     }
     
@@ -170,5 +231,6 @@ class PostChain{
 }
 
 protocol PostChainDelegate {
+    func chainGotNewPost(post: ChainImage)
     func chainDidLoad(chain: PostChain)
 }

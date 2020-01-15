@@ -9,7 +9,6 @@
 import UIKit
 
 class ExploreViewController: UIViewController, PostChainDelegate {
-
     @IBOutlet var collectionView: UICollectionView!
     
     var topChains:[PostChain] = []
@@ -35,6 +34,10 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     func chainDidLoad(chain: PostChain) {
         let chainIndex = collViewIndexReference[chain.chainID]!
         collectionView.reloadItems(at: [chainIndex])
+    }
+    
+    func chainGotNewPost(post: ChainImage) {
+        
     }
     
     @IBAction func addChain(_ sender: Any) {

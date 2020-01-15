@@ -20,7 +20,7 @@ class ChainImage{
     var delegate:ChainImageDelegate?
     var localIndex:Int = 0
     
-    //When created by user locally
+    //When created by user locally after image is uploaded
     init(link:String, user:String, image:UIImage){
         self.loadState = .LOADED
         self.image = image
@@ -29,6 +29,8 @@ class ChainImage{
         self.time = Date().toChainString() //Convert to string
     }
     
+    /// Local Init, the user will need to be very careful using this. Make sure you upload it to the chain
+    /// - Parameter image: the image to be posted
     init(image:UIImage){
         self.loadState = .NOT_LOADED
         self.image = image

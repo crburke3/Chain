@@ -17,17 +17,27 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     @IBOutlet var previewView: CKFPreviewView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var cameraButton: UIButton!
+    @IBOutlet var photosButton: UIButton!
+    
+    let imagePicker = UIImagePickerController()
     let session = CKFPhotoSession()
     var chainID: String = ""
     var delegate:ChainCameraDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        previewView = CKFPreviewView(frame: self.view.bounds)
-        view.addSubview(previewView)
+        imagePicker.delegate = self
+        constrainPreviewView()
         previewView.session = session
         cameraButton.isHidden = false
         view.bringSubviewToFront(cameraButton)
+        view.bringSubviewToFront(photosButton)
+    }
+    
+    @IBAction func tappedPhotos(_ sender: Any) {
+        imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary
+        imagePicker.allowsEditing = false
+        self.present(imagePicker, animated: true, completion: nil)
     }
     
     @IBAction func cameraTouched(_ sender: Any) { //Create Chain Image
@@ -44,21 +54,9 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     
     func captureImage() {
         session.capture({ (image, settings) in
-           /* self.previewView.isHidden = true
-            self.imageView.image = image
-            self.imageView.isHidden = false
-            print(self.imageView.frame)
-            self.cameraButton.isHidden = true
-            */
-            let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
-            photoEditor.photoEditorDelegate = self
-            photoEditor.image = image
-            //photoEditor.stickers.append(UIImage(named: "sticker" )!)
-            photoEditor.hiddenControls = [.share]
-            photoEditor.modalPresentationStyle = UIModalPresentationStyle.currentContext //or .overFullScreen for transparency
-            self.present(photoEditor, animated: true, completion: nil)
+            self.displayEditorWithImage(image: image)
         }) { (error) in
-           
+            self.showPopUp(_title: "Error Capturing Image", _message: error.localizedDescription)
         }
     }
     
@@ -66,26 +64,21 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
         if delegate != nil{
             delegate?.didFinishImage(image: image); return
         }
-        masterFire.appendChain(chainID: self.chainID, image: image) { (error, imgWithLink) in
-            if let error = error {
-                print("Error appending to chain \(error)")
-            } else {
-
-            }
-        }
-        let indexOfPost = 
-        masterFire.updateFriendsFeed(chainID: self.chainID, userID: "mbrutkow") { (error) in
-            if let error = error {
-                print("Error updating friend's feed")
-            } else {
-                
-            }
-        }
         self.presentingViewController?.dismiss(animated: true, completion:nil)
     }
     
+    func displayEditorWithImage(image:UIImage){
+        let photoEditor = PhotoEditorViewController(nibName:"PhotoEditorViewController",bundle: Bundle(for: PhotoEditorViewController.self))
+        photoEditor.photoEditorDelegate = self
+        photoEditor.image = image
+        //photoEditor.stickers.append(UIImage(named: "sticker" )!)
+        photoEditor.hiddenControls = [.share]
+        photoEditor.modalPresentationStyle = UIModalPresentationStyle.currentContext //or .overFullScreen for transparency
+        self.present(photoEditor, animated: true, completion: nil)
+    }
+    
     func canceledEditing() {
-        
+        print("user canceled editor")
     }
 }
 

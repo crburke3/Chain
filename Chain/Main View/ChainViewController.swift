@@ -10,26 +10,33 @@ import UIKit
 import PopupDialog
 import FloatingPanel
 import FanMenu
-class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate {
 
-    var fpc: FloatingPanelController!
-    let sendButton = UIButton()
-    var mainChain:PostChain!
+class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate {
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
     
+    var fpc: FloatingPanelController!
+    let sendButton = UIButton()
+    var mainChain:PostChain!//{
+//        didSet{
+//            self.mainChain.listenForChanges()
+//        }
+//    }
+    let cameraVC = CameraViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         createSendButton()
         view.bringSubviewToFront(fanMenu)
+        cameraVC.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
         tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) {
             self.reloadChain()
         }
-        //
+        self.reloadChain()
         fanMenuSetUp()
     }
     
@@ -44,9 +51,22 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     @IBAction func plusClicked(_ sender: Any) {
         //Load Global Object
-        let cameraVC = CameraViewController()
         cameraVC.chainID = self.mainChain.chainID //Get chain ID from chain being viewed
         self.present(cameraVC, animated: true)
+    }
+    
+    //Called when the camera view arrow has been tapped
+    func didFinishImage(image: UIImage) {
+        print("Appending Chain")
+        mainChain.append(image: image) { (err, finalImage) in
+            if err != nil{ return}  //Will show popups automatically
+            print("Chain appended!")
+        }
+        masterFire.updateFriendsFeed(chainID: mainChain.chainID, userID: "mbrutkow") { (error) in
+            if let error = error {
+                print("Error updating friend's feed: \(error)")
+            }
+        }
     }
     
     func imageDidLoad(chainImage: ChainImage) {
@@ -54,69 +74,5 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             self.tableView.reloadRows(at: [IndexPath(row: chainImage.localIndex, section: 0)], with: .fade)
         }
     }
-    
-    func listenToDate(){
-        mainChain.deathDate.timeTillDeath { (timeLeft) in
-            self.timerLabel.text = timeLeft
-        }
-    }
 
-    func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
-        //indexPathsForVisibleItems -> Collection View
-        //indexPathsForVisibleRow -> Table View
-        let upperIndex = currentIndex + loadRadius
-        var newIndex = currentIndex + 1
-        while (newIndex < upperIndex) {
-            //KingFisher load function
-            newIndex += 1
-        }
-    }
-    
-    func fanMenuSetUp() {
-        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
-        fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
-        //(0, -(Double.pi))
-        fanMenu.menuBackground = .clear
-        fanMenu.layer.backgroundColor = UIColor.clear.cgColor
-        fanMenu.backgroundColor = UIColor.clear
-        //May add append chain
-        fanMenu.items = [
-            FanMenuButton(
-                id: "jumpToEnd",
-                image: "end",
-                color: .green
-            ),
-            FanMenuButton(
-                id: "jumpToRandom",
-                image: "random",
-                color: .blue
-            ),
-            FanMenuButton(
-                id: "jumpToNextFriendsPost",
-                image: "friends",
-                color: .teal
-            )
-        ]
-        
-        fanMenu.onItemDidClick = { button in
-            //print("ItemDidClick: \(button.id)")
-            switch button.id {
-                case "jumpToRandom":
-                    print("Jumping to random position in chain")
-                    self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: true) //Might need to set to false
-                    break
-            case "jumpToEnd":
-                print("Jumping to end of chain")
-                self.tableView.scrollToRow(at: IndexPath(row: (self.mainChain.posts.count - 1), section: 0), at: .middle, animated: true)
-                break
-            case "jumpToNextFriendsPost":
-                print("Finding next next friend's post")
-                break
-            default:
-                break
-            }
-        
-        }
-    }
-    
 }

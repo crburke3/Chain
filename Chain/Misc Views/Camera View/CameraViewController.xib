@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +12,7 @@
             <connections>
                 <outlet property="cameraButton" destination="4HU-nP-6yM" id="nCn-8i-n4M"/>
                 <outlet property="imageView" destination="pGe-E2-Gq1" id="J5V-Da-Dnb"/>
+                <outlet property="photosButton" destination="k3G-Us-hcK" id="jAT-cJ-Xxb"/>
                 <outlet property="previewView" destination="b1e-0T-EA6" id="ypE-wj-do7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -42,6 +43,18 @@
                         <action selector="cameraTouched:" destination="-1" eventType="touchUpInside" id="zru-ZU-GHl"/>
                     </connections>
                 </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3G-Us-hcK">
+                    <rect key="frame" x="293" y="581" width="50" height="37.5"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="IA2-3u-DKY"/>
+                        <constraint firstAttribute="width" constant="50" id="xkX-c3-ZU9"/>
+                    </constraints>
+                    <color key="tintColor" red="0.94229608769999995" green="0.4164805412" blue="0.36561489110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" backgroundImage="photo" catalog="system"/>
+                    <connections>
+                        <action selector="tappedPhotos:" destination="-1" eventType="touchUpInside" id="lFK-QE-wkn"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
@@ -54,6 +67,8 @@
                 <constraint firstAttribute="bottom" secondItem="pGe-E2-Gq1" secondAttribute="bottom" id="REF-k6-FW2"/>
                 <constraint firstItem="b1e-0T-EA6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TFs-1a-OEK"/>
                 <constraint firstItem="b1e-0T-EA6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TkN-be-Ajx"/>
+                <constraint firstItem="k3G-Us-hcK" firstAttribute="centerY" secondItem="4HU-nP-6yM" secondAttribute="centerY" id="cEu-2z-0a8"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k3G-Us-hcK" secondAttribute="trailing" constant="32" id="gLd-Wg-xAp"/>
                 <constraint firstAttribute="trailing" secondItem="pGe-E2-Gq1" secondAttribute="trailing" id="s4M-WT-77w"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
@@ -62,5 +77,6 @@
     </objects>
     <resources>
         <image name="camera_button" width="100" height="100"/>
+        <image name="photo" catalog="system" width="64" height="46"/>
     </resources>
 </document>

@@ -79,7 +79,11 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             tags.append(String(tag))
         }
         let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
-        postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
+        if postImageView.image == nil{
+            postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
+        }else{
+            postChain.posts.append(ChainImage(image: postImageView.image!))
+        }
         postChain.post { (err) in
             self.animationView.stop()
             if err != nil{

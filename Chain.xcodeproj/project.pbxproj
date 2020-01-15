@@ -15,6 +15,7 @@
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
 		F8FA2FF7022E9567DE476E44 /* Pods_Chain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D598370E0D7CDF870307C38C /* Pods_Chain.framework */; };
 		FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */; };
+		FA06BC6A23CF9411002055AD /* CameraViewPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA06BC6923CF9411002055AD /* CameraViewPhotos.swift */; };
 		FA63C87D238DE92B00B30312 /* PostChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C87C238DE92B00B30312 /* PostChain.swift */; };
 		FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */; };
 		FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */; };
@@ -74,6 +75,7 @@
 		D598370E0D7CDF870307C38C /* Pods_Chain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D59994062205F2EA3D50386E /* Pods-Chain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.release.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.release.xcconfig"; sourceTree = "<group>"; };
 		FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainBreakLoader.xib; sourceTree = "<group>"; };
+		FA06BC6923CF9411002055AD /* CameraViewPhotos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraViewPhotos.swift; sourceTree = "<group>"; };
 		FA63C87C238DE92B00B30312 /* PostChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostChain.swift; sourceTree = "<group>"; };
 		FA63C881238DF4CB00B30312 /* ChainAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAuth.swift; sourceTree = "<group>"; };
 		FA63C883238DF4D800B30312 /* ChainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUser.swift; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				FA7E36B4238DD20400488000 /* CameraViewController.swift */,
+				FA06BC6923CF9411002055AD /* CameraViewPhotos.swift */,
 				FA7E36B5238DD20400488000 /* CameraViewController.xib */,
 			);
 			path = "Camera View";
@@ -470,6 +473,7 @@
 				FA867FDF23CEC4D100B638F8 /* ChainBreakLoader.swift in Sources */,
 				FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */,
 				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
+				FA06BC6A23CF9411002055AD /* CameraViewPhotos.swift in Sources */,
 				FA9C5B4D23C5547B00F1B41A /* NewChainViewController.swift in Sources */,
 				FA9C5B4223C553C500F1B41A /* ChristiansLibrary.swift in Sources */,
 				FA9C5B5123C554B900F1B41A /* PanGestureExtensions.swift in Sources */,
@@ -637,14 +641,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 2PT4RQSY99;
+				DEVELOPMENT_TEAM = P7J2GV5KE5;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

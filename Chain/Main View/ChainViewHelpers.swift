@@ -9,6 +9,7 @@
 import Foundation
 import PopupDialog
 import FloatingPanel
+import FanMenu
 
 extension ChainViewController{
     func showOptionsPopup(post_row: Int, post_image: UIImage){
@@ -131,4 +132,81 @@ extension ChainViewController{
         self.sendButton.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.6)
     }
     
+    func reloadChain(){
+        mainChain.load { (err) in
+            if err != nil{
+                print(err!); return
+            }
+            self.listenToDate()
+            for post in self.mainChain.posts{
+                post.delegate = self
+            }
+            self.tableView.reloadData()
+            self.tableView.cr.endHeaderRefresh()
+        }
+    }
+    
+    func fanMenuSetUp() {
+        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
+        fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
+        //(0, -(Double.pi))
+        fanMenu.menuBackground = .clear
+        fanMenu.layer.backgroundColor = UIColor.clear.cgColor
+        fanMenu.backgroundColor = UIColor.clear
+        //May add append chain
+        fanMenu.items = [
+            FanMenuButton(
+                id: "jumpToEnd",
+                image: "end",
+                color: .green
+            ),
+            FanMenuButton(
+                id: "jumpToRandom",
+                image: "random",
+                color: .blue
+            ),
+            FanMenuButton(
+                id: "jumpToNextFriendsPost",
+                image: "friends",
+                color: .teal
+            )
+        ]
+        
+        fanMenu.onItemDidClick = { button in
+            //print("ItemDidClick: \(button.id)")
+            switch button.id {
+                case "jumpToRandom":
+                    print("Jumping to random position in chain")
+                    self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: true) //Might need to set to false
+                    break
+            case "jumpToEnd":
+                print("Jumping to end of chain")
+                self.tableView.scrollToRow(at: IndexPath(row: (self.mainChain.posts.count - 1), section: 0), at: .middle, animated: true)
+                break
+            case "jumpToNextFriendsPost":
+                print("Finding next next friend's post")
+                break
+            default:
+                break
+            }
+        
+        }
+    }
+    
+    func listenToDate(){
+        mainChain.deathDate.timeTillDeath { (timeLeft) in
+            self.timerLabel.text = timeLeft
+        }
+    }
+    
+    func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
+        //indexPathsForVisibleItems -> Collection View
+        //indexPathsForVisibleRow -> Table View
+        let upperIndex = currentIndex + loadRadius
+        var newIndex = currentIndex + 1
+        while (newIndex < upperIndex) {
+            //KingFisher load function
+            newIndex += 1
+        }
+    }
 }
