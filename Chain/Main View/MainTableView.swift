@@ -27,6 +27,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         case .LOADED:
             cell.isPostLoaded = true
         }
+        cell.backView.addShadow()
         return cell
     }
     
@@ -38,6 +39,14 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let post = mainChain.posts[indexPath.row]
+        if post.loadState == .LOADED{
+            //Aspect = height/width
+            let aspectRatio = post.image!.size.height/post.image!.size.width
+            let cellWidth = UIScreen.main.bounds.width - (24 * 2)
+            let imgHeight = cellWidth * aspectRatio
+            return imgHeight + 16 + 8 + (24 * 2)
+        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
         return cell.frame.height
     }

@@ -39,3 +39,7 @@ exports.addFriend = functions.https.onRequest((request, response) => {
         return {"Message":error};
     }
 })
+
+exports.appendChain = functions.https.onRequest((request, response) => {
+
+})

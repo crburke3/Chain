@@ -13,6 +13,7 @@ class MainCell: UITableViewCell {
     
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
+    @IBOutlet var backView: RoundView!
     
     var post: ChainImage!
     var row: Int = 0

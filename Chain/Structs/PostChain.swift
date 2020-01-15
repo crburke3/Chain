@@ -186,35 +186,57 @@ class PostChain{
             }
     }
     
+    private var listener: ListenerRegistration?
     private var hasLoadedInitial = false
-    func listenForChanges(includeFirst:Bool = false){
+    func listenForChanges(ignoreFirst:Bool = true){
         let chainRef = Firestore.firestore().collection("chains").document(self.chainID)
-        chainRef.addSnapshotListener { (snap, err) in
+        listener = chainRef.addSnapshotListener { (snap, err) in
             if snap == nil{ return}
+            if err != nil{print("error in snaplistener"); return}
+            if ignoreFirst && !self.hasLoadedInitial{ self.hasLoadedInitial = true; return}
+            
             let data = snap!.data()!
-            let tempChain = PostChain(dict: data)
-
-            var fuck:ChainImage!
-            var locPostCount = 0
-            for locPost in self.posts{
-                var badPost = false
-                for tempPost in tempChain.posts{
-                    if locPost.link == tempPost.link{
-                        badPost = true
-                        fuck = tempPost
-                        break
+            let newChain = PostChain(dict: data)
+            
+            var newPost:ChainImage?
+            var postDict:[String:ChainImage] = [:]
+            for post in self.posts{
+                postDict[post.link] = post
+            }
+            for post in newChain.posts{
+                if postDict[post.link] == nil{
+                    //Theres a new post!
+                    newPost = post
+                    postDict[post.link] = post
+                }
+            }
+            
+            let sortedPosts = postDict.sorted { $0.value.localIndex < $1.value.localIndex }
+            var finalPosts:[ChainImage] = []
+            var postCount = 0
+            for post in sortedPosts{
+                let tempPost = post.value
+                tempPost.localIndex = postCount
+                finalPosts.append(tempPost)
+                if newPost != nil{
+                    if tempPost.link == newPost!.link{
+                        newPost!.localIndex = postCount
                     }
                 }
-                if !badPost{
-                    self.posts.insert(fuck, at: locPostCount)
-                    locPostCount += 1
-                }
-                locPostCount += 1
+                postCount += 1
             }
-
+            self.posts = finalPosts
+            if newPost != nil{
+                for delegate in self.delegates.values{
+                    delegate.chainGotNewPost(post: newPost!)
+                }
+            }
             self.hasLoadedInitial = true
-            
         }
+    }
+    
+    func stopListeningForChanges(){
+        listener?.remove()
     }
     
     func addDelegate(delegateID:String, delegate: PostChainDelegate){

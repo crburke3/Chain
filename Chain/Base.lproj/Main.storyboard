@@ -356,34 +356,55 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="531"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="drC-NI-6dT">
-                                                    <rect key="frame" x="15" y="11" width="345" height="520"/>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnY-YI-U6O">
-                                                    <rect key="frame" x="166.5" y="483" width="42" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbK-hP-ceq" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
-                                                    <rect key="frame" x="21" y="11" width="30" height="30"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                    <state key="normal" image="menu"/>
-                                                    <connections>
-                                                        <action selector="popUpMenu:" destination="clx-Iz-NuC" eventType="touchUpInside" id="TJW-cT-bGZ"/>
-                                                    </connections>
-                                                </button>
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7S-fu-uYM" customClass="RoundView" customModule="Chain" customModuleProvider="target">
+                                                    <rect key="frame" x="24" y="24" width="312" height="483"/>
+                                                    <subviews>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="drC-NI-6dT">
+                                                            <rect key="frame" x="0.0" y="0.0" width="312" height="446"/>
+                                                        </imageView>
+                                                        <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbK-hP-ceq" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
+                                                            <rect key="frame" x="8" y="0.0" width="30" height="30"/>
+                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                            <state key="normal" image="menu"/>
+                                                            <connections>
+                                                                <action selector="popUpMenu:" destination="clx-Iz-NuC" eventType="touchUpInside" id="TJW-cT-bGZ"/>
+                                                            </connections>
+                                                        </button>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZnY-YI-U6O">
+                                                            <rect key="frame" x="135" y="454" width="42" height="21"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="21" id="OXm-qS-KcD"/>
+                                                            </constraints>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <constraints>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerX" secondItem="v7S-fu-uYM" secondAttribute="centerX" id="cmk-Ze-hwx"/>
+                                                        <constraint firstItem="drC-NI-6dT" firstAttribute="top" secondItem="v7S-fu-uYM" secondAttribute="top" id="dFF-je-GLl"/>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="top" secondItem="drC-NI-6dT" secondAttribute="bottom" constant="8" id="eek-Y1-gDU"/>
+                                                        <constraint firstAttribute="bottom" secondItem="ZnY-YI-U6O" secondAttribute="bottom" constant="8" id="q94-QS-4RB"/>
+                                                        <constraint firstItem="drC-NI-6dT" firstAttribute="leading" secondItem="v7S-fu-uYM" secondAttribute="leading" id="qLL-c1-CwY"/>
+                                                        <constraint firstAttribute="trailing" secondItem="drC-NI-6dT" secondAttribute="trailing" id="qNc-PM-4Fi"/>
+                                                    </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                            <integer key="value" value="5"/>
+                                                        </userDefinedRuntimeAttribute>
+                                                    </userDefinedRuntimeAttributes>
+                                                </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerX" secondItem="drC-NI-6dT" secondAttribute="centerX" id="0L8-sT-tEj"/>
-                                                <constraint firstItem="drC-NI-6dT" firstAttribute="leading" secondItem="ieR-RF-gdu" secondAttribute="leadingMargin" id="3yu-ev-gqp"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="ZnY-YI-U6O" secondAttribute="bottom" constant="16" id="IWD-ww-nNG"/>
-                                                <constraint firstItem="drC-NI-6dT" firstAttribute="top" secondItem="ieR-RF-gdu" secondAttribute="topMargin" id="ZGy-EX-adc"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="drC-NI-6dT" secondAttribute="bottom" id="dd0-1d-Yre"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="drC-NI-6dT" secondAttribute="trailing" id="wRZ-zZ-l1q"/>
+                                                <constraint firstItem="v7S-fu-uYM" firstAttribute="leading" secondItem="ieR-RF-gdu" secondAttribute="leading" constant="24" id="6vq-zg-Y9R"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="v7S-fu-uYM" secondAttribute="trailing" constant="24" id="J1Z-JU-oaF"/>
+                                                <constraint firstAttribute="bottom" secondItem="v7S-fu-uYM" secondAttribute="bottom" constant="24" id="oL8-FP-oAz"/>
+                                                <constraint firstItem="v7S-fu-uYM" firstAttribute="top" secondItem="ieR-RF-gdu" secondAttribute="top" constant="24" id="uWM-sH-Heh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="backView" destination="v7S-fu-uYM" id="dY2-eS-Nz5"/>
                                             <outlet property="imgView" destination="drC-NI-6dT" id="ery-nj-nXq"/>
                                             <outlet property="user" destination="ZnY-YI-U6O" id="4Za-0o-EDg"/>
                                         </connections>

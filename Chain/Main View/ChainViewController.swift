@@ -11,19 +11,19 @@ import PopupDialog
 import FloatingPanel
 import FanMenu
 
-class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate {
-    
+class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate, PostChainDelegate {
+
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
     
     var fpc: FloatingPanelController!
     let sendButton = UIButton()
-    var mainChain:PostChain!//{
-//        didSet{
-//            self.mainChain.listenForChanges()
-//        }
-//    }
+    var mainChain:PostChain!{
+        didSet{
+            self.mainChain.listenForChanges()
+        }
+    }
     let cameraVC = CameraViewController()
     
     override func viewDidLoad() {
@@ -58,6 +58,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     //Called when the camera view arrow has been tapped
     func didFinishImage(image: UIImage) {
         print("Appending Chain")
+        cameraVC.dismiss(animated: true, completion: nil)
         mainChain.append(image: image) { (err, finalImage) in
             if err != nil{ return}  //Will show popups automatically
             print("Chain appended!")
@@ -74,5 +75,10 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             self.tableView.reloadRows(at: [IndexPath(row: chainImage.localIndex, section: 0)], with: .fade)
         }
     }
-
+    
+    func chainGotNewPost(post: ChainImage) {
+        tableView.insertRows(at: [IndexPath(row: post.localIndex, section: 0)], with: .automatic)
+    }
+    
+    func chainDidLoad(chain: PostChain) {}
 }
