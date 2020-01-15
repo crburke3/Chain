@@ -378,7 +378,6 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="drC-NI-6dT" secondAttribute="trailing" id="wRZ-zZ-l1q"/>
                                             </constraints>
                                         </tableViewCellContentView>
-                                        <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <outlet property="imgView" destination="drC-NI-6dT" id="ery-nj-nXq"/>
                                             <outlet property="user" destination="ZnY-YI-U6O" id="4Za-0o-EDg"/>
