@@ -78,12 +78,16 @@ class ChainFireStore {
             }
     }
     
-    //func removeFromChain()
-    //TODO: Make better chain function
-    //Will user for good, could return a lot of IDs, we can paginate this also, which we will need to do
-//    func loadChainIDs(){
-//
-//    }
+    func removeFromChain(chainID: String, post:[String:Any], completion: @escaping (String?)->()) {
+        var urlString = "" //Will hold URL string to create Chain Image
+        let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
+        firestoreRef.updateData([
+            "posts": FieldValue.arrayRemove([post]), "count": FieldValue.increment(Int64(1))
+        ])
+        
+    }
+    
+    
     func addFriend(currentUser: String, friend: String, error: @escaping (String?)->()) {
         //Add other user to current user's friend list
         var firestoreRef = Firestore.firestore().collection("users").document(currentUser)
@@ -209,6 +213,34 @@ class ChainFireStore {
     func loadNextFewPhotos() {
         
     }
-    //Function to get basic of chain (Title, tags, description, length, likes, count, etc.)
     
+    func reportImage(chainID: String, image: ChainImage, error: @escaping (String?)->()) {
+        //Create and upload doc
+        var ref: DocumentReference? = nil
+        ref = db.collection("reportedPosts").addDocument(data: image.toDict()) { err in
+            if let err = err {
+                print("Error Reporting: \(err)")
+            } else {
+                print("Successfully Reported: \(ref!.documentID)")
+            }
+        }
+        
+    }
+    
+    func shareChain(chainID: String, sender: ChainUser, receivers: [ChainUser], index: Int, error: @escaping (String?)->()) {
+        let invite = ["chain": chainID, "sentBy": sender.username, "index": index] as [String : Any]
+        for user in receivers {
+            let firestoreRef = Firestore.firestore().collection("users").document(user.phoneNumber)
+            firestoreRef.updateData([
+                "invites": FieldValue.arrayUnion([invite])
+            ]) { (err1) in
+                       if let error1 = err1{
+                           masterNav.showPopUp(_title: "Error sending invite", _message: error1.localizedDescription)
+                           error(error1.localizedDescription)
+                       }else{
+                           error(nil)
+                       }
+            }
+        }
+    }
 }

@@ -8,13 +8,16 @@
 
 import Foundation
 import PopupDialog
+import FloatingPanel
 
 extension ChainViewController{
     func showOptionsPopup(post_row: Int, post_image: UIImage){
         let title = "Image Options"
         let message = "Select one of the actions below or press cancel"
-        //print(globalRow)
-        //Scroll and center cell
+        var postUser = ""
+        let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
+        let givenPost = givenCell.post.toDict() as [String:Any]
+        postUser = givenPost["user"] as! String
         let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
@@ -24,16 +27,50 @@ extension ChainViewController{
         let cancelButton = CancelButton(title: "CANCEL") {
             print("Canceled")
         }
-        // This button will not the dismiss the dialog
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            print("Photo: \(post_row)")
-            print("Chain Shared!")
+            self.sendButton.isHidden = false
+            self.fpc = FloatingPanelController()
+            self.fpc.delegate = self // Optional
+            let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
+            //Set conentVC array to hold currentUsers friends
+            self.fpc.set(contentViewController: contentVC)
+            self.fpc.track(scrollView: contentVC.tableView)
+            self.fpc.isRemovalInteractionEnabled = true
+            self.fpc.addPanel(toParent: self)
+            //self.fpc.
+            self.view.bringSubviewToFront(self.sendButton)
+            //let window :UIWindow = UIApplication.shared.keyWindow!
+            //window.addSubview(self.sendButton)
         }
 
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
-            print("Image Reported")
+            print("Report Image")
+            masterFire.reportImage(chainID: self.mainChain.chainID, image: ChainImage(dict: givenPost)!) { (error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    //Successfully reported
+                }
+            }
         }
-        popup.addButtons([shareButton, reportButton, cancelButton])
+        let removeButton = DefaultButton(title: "Remove your Image") {
+            print("Photo: \(post_row)")
+            print("Chain Removed")
+            masterFire.removeFromChain(chainID: "firstChain", post: givenPost) { (error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    print("Post removed")
+                }
+            }
+            self.tableView.reloadData()
+        }
+        //
+        if postUser == "mbrutkow" {
+            popup.addButtons([shareButton, reportButton, removeButton, cancelButton])
+        } else {
+            popup.addButtons([shareButton, reportButton, cancelButton])
+        }
         present(popup, animated: true, completion: nil)
     }
     
@@ -76,4 +113,22 @@ extension ChainViewController{
 
         return image
     }
+ 
+    func createSendButton(){
+        self.sendButton.isHidden = true
+        self.sendButton.backgroundColor = .red
+        self.sendButton.setTitle("Send", for: .normal)
+        tableView.addSubview(self.sendButton)
+        // set position
+        var X_Position:CGFloat? = 50.0 //use your X position here
+        var Y_Position:CGFloat? = 50.0 //use your Y position here
+        //sendButton.frame.width = 100.0 as CGFloat
+        //sendButton.frame.height = 100.0 as CGFloat
+        
+        sendButton.frame = CGRect(x: X_Position!, y: Y_Position!, width: sendButton.frame.width, height: sendButton.frame.height)
+        
+        self.sendButton.heightAnchor.constraint(equalToConstant: 50).isActive = true // specify the height of the view
+        self.sendButton.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.6)
+    }
+    
 }

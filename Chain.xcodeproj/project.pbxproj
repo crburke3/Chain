@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA323C7957200C75B2E /* UserMenuCell.swift */; };
+		6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */; };
 		68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
@@ -61,6 +63,8 @@
 /* Begin PBXFileReference section */
 		2C5C4C2DF714C599B79C18A3 /* Pods-Chain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.debug.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.debug.xcconfig"; sourceTree = "<group>"; };
 		68676B9E23AEB29D00DAD539 /* Chain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chain.entitlements; sourceTree = "<group>"; };
+		6878BBA323C7957200C75B2E /* UserMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuCell.swift; sourceTree = "<group>"; };
+		6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuTableViewController.swift; sourceTree = "<group>"; };
 		68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
@@ -136,6 +140,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6878BBA023C7954000C75B2E /* User Menu */ = {
+			isa = PBXGroup;
+			children = (
+				6878BBA323C7957200C75B2E /* UserMenuCell.swift */,
+				6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */,
+			);
+			path = "User Menu";
+			sourceTree = "<group>";
+		};
 		68F92F25238F81A3000F05AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +203,7 @@
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
+				6878BBA023C7954000C75B2E /* User Menu */,
 				FA7E36A7238DCCFD00488000 /* Authentication Views */,
 				FA7E367E238DB91100488000 /* Main View */,
 				FA7E36B2238DD1EB00488000 /* Misc Views */,
@@ -459,6 +473,7 @@
 				FA9C5B4D23C5547B00F1B41A /* NewChainViewController.swift in Sources */,
 				FA9C5B4223C553C500F1B41A /* ChristiansLibrary.swift in Sources */,
 				FA9C5B5123C554B900F1B41A /* PanGestureExtensions.swift in Sources */,
+				6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				FA9C5B4423C553C500F1B41A /* ChristiansFirebase.swift in Sources */,
 				FA9C5B4823C553C500F1B41A /* GlobalAttributes.swift in Sources */,
@@ -474,6 +489,7 @@
 				FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */,
 				FA63C882238DF4CB00B30312 /* ChainAuth.swift in Sources */,
 				FA9C5B4323C553C500F1B41A /* BeautifulLoadScreen.swift in Sources */,
+				6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */,
 				FA9C5B4623C553C500F1B41A /* CustomSpinner.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -621,14 +637,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P7J2GV5KE5;
+				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

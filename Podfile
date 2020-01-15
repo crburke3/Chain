@@ -54,6 +54,6 @@ target 'Chain' do
   # pod 'CurrencyTextField'
   pod 'CameraKit-iOS'
   pod 'iOSPhotoEditor'
-  
+  pod 'FloatingPanel'
   
 end
