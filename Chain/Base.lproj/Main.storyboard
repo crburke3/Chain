@@ -305,7 +305,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="SGc-9t-OpB" customClass="FanMenu" customModule="FanMenu">
-                                <rect key="frame" x="0.0" y="480" width="375" height="230"/>
+                                <rect key="frame" x="0.0" y="474" width="375" height="249"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
@@ -461,10 +461,16 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-n9-I2C">
+                                                    <rect key="frame" x="344" y="22" width="16" height="16"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                </view>
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="profilePic" destination="JvE-pG-p64" id="Jx7-cA-EQg"/>
+                                            <outlet property="selectedIcon" destination="cb6-n9-I2C" id="MkT-kw-uyY"/>
                                             <outlet property="userName" destination="sBV-gA-x4j" id="9Yp-TM-pRv"/>
                                         </connections>
                                     </tableViewCell>

@@ -80,8 +80,9 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     }
     
     func fanMenuSetUp() {
-        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .red)
-        fanMenu.interval = (0, -(Double.pi)) //In radians
+        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
+        fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
+        //(0, -(Double.pi))
         fanMenu.menuBackground = .clear
         fanMenu.layer.backgroundColor = UIColor.clear.cgColor
         fanMenu.backgroundColor = UIColor.clear
@@ -103,6 +104,26 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
                 color: .teal
             )
         ]
+        
+        fanMenu.onItemDidClick = { button in
+            //print("ItemDidClick: \(button.id)")
+            switch button.id {
+                case "jumpToRandom":
+                    print("Jumping to random position in chain")
+                    self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: true) //Might need to set to false
+                    break
+            case "jumpToEnd":
+                print("Jumping to end of chain")
+                self.tableView.scrollToRow(at: IndexPath(row: (self.mainChain.posts.count - 1), section: 0), at: .middle, animated: true)
+                break
+            case "jumpToNextFriendsPost":
+                print("Finding next next friend's post")
+                break
+            default:
+                break
+            }
+        
+        }
     }
     
 }

@@ -56,6 +56,12 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         cell.profilePic.layer.borderColor = UIColor.black.cgColor
         cell.profilePic.layer.cornerRadius = cell.profilePic.frame.height/2
         cell.profilePic.clipsToBounds = true
+        
+        cell.selectedIcon.layer.borderWidth = 0.5
+        cell.selectedIcon.layer.masksToBounds = false
+        cell.selectedIcon.layer.borderColor = UIColor.lightGray.cgColor
+        cell.selectedIcon.layer.cornerRadius = cell.selectedIcon.frame.height/2
+        cell.selectedIcon.clipsToBounds = true
         cell.cellDidLoad()
         return cell
     }
@@ -70,13 +76,16 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         //let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
         let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
         print("Selected \(cell.userName.text)")
-        cell.contentView.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3)
+        //cell.contentView.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3)
+        cell.contentView.backgroundColor = UIColor.white
+        cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
         print("Deselected \(cell.userName.text)")
-        cell.contentView.backgroundColor = UIColor.white
+        //cell.contentView.backgroundColor = UIColor.white
+        cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 0/250, green: 0/250, blue: 0/250, alpha: 1.0).cgColor
     }
     
     @objc func showDetail(_ button:UIButton) -> Int{

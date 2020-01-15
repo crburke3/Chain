@@ -12,6 +12,7 @@ class UserMenuCell: UITableViewCell {
     
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var userName: UILabel!
+    @IBOutlet weak var selectedIcon: UIView!
     
     var hasBeenSelected: Bool = false
     
