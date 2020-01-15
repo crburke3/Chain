@@ -19,7 +19,7 @@ class ChainImage{
     var loadState = LoadState.NOT_LOADED
     var delegate:ChainImageDelegate?
     var localIndex:Int = 0
-
+    
     //When created by user locally
     init(link:String, user:String, image:UIImage){
         self.loadState = .LOADED
@@ -27,6 +27,14 @@ class ChainImage{
         self.link = link
         self.user = user
         self.time = Date().toChainString() //Convert to string
+    }
+    
+    init(image:UIImage){
+        self.loadState = .NOT_LOADED
+        self.image = image
+        self.link = ""
+        self.user = ""
+        self.time = Date().toChainString()
     }
     
     //When pulled from firestore

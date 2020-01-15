@@ -23,7 +23,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             var chainCount = 0
             for chainID in topChainIDs{
                 let chain = PostChain(chainID: chainID)
-                self.collViewIndexReference[chainID] = IndexPath(row: 0, section: chainCount)
+                self.collViewIndexReference[chainID] = IndexPath(row: chainCount, section: 0)
                 chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
                 self.topChains.append(chain)
                 chainCount += 1

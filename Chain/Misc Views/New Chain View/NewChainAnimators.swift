@@ -91,7 +91,7 @@ extension NewChainViewController{
         } else {
             print("Failed with color space")
         }
-        swipeableView.roundCorners(corners: [.bottomRight, .bottomLeft], radius: 5)
+        swipeableView.roundCorners(corners: [.bottomRight, .bottomLeft], radius: 15)
         swipeableView.addObserver(self, forKeyPath:"frame", options:.new, context:nil)
 
         constraintHeight = swipeHeightConstraint.constant
@@ -107,8 +107,7 @@ extension NewChainViewController{
         let window = UIApplication.shared.keyWindow
         let bottomPadding = window?.safeAreaInsets.bottom ?? 0.0
         let topPadding = window?.safeAreaInsets.top ?? 0.0
-        print(bottomPadding, topPadding)
-        let btnSpace = view.frame.height - (verticalLimit + 180 + bottomPadding + topPadding)
+        let btnSpace = view.frame.height - (180 + bottomPadding + topPadding)
         print(btnSpace)
         backButtonHeight.constant = btnSpace
     }
@@ -121,10 +120,11 @@ extension NewChainViewController{
     }
     
     func setupAnimatorView(){
-        let animation = Animation.named("uglyChain")
+        let animation = Animation.named("ChainBreak")
         animationView.animation = animation
         animationView.contentMode = .scaleAspectFit
         animatorHolder.addSubview(animationView)
+        view.sendSubviewToBack(animatorHolder)
         //view.addSubview(animationView)
         animationView.translatesAutoresizingMaskIntoConstraints = false
         animationView.centerXAnchor.constraint(equalTo: animatorHolder.centerXAnchor).isActive = true

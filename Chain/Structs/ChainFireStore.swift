@@ -57,7 +57,7 @@ class ChainFireStore {
         let metaDataForImage = StorageMetadata() //
         metaDataForImage.contentType = "image/jpeg" //
         imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
-            if err1 != nil {completion("Error uploading to cloud", nil); return}
+            if err1 != nil {completion("Error uploading to cloud: \(err1!.localizedDescription)", nil); return}
             imageReference.downloadURL(completion: { (url, err2) in
                 if err2 != nil {completion("Error getting URL", nil); return}
                 if url == nil {completion("Error loading URL", nil); return}

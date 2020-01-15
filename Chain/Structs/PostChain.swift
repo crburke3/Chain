@@ -33,8 +33,8 @@ class PostChain{
         self.likes = 0
         self.count = 1
         self.tags = _tags ?? []
-        self.contributors = [masterAuth.currUser.username]
-        self.coordinate = masterLocator.getCurrentLocation()!.coordinate
+        self.contributors = ["cburke"]
+        self.coordinate = CLLocation().coordinate //masterLocator.getCurrentLocation()!.coordinate
         self.loaded = .LOADED
         if posts.count > 0{
             firstImageLink = posts[0].link
@@ -74,15 +74,18 @@ class PostChain{
             }
         }
         self.loaded = .LOADED
-        let latLong = dict["l"] as! [Double]
-        self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
+        if let latLong = dict["l"] as? [Double]{
+            self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
+        }else{
+            self.coordinate = CLLocation().coordinate
+        }
         self.firstImageLink = dict["firstImageLink"] as? String
         if (self.firstImageLink == nil) && (self.posts.count > 0){
             self.firstImageLink = self.posts[0].link
         }
     }
     
-    func toDict()->[String:Any]{
+    func toDict(withPosts:Bool = true)->[String:Any]{
         
         //let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
         
@@ -144,13 +147,13 @@ class PostChain{
     func post(error: @escaping (String?)->()){
         if self.posts.count != 1{error("Error: You need 1 post in self.posts to upload the chain"); return}
         
-        masterFire.db.collection("chains").document(self.chainID).setData(self.toDict(), merge: true) { (err1) in
+        masterFire.db.collection("chains").document(self.chainID).setData(self.toDict(withPosts: false), merge: true) { (err1) in
             if err1 != nil{error(err1!.localizedDescription); return}
             
             masterFire.appendChain(chainID: self.chainID, image: self.posts[0].image!) { (err2, postedImage) in
                 if err2 != nil{error(err2); return}
                 
-                self.posts[0] = postedImage!    //This will now have more data than before
+                self.posts[0] = postedImage!    //This will now have the link
                 error(nil)
             }
         }

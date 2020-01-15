@@ -9,9 +9,9 @@
 import UIKit
 import SkyFloatingLabelTextField
 import Lottie
+import iOSPhotoEditor
 
-class NewChainViewController: UIViewController {
-
+class NewChainViewController: UIViewController, ChainCameraDelegate {
     @IBOutlet var chainTitleField: SkyFloatingLabelTextField!
     @IBOutlet var tagsField: SkyFloatingLabelTextField!
     @IBOutlet var deathDateField: SkyFloatingLabelTextField!
@@ -31,6 +31,8 @@ class NewChainViewController: UIViewController {
     var constraintHeight : CGFloat!
     var backgroundColor : UIColor!
     let colorSensitivity:CGFloat  = 2 //Lower = more change
+    var cameraVC:CameraViewController!
+
     
     let animationView = AnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     var displayLink: CADisplayLink?
@@ -47,8 +49,15 @@ class NewChainViewController: UIViewController {
 
     @objc func mainImageTapped(sender: Any){
         print("image tapped")
+        cameraVC = CameraViewController()
+        cameraVC.delegate = self
+        masterNav.pushViewController(cameraVC, animated: true)
+        //self.present(cameraVC, animated: true, completion: nil)
     }
     
+    func didFinishImage(image: UIImage) {
+        cameraVC.dismiss(animated: true, completion: nil)
+    }
 
     @IBAction func cancelPressed(_ sender: Any) {
         swipeableView.isUserInteractionEnabled = true
@@ -58,6 +67,7 @@ class NewChainViewController: UIViewController {
     @IBAction func backPressed(_ sender: Any) {
         masterNav.popViewController(animated: true)
     }
+    
     
     func willPostChain(){
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.loop)
@@ -69,8 +79,11 @@ class NewChainViewController: UIViewController {
             tags.append(String(tag))
         }
         let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
+        postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
         postChain.post { (err) in
+            self.animationView.stop()
             if err != nil{
+                self.animateCancel()
                 self.showPopUp(_title: "Error Posting Chain", _message: err!)
             }else{
                 masterNav.popViewController(animated: false)

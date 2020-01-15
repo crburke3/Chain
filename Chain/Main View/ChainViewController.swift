@@ -8,6 +8,7 @@
 
 import UIKit
 import PopupDialog
+import CRRefresh
 
 class ChainViewController: UIViewController, ChainImageDelegate {
 
@@ -20,15 +21,8 @@ class ChainViewController: UIViewController, ChainImageDelegate {
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
-        mainChain.load { (err) in
-            if err != nil{
-                print(err!); return
-            }
-            self.listenToDate()
-            for post in self.mainChain.posts{
-                post.delegate = self
-            }
-            self.tableView.reloadData()
+        tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) {
+            self.reloadChain()
         }
     }
     
@@ -62,4 +56,17 @@ class ChainViewController: UIViewController, ChainImageDelegate {
         }
     }
     
+    func reloadChain(){
+        mainChain.load { (err) in
+            if err != nil{
+                print(err!); return
+            }
+            self.listenToDate()
+            for post in self.mainChain.posts{
+                post.delegate = self
+            }
+            self.tableView.reloadData()
+            self.tableView.cr.endHeaderRefresh()
+        }
+    }
 }

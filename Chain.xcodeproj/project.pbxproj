@@ -12,6 +12,7 @@
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
 		F8FA2FF7022E9567DE476E44 /* Pods_Chain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D598370E0D7CDF870307C38C /* Pods_Chain.framework */; };
+		FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */; };
 		FA63C87D238DE92B00B30312 /* PostChain.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C87C238DE92B00B30312 /* PostChain.swift */; };
 		FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */; };
 		FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */; };
@@ -33,6 +34,8 @@
 		FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA7E36B5238DD20400488000 /* CameraViewController.xib */; };
 		FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36B8238DD55800488000 /* FirstViewController.swift */; };
 		FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E36BA238DDDB100488000 /* SceneDelegate.swift */; };
+		FA867FDD23CEC44A00B638F8 /* ChainBreak.json in Resources */ = {isa = PBXBuildFile; fileRef = FA867FDC23CEC44A00B638F8 /* ChainBreak.json */; };
+		FA867FDF23CEC4D100B638F8 /* ChainBreakLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA867FDE23CEC4D100B638F8 /* ChainBreakLoader.swift */; };
 		FA9C5B4123C553C500F1B41A /* DecodableObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C5B3823C553C500F1B41A /* DecodableObject.swift */; };
 		FA9C5B4223C553C500F1B41A /* ChristiansLibrary.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C5B3923C553C500F1B41A /* ChristiansLibrary.swift */; };
 		FA9C5B4323C553C500F1B41A /* BeautifulLoadScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C5B3A23C553C500F1B41A /* BeautifulLoadScreen.swift */; };
@@ -66,6 +69,7 @@
 		68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerExtensions.swift; sourceTree = "<group>"; };
 		D598370E0D7CDF870307C38C /* Pods_Chain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D59994062205F2EA3D50386E /* Pods-Chain.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.release.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.release.xcconfig"; sourceTree = "<group>"; };
+		FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainBreakLoader.xib; sourceTree = "<group>"; };
 		FA63C87C238DE92B00B30312 /* PostChain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostChain.swift; sourceTree = "<group>"; };
 		FA63C881238DF4CB00B30312 /* ChainAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainAuth.swift; sourceTree = "<group>"; };
 		FA63C883238DF4D800B30312 /* ChainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUser.swift; sourceTree = "<group>"; };
@@ -87,6 +91,8 @@
 		FA7E36B5238DD20400488000 /* CameraViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CameraViewController.xib; sourceTree = "<group>"; };
 		FA7E36B8238DD55800488000 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		FA7E36BA238DDDB100488000 /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		FA867FDC23CEC44A00B638F8 /* ChainBreak.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ChainBreak.json; sourceTree = "<group>"; };
+		FA867FDE23CEC4D100B638F8 /* ChainBreakLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainBreakLoader.swift; sourceTree = "<group>"; };
 		FA9C5B3823C553C500F1B41A /* DecodableObject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DecodableObject.swift; sourceTree = "<group>"; };
 		FA9C5B3923C553C500F1B41A /* ChristiansLibrary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChristiansLibrary.swift; sourceTree = "<group>"; };
 		FA9C5B3A23C553C500F1B41A /* BeautifulLoadScreen.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeautifulLoadScreen.swift; sourceTree = "<group>"; };
@@ -290,7 +296,10 @@
 		FA9C5B5223C5790B00F1B41A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
+				FA867FDC23CEC44A00B638F8 /* ChainBreak.json */,
 				FA9C5B5323C5793600F1B41A /* uglyChain.json */,
+				FA867FDE23CEC4D100B638F8 /* ChainBreakLoader.swift */,
+				FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */,
 			);
 			path = Animations;
 			sourceTree = "<group>";
@@ -371,9 +380,11 @@
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
 				68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
+				FA867FDD23CEC44A00B638F8 /* ChainBreak.json in Resources */,
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
+				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
 				FA9C5B4F23C5547B00F1B41A /* NewChainViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -442,6 +453,7 @@
 				FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */,
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,
 				68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */,
+				FA867FDF23CEC4D100B638F8 /* ChainBreakLoader.swift in Sources */,
 				FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */,
 				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
 				FA9C5B4D23C5547B00F1B41A /* NewChainViewController.swift in Sources */,

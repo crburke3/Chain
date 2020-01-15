@@ -14,13 +14,12 @@ import iOSPhotoEditor
 
 class CameraViewController: UIViewController, PhotoEditorDelegate {
 
-    
-
     @IBOutlet var previewView: CKFPreviewView!
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var cameraButton: UIButton!
     let session = CKFPhotoSession()
     var chainID: String = ""
+    var delegate:ChainCameraDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,6 +63,9 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     }
     
     func doneEditing(image: UIImage) {
+        if delegate != nil{
+            delegate?.didFinishImage(image: image); return
+        }
         masterFire.appendChain(chainID: self.chainID, image: image) { (error, imgWithLink) in
             if let error = error {
                 print("Error appending to chain \(error)")
@@ -85,4 +87,9 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     func canceledEditing() {
         
     }
+}
+
+
+protocol ChainCameraDelegate{
+    func didFinishImage(image: UIImage)
 }
