@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA323C7957200C75B2E /* UserMenuCell.swift */; };
 		6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */; };
+		6892BD5723CFAC850021A3E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */; };
+		6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */; };
+		6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */; };
+		6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */; };
 		68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
@@ -66,6 +70,10 @@
 		68676B9E23AEB29D00DAD539 /* Chain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chain.entitlements; sourceTree = "<group>"; };
 		6878BBA323C7957200C75B2E /* UserMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuCell.swift; sourceTree = "<group>"; };
 		6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuTableViewController.swift; sourceTree = "<group>"; };
+		6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
+		6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsCollectionViewCell.swift; sourceTree = "<group>"; };
+		6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainsCollectionViewCell.xib; sourceTree = "<group>"; };
 		68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
@@ -151,6 +159,17 @@
 			path = "User Menu";
 			sourceTree = "<group>";
 		};
+		6892BD5423CFAC3E0021A3E2 /* ProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */,
+				6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */,
+				6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */,
+				6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */,
+			);
+			path = ProfileView;
+			sourceTree = "<group>";
+		};
 		68F92F25238F81A3000F05AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -205,6 +224,7 @@
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
+				6892BD5423CFAC3E0021A3E2 /* ProfileView */,
 				6878BBA023C7954000C75B2E /* User Menu */,
 				FA7E36A7238DCCFD00488000 /* Authentication Views */,
 				FA7E367E238DB91100488000 /* Main View */,
@@ -396,8 +416,10 @@
 				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
 				68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */,
+				6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
 				FA867FDD23CEC44A00B638F8 /* ChainBreak.json in Resources */,
+				6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */,
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
@@ -485,12 +507,14 @@
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
 				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
 				FA9C5B4723C553C500F1B41A /* MemoryHelp.swift in Sources */,
+				6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */,
 				FA9C5B4E23C5547B00F1B41A /* NewChainAnimators.swift in Sources */,
 				FA9C5B4523C553C500F1B41A /* EmptyTableView.swift in Sources */,
 				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
 				FA63C888238E084200B30312 /* MainCell.swift in Sources */,
 				FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */,
 				FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */,
+				6892BD5723CFAC850021A3E2 /* ProfileViewController.swift in Sources */,
 				FA63C882238DF4CB00B30312 /* ChainAuth.swift in Sources */,
 				FA9C5B4323C553C500F1B41A /* BeautifulLoadScreen.swift in Sources */,
 				6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */,

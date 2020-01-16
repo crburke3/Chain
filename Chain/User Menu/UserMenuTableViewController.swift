@@ -79,6 +79,9 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         //cell.contentView.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3)
         cell.contentView.backgroundColor = UIColor.white
         cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
+        let profile = ProfileViewController()
+        profile.user = ChainUser(_username: "mikey", _phoneNumber: "123", _name: "Rut")
+        masterNav.pushViewController(profile, animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

@@ -3,6 +3,14 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profile.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
       </ContextState>
       <ContextState
