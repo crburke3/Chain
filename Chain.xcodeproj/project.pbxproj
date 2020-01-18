@@ -13,7 +13,11 @@
 		6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */; };
 		6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */; };
 		6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */; };
-		68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */; };
+		6892BD6223D23AF30021A3E2 /* VerifyNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD6023D23AF30021A3E2 /* VerifyNumberViewController.swift */; };
+		6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6123D23AF30021A3E2 /* VerifyNumberViewController.xib */; };
+		6892BD6723D3A25A0021A3E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */; };
+		6892BD6B23D3AB120021A3E2 /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */; };
+		6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
@@ -74,7 +78,11 @@
 		6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsCollectionViewCell.swift; sourceTree = "<group>"; };
 		6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainsCollectionViewCell.xib; sourceTree = "<group>"; };
-		68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6892BD6023D23AF30021A3E2 /* VerifyNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumberViewController.swift; sourceTree = "<group>"; };
+		6892BD6123D23AF30021A3E2 /* VerifyNumberViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyNumberViewController.xib; sourceTree = "<group>"; };
+		6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
+		6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalInfoViewController.xib; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
 		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
@@ -170,6 +178,24 @@
 			path = ProfileView;
 			sourceTree = "<group>";
 		};
+		6892BD5F23D23AA20021A3E2 /* Verify Phone */ = {
+			isa = PBXGroup;
+			children = (
+				6892BD6023D23AF30021A3E2 /* VerifyNumberViewController.swift */,
+				6892BD6123D23AF30021A3E2 /* VerifyNumberViewController.xib */,
+			);
+			path = "Verify Phone";
+			sourceTree = "<group>";
+		};
+		6892BD6823D3AAAF0021A3E2 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */,
+				6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		68F92F25238F81A3000F05AA /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +249,7 @@
 				68676B9E23AEB29D00DAD539 /* Chain.entitlements */,
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
+				6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
 				6892BD5423CFAC3E0021A3E2 /* ProfileView */,
 				6878BBA023C7954000C75B2E /* User Menu */,
@@ -236,7 +263,6 @@
 				FA7E3673238DB12C00488000 /* Assets.xcassets */,
 				FA7E3675238DB12C00488000 /* LaunchScreen.storyboard */,
 				FA7E3678238DB12C00488000 /* Info.plist */,
-				68A5D387238DC92700AD4DC8 /* GoogleService-Info.plist */,
 			);
 			path = Chain;
 			sourceTree = "<group>";
@@ -272,6 +298,8 @@
 				FA7E36B8238DD55800488000 /* FirstViewController.swift */,
 				FA7E36AC238DCD4100488000 /* Sign In */,
 				FA7E36AD238DCD4500488000 /* Sign Up */,
+				6892BD5F23D23AA20021A3E2 /* Verify Phone */,
+				6892BD6823D3AAAF0021A3E2 /* New Group */,
 			);
 			path = "Authentication Views";
 			sourceTree = "<group>";
@@ -412,10 +440,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */,
+				6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */,
 				FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */,
 				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
-				68A5D388238DC92700AD4DC8 /* GoogleService-Info.plist in Resources */,
 				6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
 				FA867FDD23CEC44A00B638F8 /* ChainBreak.json in Resources */,
@@ -425,6 +454,7 @@
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
 				FA9C5B4F23C5547B00F1B41A /* NewChainViewController.xib in Resources */,
+				6892BD6723D3A25A0021A3E2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +532,7 @@
 				6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				FA9C5B4423C553C500F1B41A /* ChristiansFirebase.swift in Sources */,
+				6892BD6B23D3AB120021A3E2 /* AdditionalInfoViewController.swift in Sources */,
 				FA9C5B4823C553C500F1B41A /* GlobalAttributes.swift in Sources */,
 				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
@@ -511,6 +542,7 @@
 				FA9C5B4E23C5547B00F1B41A /* NewChainAnimators.swift in Sources */,
 				FA9C5B4523C553C500F1B41A /* EmptyTableView.swift in Sources */,
 				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
+				6892BD6223D23AF30021A3E2 /* VerifyNumberViewController.swift in Sources */,
 				FA63C888238E084200B30312 /* MainCell.swift in Sources */,
 				FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */,
 				FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */,
@@ -665,14 +697,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P7J2GV5KE5;
+				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

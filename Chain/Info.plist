@@ -23,7 +23,7 @@
 			<string>Editor</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>com.googleusercontent.apps.471010598891-7v7hrq69i587ltit4mnn5nfaqb2nem26</string>
+				<string>com.googleusercontent.apps.471010598891-3rr4c1cqf8lci6b8krdk48ohjhmv1j5g</string>
 			</array>
 		</dict>
 	</array>
@@ -37,6 +37,8 @@
 	<string>Recording Video</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>Gotta get your pics</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>WE WANT YOUR NUDES</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>
@@ -73,8 +75,6 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>WE WANT YOUR NUDES</string>
 	<key>UIUserInterfaceStyle</key>
 	<string>Light</string>
 </dict>

@@ -59,7 +59,7 @@ class ChainAuth {
         }
     }
     
-    func logInUser(verificationCode: String, error: @escaping (String?)->()) {
+    func logInUser(verificationCode: String, phone: String, error: @escaping (String?)->()) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode) //Load object
         //Sign In
@@ -69,7 +69,16 @@ class ChainAuth {
                return
           } else {
                 print("Signed in successfully")//Signed In
-                //Segue
+                //Segue to additional info view
+                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+                mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+                masterNav.pushViewController(mainVC, animated: true)
+                //Create users, userFeeds docs
+                let db = Firestore.firestore()
+            let userData = ["blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""]] as [String:Any]
+            let userFeed = ["posts": [[:]]]
+                db.collection("users").document(phone).setData(userData)
+                db.collection("users").document(phone).setData(userFeed)
             }
         }
     }
