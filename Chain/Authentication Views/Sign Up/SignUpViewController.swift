@@ -48,6 +48,8 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var phoneNumber: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet weak var name: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet weak var username: SkyFloatingLabelTextFieldWithIcon!
+    @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var confirmPassword: UITextField!
     
     
     override func viewDidLoad() {
@@ -57,6 +59,12 @@ class SignUpViewController: UIViewController {
     }
 
     @IBAction func nextStep(_ sender: Any) {
+        if !checkPassword() {
+            return
+        }
+        if password.text != confirmPassword.text {
+            return
+        }
         
         if phoneNumber.text?.count != 0 && name.text?.count != 0 && username.text?.count != 0 {
             //Set label in next view
@@ -72,25 +80,9 @@ class SignUpViewController: UIViewController {
                     print(self.formatPhone())
                     if querySnapshot?.count == 0 {
                         let phoneNumber = self.formatPhone()
-                        PhoneAuthProvider.provider().verifyPhoneNumber(phoneNumber, uiDelegate: nil) { (verificationID, error) in
-                          if let error = error {
-                            print(error)
-                            return
-                          } else {
-                            UserDefaults.standard.set(verificationID, forKey: "authVerificationID") //Save verification code
-                            }
-                          // Sign in using the verificationID and the code sent to the user
-                          // ...
-                        }
-                       /* self.auth.sendVerificationCode(phoneNumber: self.formatPhone(), error: { error in
-                             if let error = error {
-                                 print("\(error) -> Unable to send verification code")
-                             } else {
-                                 
-                             }
-                         }) //Original number */
                         let verifyVC = VerifyNumberViewController()
                         verifyVC.phone = self.formatPhone()
+                        verifyVC.password = self.password.text!
                         masterNav.pushViewController(verifyVC, animated: true) //Push verify page
                     } else {
                         let alert = UIAlertController(title: "Alert", message: "Number has already been taken", preferredStyle: UIAlertController.Style.alert)
@@ -107,5 +99,9 @@ class SignUpViewController: UIViewController {
     }
     func formatPhone() -> String {
         return "+1\(phoneNumber?.text ?? "")" //Will vary by country
+    }
+    
+    func checkPassword() -> Bool {
+        return true
     }
 }

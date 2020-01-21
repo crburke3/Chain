@@ -59,7 +59,7 @@ class ChainAuth {
         }
     }
     
-    func logInUser(verificationCode: String, phone: String, error: @escaping (String?)->()) {
+    func logInUserAfterVerification(verificationCode: String, phone: String, password: String, error: @escaping (String?)->()) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode) //Load object
         //Sign In
@@ -70,15 +70,15 @@ class ChainAuth {
           } else {
                 print("Signed in successfully")//Signed In
                 //Segue to additional info view
-                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-                mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
-                masterNav.pushViewController(mainVC, animated: true)
+                let additionalInfoVC = AdditionalInfoViewController()
+                additionalInfoVC.phone = phone
+                masterNav.pushViewController(additionalInfoVC, animated: true)
                 //Create users, userFeeds docs
                 let db = Firestore.firestore()
-            let userData = ["blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""]] as [String:Any]
-            let userFeed = ["posts": [[:]]]
-                db.collection("users").document(phone).setData(userData)
-                db.collection("users").document(phone).setData(userFeed)
+            let userData = ["bio": "","blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""], "password": password] as [String:Any]
+                let userFeed = ["posts": [[:]]]
+                db.collection("users").document(phone).setData(userData) //What if this fails?
+                db.collection("userFeeds").document(phone).setData(userFeed)
             }
         }
     }
@@ -102,4 +102,40 @@ class ChainAuth {
         
     }
     
+    func continueToChangePassword(verificationCode: String, phone: String, error: @escaping (String?)->()) {
+        let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
+        let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode) //Load object
+        //Sign In
+        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
+          if let error = error {
+               print(error.localizedDescription) //Failed to sign in
+               return
+          } else {
+                print("Signed in successfully, now lets change your password")//Signed In
+                //Segue to change password VC
+                let changePasswordVC = ChangePasswordViewController()
+                masterFire.getCurrentUsersData(phone: phone) { (error) in
+                    //Get users data
+                }
+                masterNav.pushViewController(changePasswordVC, animated: true)
+            }
+        }
+    }
+    
+    func changePassword(password: String, phone: String, error: @escaping (String?)->()) {
+        let db = Firestore.firestore()
+        let washingtonRef = db.collection("users").document(password)
+        washingtonRef.updateData([
+            "password": password
+        ]) { err in
+            if let err = err {
+                print("Error updating document: \(err)")
+            } else {
+                print("Document successfully updated")
+                masterFire.getCurrentUsersData(phone: phone) { (error) in
+                    //
+                }
+            }
+        }
+    }
 }

@@ -15,6 +15,7 @@ var masterStoryBoard:UIStoryboard!
 var masterAuth = ChainAuth()
 var masterFire = ChainFireStore()
 let masterLocator = CLLocationManager()
+var currentUser = ChainUser(_username: "", _phoneNumber: "", _name: "")
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

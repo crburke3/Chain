@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
    
@@ -23,6 +24,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     }
     
     var user = ChainUser(_username: "", _phoneNumber: "", _name: "")
+    var isCurrentUser: Bool = false //If set to true, view controller will change to allow user to edit profile
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,17 +33,22 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.delegate = self
         collectionView.dataSource = self
         // Do any additional setup after loading the view.
+        //Get profile photo
         profilePic.image = UIImage()
+        let url = URL(string: user.profile)
+        profilePic.kf.setImage(with: url)
         profilePic.layer.borderWidth = 1
         profilePic.layer.masksToBounds = false
         profilePic.layer.borderColor = UIColor.black.cgColor
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         profilePic.clipsToBounds = true
+        userName.text = user.username
         //flowLayout.invalidateLayout()
         collectionView?.collectionViewLayout.invalidateLayout()
         collectionView.reloadData()
         print(self.user.name)
-        //collectionView.c
+        //
+        
     }
     
     //Collection View functions
@@ -99,5 +106,8 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
              return 0.0 //1.0
      }
      
-     
+    func isFriend() -> Bool {
+        
+        return true
+    }
 }

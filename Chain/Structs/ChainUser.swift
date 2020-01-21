@@ -10,11 +10,17 @@ import Foundation
 
 class ChainUser{
     
-    let name:String
-    let phoneNumber:String
-    let username:String
-    var posts:[PostChain] = []
-    
+    var name:String
+    var phoneNumber:String
+    var username:String
+    var posts:[[String:Any]] = [[:]]
+    //var posts:[PostChain] = []
+    var blocked:[String] = [""]
+    var invites:[[String:Any]] = [[:]] //Use invite object and sub-collection for invites
+    var topPosts:[[String:Any]] = [[:]] //Use chain objects and sub-collection for posts
+    var profile:String = ""
+    var friends:[ChainFriend] = [] //Only to be used for currentUser
+    // let userData = ["blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""]] as [String:Any]
     init(_username:String, _phoneNumber:String, _name:String){
         self.phoneNumber = _phoneNumber
         self.username = _username

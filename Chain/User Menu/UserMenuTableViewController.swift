@@ -8,8 +8,7 @@
 
 import UIKit
 import FloatingPanel
-
-var currentUser = ChainUser(_username: "mbrutkow", _phoneNumber: "+19802550653", _name: "Mike")
+import Kingfisher
 
 class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -17,8 +16,8 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var textBoxHolder: UIView!
     
-    
-    var userArray = ["Christian", "Alex", "Joe", "69420", "Mike", "Chris", "Shin", "John", "A", "B", "C", "D", "E", "F", "G", "H"] //Will hold ChainUser objects and be set while loading view controller
+    var userArray = [currentUser]
+    //var userArray = ["Christian", "Alex", "Joe", "69420", "Mike", "Chris", "Shin", "John", "A", "B", "C", "D", "E", "F", "G", "H"] //Will hold ChainFriend objects and be set while loading view controller
     
     //var headerHeightConstraint:NSLayoutConstraint!
     var index: Int = 0
@@ -49,8 +48,11 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "user") as! UserMenuCell
-        cell.userName.text = userArray[indexPath.row] //currentUser.friends[indexPath.index]["user"]
-        cell.profilePic.image = UIImage()
+        cell.userName.text = userArray[indexPath.row].username //currentUser.friends[indexPath.index]["user"]
+        let url = URL(string: userArray[indexPath.row].profile)
+        cell.profilePic.kf.setImage(with: url)
+        cell.phone = userArray[indexPath.row].phoneNumber
+        //cell.profilePic.image = UIImage()
         cell.profilePic.layer.borderWidth = 1
         cell.profilePic.layer.masksToBounds = false
         cell.profilePic.layer.borderColor = UIColor.black.cgColor
@@ -79,9 +81,11 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         //cell.contentView.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3)
         cell.contentView.backgroundColor = UIColor.white
         cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
+        /*
         let profile = ProfileViewController()
         profile.user = ChainUser(_username: "mikey", _phoneNumber: "123", _name: "Rut")
         masterNav.pushViewController(profile, animated: true)
+    */
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

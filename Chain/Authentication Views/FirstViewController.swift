@@ -25,6 +25,7 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     }
     
     @IBAction func enterTapped(_ sender: Any) {
+        //masterNav.pushViewController(SignInViewController(), animated: true)
         masterNav.pushViewController(SignInViewController(), animated: true)
     }
     

@@ -109,7 +109,7 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     </state>
                     <connections>
-                        <action selector="forgotPassword:" destination="-1" eventType="touchUpInside" id="h0G-9b-yyO"/>
+                        <action selector="forgotPassword:" destination="-1" eventType="touchUpInside" id="6gv-cv-1m7"/>
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="IJ4-S2-g3K" customClass="RoundButton" customModule="Chain" customModuleProvider="target">

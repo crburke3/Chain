@@ -29,10 +29,6 @@ class SignInViewController: UIViewController {
         
     }
     //
-    @IBAction func forgotPassword(_ sender: Any) {
-        //Push Phone-Auth view
-        //Once complete prompt and store new password
-    }
     @IBAction func signIn(_ sender: Any) {
         var storedPassword: String = ""
         db.collection("users").whereField("phone", isEqualTo: formatPhone())
@@ -59,9 +55,14 @@ class SignInViewController: UIViewController {
                     return
                 }
                 if storedPassword == self.password.text {
-                    let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-                    mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
-                    masterNav.pushViewController(mainVC, animated: true) //Push MainChain
+                    masterFire.getCurrentUsersData(phone: self.formatPhone() ?? "") { (error) in
+                        if let error = error {
+                            
+                        } else {
+                            //Why is this not called?
+                        }
+                    }
+                    
                 } else { //Incorrect
                     let alert = UIAlertController(title: "Ok", message: "Incorrect Password", preferredStyle: UIAlertController.Style.alert)
                     alert.addAction(UIAlertAction(title: "Click", style: UIAlertAction.Style.default, handler: nil))
@@ -74,6 +75,22 @@ class SignInViewController: UIViewController {
     @IBAction func signUp(_ sender: Any) {
         masterNav.pushViewController(SignUpViewController(), animated: true) //Load Sign Up View
     }
+    
+    @IBAction func forgotPassword(_ sender: Any) {
+        if phoneNumber.text?.count == 0 {
+            let alert = UIAlertController(title: "Reset Password", message: "Please enter your number before proceeding", preferredStyle: UIAlertController.Style.alert)
+            alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        } else {
+            let verifyVC = VerifyNumberViewController()
+            verifyVC.phone = formatPhone()
+            verifyVC.changingPassword = true
+            masterNav.pushViewController(verifyVC, animated: true)
+        }
+        
+    }
+    
+    
     
     //
     func formatPhone() -> String {
