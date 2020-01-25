@@ -19,6 +19,7 @@ class UserMenuCell: UITableViewCell {
     var hasBeenSelected: Bool = false
     var phone: String = ""
     
+    
     @IBAction func goToProfile(_ sender: Any) {
         let db = Firestore.firestore()
         let friendVC = ProfileViewController()
@@ -31,8 +32,14 @@ class UserMenuCell: UITableViewCell {
                     for document in querySnapshot!.documents {
                         //Need top posts, profile pic, bio
                         print("\(document.documentID) => \(document.data())")
-                        friendVC.user.profile = document.get("profilePhoto") as? String ?? ""
-                        friendVC.user.posts = document.get("topPhotos") as? [[String:Any]] ?? [[:]] //Will change to PostChain later if top posts is converted to a subcollection
+                        let username = document.get("username") as? String ?? ""
+                        let phoneNumber = document.get("phone") as? String ?? ""
+                        let profile = document.get("profilePhoto") as? String ?? ""
+                        let name = document.get("name") as? String ?? ""
+                        let bio = document.get("bio") as? String ?? ""
+                        let topPosts = document.get("topPosts") as? [[String:Any]] ?? [[:]]
+                        let showUser = ChainUser(_username: username, _phoneNumber: phoneNumber, _profile: profile, _name: name, _bio: bio, _topPosts: topPosts)
+                        friendVC.user = showUser
                         masterNav.pushViewController(friendVC, animated: true)
                     }
                 }

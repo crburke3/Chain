@@ -22,14 +22,15 @@ extension ChainViewController{
         let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
-        let image = cropToBounds(image: post_image, width: 200, height: 200)
+        let image = cropToBounds(image: post_image, width: 100, height: 100)
         let popup = PopupDialog(title: title, message: message, image: image) //Image arguement is optional
         // Create buttons
         let cancelButton = CancelButton(title: "CANCEL") {
             print("Canceled")
         }
+        /*
         let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            self.sendButton.isHidden = false
+            
             self.fpc = FloatingPanelController()
             self.fpc.delegate = self // Optional
             let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
@@ -38,12 +39,9 @@ extension ChainViewController{
             self.fpc.track(scrollView: contentVC.tableView)
             self.fpc.isRemovalInteractionEnabled = true
             self.fpc.addPanel(toParent: self)
-            //self.fpc.
-            self.view.bringSubviewToFront(self.sendButton)
-            //let window :UIWindow = UIApplication.shared.keyWindow!
-            //window.addSubview(self.sendButton)
+            
         }
-
+        */
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Report Image")
             masterFire.reportImage(chainID: self.mainChain.chainID, image: ChainImage(dict: givenPost)!) { (error) in
@@ -68,9 +66,9 @@ extension ChainViewController{
         }
         //
         if postUser == "mbrutkow" {
-            popup.addButtons([shareButton, reportButton, removeButton, cancelButton])
+            popup.addButtons([reportButton, removeButton, cancelButton])
         } else {
-            popup.addButtons([shareButton, reportButton, cancelButton])
+            popup.addButtons([reportButton, cancelButton])
         }
         present(popup, animated: true, completion: nil)
     }
@@ -148,8 +146,10 @@ extension ChainViewController{
     
     func fanMenuSetUp() {
         fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
+        //fanMenu.
         fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
         //(0, -(Double.pi))
+        //(1.25*(Double.pi), (1.75*(Double.pi)))
         fanMenu.menuBackground = .clear
         fanMenu.layer.backgroundColor = UIColor.clear.cgColor
         fanMenu.backgroundColor = UIColor.clear
@@ -158,23 +158,26 @@ extension ChainViewController{
             FanMenuButton(
                 id: "jumpToEnd",
                 image: "end",
-                color: .green
+                color: .white
             ),
             FanMenuButton(
                 id: "jumpToRandom",
                 image: "random",
-                color: .blue
+                color: .white
             ),
             FanMenuButton(
                 id: "jumpToNextFriendsPost",
                 image: "friends",
-                color: .teal
+                color: .white
             )
         ]
         
         fanMenu.onItemDidClick = { button in
             //print("ItemDidClick: \(button.id)")
             switch button.id {
+                case "addPhotoToChain":
+                    print("Adding photo")
+                    break
                 case "jumpToRandom":
                     print("Jumping to random position in chain")
                     self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: true) //Might need to set to false

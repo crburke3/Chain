@@ -10,6 +10,14 @@
 		6848594423D62FC700AFEB7C /* ChainFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6848594323D62FC700AFEB7C /* ChainFriend.swift */; };
 		6848594823D65C4200AFEB7C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6848594623D65C4200AFEB7C /* ChangePasswordViewController.swift */; };
 		6848594923D65C4200AFEB7C /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6848594723D65C4200AFEB7C /* ChangePasswordViewController.xib */; };
+		686B15A423D8E58000FB31DC /* CurrentUserProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686B15A223D8E58000FB31DC /* CurrentUserProfileViewController.swift */; };
+		686B15A523D8E58000FB31DC /* CurrentUserProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686B15A323D8E58000FB31DC /* CurrentUserProfileViewController.xib */; };
+		686B15A823D8EB6500FB31DC /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686B15A623D8EB6500FB31DC /* EditProfileViewController.swift */; };
+		686B15A923D8EB6500FB31DC /* EditProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686B15A723D8EB6500FB31DC /* EditProfileViewController.xib */; };
+		686B15AE23DB75D500FB31DC /* FriendsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686B15AC23DB75D500FB31DC /* FriendsViewController.swift */; };
+		686B15AF23DB75D500FB31DC /* FriendsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686B15AD23DB75D500FB31DC /* FriendsViewController.xib */; };
+		686B15B623DB846A00FB31DC /* FriendTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 686B15B423DB846A00FB31DC /* FriendTableViewCell.swift */; };
+		686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686B15B523DB846A00FB31DC /* FriendTableViewCell.xib */; };
 		6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA323C7957200C75B2E /* UserMenuCell.swift */; };
 		6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */; };
 		6892BD5723CFAC850021A3E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */; };
@@ -78,6 +86,14 @@
 		6848594623D65C4200AFEB7C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		6848594723D65C4200AFEB7C /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
 		68676B9E23AEB29D00DAD539 /* Chain.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Chain.entitlements; sourceTree = "<group>"; };
+		686B15A223D8E58000FB31DC /* CurrentUserProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurrentUserProfileViewController.swift; sourceTree = "<group>"; };
+		686B15A323D8E58000FB31DC /* CurrentUserProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CurrentUserProfileViewController.xib; sourceTree = "<group>"; };
+		686B15A623D8EB6500FB31DC /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
+		686B15A723D8EB6500FB31DC /* EditProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EditProfileViewController.xib; sourceTree = "<group>"; };
+		686B15AC23DB75D500FB31DC /* FriendsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendsViewController.swift; sourceTree = "<group>"; };
+		686B15AD23DB75D500FB31DC /* FriendsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendsViewController.xib; sourceTree = "<group>"; };
+		686B15B423DB846A00FB31DC /* FriendTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendTableViewCell.swift; sourceTree = "<group>"; };
+		686B15B523DB846A00FB31DC /* FriendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendTableViewCell.xib; sourceTree = "<group>"; };
 		6878BBA323C7957200C75B2E /* UserMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuCell.swift; sourceTree = "<group>"; };
 		6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuTableViewController.swift; sourceTree = "<group>"; };
 		6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +180,28 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		6844CDDF23D6BAE200A88860 /* Current User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				686B15A223D8E58000FB31DC /* CurrentUserProfileViewController.swift */,
+				686B15A323D8E58000FB31DC /* CurrentUserProfileViewController.xib */,
+				686B15A623D8EB6500FB31DC /* EditProfileViewController.swift */,
+				686B15A723D8EB6500FB31DC /* EditProfileViewController.xib */,
+			);
+			path = "Current User Profile";
+			sourceTree = "<group>";
+		};
+		6844CDE023D6BAF700A88860 /* Other User Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */,
+				6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */,
+				6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */,
+				6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */,
+			);
+			path = "Other User Profile";
+			sourceTree = "<group>";
+		};
 		6848594523D65BFA00AFEB7C /* Reset Password */ = {
 			isa = PBXGroup;
 			children = (
@@ -171,6 +209,24 @@
 				6848594723D65C4200AFEB7C /* ChangePasswordViewController.xib */,
 			);
 			path = "Reset Password";
+			sourceTree = "<group>";
+		};
+		686B15AA23DB758200FB31DC /* Friends */ = {
+			isa = PBXGroup;
+			children = (
+				686B15AC23DB75D500FB31DC /* FriendsViewController.swift */,
+				686B15AD23DB75D500FB31DC /* FriendsViewController.xib */,
+				686B15B423DB846A00FB31DC /* FriendTableViewCell.swift */,
+				686B15B523DB846A00FB31DC /* FriendTableViewCell.xib */,
+			);
+			path = Friends;
+			sourceTree = "<group>";
+		};
+		686B15AB23DB759C00FB31DC /* Blocked */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Blocked;
 			sourceTree = "<group>";
 		};
 		6878BBA023C7954000C75B2E /* User Menu */ = {
@@ -185,10 +241,10 @@
 		6892BD5423CFAC3E0021A3E2 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
-				6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */,
-				6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */,
-				6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */,
-				6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */,
+				686B15AA23DB758200FB31DC /* Friends */,
+				686B15AB23DB759C00FB31DC /* Blocked */,
+				6844CDDF23D6BAE200A88860 /* Current User Profile */,
+				6844CDE023D6BAF700A88860 /* Other User Profile */,
 			);
 			path = ProfileView;
 			sourceTree = "<group>";
@@ -460,15 +516,19 @@
 				6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */,
 				6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */,
 				6848594923D65C4200AFEB7C /* ChangePasswordViewController.xib in Resources */,
+				686B15A523D8E58000FB31DC /* CurrentUserProfileViewController.xib in Resources */,
 				FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */,
 				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
 				FA7E3677238DB12C00488000 /* LaunchScreen.storyboard in Resources */,
 				6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */,
+				686B15A923D8EB6500FB31DC /* EditProfileViewController.xib in Resources */,
 				FA7E3674238DB12C00488000 /* Assets.xcassets in Resources */,
+				686B15AF23DB75D500FB31DC /* FriendsViewController.xib in Resources */,
 				FA867FDD23CEC44A00B638F8 /* ChainBreak.json in Resources */,
 				6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */,
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
+				686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
 				FA9C5B4F23C5547B00F1B41A /* NewChainViewController.xib in Resources */,
@@ -529,8 +589,10 @@
 				FA7E36A4238DBB7600488000 /* enums.swift in Sources */,
 				FA9C5B4123C553C500F1B41A /* DecodableObject.swift in Sources */,
 				FA63C87D238DE92B00B30312 /* PostChain.swift in Sources */,
+				686B15A423D8E58000FB31DC /* CurrentUserProfileViewController.swift in Sources */,
 				FA63C884238DF4D800B30312 /* ChainUser.swift in Sources */,
 				FA9C5BC823C648A000F1B41A /* ChainViewHelpers.swift in Sources */,
+				686B15B623DB846A00FB31DC /* FriendTableViewCell.swift in Sources */,
 				FA9C5B4923C553C500F1B41A /* LoadingView.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ChainViewController.swift in Sources */,
 				FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */,
@@ -556,6 +618,7 @@
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
 				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
 				6848594423D62FC700AFEB7C /* ChainFriend.swift in Sources */,
+				686B15A823D8EB6500FB31DC /* EditProfileViewController.swift in Sources */,
 				FA9C5B4723C553C500F1B41A /* MemoryHelp.swift in Sources */,
 				6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */,
 				FA9C5B4E23C5547B00F1B41A /* NewChainAnimators.swift in Sources */,
@@ -569,6 +632,7 @@
 				FA63C882238DF4CB00B30312 /* ChainAuth.swift in Sources */,
 				FA9C5B4323C553C500F1B41A /* BeautifulLoadScreen.swift in Sources */,
 				6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */,
+				686B15AE23DB75D500FB31DC /* FriendsViewController.swift in Sources */,
 				FA9C5B4623C553C500F1B41A /* CustomSpinner.swift in Sources */,
 				6848594823D65C4200AFEB7C /* ChangePasswordViewController.swift in Sources */,
 			);

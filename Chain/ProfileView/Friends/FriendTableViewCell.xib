@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FriendTableViewCell" rowHeight="64" id="KGk-i7-Jjw" customClass="FriendTableViewCell" customModule="Chain" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="58"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8xT-MG-MTf">
+                        <rect key="frame" x="16" y="4" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Qgy-44-ryW"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fXc-pS-Hzd">
+                        <rect key="frame" x="74" y="19" width="153" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aNC-ow-thj" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
+                        <rect key="frame" x="235" y="14" width="69" height="30"/>
+                        <color key="backgroundColor" red="0.98823529409999999" green="0.72941176470000002" blue="0.01176470588" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="69" id="9ga-S9-hQ1"/>
+                        </constraints>
+                        <state key="normal" title="Remove">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                <integer key="value" value="4"/>
+                            </userDefinedRuntimeAttribute>
+                        </userDefinedRuntimeAttributes>
+                        <connections>
+                            <action selector="changeFriendStatus:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="hdF-QS-Zh0"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="aNC-ow-thj" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-41" id="62M-zm-WAh"/>
+                    <constraint firstItem="fXc-pS-Hzd" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-36" id="8gB-Qw-s2y"/>
+                    <constraint firstItem="fXc-pS-Hzd" firstAttribute="centerY" secondItem="aNC-ow-thj" secondAttribute="centerY" id="EA0-QJ-FBV"/>
+                    <constraint firstItem="8xT-MG-MTf" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="-51" id="Ge6-Lz-6a1"/>
+                    <constraint firstItem="8xT-MG-MTf" firstAttribute="centerY" secondItem="H2p-sc-9uM" secondAttribute="centerY" id="J1d-kj-JMp"/>
+                    <constraint firstItem="8xT-MG-MTf" firstAttribute="centerY" secondItem="fXc-pS-Hzd" secondAttribute="centerY" id="MpB-5m-mOB"/>
+                    <constraint firstItem="8xT-MG-MTf" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="PSn-Eu-Kam"/>
+                    <constraint firstItem="aNC-ow-thj" firstAttribute="leading" secondItem="fXc-pS-Hzd" secondAttribute="trailing" constant="8" id="STT-Wc-RO5"/>
+                    <constraint firstItem="fXc-pS-Hzd" firstAttribute="leading" secondItem="8xT-MG-MTf" secondAttribute="trailing" constant="8" id="WM2-AJ-YfW"/>
+                    <constraint firstItem="aNC-ow-thj" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="kt9-Nx-rkH"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="profilePic" destination="8xT-MG-MTf" id="Rmc-vN-Ctu"/>
+                <outlet property="username" destination="fXc-pS-Hzd" id="nNd-1R-uA9"/>
+            </connections>
+            <point key="canvasLocation" x="73.913043478260875" y="84.375"/>
+        </tableViewCell>
+    </objects>
+</document>

@@ -10,13 +10,24 @@ import UIKit
 import PopupDialog
 import FloatingPanel
 import FanMenu
+import Kingfisher
+//import SideMenuSwift
 
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate, PostChainDelegate {
 
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
+    @IBOutlet weak var profileButton: UIButton!
+    @IBAction func profileActions(_ sender: Any) {
+        //Push currentUser Profile VC
+        let currentUserProfileVC = CurrentUserProfileViewController()
+        masterNav.pushViewController(currentUserProfileVC, animated: true) //Push Profile
+        
+    }
+    @IBOutlet weak var profileView: UIImageView!
     
+  
     var fpc: FloatingPanelController!
     let sendButton = UIButton()
     var mainChain:PostChain!{
@@ -38,6 +49,14 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         }
         self.reloadChain()
         fanMenuSetUp()
+        let url = URL(string: currentUser.profile ?? "")
+        profileView.kf.setImage(with: url)
+        profileView.layer.borderWidth = 1
+        profileView.layer.masksToBounds = false
+        profileView.layer.borderColor = UIColor.black.cgColor
+        profileView.layer.cornerRadius = profileView.frame.height/2
+        profileView.clipsToBounds = true
+        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -81,4 +100,19 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     }
     
     func chainDidLoad(chain: PostChain) {}
+    
+    @objc func buttonClicked(sender:UIButton) {
+        let buttonRow = sender.tag
+        print(sender.tag)
+        self.fpc = FloatingPanelController()
+        self.fpc.delegate = self // Optional
+        let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
+        contentVC.index = buttonRow
+        contentVC.chain = mainChain.chainID
+        //Set conentVC array to hold currentUsers friends
+        self.fpc.set(contentViewController: contentVC)
+        self.fpc.track(scrollView: contentVC.tableView)
+        self.fpc.isRemovalInteractionEnabled = true
+        self.fpc.addPanel(toParent: self)
+    }
 }

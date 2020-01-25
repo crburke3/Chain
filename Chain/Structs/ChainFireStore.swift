@@ -89,58 +89,61 @@ class ChainFireStore {
     }
     
     
-    func addFriend(currentUser: String, friend: String, error: @escaping (String?)->()) {
+    func addFriend(friend: [String:Any], error: @escaping (String?)->()) {
         //Add other user to current user's friend list
-        var firestoreRef = Firestore.firestore().collection("users").document(currentUser)
+        let currentUserBasicInfo = ["phone": currentUser.phoneNumber, "profile": currentUser.profile, "username": currentUser.username] as [String:Any]
+        var firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
         firestoreRef.updateData([
             "friends": FieldValue.arrayUnion([friend])
         ]) { (err1) in
                    if let error1 = err1{
-                       masterNav.showPopUp(_title: "Error adding friend to friends list", _message: error1.localizedDescription)
+                       masterNav.showPopUp(_title: "Error adding friend to your friends list", _message: error1.localizedDescription)
                        error(error1.localizedDescription)
                    }else{
                        error(nil)
                    }
         }
         //Add current user to other user's friends list
-        firestoreRef = Firestore.firestore().collection("users").document(friend)
+        firestoreRef = Firestore.firestore().collection("users").document(friend["phone"] as? String ?? "")
         firestoreRef.updateData([
             "friends": FieldValue.arrayUnion([currentUser])
         ]) { (err1) in
                    if let error1 = err1{
-                       masterNav.showPopUp(_title: "Error adding friend to friends list", _message: error1.localizedDescription)
+                       masterNav.showPopUp(_title: "Error adding you to friends list", _message: error1.localizedDescription)
                        error(error1.localizedDescription)
                    }else{
                        error(nil)
                    }
         }
     }
-    func removeFriend(currentUser: String, friend: String, error: @escaping (String?)->()) {
-        //Add other user to current user's friend list
-        var firestoreRef = Firestore.firestore().collection("users").document(currentUser)
+    
+    func removeFriend(friend: [String:Any], error: @escaping (String?)->()) {
+        let currentUserBasicInfo = ["phone": currentUser.phoneNumber, "profile": currentUser.profile, "username": currentUser.username] as [String:Any]
+        var firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
         firestoreRef.updateData([
             "friends": FieldValue.arrayRemove([friend])
         ]) { (err1) in
                    if let error1 = err1{
-                       masterNav.showPopUp(_title: "Error removing friend from friends list", _message: error1.localizedDescription)
+                       masterNav.showPopUp(_title: "Error removing friend from your friends list", _message: error1.localizedDescription)
                        error(error1.localizedDescription)
                    }else{
                        error(nil)
                    }
         }
         //Add current user to other user's friends list
-        firestoreRef = Firestore.firestore().collection("users").document(friend)
+        firestoreRef = Firestore.firestore().collection("users").document(friend["phone"] as? String ?? "")
         firestoreRef.updateData([
             "friends": FieldValue.arrayRemove([currentUser])
         ]) { (err1) in
                    if let error1 = err1{
-                       masterNav.showPopUp(_title: "Error removing friend from friends list", _message: error1.localizedDescription)
+                       masterNav.showPopUp(_title: "Error removing you from friends list", _message: error1.localizedDescription)
                        error(error1.localizedDescription)
                    }else{
                        error(nil)
                    }
         }
     }
+    
     func signUpUser(docData: [String : Any], error: @escaping (String?)->()) {
         Firestore.firestore().collection("users").document(docData["username"] as! String).setData(docData) { err in
             if let err = err {
@@ -183,16 +186,21 @@ class ChainFireStore {
         } else {
             for document in querySnapshot!.documents {
                 print("\(document.documentID) => \(document.data())")
+                currentUser.friends = document.get("friends") as? [[String:Any]] ?? [[:]]
                 let blocked = document.get("blocked") as? [String] ?? [""]
                 let invites = document.get("invites") as? [[String:Any]] ?? [[:]]
                 let phone = document.get("phone") as? String ?? ""
                 let profilePhoto = document.get("profilePhoto") as? String ?? ""
                 let topPhotos = document.get("topPhotos") as? [[String:Any]] ?? [[:]]
+                currentUser.bio = document.get("bio") as? String ?? ""
+                currentUser.name = document.get("name") as? String ?? ""
+                currentUser.username = document.get("username") as? String ?? ""
                 currentUser.blocked = blocked
                 currentUser.invites = invites
                 currentUser.phoneNumber = phone
                 currentUser.profile = profilePhoto
                 currentUser.topPosts = topPhotos
+                //Need to save chains, friends, and blocked as well
             }
             let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             mainVC.mainChain = PostChain(chainID: "firstChain", load: true)

@@ -25,9 +25,12 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     }
     
     @IBAction func enterTapped(_ sender: Any) {
-        //masterNav.pushViewController(SignInViewController(), animated: true)
         masterNav.pushViewController(SignInViewController(), animated: true)
-    }
+        /* let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+        mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+        masterNav.pushViewController(mainVC, animated: true) //Push MainChain
+        */
+        }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {

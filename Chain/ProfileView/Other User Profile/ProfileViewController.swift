@@ -21,6 +21,9 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
     @IBOutlet weak var friendButton: RoundButton!
     @IBOutlet weak var userName: UILabel!
     @IBAction func friendAction(_ sender: Any) {
+        masterFire.addFriend(friend: ["phone": user.phoneNumber,"profile": user.profile,"username": user.username]) { (error) in
+            //
+        }
     }
     
     var user = ChainUser(_username: "", _phoneNumber: "", _name: "")
@@ -48,7 +51,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
         collectionView.reloadData()
         print(self.user.name)
         //
-        
+        if isFriend() {
+            friendButton.setTitle("Remove Friend", for: .normal)
+        } else {
+            friendButton.setTitle("Add Friend", for: .normal)
+        }
     }
     
     //Collection View functions
@@ -107,7 +114,11 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
      }
      
     func isFriend() -> Bool {
-        
-        return true
+        for friend in currentUser.friends {
+            if (user.phoneNumber == (friend["phone"] as? String ?? "")) {
+                return true
+            }
+        }
+        return false
     }
 }

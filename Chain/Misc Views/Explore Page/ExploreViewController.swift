@@ -10,9 +10,16 @@ import UIKit
 
 class ExploreViewController: UIViewController, PostChainDelegate {
     @IBOutlet var collectionView: UICollectionView!
+    @IBAction func goBack(_ sender: Any) {
+        if let navController = self.navigationController {
+            navController.popViewController(animated: true)
+        }
+    }
+    
     
     var topChains:[PostChain] = []
     var collViewIndexReference:[String:IndexPath] = [:]
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

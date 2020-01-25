@@ -70,15 +70,15 @@ class ChainAuth {
           } else {
                 print("Signed in successfully")//Signed In
                 //Segue to additional info view
-                let additionalInfoVC = AdditionalInfoViewController()
-                additionalInfoVC.phone = phone
-                masterNav.pushViewController(additionalInfoVC, animated: true)
                 //Create users, userFeeds docs
                 let db = Firestore.firestore()
-            let userData = ["bio": "","blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""], "password": password] as [String:Any]
+            let userData = ["bio": "","blocked": [""], "invites": [[:]], "phone": phone, "profilePhoto": "", "topPhotos": [""], "password": password, "friends": [[:]]] as [String:Any]
                 let userFeed = ["posts": [[:]]]
                 db.collection("users").document(phone).setData(userData) //What if this fails?
                 db.collection("userFeeds").document(phone).setData(userFeed)
+                let additionalInfoVC = AdditionalInfoViewController()
+                additionalInfoVC.phone = phone
+                masterNav.pushViewController(additionalInfoVC, animated: true)
             }
         }
     }

@@ -11,6 +11,12 @@ import UIKit
 
 extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
+    
+    
+    //Function to be called upon share button press
+    
+    
+    //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
         let post = mainChain.posts[indexPath.row]
@@ -27,6 +33,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         case .LOADED:
             cell.isPostLoaded = true
         }
+        
+        cell.share.tag = indexPath.row
+        cell.share.addTarget(self, action: #selector(ChainViewController.buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
+        
         cell.backView.addShadow()
         return cell
     }

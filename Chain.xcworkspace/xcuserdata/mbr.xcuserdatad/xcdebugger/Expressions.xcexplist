@@ -3,6 +3,30 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in closure #1 in closure #1 in EditProfileViewController.uploadImage(image:completion:):EditProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentProfilePhotoURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "CurrentUserProfileViewController.viewWillAppear(_:):CurrentUserProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentUser.profile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "photoEditor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -19,18 +43,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
-      </ContextState>
-      <ContextState
-         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
+         contextName = "closure #1 in closure #1 in EditProfileViewController.changedInfo():EditProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "photoEditor">
+               value = "currentProfilePhotoURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
+         contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
+      </ContextState>
+      <ContextState
+         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "photoEditor">

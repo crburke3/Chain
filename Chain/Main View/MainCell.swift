@@ -8,12 +8,19 @@
 
 import UIKit
 import PopupDialog
+import FloatingPanel
 
 class MainCell: UITableViewCell {
-    
+    //var fpc: FloatingPanelController!
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
     @IBOutlet var backView: RoundView!
+    @IBAction func shareButton(_ sender: Any) {
+        //Call
+    }
+    @IBOutlet weak var share: UIButton!
+    
+    
     
     var post: ChainImage!
     var row: Int = 0
