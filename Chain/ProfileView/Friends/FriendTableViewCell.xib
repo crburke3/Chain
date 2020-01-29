@@ -63,6 +63,7 @@
             </tableViewCellContentView>
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
+                <outlet property="buttonState" destination="aNC-ow-thj" id="3so-3m-VOT"/>
                 <outlet property="profilePic" destination="8xT-MG-MTf" id="Rmc-vN-Ctu"/>
                 <outlet property="username" destination="fXc-pS-Hzd" id="nNd-1R-uA9"/>
             </connections>

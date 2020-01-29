@@ -34,6 +34,12 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
          */
     }
     
+    @IBAction func signOut(_ sender: Any) {
+        currentUser = ChainUser(_username: "", _phoneNumber: "", _name: "")
+        let signInVC = SignInViewController()
+        masterNav.pushViewController(signInVC, animated: true)
+        
+    }
     
     @IBAction func editProfile(_ sender: Any) {
         //Push EditProfileVC
@@ -43,6 +49,12 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     @IBAction func goBack(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func viewInvites(_ sender: Any) {
+        let inviteVC = InvitesViewController()
+        masterNav.pushViewController(inviteVC, animated: true)
+    }
+    
     
    //
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

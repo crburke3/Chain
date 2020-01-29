@@ -22,7 +22,9 @@ class ChainFireStore {
 
     //If error comes back as nil, then nothing went wrong
     func uploadChain(chain:PostChain, error: @escaping (String?)->()) {
-        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)                                    
+        //Add sub-collections
+        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)
+        //  firestoreRef.collection("posts")
         firestoreRef.setData(chain.toDict()) { (err1) in
             if let error1 = err1{
                 masterNav.showPopUp(_title: "Error Uploading Chain", _message: error1.localizedDescription)
@@ -186,7 +188,7 @@ class ChainFireStore {
         } else {
             for document in querySnapshot!.documents {
                 print("\(document.documentID) => \(document.data())")
-                currentUser.friends = document.get("friends") as? [[String:Any]] ?? [[:]]
+                //currentUser.friends = document.get("friends") as? [[String:Any]] ?? [[:]]
                 let blocked = document.get("blocked") as? [String] ?? [""]
                 let invites = document.get("invites") as? [[String:Any]] ?? [[:]]
                 let phone = document.get("phone") as? String ?? ""
@@ -201,7 +203,9 @@ class ChainFireStore {
                 currentUser.profile = profilePhoto
                 currentUser.topPosts = topPhotos
                 //Need to save chains, friends, and blocked as well
+                
             }
+            currentUser.getFriends()
             let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
             masterNav.pushViewController(mainVC, animated: true) //Push MainChain
@@ -209,38 +213,17 @@ class ChainFireStore {
         }
     }
     
-    func updateFriendsFeed(chainID: String, userID: String, error: @escaping (String?)->()) {
-        //Place created chain or involved-in chain onto every friend's feed
-       // let friendsRef = db
-        //.collection("users").document("mbrutkow")
-        //.collection("messages").document("message1")
-        let feedDict = ["chain": chainID, "user": userID] as [String : Any]
-       //Upload to all feeds
-        db.collection("users").document("mbrutkow").collection("friends").getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        let givenFriend = document.documentID
-                        //Append
-                        let firestoreRef = Firestore.firestore().collection("userFeeds").document(givenFriend)
-                        firestoreRef.updateData([
-                            "posts": FieldValue.arrayUnion([feedDict])
-                        ]) { (err1) in
-                                   if let error1 = err1{
-                                       //masterNav.showPopUp(_title: "Error adding friend to friends list", _message: error1.localizedDescription)
-                                       error(error1.localizedDescription)
-                                   }else{
-                                       error(nil)
-                                   }
-                        }
-                        
-                    }
+    func updateFriendsFeed(chain: PostChain, error: @escaping (String?)->()) {
+        //userID = phone number
+        for user in currentUser.friends {
+            let postRef = db.collection("userFeeds").document(user.phoneNumber).collection("posts")
+            postRef.document(chain.chainID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
+                    //Consider only uploading to top friends
                 }
+            }
         }
-        
     }
+    
     func loadNextFewPhotos() {
         
     }

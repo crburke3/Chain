@@ -171,17 +171,22 @@ class PostChain{
                 if url == nil {completion("Error loading URL", nil); return}
                 urlString = url!.absoluteString //Hold URL
                 print(urlString)
-                let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
-                firestoreRef.updateData([
-                    "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "count": FieldValue.increment(Int64(1))
-                ]) { (err1) in
-                    if let error1 = err1{
-                        masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
-                        completion(error1.localizedDescription, nil)
-                    } else{
-                        completion(nil, uploadImage)
+                let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
+                let dict = uploadImage.toDict()
+                //Add to sub-collection
+                let postRef = Firestore.firestore().collection("chains").document(self.chainID).collection("posts")
+                postRef.addDocument(data: dict) { (error) in
+                    if let err = error {
+                        print("Error when adding doc: \(err)")
+                        print("Localized Desc.: \(err.localizedDescription)")
+                    } else {
+                        print("Success appending image")
+                        masterFire.updateFriendsFeed(chain: self) { (error) in
+                            
+                        }
                     }
-                   }
+                }
+                
                 })
             }
     }

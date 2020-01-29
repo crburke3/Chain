@@ -12,6 +12,9 @@ class FriendTableViewCell: UITableViewCell {
 
     @IBOutlet weak var profilePic: UIImageView!
     @IBOutlet weak var username: UILabel!
+    @IBOutlet weak var buttonState: RoundButton!
+    
+    var givenFriend = ChainUser(_username: "", _phoneNumber: "", _name: "")
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -25,7 +28,29 @@ class FriendTableViewCell: UITableViewCell {
     }
     
     @IBAction func changeFriendStatus(_ sender: Any) {
-        print("Removing Friend")
+        if buttonState.titleLabel?.text == "Remove" {
+            print("Removing Friend")
+            currentUser.removeFriend(friend: givenFriend) { (error) in
+                if let err = error {
+                    print(err)
+                } else {
+                    print("Removed")
+                }
+                self.buttonState.setTitle("Add", for: .normal)
+            }
+            print("exited")
+        } else {
+            print("Readding Friend")
+            currentUser.addFriend(friend: givenFriend) { (error) in
+                if let err = error {
+                    print(err)
+                } else {
+                    self.buttonState.setTitle("Remove", for: .normal)
+                }
+                    self.buttonState.setTitle("Remove", for: .normal)
+            }
+            
+        }
     }
     
     

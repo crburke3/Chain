@@ -20,6 +20,7 @@
 		686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 686B15B523DB846A00FB31DC /* FriendTableViewCell.xib */; };
 		6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA323C7957200C75B2E /* UserMenuCell.swift */; };
 		6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */; };
+		68813EDC23E0B8100057F7AA /* SearchFunction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68813EDB23E0B8100057F7AA /* SearchFunction.swift */; };
 		6892BD5723CFAC850021A3E2 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */; };
 		6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */; };
 		6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */; };
@@ -29,6 +30,10 @@
 		6892BD6723D3A25A0021A3E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */; };
 		6892BD6B23D3AB120021A3E2 /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */; };
 		6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */; };
+		689E93D123DE125300EED90F /* InvitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E93CF23DE125300EED90F /* InvitesViewController.swift */; };
+		689E93D223DE125300EED90F /* InvitesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689E93D023DE125300EED90F /* InvitesViewController.xib */; };
+		689E93D523DE136B00EED90F /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E93D323DE136B00EED90F /* InviteTableViewCell.swift */; };
+		689E93D623DE136B00EED90F /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689E93D423DE136B00EED90F /* InviteTableViewCell.xib */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
@@ -96,6 +101,7 @@
 		686B15B523DB846A00FB31DC /* FriendTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendTableViewCell.xib; sourceTree = "<group>"; };
 		6878BBA323C7957200C75B2E /* UserMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserMenuCell.swift; sourceTree = "<group>"; };
 		6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuTableViewController.swift; sourceTree = "<group>"; };
+		68813EDB23E0B8100057F7AA /* SearchFunction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFunction.swift; sourceTree = "<group>"; };
 		6892BD5523CFAC850021A3E2 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		6892BD5623CFAC850021A3E2 /* ProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ProfileViewController.xib; sourceTree = "<group>"; };
 		6892BD5923CFB18F0021A3E2 /* ChainsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -105,6 +111,10 @@
 		6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalInfoViewController.xib; sourceTree = "<group>"; };
+		689E93CF23DE125300EED90F /* InvitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesViewController.swift; sourceTree = "<group>"; };
+		689E93D023DE125300EED90F /* InvitesViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InvitesViewController.xib; sourceTree = "<group>"; };
+		689E93D323DE136B00EED90F /* InviteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InviteTableViewCell.swift; sourceTree = "<group>"; };
+		689E93D423DE136B00EED90F /* InviteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
 		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
@@ -234,6 +244,7 @@
 			children = (
 				6878BBA323C7957200C75B2E /* UserMenuCell.swift */,
 				6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */,
+				68813EDB23E0B8100057F7AA /* SearchFunction.swift */,
 			);
 			path = "User Menu";
 			sourceTree = "<group>";
@@ -241,6 +252,7 @@
 		6892BD5423CFAC3E0021A3E2 /* ProfileView */ = {
 			isa = PBXGroup;
 			children = (
+				689E93CE23DE123100EED90F /* Invites */,
 				686B15AA23DB758200FB31DC /* Friends */,
 				686B15AB23DB759C00FB31DC /* Blocked */,
 				6844CDDF23D6BAE200A88860 /* Current User Profile */,
@@ -265,6 +277,17 @@
 				6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */,
 			);
 			path = "Additional Info";
+			sourceTree = "<group>";
+		};
+		689E93CE23DE123100EED90F /* Invites */ = {
+			isa = PBXGroup;
+			children = (
+				689E93CF23DE125300EED90F /* InvitesViewController.swift */,
+				689E93D323DE136B00EED90F /* InviteTableViewCell.swift */,
+				689E93D423DE136B00EED90F /* InviteTableViewCell.xib */,
+				689E93D023DE125300EED90F /* InvitesViewController.xib */,
+			);
+			path = Invites;
 			sourceTree = "<group>";
 		};
 		68F92F25238F81A3000F05AA /* Extensions */ = {
@@ -516,6 +539,7 @@
 				6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */,
 				6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */,
 				6848594923D65C4200AFEB7C /* ChangePasswordViewController.xib in Resources */,
+				689E93D223DE125300EED90F /* InvitesViewController.xib in Resources */,
 				686B15A523D8E58000FB31DC /* CurrentUserProfileViewController.xib in Resources */,
 				FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */,
 				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
@@ -528,6 +552,7 @@
 				6892BD5823CFAC850021A3E2 /* ProfileViewController.xib in Resources */,
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
+				689E93D623DE136B00EED90F /* InviteTableViewCell.xib in Resources */,
 				686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
@@ -595,6 +620,7 @@
 				686B15B623DB846A00FB31DC /* FriendTableViewCell.swift in Sources */,
 				FA9C5B4923C553C500F1B41A /* LoadingView.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ChainViewController.swift in Sources */,
+				68813EDC23E0B8100057F7AA /* SearchFunction.swift in Sources */,
 				FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
 				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,
@@ -613,6 +639,7 @@
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
 				FA9C5B4423C553C500F1B41A /* ChristiansFirebase.swift in Sources */,
 				6892BD6B23D3AB120021A3E2 /* AdditionalInfoViewController.swift in Sources */,
+				689E93D123DE125300EED90F /* InvitesViewController.swift in Sources */,
 				FA9C5B4823C553C500F1B41A /* GlobalAttributes.swift in Sources */,
 				FA7E36B0238DCD5C00488000 /* SignUpViewController.swift in Sources */,
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
@@ -630,6 +657,7 @@
 				FAAF0A4023C198D400838B0E /* DateExtensions.swift in Sources */,
 				6892BD5723CFAC850021A3E2 /* ProfileViewController.swift in Sources */,
 				FA63C882238DF4CB00B30312 /* ChainAuth.swift in Sources */,
+				689E93D523DE136B00EED90F /* InviteTableViewCell.swift in Sources */,
 				FA9C5B4323C553C500F1B41A /* BeautifulLoadScreen.swift in Sources */,
 				6878BBA623C8FD5200C75B2E /* UserMenuTableViewController.swift in Sources */,
 				686B15AE23DB75D500FB31DC /* FriendsViewController.swift in Sources */,

@@ -115,7 +115,7 @@ class ProfileViewController: UIViewController, UICollectionViewDelegate, UIColle
      
     func isFriend() -> Bool {
         for friend in currentUser.friends {
-            if (user.phoneNumber == (friend["phone"] as? String ?? "")) {
+            if (user.phoneNumber == friend.phoneNumber) {
                 return true
             }
         }

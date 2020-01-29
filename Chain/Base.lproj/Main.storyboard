@@ -195,13 +195,35 @@
                                                                 <action selector="shareButton:" destination="clx-Iz-NuC" eventType="touchUpInside" id="dkV-RK-oNx"/>
                                                             </connections>
                                                         </button>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mgc-Yq-OJv">
+                                                            <rect key="frame" x="92" y="447" width="35" height="35"/>
+                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" constant="35" id="7Ai-dg-N1V"/>
+                                                                <constraint firstAttribute="width" constant="35" id="clP-Va-JdH"/>
+                                                            </constraints>
+                                                            <connections>
+                                                                <action selector="goToProfile:" destination="clx-Iz-NuC" eventType="touchUpInside" id="XNZ-vF-WiP"/>
+                                                            </connections>
+                                                        </button>
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="oTq-wG-9fd">
+                                                            <rect key="frame" x="92" y="447" width="35" height="35"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="35" id="1dE-SH-SOL"/>
+                                                                <constraint firstAttribute="height" constant="35" id="7HC-md-Ks8"/>
+                                                            </constraints>
+                                                        </imageView>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerY" secondItem="mgc-Yq-OJv" secondAttribute="centerY" id="7sl-CD-1n8"/>
                                                         <constraint firstItem="Xkf-Hd-fgR" firstAttribute="top" secondItem="drC-NI-6dT" secondAttribute="bottom" constant="3" id="9ux-OM-oSC"/>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="leading" secondItem="mgc-Yq-OJv" secondAttribute="trailing" constant="8" id="ADc-Ua-2OZ"/>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerY" secondItem="oTq-wG-9fd" secondAttribute="centerY" id="SKb-Ou-0lV"/>
                                                         <constraint firstItem="ZnY-YI-U6O" firstAttribute="centerX" secondItem="v7S-fu-uYM" secondAttribute="centerX" id="cmk-Ze-hwx"/>
                                                         <constraint firstItem="drC-NI-6dT" firstAttribute="top" secondItem="v7S-fu-uYM" secondAttribute="top" id="dFF-je-GLl"/>
                                                         <constraint firstItem="ZnY-YI-U6O" firstAttribute="top" secondItem="drC-NI-6dT" secondAttribute="bottom" constant="8" id="eek-Y1-gDU"/>
+                                                        <constraint firstItem="ZnY-YI-U6O" firstAttribute="leading" secondItem="oTq-wG-9fd" secondAttribute="trailing" constant="8" id="maH-RQ-rYl"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZnY-YI-U6O" secondAttribute="bottom" constant="8" id="q94-QS-4RB"/>
                                                         <constraint firstItem="drC-NI-6dT" firstAttribute="leading" secondItem="v7S-fu-uYM" secondAttribute="leading" id="qLL-c1-CwY"/>
                                                         <constraint firstAttribute="trailing" secondItem="drC-NI-6dT" secondAttribute="trailing" id="qNc-PM-4Fi"/>
@@ -225,6 +247,8 @@
                                         <connections>
                                             <outlet property="backView" destination="v7S-fu-uYM" id="dY2-eS-Nz5"/>
                                             <outlet property="imgView" destination="drC-NI-6dT" id="ery-nj-nXq"/>
+                                            <outlet property="profilePic" destination="mgc-Yq-OJv" id="Uzi-jP-vcw"/>
+                                            <outlet property="profilePicImage" destination="oTq-wG-9fd" id="H3f-ei-RcI"/>
                                             <outlet property="share" destination="Xkf-Hd-fgR" id="o0f-vt-O3I"/>
                                             <outlet property="user" destination="ZnY-YI-U6O" id="4Za-0o-EDg"/>
                                         </connections>
@@ -272,6 +296,9 @@
                                 <state key="normal" title="Send Invites">
                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendInvites:" destination="qiI-KG-Mag" eventType="touchUpInside" id="yq0-zn-sBh"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-cI-hkO">
                                 <rect key="frame" x="0.0" y="93" width="375" height="574"/>

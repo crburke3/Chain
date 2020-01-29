@@ -14,6 +14,8 @@ class ChainImage{
     
     var link:String
     var user:String
+    var userProfile:String
+    var userPhone:String
     var time:String
     var image:UIImage?
     var loadState = LoadState.NOT_LOADED
@@ -21,11 +23,13 @@ class ChainImage{
     var localIndex:Int = 0
     
     //When created by user locally after image is uploaded
-    init(link:String, user:String, image:UIImage){
+    init(link:String, user:String, userProfile:String, userPhone:String, image:UIImage){
         self.loadState = .LOADED
         self.image = image
         self.link = link
         self.user = user
+        self.userProfile = userProfile
+        self.userPhone = userPhone
         self.time = Date().toChainString() //Convert to string
     }
     
@@ -37,6 +41,8 @@ class ChainImage{
         self.link = ""
         self.user = ""
         self.time = Date().toChainString()
+        self.userPhone = ""
+        self.userProfile = ""
     }
     
     //When pulled from firestore
@@ -48,12 +54,16 @@ class ChainImage{
         self.link = dict["Link"] as! String
         self.time = dict["Time"] as! String
         self.user = dict["user"] as! String
+        self.userPhone = dict["userPhone"] as? String ?? ""
+        self.userProfile = dict["userProfile"] as? String ?? ""
     }
     
     func toDict()->[String:Any]{
         let retDict:[String:Any] = ["Link": self.link,
                                     "Time": self.time,
-                                    "user": self.user]
+                                    "user": self.user,
+                                    "userProfile": self.userProfile,
+                                    "userPhone": self.userPhone]
         return retDict
     }
     

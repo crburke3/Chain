@@ -12,6 +12,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     @IBOutlet weak var titleOfVC: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    var friendHolder = [ChainUser]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,12 +22,14 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         self.tableView.reloadData()
         //Get initial 10 friends
+        friendHolder = currentUser.friends
     }
     @IBAction func goBack(_ sender: Any) {
+        masterNav.popViewController(animated: true)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentUser.friends.count
+        return friendHolder.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -36,15 +39,15 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as! FriendTableViewCell
-        cell.username.text = "Christian"
-        let url = URL(string: currentUser.profile ?? "")
-        /*cell.profilePic.kf.setImage(with: url)
+        cell.username.text = currentUser.friends[indexPath.row].username
+        let url = URL(string: currentUser.friends[indexPath.row].profile ?? "")
+        cell.profilePic.kf.setImage(with: url)
         cell.profilePic.layer.borderWidth = 1
         cell.profilePic.layer.masksToBounds = false
         cell.profilePic.layer.borderColor = UIColor.black.cgColor
         cell.profilePic.layer.cornerRadius = cell.profilePic.frame.height/2
         cell.profilePic.clipsToBounds = true
-*/
+        cell.givenFriend = friendHolder[indexPath.row]
         /*
         let dict = usersArray[indexPath.row]
         

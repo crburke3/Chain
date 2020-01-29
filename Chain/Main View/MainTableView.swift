@@ -25,6 +25,19 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
         cell.row = indexPath.row
         cell.post = post
+        //
+        let url = URL(string: mainChain.posts[indexPath.row].userProfile)
+        cell.profilePicImage?.kf.setImage(with: url)
+        cell.phone = mainChain.posts[indexPath.row].userPhone
+        //cell.profilePic.image = UIImage()
+        cell.profilePicImage.layer.borderWidth = 1
+        cell.profilePicImage.layer.masksToBounds = false
+        cell.profilePicImage.layer.borderColor = UIColor.black.cgColor
+        cell.profilePicImage.layer.cornerRadius = cell.profilePicImage.frame.height/2
+        cell.profilePicImage.clipsToBounds = true
+        cell.profilePicImage.contentMode = .scaleAspectFill
+        //
+        //cell.profilePic.imageView?.kf.setImage(with: <#T##ImageDataProvider?#>)
         switch post.loadState{
         case .NOT_LOADED:
             post.load()

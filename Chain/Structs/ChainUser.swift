@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 class ChainUser{
     
@@ -19,7 +20,7 @@ class ChainUser{
     var invites:[[String:Any]] = [[:]] //Use invite object and sub-collection for invites
     var topPosts:[[String:Any]] = [[:]] //Use chain objects and sub-collection for posts
     var profile:String = ""
-    var friends:[[String:Any]] = [[:]]
+    var friends:[ChainUser] = [ChainUser]()
     // let userData = ["blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""]] as [String:Any]
     var bio: String = ""
     
@@ -38,7 +39,13 @@ class ChainUser{
         self.bio = _bio
         self.topPosts = _topPosts
     }
-    
+    //Init from doc
+    init(dict: [String:Any]) {
+        self.username = dict["username"] as? String ?? ""
+        self.name = dict["name"] as? String ?? ""
+        self.phoneNumber = dict["phoneNumber"] as? String ?? ""
+        self.profile = dict["profile"] as? String ?? ""
+    }
     static func initFromFirestore(with phoneNumber:String, user: @escaping(ChainUser?)->()){
         
     }
@@ -46,6 +53,83 @@ class ChainUser{
     func toDict() -> [String:Any] { //To be expanded/more detailed later
         return ["name" : self.name, "phone" : self.phoneNumber, "posts" : self.posts, "blocked": []]
     }
+    /*
+    func userArray() -> [ChainUser] {
+        var userArray = [ChainUser]()
+        for friend in friends {
+            let user = ChainUser(_username: friend["username"] as? String ?? "", _phoneNumber: friend["phone"] as? String ?? "", _profile: friend["profile"] as? String ?? "", _name: "", _bio: "", _topPosts: [[:]])
+            userArray.append(user)
+        }
+        return userArray
+    }
+    */
+    func getFriends() {
+        let db = Firestore.firestore()
+        var userArray = [ChainUser]()
+        
+        db.collection("users").whereField("phone", isEqualTo: currentUser.phoneNumber).getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                let dictionary = document.data() as [String : Any]
+                userArray.append(ChainUser(dict: dictionary))
+            }
+            self.friends = userArray
+            }
+        }
+        
+    }
     
+    func addFriend(friend: ChainUser, error: @escaping (String?)->()) {
+        let db = Firestore.firestore()
+        var friendRef = db.collection("users").document(currentUser.phoneNumber).collection("friends")
+        //friendRef.addDocument(data: friend.toDict())
+        friendRef.document(friend.phoneNumber).setData(friend.toDict()) { (error) in
+            if let err = error {
+                print(error)
+                return
+            } else {
+                //print("Successfully added friend! You and \(friend.username) are now friends.") //
+                //currentUser.friends.append(friend)
+            }
+        }
+        friendRef = db.collection("users").document(friend.phoneNumber).collection("friends")
+        friendRef.document(currentUser.phoneNumber).setData(currentUser.toDict()) { (error) in
+            if let err = error {
+                print(error)
+            } else {
+                print("Successfully added friend! You and \(friend.username) are now friends.") //
+                currentUser.friends.append(friend)
+            }
+        }
+    }
     
+    func removeFriend(friend: ChainUser, error: @escaping (String?)->()) {
+        let db = Firestore.firestore()
+        var friendRef = db.collection("users").document(currentUser.phoneNumber).collection("friends")
+        friendRef.document(friend.phoneNumber).delete { (error) in
+            if let err = error {
+                print("Couldn't remove friend")
+                return
+            } else {
+                print("Removed friend")
+            }
+        }
+        friendRef = db.collection("users").document(friend.phoneNumber).collection("friends")
+        friendRef.document(currentUser.phoneNumber).delete { (error) in
+            if let err = error {
+                print("Couldn't remove friend")
+            } else {
+                var i: Int = 0
+                for user in self.friends {
+                    if user.phoneNumber == friend.phoneNumber {
+                        currentUser.friends.remove(at: i)
+                    }
+                    i += 1
+                }
+                print("Removed friend")
+            }
+        }
+    }
 }

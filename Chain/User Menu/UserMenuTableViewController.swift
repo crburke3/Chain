@@ -16,10 +16,10 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var textBoxHolder: UIView!
     
-    var userArray = [currentUser]
-    //var userArray = ["Christian", "Alex", "Joe", "69420", "Mike", "Chris", "Shin", "John", "A", "B", "C", "D", "E", "F", "G", "H"] //Will hold ChainFriend objects and be set while loading view controller
-    
-    //var headerHeightConstraint:NSLayoutConstraint!
+    var invitation = Invite(_chainID: "", _chainPreview: "", _dateSent: "", _expirationDate: "", _sentByUsername: "", _sentByPhone: "", _sentByProfile: "", _receivedBy: "", _index: 0)
+    var userArray = [ChainUser]()
+    var filteredUserArray = [ChainUser]() //
+    //Load with currentUser.friends
     var index: Int = 0
     var chain: String = ""
     //
@@ -29,8 +29,8 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         tableView.delegate = self
         tableView.dataSource = self
         tableView.allowsMultipleSelection = true
-            
         textBoxHolder.layer.cornerRadius = 12
+        userArray = currentUser.friends
         //self.view.bringSubviewToFront(self.sendButton)
         
         
@@ -38,7 +38,33 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     //
    
     //
-  
+    @IBAction func sendInvites(_ sender: Any) {
+        let selectedRows = self.tableView.indexPathsForSelectedRows ?? []
+               var intRowsSelected = [Int]()
+               for row in selectedRows {
+                   intRowsSelected.append(row.row)
+               }
+              
+               for row in intRowsSelected {
+                   //userArray[row]
+                   invitation.receivedBy = userArray[row].phoneNumber
+                   invitation.sendInvitation { (error) in
+                       if let err = error {
+                           
+                       } else {
+                           
+                       }
+                   }
+               }
+               print("Invite Sent")
+               guard let selected = self.tableView.indexPathsForSelectedRows else { return }
+               for row in selected {
+                   tableView.deselectRow(at: row, animated: true)
+               }
+               return
+           
+    }
+    
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -97,11 +123,21 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     
     @objc func showDetail(_ button:UIButton) -> Int{
         //Gather array of users
-        masterFire.shareChain(chainID: "firstChain", sender: currentUser, receivers: [ChainUser(_username: "mbrutkow", _phoneNumber: "+19802550653", _name: "Mike")], index: 3) { (error) in
-            if let error = error {
-                print(error)
-            } else {
-                //Success
+        let selectedRows = self.tableView.indexPathsForSelectedRows ?? []
+        var intRowsSelected = [Int]()
+        for row in selectedRows {
+            intRowsSelected.append(row.row)
+        }
+       
+        for row in intRowsSelected {
+            //userArray[row]
+            invitation.receivedBy = userArray[row].phoneNumber
+            invitation.sendInvitation { (error) in
+                if let err = error {
+                    
+                } else {
+                    
+                }
             }
         }
         print("Invite Sent")

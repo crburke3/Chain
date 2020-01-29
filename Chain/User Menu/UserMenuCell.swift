@@ -41,6 +41,7 @@ class UserMenuCell: UITableViewCell {
                         let showUser = ChainUser(_username: username, _phoneNumber: phoneNumber, _profile: profile, _name: name, _bio: bio, _topPosts: topPosts)
                         friendVC.user = showUser
                         masterNav.pushViewController(friendVC, animated: true)
+                        
                     }
                 }
         }
