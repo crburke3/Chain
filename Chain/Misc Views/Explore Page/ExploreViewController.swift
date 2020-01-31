@@ -9,22 +9,55 @@
 import UIKit
 
 class ExploreViewController: UIViewController, PostChainDelegate {
-    @IBOutlet var collectionView: UICollectionView!
+    
+    @IBOutlet weak var collectionViewA: UICollectionView!
+    @IBOutlet weak var collectionViewB: UICollectionView!
+    @IBOutlet weak var switchFeeds: UIButton!
+    
     @IBAction func goBack(_ sender: Any) {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
     }
+    @IBAction func switchFeedsAction(_ sender: Any) {
+        if switchFeeds.titleLabel?.text == "Switch to Friend's Feed" {
+            switchFeeds.setTitle("Switch to Global Feed", for: .normal)
+            //Reload bottom collection view
+            print("Reloading bottom collection view to show Friend's feed")
+            loadUserFeed { (chains) in
+                self.otherChains = chains
+                print("Retrieved User Feed")
+                self.collectionViewA.reloadData() //A is bottom collection view
+            }
+        } else {
+            switchFeeds.setTitle("Switch to Friend's Feed", for: .normal)
+            //Reload bottom collection view
+            print("Reloading bottom collection view to show Global feed")
+            loadGlobalChainsID { (chains) in
+                self.otherChains = chains
+                print("Retrieved Global Feed")
+                self.collectionViewA.reloadData()
+            }
+        }
+    }
     
     
     var topChains:[PostChain] = []
+    var otherChains:[PostChain] = [] //Will hold Friend's or Global feed
+    //var friendsChains:[PostChain] = []
+    
     var collViewIndexReference:[String:IndexPath] = [:]
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.delegate = self
-        collectionView.dataSource = self
+        switchFeeds.setTitle("Switch to Global Feed", for: .normal)
+        //By default show friend's feed
+        collectionViewA.delegate = self
+        collectionViewA.dataSource = self
+        collectionViewB.dataSource = self
+        collectionViewB.delegate = self
+        
         loadTopChainIDs { (topChainIDs) in
             var chainCount = 0
             for chainID in topChainIDs{
@@ -34,13 +67,21 @@ class ExploreViewController: UIViewController, PostChainDelegate {
                 self.topChains.append(chain)
                 chainCount += 1
             }
-            self.collectionView.reloadData()
+            self.collectionViewA.reloadData()
+            
+        }
+        
+        loadGlobalChainsID { (postChains) in
+            self.otherChains = postChains
+            //chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
+            //self.globalChains.append(chain)
+            self.collectionViewB.reloadData()
         }
     }
     
     func chainDidLoad(chain: PostChain) {
         let chainIndex = collViewIndexReference[chain.chainID]!
-        collectionView.reloadItems(at: [chainIndex])
+        collectionViewA.reloadItems(at: [chainIndex])
     }
     
     func chainGotNewPost(post: ChainImage) {

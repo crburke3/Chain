@@ -39,9 +39,9 @@ class MainCell: UITableViewCell {
                 for document in querySnapshot!.documents {
                     profile.user = ChainUser(dict: document.data() as [String : Any])
                 }
+                masterNav.pushViewController(profile, animated: true)
                 }
             }
-            masterNav.pushViewController(profile, animated: true)
         }
         print("Pushing VC") //
     }

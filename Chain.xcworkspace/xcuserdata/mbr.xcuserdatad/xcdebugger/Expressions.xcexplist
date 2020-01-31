@@ -11,10 +11,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "CurrentUserProfileViewController.viewWillAppear(_:):CurrentUserProfileViewController.swift">
+         contextName = "UserMenuTableViewController.tableView(_:didSelectRowAt:):UserMenuTableViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "currentUser.profile">
+               value = "">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -51,6 +51,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ExploreViewController.collectionView(_:numberOfItemsInSection:):ExplorePageCollectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "topChains.count">
+            </PersistentString>
+            <PersistentString
+               value = "globalChains.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ExploreViewController.viewDidLoad():ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "globalChains.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
       </ContextState>
       <ContextState
@@ -62,10 +81,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "UserMenuTableViewController.tableView(_:didSelectRowAt:):UserMenuTableViewController.swift">
+         contextName = "CurrentUserProfileViewController.viewWillAppear(_:):CurrentUserProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "">
+               value = "currentUser.profile">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

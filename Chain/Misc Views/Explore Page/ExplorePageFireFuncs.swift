@@ -19,4 +19,35 @@ extension ExploreViewController{
             }
         }
     }
+    
+    func loadGlobalChainsID(chains: @escaping ([PostChain])->()){
+        //Only get docs of cells in view
+        var chainArray = [PostChain]()
+        
+        masterFire.db.collection("globalFeed").getDocuments() { (querySnapshot, err) in
+        if let err = err {
+            print("Error getting documents: \(err)")
+        } else {
+            for document in querySnapshot!.documents {
+                chainArray.append(PostChain(dict: document.data() as [String : Any]))
+            }
+            chains(chainArray)
+        }
+        }
+    }
+    
+    func loadUserFeed(chains: @escaping ([PostChain])->()){
+           
+        var chainArray = [PostChain]()
+        masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").getDocuments() { (querySnapshot, err) in
+           if let err = err {
+               print("Error getting documents: \(err)")
+           } else {
+               for document in querySnapshot!.documents {
+                   chainArray.append(PostChain(dict: document.data() as [String : Any]))
+            }
+            chains(chainArray)
+            }
+            }
+       }
 }
