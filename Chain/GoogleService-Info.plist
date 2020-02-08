@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>471010598891-7v7hrq69i587ltit4mnn5nfaqb2nem26.apps.googleusercontent.com</string>
+	<string>471010598891-3rr4c1cqf8lci6b8krdk48ohjhmv1j5g.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.471010598891-7v7hrq69i587ltit4mnn5nfaqb2nem26</string>
+	<string>com.googleusercontent.apps.471010598891-3rr4c1cqf8lci6b8krdk48ohjhmv1j5g</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDTRG7jBnjjg64ISWeC9JrYCI-UKCAkWwM</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,23 +13,23 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.DripMobile.chain</string>
+	<string>com.DripMobile.chain2</string>
 	<key>PROJECT_ID</key>
 	<string>chain-3ad1e</string>
 	<key>STORAGE_BUCKET</key>
 	<string>chain-3ad1e.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:471010598891:ios:ca2606d7ce1a03c1fcc3ae</string>
+	<string>1:471010598891:ios:cfbff4f6c184ee0dfcc3ae</string>
 	<key>DATABASE_URL</key>
 	<string>https://chain-3ad1e.firebaseio.com</string>
 </dict>
