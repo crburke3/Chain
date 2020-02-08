@@ -11,7 +11,7 @@ import Firebase
 import FirebaseFirestore
 
 class Invite {
-    var chainID: String = ""
+    var chainName: String = ""
     var chainPreview: String = "" //Hold URL for preview image
     var dateSent: String = ""
     var expirationDate: String = ""
@@ -25,8 +25,8 @@ class Invite {
     
     //It would be cool to have general information of Chain appear with invitation
     
-    init(_chainID:String, _chainPreview:String, _dateSent:String, _expirationDate:String, _sentByUsername:String, _sentByPhone: String, _sentByProfile:String, _receivedBy:String, _index: Int){
-        self.chainID = _chainID
+    init(_chainName:String, _chainPreview:String, _dateSent:String, _expirationDate:String, _sentByUsername:String, _sentByPhone: String, _sentByProfile:String, _receivedBy:String, _index: Int){
+        self.chainName = _chainName
         self.dateSent = _dateSent
         self.expirationDate = _expirationDate
         self.sentByUsername = _sentByUsername
@@ -39,7 +39,7 @@ class Invite {
     
     //init from Firestore
     init(dict: [String:Any]) {
-        self.chainID = dict["chain"] as? String ?? ""
+        self.chainName = dict["chain"] as? String ?? ""
         self.dateSent = dict["dateSent"] as? String ?? ""
         self.expirationDate = dict["expirationDate"] as? String ?? ""
         self.sentByUsername = dict["sentByUsername"] as? String ?? ""
@@ -51,7 +51,7 @@ class Invite {
     }
     
     func toDict() -> [String:Any] {
-        return ["chain":self.chainID, "dateSent":self.dateSent, "expirationDate":self.expirationDate, "sentByUsername":self.sentByUsername, "sentByPhone":self.sentByPhone, "sentByProfile":self.sentByProfile, "receivedBy":self.receivedBy, "index":self.index, "chainPreview":self.chainPreview] as [String:Any]
+        return ["chain":self.chainName, "dateSent":self.dateSent, "expirationDate":self.expirationDate, "sentByUsername":self.sentByUsername, "sentByPhone":self.sentByPhone, "sentByProfile":self.sentByProfile, "receivedBy":self.receivedBy, "index":self.index, "chainPreview":self.chainPreview] as [String:Any]
     }
     
     func sendInvitation(error: @escaping (String?)->()) {

@@ -15,7 +15,7 @@ import FirebaseStorage
 
 
 class PostChain{
-    var chainID:String
+    var chainName:String
     var birthDate:Date
     var deathDate:Date
     var likes:Int
@@ -27,10 +27,10 @@ class PostChain{
     var loaded: LoadState
     var delegates: [String:PostChainDelegate] = [:]
     var firstImageLink:String?
-    var chainUID:String = ""
+    var chainUUID:String = ""
     
-    init(_chainID:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
-        self.chainID = _chainID
+    init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
+        self.chainName = _chainName
         self.birthDate = _birthDate
         self.deathDate = _deathDate
         self.likes = 0
@@ -44,8 +44,9 @@ class PostChain{
         }
     }
     
-    init(chainID:String, load:Bool = true){
-        self.chainID = chainID
+    init(chainName:String, load:Bool = true){
+        self.chainName = chainName
+        self.chainUUID = chainName
         self.birthDate = Date()
         self.deathDate = Date()
         self.likes = 0
@@ -57,14 +58,14 @@ class PostChain{
         self.loaded = .NOT_LOADED
         if load{
             self.load { (error) in
-                if error != nil{ print("Failed loading chain \(self.chainID): \(error!)")}
+                if error != nil{ print("Failed loading chain \(self.chainName): \(error!)")}
             }
         }
     }
     
     init(dict:[String:Any]){
-        self.chainID = dict["chainID"] as! String   //want this to fail if it doesnt exist
-        self.chainUID = dict["chainUID"] as! String 
+        self.chainName = dict["chainName"] as! String   //want this to fail if it doesnt exist
+        self.chainUUID = dict["chainUUID"] as! String 
         self.birthDate = Date(chainString: dict["birthDate"] as! String)
         self.deathDate = Date(chainString: dict["deathDate"] as! String)
         self.likes = dict["likes"] as! Int
@@ -90,9 +91,10 @@ class PostChain{
         
         //let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
         
-        var retDict:[String:Any] = ["chainID" : self.chainID,
-                                    "birthDate" : self.birthDate.toChainString(),
-                                    "deathDate" : self.deathDate.toChainString(),
+        var retDict:[String:Any] = ["chainName" : self.chainName,
+                                    "chainUUID" : self.chainUUID,
+                                    "birthDate" : self.birthDate,
+                                    "deathDate" : self.deathDate,
                                     "likes" : self.likes,
                                     "count": self.count,
                                     "tags" : self.tags,
@@ -120,8 +122,9 @@ class PostChain{
     }
     
     func load(error: @escaping ((String?)->())){
-        //self.chainUID = "firstChain" 
-        masterFire.loadChain(chainID: self.chainUID) { (chain) in
+        //self.chainUUID = "firstChain"
+        if chainUUID.count < 1{error("invalid chain UID"); return}
+        masterFire.loadChain(chainName: self.chainUUID) { (chain) in
             if chain != nil{
                 self.birthDate = chain!.birthDate
                 self.deathDate = chain!.deathDate
@@ -133,7 +136,7 @@ class PostChain{
                 self.posts = chain!.posts
                 self.firstImageLink = chain!.firstImageLink
                 self.loaded = .LOADED
-                self.chainUID = chain!.chainUID
+                self.chainUUID = chain!.chainUUID
                 for delegate in self.delegates.values{
                     delegate.chainDidLoad(chain: self)
                 }
@@ -150,7 +153,7 @@ class PostChain{
         //if self.posts.count != 1{error("Error: You need 1 post in self.posts to upload the chain"); return}
         let docRef = Firestore.firestore().collection("chains").document().documentID
         print(docRef)
-        self.chainUID = docRef
+        self.chainUUID = docRef
         masterFire.db.collection("chains").document(docRef).setData(self.toDict(withPosts: false)) { (err1) in
             if err1 != nil{error(err1!.localizedDescription); return} else {
                 //DocumentReference
@@ -164,7 +167,7 @@ class PostChain{
     
     func append(image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUUID)
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -180,7 +183,7 @@ class PostChain{
                 let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
                 let dict = uploadImage.toDict()
                 //Add to sub-collection
-                let postRef = Firestore.firestore().collection("chains").document(self.chainUID).collection("posts")
+                let postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
                 postRef.addDocument(data: dict) { (error) in
                     if let err = error {
                         print("Error when adding doc: \(err)")
@@ -205,7 +208,7 @@ class PostChain{
     private var listener: ListenerRegistration?
     private var hasLoadedInitial = false
     func listenForChanges(ignoreFirst:Bool = true){
-        let chainRef = Firestore.firestore().collection("chains").document(self.chainID)
+        let chainRef = Firestore.firestore().collection("chains").document(self.chainName)
         listener = chainRef.addSnapshotListener { (snap, err) in
             if snap == nil{ return}
             if err != nil{print("error in snaplistener"); return}

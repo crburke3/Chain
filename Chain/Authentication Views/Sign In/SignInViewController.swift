@@ -11,24 +11,22 @@ import FirebaseAuth
 import FirebaseFirestore
 import Firebase
 import SkyFloatingLabelTextField
+import CTKFlagPhoneNumber
 
 class SignInViewController: UIViewController {
     
-    @IBOutlet weak var phoneNumber: SkyFloatingLabelTextFieldWithIcon!
+    
+
+    @IBOutlet var phoneNumber: CTKFlagPhoneNumberTextField!
     @IBOutlet weak var password: SkyFloatingLabelTextFieldWithIcon!
     
     let db = Firestore.firestore()
     let auth = ChainAuth()
-    /*
-    @IBOutlet weak var phoneNumber: SkyFloatingLabelTextField?
-    @IBOutlet weak var verificationCode: SkyFloatingLabelTextField?
-    */
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
     }
-    //
+    
     @IBAction func signIn(_ sender: Any) {
         var storedPassword: String = ""
         db.collection("users").whereField("phone", isEqualTo: formatPhone())
@@ -94,7 +92,7 @@ class SignInViewController: UIViewController {
     
     //
     func formatPhone() -> String {
-        return "+1\(phoneNumber?.text ?? "")" //Will vary by country
+        return phoneNumber.getFormattedPhoneNumber() ?? ""
     }
     /*
     @IBAction func sendCode(_ sender: Any) {

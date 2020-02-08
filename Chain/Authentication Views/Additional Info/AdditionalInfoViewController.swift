@@ -115,7 +115,7 @@ extension AdditionalInfoViewController {
                             //Get users data
                         }
                         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-                        mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+                        mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
                         masterNav.pushViewController(mainVC, animated: true)
                     }
                    }

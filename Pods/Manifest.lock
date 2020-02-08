@@ -153,6 +153,7 @@ PODS:
     - nanopb/encode (= 0.3.9011)
   - nanopb/decode (0.3.9011)
   - nanopb/encode (0.3.9011)
+  - Pastel (0.6.0)
   - PopupDialog (1.1.1):
     - DynamicBlurView (~> 4.0)
   - Protobuf (3.11.2)
@@ -187,6 +188,7 @@ DEPENDENCIES:
   - KKPinCodeTextField
   - lottie-ios
   - MBRadioCheckboxButton
+  - Pastel
   - PopupDialog
   - SHSearchBar
   - SkyFloatingLabelTextField (~> 3.0)
@@ -233,6 +235,7 @@ SPEC REPOS:
     - Macaw
     - MBRadioCheckboxButton
     - nanopb
+    - Pastel
     - PopupDialog
     - Protobuf
     - SHSearchBar
@@ -290,6 +293,7 @@ SPEC CHECKSUMS:
   Macaw: 10bf9e327cb75f24e3225d5229a80ed544df85f0
   MBRadioCheckboxButton: 6e2a2cdc441e292e45b64c4e65eb8fc1fc05eef2
   nanopb: 18003b5e52dab79db540fe93fe9579f399bd1ccd
+  Pastel: 814f081efbe2859c37e65ee44f396e6e5be88619
   PopupDialog: 720c92befd8bc23c13442254945213db5612f149
   Protobuf: dd1aaea7140debfe4dd0683fb8ef208e527ae153
   SHSearchBar: 9fcc9daff8a3264386b975961de6c485f33439d4
@@ -300,6 +304,6 @@ SPEC CHECKSUMS:
   UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
   UIEmptyState: 767376694d9402452fb3c0a5a5283176c6a53c92
 
-PODFILE CHECKSUM: 7d903e87ac838c00f9b537b039fe72664e3e025a
+PODFILE CHECKSUM: 54e383f890b7405f56f48f6a80a8ac665bd617d6
 
 COCOAPODS: 1.8.4

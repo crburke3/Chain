@@ -60,15 +60,14 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         
         loadTopChainIDs { (topChainIDs) in
             var chainCount = 0
-            for chainID in topChainIDs{
-                let chain = PostChain(chainID: chainID)
-                self.collViewIndexReference[chainID] = IndexPath(row: chainCount, section: 0)
+            for chainName in topChainIDs{
+                let chain = PostChain(chainName: chainName)
+                self.collViewIndexReference[chainName] = IndexPath(row: chainCount, section: 0)
                 chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
                 self.topChains.append(chain)
                 chainCount += 1
             }
             self.collectionViewA.reloadData()
-            
         }
         
         loadGlobalChainsID { (postChains) in
@@ -80,7 +79,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     }
     
     func chainDidLoad(chain: PostChain) {
-        let chainIndex = collViewIndexReference[chain.chainID]!
+        let chainIndex = collViewIndexReference[chain.chainName]!
         collectionViewA.reloadItems(at: [chainIndex])
     }
     

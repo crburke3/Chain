@@ -16,7 +16,7 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var textBoxHolder: UIView!
     
-    var invitation = Invite(_chainID: "", _chainPreview: "", _dateSent: "", _expirationDate: "", _sentByUsername: "", _sentByPhone: "", _sentByProfile: "", _receivedBy: "", _index: 0)
+    var invitation = Invite(_chainName: "", _chainPreview: "", _dateSent: "", _expirationDate: "", _sentByUsername: "", _sentByPhone: "", _sentByProfile: "", _receivedBy: "", _index: 0)
     var userArray = [ChainUser]()
     var filteredUserArray = [ChainUser]() //
     //Load with currentUser.friends

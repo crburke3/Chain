@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 //import Geofirestore
 import FirebaseAuth
+import Pastel
 
 
 class FirstViewController : UIViewController, CLLocationManagerDelegate{
@@ -19,9 +20,10 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     let testVerificationCode = "123456"
     
     override func viewDidLoad() {
+        super.viewDidLoad()
         masterNav = self.navigationController! //Guessing you were trying to get the current Nav Controller
         masterStoryBoard = self.storyboard!
-        
+        addGradient()
     }
     
     @IBAction func enterTapped(_ sender: Any) {
@@ -35,13 +37,13 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
         currentUser.topPosts = []
         //masterNav.pushViewController(SignInViewController(), animated: true)
         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
-        //mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+        //mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
         masterNav.pushViewController(mainVC, animated: true)
         /* let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-        mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+        mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
         masterNav.pushViewController(mainVC, animated: true) //Push MainChain
         */
-        }
+    }
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -53,6 +55,18 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
         default:
             masterLocator.startUpdatingLocation()
         }
+    }
+    
+    func addGradient(){
+        let pastelView = PastelView(frame: view.bounds)
+        pastelView.startPastelPoint = .bottomLeft
+        pastelView.endPastelPoint = .topRight
+        pastelView.animationDuration = 3.0
+        pastelView.setColors([UIColor.Chain.mainBlue,
+                              UIColor.Chain.mainOrange])
+
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
     }
     
 }

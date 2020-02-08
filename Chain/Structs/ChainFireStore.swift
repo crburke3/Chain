@@ -23,7 +23,7 @@ class ChainFireStore {
     //If error comes back as nil, then nothing went wrong
     func uploadChain(chain:PostChain, error: @escaping (String?)->()) {
         //Add sub-collections
-        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainName)
         //  firestoreRef.collection("posts")
         firestoreRef.setData(chain.toDict()) { (err1) in
             if let error1 = err1{
@@ -37,9 +37,9 @@ class ChainFireStore {
     
     //Will be deprecated later, just for use during testing
     //Added "index" so once chain is loaded it starts in the correct spot
-    func loadChain(chainID:String, chain: @escaping (PostChain?)->()){
-        print(chainID)
-        let ref = Firestore.firestore().collection("chains").document(chainID)
+    func loadChain(chainName:String, chain: @escaping (PostChain?)->()){
+        print(chainName)
+        let ref = Firestore.firestore().collection("chains").document(chainName)
         ref.getDocument { (snap, err) in
             if err == nil{
                 let snapData = snap!.data()!
@@ -52,9 +52,9 @@ class ChainFireStore {
     
     //Added
     /*
-    func appendChain(chainID: String, image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
+    func appendChain(chainName: String, image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(chainName)
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -82,9 +82,9 @@ class ChainFireStore {
             }
     }
     */
-    func removeFromChain(chainID: String, post:[String:Any], completion: @escaping (String?)->()) {
+    func removeFromChain(chainName: String, post:[String:Any], completion: @escaping (String?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(chainID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(chainName)
         firestoreRef.updateData([
             "posts": FieldValue.arrayRemove([post]), "count": FieldValue.increment(Int64(1))
         ])
@@ -176,7 +176,7 @@ class ChainFireStore {
     }
     
     
-    func inviteFriend(chainID: String, sendUser: String, index: Int, error: @escaping (String?)->()) {
+    func inviteFriend(chainName: String, sendUser: String, index: Int, error: @escaping (String?)->()) {
         //In Invitation object for now
         
         
@@ -210,8 +210,8 @@ class ChainFireStore {
             
             //let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             let mainVC = ExploreViewController()
-            //mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
-            //mainVC.mainChain.chainUID = "firstChain"
+            //mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
+            //mainVC.mainChain.chainUUID = "firstChain"
             masterNav.pushViewController(mainVC, animated: true) //Push MainChain
             }
         }
@@ -221,7 +221,7 @@ class ChainFireStore {
         //userID = phone number
         for user in currentUser.friends {
             let postRef = db.collection("userFeeds").document(user.phoneNumber).collection("posts")
-            postRef.document(chain.chainID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
+            postRef.document(chain.chainName).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
                     //Consider only uploading to top friends
                 }
             }
@@ -232,7 +232,7 @@ class ChainFireStore {
         
     }
     
-    func reportImage(chainID: String, image: ChainImage, error: @escaping (String?)->()) {
+    func reportImage(chainName: String, image: ChainImage, error: @escaping (String?)->()) {
         //Create and upload doc
         var ref: DocumentReference? = nil
         ref = db.collection("reportedPosts").addDocument(data: image.toDict()) { err in
@@ -245,8 +245,8 @@ class ChainFireStore {
         
     }
     
-    func shareChain(chainID: String, sender: ChainUser, receivers: [ChainUser], index: Int, error: @escaping (String?)->()) {
-        let invite = ["chain": chainID, "sentBy": sender.username, "index": index] as [String : Any]
+    func shareChain(chainName: String, sender: ChainUser, receivers: [ChainUser], index: Int, error: @escaping (String?)->()) {
+        let invite = ["chain": chainName, "sentBy": sender.username, "index": index] as [String : Any]
         for user in receivers {
             let firestoreRef = Firestore.firestore().collection("users").document(user.phoneNumber)
             firestoreRef.updateData([

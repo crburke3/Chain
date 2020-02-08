@@ -44,7 +44,7 @@ extension ChainViewController{
         */
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Report Image")
-            masterFire.reportImage(chainID: self.mainChain.chainID, image: ChainImage(dict: givenPost)!) { (error) in
+            masterFire.reportImage(chainName: self.mainChain.chainName, image: ChainImage(dict: givenPost)!) { (error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -55,7 +55,7 @@ extension ChainViewController{
         let removeButton = DefaultButton(title: "Remove your Image") {
             print("Photo: \(post_row)")
             print("Chain Removed")
-            masterFire.removeFromChain(chainID: "firstChain", post: givenPost) { (error) in
+            masterFire.removeFromChain(chainName: "firstChain", post: givenPost) { (error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -186,7 +186,7 @@ extension ChainViewController{
         }
     }
     
-    func nextFewImages(chainID: String, currentIndex: Int, loadRadius: Int) {
+    func nextFewImages(chainName: String, currentIndex: Int, loadRadius: Int) {
         //indexPathsForVisibleItems -> Collection View
         //indexPathsForVisibleRow -> Table View
         let upperIndex = currentIndex + loadRadius

@@ -10,13 +10,20 @@ import UIKit
 
 class ExplorePageCell: UICollectionViewCell {
     
-    @IBOutlet var loadingView: UIView!
+    @IBOutlet var roundView: RoundView!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var previewImageView: UIImageView!
     var deathDate:Date = Date()
+    private var loaded = false
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        if !loaded{
+            roundView.addShadow()
+            roundView.addGradient(colorScheme: .ChainOriginal)
+            previewImageView.roundCorners(corners: [.allCorners], radius: 5)
+        }
 
     }
     

@@ -46,6 +46,8 @@ target 'Chain' do
   pod 'KKPinCodeTextField'
   pod 'CountdownLabel'
   pod 'FloatingPanel'
+  pod "Pastel"
+
   # pod 'Mapbox-iOS-SDK'
   # pod 'MapboxNavigation', '~> 0.38.0'
   # pod 'BraintreeDropIn'

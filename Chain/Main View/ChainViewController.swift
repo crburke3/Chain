@@ -73,7 +73,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     @IBAction func plusClicked(_ sender: Any) {
         //Load Global Object
-        cameraVC.chainID = self.mainChain.chainID //Get chain ID from chain being viewed
+        cameraVC.chainName = self.mainChain.chainName //Get chain ID from chain being viewed
         self.present(cameraVC, animated: true)
     }
     
@@ -107,9 +107,9 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         self.fpc = FloatingPanelController()
         self.fpc.delegate = self // Optional
         let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
-        contentVC.invitation = Invite(_chainID: mainChain.chainID, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain?.deathDate.toChainString() ?? "", _sentByUsername: currentUser.username, _sentByPhone: currentUser.phoneNumber, _sentByProfile: currentUser.profile, _receivedBy: "", _index: buttonRow)
+        contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain?.deathDate.toChainString() ?? "", _sentByUsername: currentUser.username, _sentByPhone: currentUser.phoneNumber, _sentByProfile: currentUser.profile, _receivedBy: "", _index: buttonRow)
         contentVC.index = buttonRow
-        contentVC.chain = mainChain.chainID
+        contentVC.chain = mainChain.chainName
         contentVC.userArray = currentUser.friends
         //Set conentVC array to hold currentUsers friends
         self.fpc.set(contentViewController: contentVC)

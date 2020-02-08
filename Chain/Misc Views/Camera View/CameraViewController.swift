@@ -21,7 +21,7 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     
     let imagePicker = UIImagePickerController()
     let session = CKFPhotoSession()
-    var chainID: String = ""
+    var chainName: String = ""
     var delegate:ChainCameraDelegate?
     
     override func viewDidLoad() {

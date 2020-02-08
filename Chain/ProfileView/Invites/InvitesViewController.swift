@@ -63,7 +63,7 @@ class InvitesViewController: UIViewController, UITableViewDelegate, UITableViewD
             let url = URL(string: inviteArray[indexPath.row].chainPreview ?? "")
             cell.chainPreview.kf.setImage(with: url)
             let urlForProfile = URL(string: inviteArray[indexPath.row].sentByProfile ?? "")
-            cell.chainTitle.text = inviteArray[indexPath.row].chainID
+            cell.chainTitle.text = inviteArray[indexPath.row].chainName
             cell.sendersProfilePic.kf.setImage(with: urlForProfile)
                 //= inviteArray[indexPath.row].sentByProfile
             cell.message.text = "\(inviteArray[indexPath.row].sentByUsername) invited you to view a chain!"

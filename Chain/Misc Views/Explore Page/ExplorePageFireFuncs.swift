@@ -9,13 +9,13 @@
 import Foundation
 
 extension ExploreViewController{
-    func loadTopChainIDs(chainIDs: @escaping ([String])->()){
+    func loadTopChainIDs(chainNames: @escaping ([String])->()){
         masterFire.db.collection("explorePage").document("topChains").getDocument { (snap, err) in
             if err != nil{
                 self.showPopUp(_title: "Error Loading", _message: "gotta check your internet conneciton bud."); return
             }
             if let snapData = snap!.data(){
-                chainIDs(snapData["chainIDs"] as? [String] ?? [])
+                chainNames(snapData["chainNames"] as? [String] ?? [])
             }
         }
     }

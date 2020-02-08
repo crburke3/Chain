@@ -17,7 +17,7 @@ class InviteTableViewCell: UITableViewCell {
     @IBOutlet weak var sendersProfilePic: UIImageView!
     @IBOutlet weak var message: UILabel!
     
-    var invitation: Invite = Invite(_chainID:"", _chainPreview:"", _dateSent:"", _expirationDate:"", _sentByUsername:"", _sentByPhone: "", _sentByProfile:"", _receivedBy:"", _index: 0)
+    var invitation: Invite = Invite(_chainName:"", _chainPreview:"", _dateSent:"", _expirationDate:"", _sentByUsername:"", _sentByPhone: "", _sentByProfile:"", _receivedBy:"", _index: 0)
     
     override func awakeFromNib() {
         super.awakeFromNib()

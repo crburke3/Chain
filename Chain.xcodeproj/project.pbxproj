@@ -27,7 +27,6 @@
 		6892BD5C23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */; };
 		6892BD6223D23AF30021A3E2 /* VerifyNumberViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD6023D23AF30021A3E2 /* VerifyNumberViewController.swift */; };
 		6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6123D23AF30021A3E2 /* VerifyNumberViewController.xib */; };
-		6892BD6723D3A25A0021A3E2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */; };
 		6892BD6B23D3AB120021A3E2 /* AdditionalInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */; };
 		6892BD6C23D3AB120021A3E2 /* AdditionalInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */; };
 		689E93D123DE125300EED90F /* InvitesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E93CF23DE125300EED90F /* InvitesViewController.swift */; };
@@ -78,6 +77,7 @@
 		FA9C5B5123C554B900F1B41A /* PanGestureExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C5B5023C554B900F1B41A /* PanGestureExtensions.swift */; };
 		FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */ = {isa = PBXBuildFile; fileRef = FA9C5B5323C5793600F1B41A /* uglyChain.json */; };
 		FA9C5BC823C648A000F1B41A /* ChainViewHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA9C5BC723C648A000F1B41A /* ChainViewHelpers.swift */; };
+		FA9CB63823EE661E00D43F04 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FA9CB63723EE661E00D43F04 /* GoogleService-Info.plist */; };
 		FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3723C1911800838B0E /* ExploreViewController.swift */; };
 		FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */; };
 		FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */; };
@@ -108,7 +108,6 @@
 		6892BD5A23CFB18F0021A3E2 /* ChainsCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChainsCollectionViewCell.xib; sourceTree = "<group>"; };
 		6892BD6023D23AF30021A3E2 /* VerifyNumberViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VerifyNumberViewController.swift; sourceTree = "<group>"; };
 		6892BD6123D23AF30021A3E2 /* VerifyNumberViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = VerifyNumberViewController.xib; sourceTree = "<group>"; };
-		6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		6892BD6923D3AB120021A3E2 /* AdditionalInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdditionalInfoViewController.swift; sourceTree = "<group>"; };
 		6892BD6A23D3AB120021A3E2 /* AdditionalInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AdditionalInfoViewController.xib; sourceTree = "<group>"; };
 		689E93CF23DE125300EED90F /* InvitesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InvitesViewController.swift; sourceTree = "<group>"; };
@@ -162,6 +161,7 @@
 		FA9C5B5023C554B900F1B41A /* PanGestureExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PanGestureExtensions.swift; sourceTree = "<group>"; };
 		FA9C5B5323C5793600F1B41A /* uglyChain.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = uglyChain.json; sourceTree = "<group>"; };
 		FA9C5BC723C648A000F1B41A /* ChainViewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainViewHelpers.swift; sourceTree = "<group>"; };
+		FA9CB63723EE661E00D43F04 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		FAAF0A3723C1911800838B0E /* ExploreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
 		FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePageCell.swift; sourceTree = "<group>"; };
 		FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplorePageFireFuncs.swift; sourceTree = "<group>"; };
@@ -340,10 +340,10 @@
 		FA7E3669238DB12A00488000 /* Chain */ = {
 			isa = PBXGroup;
 			children = (
+				FA9CB63723EE661E00D43F04 /* GoogleService-Info.plist */,
 				68676B9E23AEB29D00DAD539 /* Chain.entitlements */,
 				FA7E36BA238DDDB100488000 /* SceneDelegate.swift */,
 				FA7E366A238DB12A00488000 /* AppDelegate.swift */,
-				6892BD6623D3A25A0021A3E2 /* GoogleService-Info.plist */,
 				FA7E3670238DB12A00488000 /* Main.storyboard */,
 				6892BD5423CFAC3E0021A3E2 /* ProfileView */,
 				6878BBA023C7954000C75B2E /* User Menu */,
@@ -555,9 +555,9 @@
 				689E93D623DE136B00EED90F /* InviteTableViewCell.xib in Resources */,
 				686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
+				FA9CB63823EE661E00D43F04 /* GoogleService-Info.plist in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
 				FA9C5B4F23C5547B00F1B41A /* NewChainViewController.xib in Resources */,
-				6892BD6723D3A25A0021A3E2 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,6 +808,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
@@ -818,6 +819,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -830,14 +832,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Chain/Chain.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = P7J2GV5KE5;
+				DEVELOPMENT_TEAM = 2PT4RQSY99;
 				INFOPLIST_FILE = Chain/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain;
+				PRODUCT_BUNDLE_IDENTIFIER = com.DripMobile.chain2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;

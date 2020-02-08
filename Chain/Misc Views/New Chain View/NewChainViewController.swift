@@ -84,7 +84,7 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             for tag in tempTags{
                 tags.append(String(tag))
             }
-            let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
+            let postChain = PostChain(_chainName: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
             if postImageView.image == nil{
                 postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
             }else{

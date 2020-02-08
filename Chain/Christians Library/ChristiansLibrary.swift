@@ -11,6 +11,7 @@ import UIKit
 import MapKit
 import Kingfisher
 import PopupDialog
+import Pastel
 
 extension MKPlacemark{
     func parseAddress() -> String {
@@ -392,6 +393,26 @@ class RoundView:UIView{
         backgroundColor = nil
         layer.backgroundColor =  backgroundCGColor
     }
+    
+    func addGradient(colorScheme:GradientColorScheme){
+        let pastelView = PastelView(frame: self.bounds)
+        pastelView.startPastelPoint = .bottomLeft
+        pastelView.endPastelPoint = .topRight
+        pastelView.animationDuration = 3.0
+        pastelView.setColors(colorScheme.colors)
+        pastelView.startAnimation()
+        self.insertSubview(pastelView, at: 0)
+    }
+}
+
+enum GradientColorScheme:String{
+    case ChainOriginal
+    
+    var colors:[UIColor]{
+        get{
+            return [UIColor.Chain.mainBlue, UIColor.Chain.mainOrange]
+        }
+    }
 }
 
 class BorderTextView:UITextView{
@@ -610,6 +631,11 @@ extension UIColor{
         static var flexRed: UIColor  { return UIColor(red: 216/255, green: 112/255, blue: 53/255, alpha: 1) }
         static var errorRed: UIColor  { return UIColor(red: 255/255, green: 76/255, blue: 84/255, alpha: 1) }
         static var navOrange: UIColor  { return UIColor(red: 232/255, green: 121/255, blue: 58/255, alpha: 1) }
+    }
+    
+    struct Chain{
+        static var mainBlue: UIColor  { return UIColor(red: 242/255, green: 101/255, blue: 34/255, alpha: 1) }
+        static var mainOrange: UIColor  { return UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1) }
     }
 }
 
