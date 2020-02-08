@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
@@ -20,7 +21,41 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
         //
-        let post = mainChain.posts[indexPath.row]
+        let post: ChainImage
+        
+        //Get data from previous query then call the next
+        
+        nextQuery = masterFire.db.collection("cities").order(by: "Time").start(afterDocument: lastDoc!).limit(to: 1)
+        //Get data from nextQuery
+        nextQuery?.getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        post.user = document.get("user") as? String ?? ""
+                        post.link = document.get("Link") as? String ?? ""
+                        post.time = ((document.get("Time") as? Timestamp)?.dateValue())!
+                        post.userPhone = document.get("userPhone") as? String ?? ""
+                        post.userProfile = document.get("userProfile") as? String ?? ""
+
+                    }
+                }
+        }
+        nextQuery?.addSnapshotListener { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                print("Error retreving post: \(error.debugDescription)")
+                return
+            }
+
+            guard let lastSnapshot = snapshot.documents.last else {
+                // The collection is empty.
+                return
+            }
+            self.lastDoc = lastSnapshot
+        }
+        //Set link for post
+        
         cell.user.text = post.user
         cell.imgView.image = post.image
         cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
@@ -41,6 +76,8 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         //cell.profilePic.imageView?.kf.setImage(with: <#T##ImageDataProvider?#>)
         switch post.loadState{
         case .NOT_LOADED:
+            //Set URL
+            //post.url
             post.load() //If cell hasn't been loaded yet, then query post from Firestore
         case .LOADING:
             break

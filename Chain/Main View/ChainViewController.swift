@@ -17,6 +17,9 @@ import Firebase
 
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate, PostChainDelegate {
 
+    var lastDoc: QueryDocumentSnapshot?
+    var nextQuery: Query?
+    
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
@@ -41,6 +44,24 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //
+        nextQuery = masterFire.db.collection("chains").document(mainChain.chainUID).collection("posts")
+            .order(by: "Time")
+            .limit(to: 1)
+
+        nextQuery?.addSnapshotListener { (snapshot, error) in
+            guard let snapshot = snapshot else {
+                print("Error retreving post: \(error.debugDescription)")
+                return
+            }
+
+            guard let lastSnapshot = snapshot.documents.last else {
+                // The collection is empty.
+                return
+            }
+            self.lastDoc = lastSnapshot
+        }
+        //
         //createSendButton()
         fanMenuSetUp()
         view.bringSubviewToFront(fanMenu)
