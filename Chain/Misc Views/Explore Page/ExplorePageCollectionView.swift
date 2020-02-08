@@ -12,7 +12,7 @@ import UIKit
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == self.collectionViewA {
-            return topChains.count
+            return topChains.count //Something is wrong here and below
         } else {
             return otherChains.count
         }
@@ -55,12 +55,13 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == self.collectionViewA {
             let chainSelected = topChains[indexPath.row]
-            let chainVC = ChainViewController()
+            let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             chainVC.mainChain = chainSelected
             masterNav.pushViewController(chainVC, animated: true)
         } else {
             let chainSelected = otherChains[indexPath.row]
-            let chainVC = ChainViewController()
+            //let chainVC = ChainViewController()
+            let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             chainVC.mainChain = chainSelected
             masterNav.pushViewController(chainVC, animated: true)
         }

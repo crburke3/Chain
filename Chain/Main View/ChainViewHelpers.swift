@@ -113,22 +113,6 @@ extension ChainViewController{
         return image
     }
  
-    func createSendButton(){
-        self.sendButton.isHidden = true
-        self.sendButton.backgroundColor = .red
-        self.sendButton.setTitle("Send", for: .normal)
-        tableView.addSubview(self.sendButton)
-        // set position
-        var X_Position:CGFloat? = 50.0 //use your X position here
-        var Y_Position:CGFloat? = 50.0 //use your Y position here
-        //sendButton.frame.width = 100.0 as CGFloat
-        //sendButton.frame.height = 100.0 as CGFloat
-        
-        sendButton.frame = CGRect(x: X_Position!, y: Y_Position!, width: sendButton.frame.width, height: sendButton.frame.height)
-        
-        self.sendButton.heightAnchor.constraint(equalToConstant: 50).isActive = true // specify the height of the view
-        self.sendButton.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.6)
-    }
     
     func reloadChain(){
         mainChain.load { (err) in

@@ -27,6 +27,7 @@ class PostChain{
     var loaded: LoadState
     var delegates: [String:PostChainDelegate] = [:]
     var firstImageLink:String?
+    var chainUID:String = ""
     
     init(_chainID:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainID = _chainID
@@ -63,6 +64,7 @@ class PostChain{
     
     init(dict:[String:Any]){
         self.chainID = dict["chainID"] as! String   //want this to fail if it doesnt exist
+        self.chainUID = dict["chainUID"] as! String 
         self.birthDate = Date(chainString: dict["birthDate"] as! String)
         self.deathDate = Date(chainString: dict["deathDate"] as! String)
         self.likes = dict["likes"] as! Int
@@ -94,8 +96,7 @@ class PostChain{
                                     "likes" : self.likes,
                                     "count": self.count,
                                     "tags" : self.tags,
-                                    "contributors" : self.contributors,
-                                    "posts": self.postsData()]
+                                    "contributors" : self.contributors]
         if self.firstImageLink != nil{
             retDict["firstImageLink"] = self.firstImageLink!
         }
@@ -119,7 +120,8 @@ class PostChain{
     }
     
     func load(error: @escaping ((String?)->())){
-        masterFire.loadChain(chainID: self.chainID) { (chain) in
+        //self.chainUID = "firstChain" 
+        masterFire.loadChain(chainID: self.chainUID) { (chain) in
             if chain != nil{
                 self.birthDate = chain!.birthDate
                 self.deathDate = chain!.deathDate
@@ -131,6 +133,7 @@ class PostChain{
                 self.posts = chain!.posts
                 self.firstImageLink = chain!.firstImageLink
                 self.loaded = .LOADED
+                self.chainUID = chain!.chainUID
                 for delegate in self.delegates.values{
                     delegate.chainDidLoad(chain: self)
                 }
@@ -143,22 +146,25 @@ class PostChain{
     
     /// Will post the chain from the object
     /// - Parameter err: if this returns nil, the post was successful
-    func post(error: @escaping (String?)->()){
-        if self.posts.count != 1{error("Error: You need 1 post in self.posts to upload the chain"); return}
-        
-        masterFire.db.collection("chains").document(self.chainID).setData(self.toDict(withPosts: false), merge: true) { (err1) in
-            if err1 != nil{error(err1!.localizedDescription); return}
-            self.append(image: self.posts[0].image!) { (err2, postedImage) in
-                if err2 != nil{error(err2); return}
-                self.posts[0] = postedImage!    //This will now have the link
-                error(nil)
+    func post(image: UIImage, error: @escaping (String?)->()){
+        //if self.posts.count != 1{error("Error: You need 1 post in self.posts to upload the chain"); return}
+        let docRef = Firestore.firestore().collection("chains").document().documentID
+        print(docRef)
+        self.chainUID = docRef
+        masterFire.db.collection("chains").document(docRef).setData(self.toDict(withPosts: false)) { (err1) in
+            if err1 != nil{error(err1!.localizedDescription); return} else {
+                //DocumentReference
+                self.append(image: image) { (err2, postedImage) in
+                    if err2 != nil{error(err2); return}
+                }
+                
             }
         }
     }
     
     func append(image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainID)
+        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUID)
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -174,16 +180,21 @@ class PostChain{
                 let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
                 let dict = uploadImage.toDict()
                 //Add to sub-collection
-                let postRef = Firestore.firestore().collection("chains").document(self.chainID).collection("posts")
+                let postRef = Firestore.firestore().collection("chains").document(self.chainUID).collection("posts")
                 postRef.addDocument(data: dict) { (error) in
                     if let err = error {
                         print("Error when adding doc: \(err)")
                         print("Localized Desc.: \(err.localizedDescription)")
                     } else {
                         print("Success appending image")
-                        masterFire.updateFriendsFeed(chain: self) { (error) in
+                        //self.posts.append(uploadImage)
+                        masterNav.popViewController(animated: false)
+                        let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+                        chainVC.mainChain = self
+                        masterNav.pushViewController(chainVC, animated: true)
+                        /* masterFire.updateFriendsFeed(chain: self) { (error) in
                             
-                        }
+                        } */
                     }
                 }
                 

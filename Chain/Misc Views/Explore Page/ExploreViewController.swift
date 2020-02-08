@@ -25,7 +25,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             //Reload bottom collection view
             print("Reloading bottom collection view to show Friend's feed")
             loadUserFeed { (chains) in
-                self.otherChains = chains
+                self.topChains = chains
                 print("Retrieved User Feed")
                 self.collectionViewA.reloadData() //A is bottom collection view
             }
@@ -34,7 +34,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             //Reload bottom collection view
             print("Reloading bottom collection view to show Global feed")
             loadGlobalChainsID { (chains) in
-                self.otherChains = chains
+                self.topChains = chains
                 print("Retrieved Global Feed")
                 self.collectionViewA.reloadData()
             }

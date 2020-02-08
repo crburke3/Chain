@@ -3,10 +3,26 @@
    version = "1.0">
    <ContextStates>
       <ContextState
-         contextName = "closure #1 in closure #1 in closure #1 in EditProfileViewController.uploadImage(image:completion:):EditProfileViewController.swift">
+         contextName = "closure #1 in closure #1 in EditProfileViewController.changedInfo():EditProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "currentProfilePhotoURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ExploreViewController.viewDidLoad():ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "globalChains.count">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ExploreViewController.switchFeedsAction(_:):ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "otherChains">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -19,34 +35,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
+         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
          <PersistentStrings>
             <PersistentString
                value = "photoEditor">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "profile.user">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentUser">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in closure #1 in EditProfileViewController.changedInfo():EditProfileViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "currentProfilePhotoURL">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -62,10 +54,10 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in ExploreViewController.viewDidLoad():ExploreViewController.swift">
+         contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "globalChains.count">
+               value = "photoEditor">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -73,10 +65,18 @@
          contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
       </ContextState>
       <ContextState
-         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
+         contextName = "closure #1 in closure #1 in closure #1 in EditProfileViewController.uploadImage(image:completion:):EditProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "photoEditor">
+               value = "currentProfilePhotoURL">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentUser">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -85,6 +85,14 @@
          <PersistentStrings>
             <PersistentString
                value = "currentUser.profile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profile.user">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

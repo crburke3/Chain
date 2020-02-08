@@ -38,6 +38,7 @@ class ChainFireStore {
     //Will be deprecated later, just for use during testing
     //Added "index" so once chain is loaded it starts in the correct spot
     func loadChain(chainID:String, chain: @escaping (PostChain?)->()){
+        print(chainID)
         let ref = Firestore.firestore().collection("chains").document(chainID)
         ref.getDocument { (snap, err) in
             if err == nil{
@@ -206,8 +207,11 @@ class ChainFireStore {
                 
             }
             currentUser.getFriends()
-            let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-            mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+            
+            //let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
+            let mainVC = ExploreViewController()
+            //mainVC.mainChain = PostChain(chainID: "firstChain", load: true)
+            //mainVC.mainChain.chainUID = "firstChain"
             masterNav.pushViewController(mainVC, animated: true) //Push MainChain
             }
         }

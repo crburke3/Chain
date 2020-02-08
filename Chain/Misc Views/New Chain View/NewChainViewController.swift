@@ -41,6 +41,8 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     var s: CGFloat = 0
     var b: CGFloat = 0
 
+    var functionCounter: Int = 0
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
@@ -56,7 +58,8 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     }
     
     func didFinishImage(image: UIImage) {
-        cameraVC.dismiss(animated: true, completion: nil)
+        postImageView.image = image
+        masterNav.popViewController(animated: true)
     }
 
     @IBAction func cancelPressed(_ sender: Any) {
@@ -71,27 +74,31 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     
     func willPostChain(){
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.loop)
-        let name = chainTitleField.text!
-        let death = Date().add(days: 1)
-        let tempTags = tagsField.text!.split(separator: " ")
-        var tags:[String] = []
-        for tag in tempTags{
-            tags.append(String(tag))
-        }
-        let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
-        if postImageView.image == nil{
-            postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
-        }else{
-            postChain.posts.append(ChainImage(image: postImageView.image!))
-        }
-        postChain.post { (err) in
-            self.animationView.stop()
-            if err != nil{
-                self.animateCancel()
-                self.showPopUp(_title: "Error Posting Chain", _message: err!)
+        functionCounter += 1
+        print("\(functionCounter) Number of Times")
+        if functionCounter == 1 {
+            let name = chainTitleField.text!
+            let death = Date().add(days: 4)
+            let tempTags = tagsField.text!.split(separator: " ")
+            var tags:[String] = []
+            for tag in tempTags{
+                tags.append(String(tag))
+            }
+            let postChain = PostChain(_chainID: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
+            if postImageView.image == nil{
+                postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
             }else{
-                masterNav.popViewController(animated: false)
-                masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+                postChain.posts.append(ChainImage(image: postImageView.image!))
+            }
+            postChain.post(image: postImageView.image ?? UIImage()) { (err) in
+                self.animationView.stop()
+                if err != nil{
+                    self.animateCancel()
+                    self.showPopUp(_title: "Error Posting Chain", _message: err!)
+                }else{
+                    masterNav.popViewController(animated: false)
+                    masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+                }
             }
         }
     }

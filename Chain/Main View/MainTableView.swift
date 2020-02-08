@@ -19,6 +19,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     //
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
+        //
         let post = mainChain.posts[indexPath.row]
         cell.user.text = post.user
         cell.imgView.image = post.image
@@ -40,7 +41,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
         //cell.profilePic.imageView?.kf.setImage(with: <#T##ImageDataProvider?#>)
         switch post.loadState{
         case .NOT_LOADED:
-            post.load()
+            post.load() //If cell hasn't been loaded yet, then query post from Firestore
         case .LOADING:
             break
         case .LOADED:
@@ -82,5 +83,8 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
             print("Menu not set yet")
         }
     }
+    //Currently posts are in dict and don't need to be queried
+    //Switching to sub-collection and posts need to be queried as their respective cells become visible
+    
     
 }

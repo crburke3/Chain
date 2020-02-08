@@ -41,7 +41,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        createSendButton()
+        //createSendButton()
+        fanMenuSetUp()
         view.bringSubviewToFront(fanMenu)
         cameraVC.delegate = self
         tableView.delegate = self
@@ -50,7 +51,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             self.reloadChain()
         }
         self.reloadChain()
-        fanMenuSetUp()
         let url = URL(string: currentUser.profile ?? "")
         profileView.kf.setImage(with: url)
         profileView.layer.borderWidth = 1
