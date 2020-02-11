@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 import FirebaseStorage
+import Firebase
 
 class ChainImage{
     
@@ -16,7 +17,7 @@ class ChainImage{
     var user:String
     var userProfile:String
     var userPhone:String
-    var time:String
+    var time:Date
     var image:UIImage?
     var loadState = LoadState.NOT_LOADED
     var delegate:ChainImageDelegate?
@@ -30,7 +31,7 @@ class ChainImage{
         self.user = user
         self.userProfile = userProfile
         self.userPhone = userPhone
-        self.time = Date().toChainString() //Convert to string
+        self.time = Date() //Convert to string
     }
     
     /// Local Init, the user will need to be very careful using this. Make sure you upload it to the chain
@@ -40,7 +41,7 @@ class ChainImage{
         self.image = image
         self.link = ""
         self.user = ""
-        self.time = Date().toChainString()
+        self.time = Date()
         self.userPhone = ""
         self.userProfile = ""
     }
@@ -52,7 +53,7 @@ class ChainImage{
         if (dict["user"] as? String) == nil{return nil}
 
         self.link = dict["Link"] as! String
-        self.time = dict["Time"] as! String
+        self.time = (dict["Time"] as! Timestamp).dateValue()
         self.user = dict["user"] as! String
         self.userPhone = dict["userPhone"] as? String ?? ""
         self.userProfile = dict["userProfile"] as? String ?? ""

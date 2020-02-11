@@ -35,7 +35,12 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
         currentUser.phoneNumber = "+19802550653"
         currentUser.profile = "https://firebasestorage.googleapis.com/v0/b/chain-3ad1e.appspot.com/o/Fitwork%20Images%2FD2F69E6E-47D8-4307-A91F-C4E1A737B3B1?alt=media&token=4fbfa3b6-c775-4935-b1de-ab12e98c940b"
         currentUser.topPosts = []
-        //masterNav.pushViewController(SignInViewController(), animated: true)
+        //let x = 100
+       //let s = MemoryLayout.size(ofValue: x)
+        //let string = "aaabbccddeeffgghh"
+        //let object = MemoryLayout.size(ofValue: string)
+        //let size = MemoryLayout<PostChain>.size
+        //print("Size of number is \(size)")
         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
         //mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
         masterNav.pushViewController(mainVC, animated: true)

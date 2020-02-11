@@ -21,7 +21,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
         //
-        let post: ChainImage
+        let post = ChainImage(image: UIImage())
         
         //Get data from previous query then call the next
         

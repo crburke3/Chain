@@ -208,7 +208,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "90"
             endingLineNumber = "90"
-            landmarkName = "removeFromChain(chainID:post:completion:)"
+            landmarkName = "removeFromChain(chainName:post:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1248,7 +1248,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "42"
             endingLineNumber = "42"
-            landmarkName = "loadChain(chainID:chain:)"
+            landmarkName = "loadChain(chainName:chain:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1281,6 +1281,22 @@
             startingLineNumber = "66"
             endingLineNumber = "66"
             landmarkName = "collectionView(_:didSelectItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E33A3739-F3BD-4ECA-830A-DA8DC52F8661"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Chain/Authentication Views/FirstViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
+            landmarkName = "enterTapped(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

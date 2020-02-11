@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		68293A8323F30C1500A0D754 /* ChainCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68293A8223F30C1500A0D754 /* ChainCache.swift */; };
 		6848594423D62FC700AFEB7C /* ChainFriend.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6848594323D62FC700AFEB7C /* ChainFriend.swift */; };
 		6848594823D65C4200AFEB7C /* ChangePasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6848594623D65C4200AFEB7C /* ChangePasswordViewController.swift */; };
 		6848594923D65C4200AFEB7C /* ChangePasswordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6848594723D65C4200AFEB7C /* ChangePasswordViewController.xib */; };
@@ -87,6 +88,7 @@
 
 /* Begin PBXFileReference section */
 		2C5C4C2DF714C599B79C18A3 /* Pods-Chain.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Chain.debug.xcconfig"; path = "Target Support Files/Pods-Chain/Pods-Chain.debug.xcconfig"; sourceTree = "<group>"; };
+		68293A8223F30C1500A0D754 /* ChainCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCache.swift; sourceTree = "<group>"; };
 		6848594323D62FC700AFEB7C /* ChainFriend.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFriend.swift; sourceTree = "<group>"; };
 		6848594623D65C4200AFEB7C /* ChangePasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordViewController.swift; sourceTree = "<group>"; };
 		6848594723D65C4200AFEB7C /* ChangePasswordViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordViewController.xib; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 			isa = PBXGroup;
 			children = (
 				6848594323D62FC700AFEB7C /* ChainFriend.swift */,
+				68293A8223F30C1500A0D754 /* ChainCache.swift */,
 				FA7E36A3238DBB7600488000 /* enums.swift */,
 				68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */,
 				FA63C881238DF4CB00B30312 /* ChainAuth.swift */,
@@ -624,6 +627,7 @@
 				FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
 				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,
+				68293A8323F30C1500A0D754 /* ChainCache.swift in Sources */,
 				FA63C886238E07A400B30312 /* MainTableView.swift in Sources */,
 				FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */,
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,

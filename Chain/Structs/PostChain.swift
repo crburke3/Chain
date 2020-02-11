@@ -28,6 +28,7 @@ class PostChain{
     var delegates: [String:PostChainDelegate] = [:]
     var firstImageLink:String?
     var chainUUID:String = ""
+    var highestViewedIndex: Int = 0
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -268,6 +269,12 @@ class PostChain{
     
     func removeAllDelegates(){
         self.delegates = [:]
+    }
+    
+    func setHighestIndex(index: Int) {
+        if index > self.highestViewedIndex {
+            self.highestViewedIndex = index
+        }
     }
 }
 

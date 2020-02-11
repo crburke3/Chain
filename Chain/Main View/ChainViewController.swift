@@ -45,7 +45,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     override func viewDidLoad() {
         super.viewDidLoad()
         //
-        nextQuery = masterFire.db.collection("chains").document(mainChain.chainUID).collection("posts")
+        nextQuery = masterFire.db.collection("chains").document(mainChain.chainUUID).collection("posts")
             .order(by: "Time")
             .limit(to: 1)
 

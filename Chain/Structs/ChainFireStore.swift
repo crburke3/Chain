@@ -16,7 +16,7 @@ class ChainFireStore {
     //
     let locationManager = CLLocationManager()
     let db = Firestore.firestore()
-    var allChains:[String: PostChain] = [:]
+    var allChains:[PostChain] = []
     
     
 
@@ -39,14 +39,16 @@ class ChainFireStore {
     //Added "index" so once chain is loaded it starts in the correct spot
     func loadChain(chainName:String, chain: @escaping (PostChain?)->()){
         print(chainName)
-        let ref = Firestore.firestore().collection("chains").document(chainName)
-        ref.getDocument { (snap, err) in
-            if err == nil{
-                let snapData = snap!.data()!
-                chain(PostChain(dict: snapData))
-            }else{
-                chain(nil)
-            }
+        let ref = Firestore.firestore().collection("chains")
+        ref.whereField("chainUUID", isEqualTo: chainName).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        chain(PostChain(dict: document.data() as [String : Any]))
+                    }
+                }
         }
     }
     
