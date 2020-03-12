@@ -3,6 +3,36 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "post.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mainChain.posts[0].widthImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChainImage.init(dict:):ChainImage.swift">
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in closure #1 in EditProfileViewController.changedInfo():EditProfileViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -11,34 +41,13 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #2 in ExploreViewController.viewDidLoad():ExploreViewController.swift">
+         contextName = "closure #1 in closure #1 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "globalChains.count">
+               value = "cell.post">
             </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "closure #1 in ExploreViewController.switchFeedsAction(_:):ExploreViewController.swift">
-         <PersistentStrings>
             <PersistentString
-               value = "otherChains">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "UserMenuTableViewController.tableView(_:didSelectRowAt:):UserMenuTableViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "">
-            </PersistentString>
-         </PersistentStrings>
-      </ContextState>
-      <ContextState
-         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
-         <PersistentStrings>
-            <PersistentString
-               value = "photoEditor">
+               value = "mainChain.posts">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -54,6 +63,25 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "UserMenuTableViewController.tableView(_:didSelectRowAt:):UserMenuTableViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PostChain.loadPost(postSource:post:):PostChain.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.chainUUID">
+            </PersistentString>
+            <PersistentString
+               value = "lastReadBirthDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "PhotoEditorViewController.viewDidLoad():PhotoEditorViewController.swift">
          <PersistentStrings>
             <PersistentString
@@ -62,7 +90,31 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
+         contextName = "closure #1 in PostChain.loadPost(postSource:post:):PostChain.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "querySnapshot!.documents.count">
+            </PersistentString>
+            <PersistentString
+               value = "lastReadBirthDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "profile.user">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ExploreViewController.switchFeedsAction(_:):ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "otherChains">
+            </PersistentString>
+         </PersistentStrings>
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in EditProfileViewController.uploadImage(image:completion:):EditProfileViewController.swift">
@@ -73,10 +125,40 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
+         contextName = "PostChain.init(dict:):PostChain.swift">
          <PersistentStrings>
             <PersistentString
-               value = "currentUser">
+               value = "self.birthDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChainViewController.tableView(_:heightForRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "masterCache.allChains[0].posts.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.mainChain.posts[indexPath.row].heightImage">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "PhotoEditorViewController.setImageView(image:):PhotoEditorViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "photoEditor">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "masterCache.allChains[0].posts.count">
+            </PersistentString>
+            <PersistentString
+               value = "mainChain.posts[2].heightImage">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -89,10 +171,18 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
-         contextName = "ProfileViewController.viewDidLoad():ProfileViewController.swift">
+         contextName = "closure #1 in ChainViewController.viewDidLoad():ChainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "profile.user">
+               value = "mainChain.posts[1]">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #2 in ExploreViewController.viewDidLoad():ExploreViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "globalChains.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -64,6 +64,21 @@ class MainCell: UITableViewCell {
     }
     
     func cellDidLoad(){
-        
+        profilePicImage.layer.borderWidth = 1
+        profilePicImage.layer.masksToBounds = false
+        profilePicImage.layer.borderColor = UIColor.black.cgColor
+        profilePicImage.layer.cornerRadius = profilePicImage.frame.height/2
+        profilePicImage.clipsToBounds = true
+        profilePicImage.contentMode = .scaleAspectFill
     }
 }
+//Load Image? Might need to reload image if post is in cache but not image
+//cell.imgView.roundCorners(corners: [.allCorners], radius: 5)
+//cell.row = indexPath.row
+//cell.post = self.mainChain.posts[indexPath.row]
+//let urlProfile = URL(string: self.mainChain.posts[indexPath.row].userProfile)
+//cell.profilePicImage?.kf.setImage(with: urlProfile)
+//cell.phone = self.mainChain.posts[indexPath.row].userPhone
+//cell.share.tag = indexPath.row
+//cell.share.addTarget(self, action: #selector(ChainViewController.buttonClicked(sender:)), for: UIControl.Event.touchUpInside)
+//cell.backView.addShadow()

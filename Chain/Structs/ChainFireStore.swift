@@ -35,55 +35,6 @@ class ChainFireStore {
         }
     }
     
-    //Will be deprecated later, just for use during testing
-    //Added "index" so once chain is loaded it starts in the correct spot
-    func loadChain(chainName:String, chain: @escaping (PostChain?)->()){
-        print(chainName)
-        let ref = Firestore.firestore().collection("chains")
-        ref.whereField("chainUUID", isEqualTo: chainName).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        chain(PostChain(dict: document.data() as [String : Any]))
-                    }
-                }
-        }
-    }
-    
-    //Added
-    /*
-    func appendChain(chainName: String, image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
-        var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(chainName)
-        let data = image.jpegData(compressionQuality: 1.0)!
-        let imageName = UUID().uuidString
-        let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
-        let metaDataForImage = StorageMetadata() //
-        metaDataForImage.contentType = "image/jpeg" //
-        imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
-            if err1 != nil {completion("Error uploading to cloud: \(err1!.localizedDescription)", nil); return}
-            imageReference.downloadURL(completion: { (url, err2) in
-                if err2 != nil {completion("Error getting URL", nil); return}
-                if url == nil {completion("Error loading URL", nil); return}
-                urlString = url!.absoluteString //Hold URL
-                print(urlString)
-                let uploadImage = ChainImage(link: urlString, user: "mbrutkow", image: image)
-                firestoreRef.updateData([
-                    "posts": FieldValue.arrayUnion([uploadImage.toDict()]), "count": FieldValue.increment(Int64(1))
-                ]) { (err1) in
-                    if let error1 = err1{
-                        masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
-                        completion(error1.localizedDescription, nil)
-                    } else{
-                        completion(nil, uploadImage)
-                    }
-                   }
-                })
-            }
-    }
-    */
     func removeFromChain(chainName: String, post:[String:Any], completion: @escaping (String?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
         let firestoreRef = Firestore.firestore().collection("chains").document(chainName)
@@ -237,7 +188,7 @@ class ChainFireStore {
     func reportImage(chainName: String, image: ChainImage, error: @escaping (String?)->()) {
         //Create and upload doc
         var ref: DocumentReference? = nil
-        ref = db.collection("reportedPosts").addDocument(data: image.toDict()) { err in
+        ref = db.collection("reportedPosts").addDocument(data: image.toDict(height: image.heightImage, width: image.widthImage)) { err in
             if let err = err {
                 print("Error Reporting: \(err)")
             } else {

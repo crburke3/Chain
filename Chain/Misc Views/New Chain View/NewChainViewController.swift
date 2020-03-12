@@ -90,7 +90,7 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             }else{
                 postChain.posts.append(ChainImage(image: postImageView.image!))
             }
-            postChain.post(image: postImageView.image ?? UIImage()) { (err) in
+            postChain.append(image: postImageView.image ?? UIImage(), source: "general") { (err, imageUploaded) in
                 self.animationView.stop()
                 if err != nil{
                     self.animateCancel()

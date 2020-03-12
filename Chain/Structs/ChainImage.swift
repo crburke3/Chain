@@ -22,10 +22,12 @@ class ChainImage{
     var loadState = LoadState.NOT_LOADED
     var delegate:ChainImageDelegate?
     var localIndex:Int = 0
+    var widthImage:CGFloat = 0.0
+    var heightImage:CGFloat = 0.0
     
     //When created by user locally after image is uploaded
     init(link:String, user:String, userProfile:String, userPhone:String, image:UIImage){
-        self.loadState = .LOADED
+        self.loadState = .NOT_LOADED
         self.image = image
         self.link = link
         self.user = user
@@ -49,7 +51,7 @@ class ChainImage{
     //When pulled from firestore
     init?(dict:[String:Any]){
         if (dict["Link"] as? String) == nil{return nil}
-        if (dict["Time"] as? String) == nil{return nil}
+        if (dict["Time"] as? Timestamp) == nil{return nil}
         if (dict["user"] as? String) == nil{return nil}
 
         self.link = dict["Link"] as! String
@@ -57,24 +59,34 @@ class ChainImage{
         self.user = dict["user"] as! String
         self.userPhone = dict["userPhone"] as? String ?? ""
         self.userProfile = dict["userProfile"] as? String ?? ""
+        self.widthImage = CGFloat(dict["width"] as? Double ?? 400.0)
+        self.heightImage = CGFloat(dict["height"] as? Double ?? 400.0)
+        self.loadState = .NOT_LOADED
     }
     
-    func toDict()->[String:Any]{
-        let retDict:[String:Any] = ["Link": self.link,
-                                    "Time": self.time,
-                                    "user": self.user,
-                                    "userProfile": self.userProfile,
-                                    "userPhone": self.userPhone]
+    func toDict(height: CGFloat, width: CGFloat)->[String:Any]{
+        self.widthImage = width
+        self.heightImage = height
+        let retDict:[String:Any] = ["Link": self.link, "Time": self.time, "user": self.user, "userProfile": self.userProfile, "userPhone": self.userPhone, "index": self.localIndex, "width": self.widthImage, "height": self.heightImage]
+        
         return retDict
     }
     
-    func load(){
+    
+    
+    func load(){ //Switch to Kingfisher
         if (loadState == .LOADING) || (loadState == .LOADED){
             return
         }
         //firestore pull initialization
         self.loadState = .LOADING
+        let url = URL(string: self.link)
+        //imageView.kf.setImage(with: url)
         //print("Downloading: \(self.link)")
+        //self.loadState = .LOADED
+        self.delegate?.imageDidLoad(chainImage: self)
+        //
+        /*
         if let url =  URL(string: self.link){
             getData(from: url) { data, response, error in
                 guard let data = data, error == nil else { return }
@@ -92,7 +104,7 @@ class ChainImage{
         }else{
             print("Failed URL conversion: \(self.link)")
         }
-        
+        */
     }
     
     

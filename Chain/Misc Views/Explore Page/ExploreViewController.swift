@@ -25,7 +25,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             //Reload bottom collection view
             print("Reloading bottom collection view to show Friend's feed")
             loadUserFeed { (chains) in
-                self.topChains = chains
+                self.otherChains = chains
                 print("Retrieved User Feed")
                 self.collectionViewA.reloadData() //A is bottom collection view
             }
@@ -33,8 +33,8 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             switchFeeds.setTitle("Switch to Friend's Feed", for: .normal)
             //Reload bottom collection view
             print("Reloading bottom collection view to show Global feed")
-            loadGlobalChainsID { (chains) in
-                self.topChains = chains
+            loadUserFeed { (chains) in
+                self.otherChains = chains
                 print("Retrieved Global Feed")
                 self.collectionViewA.reloadData()
             }
@@ -58,6 +58,12 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         collectionViewB.dataSource = self
         collectionViewB.delegate = self
         
+        loadUserFeed { (chains) in
+            self.otherChains = chains
+            print("Retrieved User Feed")
+            self.collectionViewA.reloadData() //A is bottom collection view
+        }
+        /*
         loadTopChainIDs { (topChainIDs) in
             var chainCount = 0
             for chainName in topChainIDs{
@@ -68,10 +74,10 @@ class ExploreViewController: UIViewController, PostChainDelegate {
                 chainCount += 1
             }
             self.collectionViewA.reloadData()
-        }
+        } */
         
         loadGlobalChainsID { (postChains) in
-            self.otherChains = postChains
+            self.topChains = postChains
             //chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
             //self.globalChains.append(chain)
             self.collectionViewB.reloadData()

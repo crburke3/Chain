@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import MapKit
 
+var masterCache = ChainCache()
 var masterNav:UINavigationController!
 var masterStoryBoard:UIStoryboard!
 var masterAuth = ChainAuth()

@@ -17,7 +17,7 @@ extension ChainViewController{
         let message = "Select one of the actions below or press cancel"
         var postUser = ""
         let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
-        let givenPost = givenCell.post.toDict() as [String:Any]
+        let givenPost = givenCell.post.toDict(height: post_image.size.height, width: post_image.size.width) as [String:Any]
         postUser = givenPost["user"] as! String
         let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
@@ -115,7 +115,8 @@ extension ChainViewController{
  
     
     func reloadChain(){
-        mainChain.load { (err) in
+        /*
+        mainChain.loadPost { (err) in
             if err != nil{
                 print(err!); return
             }
@@ -126,6 +127,7 @@ extension ChainViewController{
             self.tableView.reloadData()
             self.tableView.cr.endHeaderRefresh()
         }
+         */
     }
     
     func fanMenuSetUp() {

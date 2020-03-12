@@ -19,6 +19,9 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
 
     var lastDoc: QueryDocumentSnapshot?
     var nextQuery: Query?
+    var counter: Int = 0 //Remove
+    var chainSource = "" //Should be either Global or Regular
+    //Aspect Ratio array
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
@@ -44,25 +47,14 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //
-        nextQuery = masterFire.db.collection("chains").document(mainChain.chainUUID).collection("posts")
-            .order(by: "Time")
-            .limit(to: 1)
-
-        nextQuery?.addSnapshotListener { (snapshot, error) in
-            guard let snapshot = snapshot else {
-                print("Error retreving post: \(error.debugDescription)")
-                return
+        mainChain.loadPost(postSource: chainSource) { (post) in //chainSource -> global or general
+            if self.mainChain.posts.count == 0 {
+                self.mainChain.posts.append(post)
+                //self.mainChain.posts[0].widthImage = 400
+                //self.mainChain.posts[0].heightImage = 400
+                self.tableView.reloadData()
             }
-
-            guard let lastSnapshot = snapshot.documents.last else {
-                // The collection is empty.
-                return
-            }
-            self.lastDoc = lastSnapshot
         }
-        //
-        //createSendButton()
         fanMenuSetUp()
         view.bringSubviewToFront(fanMenu)
         cameraVC.delegate = self
@@ -80,6 +72,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         profileView.layer.cornerRadius = profileView.frame.height/2
         profileView.clipsToBounds = true
         profileView.contentMode = .scaleAspectFill
+        
         
     }
     
@@ -102,7 +95,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     func didFinishImage(image: UIImage) {
         print("Appending Chain")
         cameraVC.dismiss(animated: true, completion: nil)
-        mainChain.append(image: image) { (err, finalImage) in
+        mainChain.append(image: image, source: self.chainSource) { (err, finalImage) in
             if err != nil{ return}  //Will show popups automatically
             print("Chain appended!")
         }

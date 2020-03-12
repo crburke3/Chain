@@ -28,7 +28,7 @@ class PostChain{
     var delegates: [String:PostChainDelegate] = [:]
     var firstImageLink:String?
     var chainUUID:String = ""
-    var highestViewedIndex: Int = 0
+    var lastReadBirthDate =  Date(timeIntervalSinceReferenceDate: -123456789.0) //Keeps track of last read cell, acts as a cursor for pagination
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -57,28 +57,24 @@ class PostChain{
         self.coordinate = CLLocationCoordinate2D()
         self.posts = []
         self.loaded = .NOT_LOADED
-        if load{
-            self.load { (error) in
-                if error != nil{ print("Failed loading chain \(self.chainName): \(error!)")}
-            }
-        }
     }
     
     init(dict:[String:Any]){
         self.chainName = dict["chainName"] as! String   //want this to fail if it doesnt exist
         self.chainUUID = dict["chainUUID"] as! String 
-        self.birthDate = Date(chainString: dict["birthDate"] as! String)
-        self.deathDate = Date(chainString: dict["deathDate"] as! String)
+        self.birthDate = (dict["birthDate"] as! Timestamp).dateValue()
+        self.deathDate = (dict["deathDate"] as! Timestamp).dateValue()
         self.likes = dict["likes"] as! Int
         self.count = dict["count"] as! Int
         self.tags = dict["tags"] as? [String] ?? []
         self.contributors = dict["contributors"] as? [String] ?? []
-        let postsData = dict["posts"] as? [[String:Any]] ?? []
-        for postData in postsData{
+        //Posts will be appended to chain object from sub-collection seperately
+        //let postsData = dict["posts"] as? [[String:Any]] ?? []
+        /* for postData in postsData{
             if let img = ChainImage(dict: postData){
                 self.posts.append(img)
             }
-        }
+        } */
         self.loaded = .LOADED
         let latLong = dict["l"] as? [Double] ?? [0.0, 0.0]
         self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
@@ -115,60 +111,48 @@ class PostChain{
         var postsData:[[String:Any]] = []
         var index = 0
         for post in self.posts{
-            postsData.append(post.toDict())
+            //postsData.append(post.toDict())
             self.posts[index].localIndex = index
             index += 1
         }
         return postsData
     }
     
-    func load(error: @escaping ((String?)->())){
-        //self.chainUUID = "firstChain"
-        if chainUUID.count < 1{error("invalid chain UID"); return}
-        masterFire.loadChain(chainName: self.chainUUID) { (chain) in
-            if chain != nil{
-                self.birthDate = chain!.birthDate
-                self.deathDate = chain!.deathDate
-                self.likes = chain!.likes
-                self.count = chain!.count
-                self.tags = chain!.tags
-                self.contributors = chain!.contributors
-                self.coordinate = chain!.coordinate
-                self.posts = chain!.posts
-                self.firstImageLink = chain!.firstImageLink
-                self.loaded = .LOADED
-                self.chainUUID = chain!.chainUUID
-                for delegate in self.delegates.values{
-                    delegate.chainDidLoad(chain: self)
-                }
-                error(nil)
-            }else{
-                error("Error loading")
-            }
+    func loadPost(postSource: String, post: @escaping (ChainImage)->()){
+        //chainSource -> global or general
+        let aTimestamp = Timestamp(date: self.lastReadBirthDate)
+        print(lastReadBirthDate)
+        var postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
+        switch postSource {
+            case "global":
+                postRef = masterFire.db.collection("globalFeed").document(self.chainUUID).collection("posts")
+                break
+            case "general": //For user feed and general
+                postRef = masterFire.db.collection("chains").document("umsIv3SnQolqT6nCCW8o").collection("posts")
+                break
+            default: break
         }
-    }
-    
-    /// Will post the chain from the object
-    /// - Parameter err: if this returns nil, the post was successful
-    func post(image: UIImage, error: @escaping (String?)->()){
-        //if self.posts.count != 1{error("Error: You need 1 post in self.posts to upload the chain"); return}
-        let docRef = Firestore.firestore().collection("chains").document().documentID
-        print(docRef)
-        self.chainUUID = docRef
-        masterFire.db.collection("chains").document(docRef).setData(self.toDict(withPosts: false)) { (err1) in
-            if err1 != nil{error(err1!.localizedDescription); return} else {
-                //DocumentReference
-                self.append(image: image) { (err2, postedImage) in
-                    if err2 != nil{error(err2); return}
-                }
+        //Get next document/post
+        postRef.whereField("Time", isGreaterThan: aTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    for document in querySnapshot!.documents {
+                        print("\(document.documentID) => \(document.data())")
+                        print(document.get("user") as! String)
+                        self.lastReadBirthDate = (document.get("Time") as? Timestamp)?.dateValue() ?? Date()
+                        post(ChainImage(dict: document.data() as [String : Any])!)
                 
-            }
+                    }
+                }
+            post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage())) //Empty post, needs error image
         }
+        
     }
     
-    func append(image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
+    func append(image:UIImage, source:String, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
-        let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUUID)
+        //let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -182,9 +166,19 @@ class PostChain{
                 urlString = url!.absoluteString //Hold URL
                 print(urlString)
                 let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
-                let dict = uploadImage.toDict()
+                //Set index of uploadImage
+                let dict = uploadImage.toDict(height: image.size.height, width: image.size.width)
                 //Add to sub-collection
-                let postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
+                print("Appending to this chain: \(self.chainUUID)")
+                self.chainUUID = "umsIv3SnQolqT6nCCW8o" //Hard coded
+                var postRef: CollectionReference
+                //Function to set postRef based on source
+                if source == "general" {
+                    postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
+                } else {
+                    postRef = Firestore.firestore().collection("globalFeed").document(self.chainUUID).collection("posts")
+                }
+                
                 postRef.addDocument(data: dict) { (error) in
                     if let err = error {
                         print("Error when adding doc: \(err)")
@@ -208,50 +202,11 @@ class PostChain{
     
     private var listener: ListenerRegistration?
     private var hasLoadedInitial = false
-    func listenForChanges(ignoreFirst:Bool = true){
+    
+    func listenForChanges(ignoreFirst:Bool = true){ //Needs to be updated
         let chainRef = Firestore.firestore().collection("chains").document(self.chainName)
         listener = chainRef.addSnapshotListener { (snap, err) in
-            if snap == nil{ return}
-            if err != nil{print("error in snaplistener"); return}
-            if ignoreFirst && !self.hasLoadedInitial{ self.hasLoadedInitial = true; return}
-            
-            let data = snap!.data()!
-            let newChain = PostChain(dict: data)
-            
-            var newPost:ChainImage?
-            var postDict:[String:ChainImage] = [:]
-            for post in self.posts{
-                postDict[post.link] = post
-            }
-            for post in newChain.posts{
-                if postDict[post.link] == nil{
-                    //Theres a new post!
-                    newPost = post
-                    postDict[post.link] = post
-                }
-            }
-            
-            let sortedPosts = postDict.sorted { $0.value.localIndex < $1.value.localIndex }
-            var finalPosts:[ChainImage] = []
-            var postCount = 0
-            for post in sortedPosts{
-                let tempPost = post.value
-                tempPost.localIndex = postCount
-                finalPosts.append(tempPost)
-                if newPost != nil{
-                    if tempPost.link == newPost!.link{
-                        newPost!.localIndex = postCount
-                    }
-                }
-                postCount += 1
-            }
-            self.posts = finalPosts
-            if newPost != nil{
-                for delegate in self.delegates.values{
-                    delegate.chainGotNewPost(post: newPost!)
-                }
-            }
-            self.hasLoadedInitial = true
+            //Use listener to update chains as people post
         }
     }
     
@@ -271,9 +226,9 @@ class PostChain{
         self.delegates = [:]
     }
     
-    func setHighestIndex(index: Int) {
-        if index > self.highestViewedIndex {
-            self.highestViewedIndex = index
+    func setHighestIndex(birthDate: Date) {
+        if birthDate > self.lastReadBirthDate {
+            self.lastReadBirthDate = birthDate
         }
     }
 }

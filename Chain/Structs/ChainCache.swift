@@ -17,6 +17,7 @@ class ChainCache {
     var cachePostLimit: Int = 40000 //Assuming each document is under 500 bytes
     //This will lead to around 20 Mb of data @ 40K posts
     //Seperate pod will handle image cacheing
+    var cacheByteLimit: Int = 25000000 //25 Mb
     
     
     init() {
@@ -29,18 +30,19 @@ class ChainCache {
                 return true
             }
         }
+        addChainToCache(chain: requestedChain)
         return false
     }
     
-    func postAlreadyLoaded(chainUUID: String, index: Int) -> Bool {
-        var chainIndex: Int = 0
+    func postAlreadyLoaded(chainUUID: String, birthDate: Date) -> Bool {
+        /* var chainIndex: Int = 0
         for chain in allChains {
             if chainUUID == chain.chainUUID {
                 break
             }
             chainIndex += 1
-        }
-        if allChains[chainIndex].highestViewedIndex <= index {
+        } */
+        if self.allChains[0].lastReadBirthDate >= birthDate {
             return true
         }
         return false
@@ -71,15 +73,35 @@ class ChainCache {
         return
     }
     
+    func addChainToCache(chain: PostChain) {
+            self.allChains.append(chain)
+            checkSizeOfChain()
+    }
+    
+    func addPostToCache(chainUUID: String, birthDate: Date, post: ChainImage) {
+        //Viewed chain should be in first index of allChains
+        if !postAlreadyLoaded(chainUUID: chainUUID, birthDate: birthDate) {
+            self.allChains[0].posts.append(post)
+            self.allChains[0].lastReadBirthDate = post.time
+            self.sizeInPosts += 1
+            self.checkSizeOfChain()
+        }
+    }
     func deleteOldChain() {
         //Options:
+        print("Freeing up space in cache")
         //  Delete posts until size is moderate
         //  Delete entire chains as a whole
     }
     
-    func getSizeOfChain()  {
+    func checkSizeOfChain()  {
         //Update post and byte counts
-        
+        //300 is estimated size of Chain
+        //500 is estimated size of Post
+        self.sizeInBytes = (self.sizeInPosts*500) + (self.allChains.count*300)
+        if (self.sizeInBytes > self.cacheByteLimit || self.sizeInPosts > self.cachePostLimit) {
+            deleteOldChain()
+        }
     }
     
     func updateLimits() {
