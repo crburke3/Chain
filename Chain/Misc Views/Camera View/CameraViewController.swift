@@ -18,6 +18,8 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     @IBOutlet var imageView: UIImageView!
     @IBOutlet var cameraButton: UIButton!
     @IBOutlet var photosButton: UIButton!
+    @IBOutlet weak var flipCameraButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     let imagePicker = UIImagePickerController()
     let session = CKFPhotoSession()
@@ -30,9 +32,26 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
         constrainPreviewView()
         previewView.session = session
         cameraButton.isHidden = false
-        view.bringSubviewToFront(cameraButton)
+        photosButton.isHidden = false
+        flipCameraButton.isHidden = false
+        backButton.isHidden = false
         view.bringSubviewToFront(photosButton)
+        view.bringSubviewToFront(cameraButton)
+        view.bringSubviewToFront(flipCameraButton)
+        view.bringSubviewToFront(backButton)
+        //view.bringSubviewToFront(photosButton)
     }
+    
+    @IBAction func goBack(_ sender: Any) {
+        masterNav.popViewController(animated: true)
+    }
+
+    @IBAction func flipCamera(_ sender: Any) {
+        //
+        session.togglePosition()
+        print("Flipping camera")
+    }
+    
     
     @IBAction func tappedPhotos(_ sender: Any) {
         imagePicker.sourceType = UIImagePickerController.SourceType.photoLibrary

@@ -15,7 +15,22 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
-        //Check to see if masterCache.allChains[0].posts[indexPath.row] exists
+        cell.backView.addShadow() //Custom function defined in extension
+        
+        if (indexPath.row == (self.mainChain.posts.count - 1)) && (mainChain.posts.count != 1) {
+            //Load a post(s)
+            
+             if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
+                                   mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
+                                       if (post.link != "noLink") {
+                                           self.mainChain.posts.append(post)
+                                           self.mainChain.posts.last?.loadState = .LOADED
+                                           self.tableView.reloadData()
+                                       }
+                                   }
+            } 
+        }
+        
         if (masterCache.allChains[0].posts.count <= (indexPath.row + 1)) {
             switch mainChain.posts[indexPath.row].loadState {
                 case .NOT_LOADED:
@@ -24,32 +39,41 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     }
                     cell.post = mainChain.posts[indexPath.row] //Should use post to extract all needed infromation for image
                     //Don't call Firestore if already in cache
-                    mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
-                        if (post.link != "noLink") {
-                            self.mainChain.posts.append(post)
-                            //self.mainChain.posts[indexPath.row].heightImage //Get heigh and width of image
-                            let url = URL(string: self.mainChain.posts[indexPath.row].link) //Need to store dimensions in Firestore doc
-                            cell.imgView.kf.setImage(with: url) { result in
-                                switch result {
-                                case .success(let value):
+                    print(self.tableView.indexPathsForVisibleRows?.last?.row) //Prints highest value
                     
-                                    break
-                                case .failure(let error):
-                                    print(error)
-                                    break
-                                }
+                    if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
+                        mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
+                            if (post.link != "noLink") {
+                                self.mainChain.posts.append(post)
+                                self.mainChain.posts.last?.loadState = .LOADED
+                                self.tableView.reloadData()
                             }
-                            //
-                            self.mainChain.posts[indexPath.row].loadState = .LOADED
-                            self.tableView.reloadData()
+                        }
+                    } else {
+                        print("L")
                     }
-                }
                     break
                 case .LOADING:
+                    //
+                    cell.post = mainChain.posts[indexPath.row]
+                    mainChain.posts[indexPath.row].loadState = .LOADED
                     break
                 case .LOADED:
                     cell.isPostLoaded = true
+                    break
             }
+            var url = URL(string: self.mainChain.posts[indexPath.row].link) //Need to store dimensions in Firestore doc
+            print("At \(indexPath.row) use \(self.mainChain.posts[indexPath.row].link)")
+            cell.imgView.kf.setImage(with: url) { result in
+            switch result {
+                case .success(let value):
+                    break
+                case .failure(let error):
+                    print(error)
+                    break
+                }
+            }
+            cell.user.text = self.mainChain.posts[indexPath.row].user
             return cell
         } else { //In cahce, load cell from cache
              let url = URL(string: self.mainChain.posts[indexPath.row].link) //Need to store dimensions in Firestore doc
@@ -62,6 +86,9 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                         break
                     }
                 }
+            
+            print("At \(indexPath.row) use \(self.mainChain.posts[indexPath.row].link)")
+            cell.user.text = self.mainChain.posts[indexPath.row].user
             return cell
         }
         

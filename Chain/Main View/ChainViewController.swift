@@ -21,7 +21,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     var nextQuery: Query?
     var counter: Int = 0 //Remove
     var chainSource = "" //Should be either Global or Regular
-    //Aspect Ratio array
+    let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
@@ -44,6 +44,11 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         }
     }
     let cameraVC = CameraViewController()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.mainChain.posts.last?.loadState = .LOADING
+        self.tableView.reloadData() //Reload rows and scroll to bottom returning from posting
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -88,17 +93,17 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     @IBAction func plusClicked(_ sender: Any) {
         //Load Global Object
         cameraVC.chainName = self.mainChain.chainName //Get chain ID from chain being viewed
-        self.present(cameraVC, animated: true)
+        //self.present(cameraVC, animated: true)
+        masterNav.pushViewController(cameraVC, animated: true)
     }
     
     //Called when the camera view arrow has been tapped
     func didFinishImage(image: UIImage) {
         print("Appending Chain")
-        cameraVC.dismiss(animated: true, completion: nil)
         mainChain.append(image: image, source: self.chainSource) { (err, finalImage) in
             if err != nil{ return}  //Will show popups automatically
-            print("Chain appended!")
         }
+        
     }
     
     func imageDidLoad(chainImage: ChainImage) {

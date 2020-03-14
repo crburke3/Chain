@@ -21,6 +21,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionViewA {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExplorePageCell", for: indexPath) as! ExplorePageCell
+            cell.roundView.addShadow() //Custom function defined in extensions
             let chain = otherChains[indexPath.row]
             if chain.loaded == .LOADED{
                 //cell.loadingView.isHidden = true

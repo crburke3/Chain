@@ -6,6 +6,9 @@
          contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
          <PersistentStrings>
             <PersistentString
+               value = "self.tableView.indexPathsForVisibleRows?.last?.row">
+            </PersistentString>
+            <PersistentString
                value = "currentUser">
             </PersistentString>
          </PersistentStrings>
@@ -13,6 +16,9 @@
       <ContextState
          contextName = "closure #2 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
          <PersistentStrings>
+            <PersistentString
+               value = "self.tableView.indexPathsForVisibleRows?.last?.row">
+            </PersistentString>
             <PersistentString
                value = "post.user">
             </PersistentString>
@@ -22,7 +28,7 @@
          contextName = "closure #1 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
          <PersistentStrings>
             <PersistentString
-               value = "mainChain.posts[0].widthImage">
+               value = "mainChain.posts">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -48,6 +54,9 @@
             </PersistentString>
             <PersistentString
                value = "mainChain.posts">
+            </PersistentString>
+            <PersistentString
+               value = "indexPath.row">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -156,6 +165,9 @@
          <PersistentStrings>
             <PersistentString
                value = "masterCache.allChains[0].posts.count">
+            </PersistentString>
+            <PersistentString
+               value = "self.tableView.indexPathsForVisibleRows?.last?.row">
             </PersistentString>
             <PersistentString
                value = "mainChain.posts[2].heightImage">

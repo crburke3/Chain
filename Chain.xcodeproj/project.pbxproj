@@ -34,6 +34,7 @@
 		689E93D223DE125300EED90F /* InvitesViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689E93D023DE125300EED90F /* InvitesViewController.xib */; };
 		689E93D523DE136B00EED90F /* InviteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 689E93D323DE136B00EED90F /* InviteTableViewCell.swift */; };
 		689E93D623DE136B00EED90F /* InviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 689E93D423DE136B00EED90F /* InviteTableViewCell.xib */; };
+		68BDBD3A241ACE3700613A93 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BDBD39241ACE3700613A93 /* UIViewExtensions.swift */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
@@ -118,6 +119,7 @@
 		689E93D423DE136B00EED90F /* InviteTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InviteTableViewCell.xib; sourceTree = "<group>"; };
 		68A5D389238DD98800AD4DC8 /* ChainFireStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainFireStore.swift; sourceTree = "<group>"; };
 		68A5D38B238DD9E500AD4DC8 /* ChainImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainImage.swift; sourceTree = "<group>"; };
+		68BDBD39241ACE3700613A93 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFirestoreExtensions.swift; sourceTree = "<group>"; };
 		68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerExtensions.swift; sourceTree = "<group>"; };
@@ -299,6 +301,7 @@
 				68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */,
 				68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */,
 				FAAF0A3F23C198D400838B0E /* DateExtensions.swift */,
+				68BDBD39241ACE3700613A93 /* UIViewExtensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -624,6 +627,7 @@
 				FA9C5B4923C553C500F1B41A /* LoadingView.swift in Sources */,
 				FA7E366F238DB12A00488000 /* ChainViewController.swift in Sources */,
 				68813EDC23E0B8100057F7AA /* SearchFunction.swift in Sources */,
+				68BDBD3A241ACE3700613A93 /* UIViewExtensions.swift in Sources */,
 				FA7E36AA238DCD3B00488000 /* SignInViewController.swift in Sources */,
 				FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */,
 				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,

@@ -29,6 +29,7 @@ class PostChain{
     var firstImageLink:String?
     var chainUUID:String = ""
     var lastReadBirthDate =  Date(timeIntervalSinceReferenceDate: -123456789.0) //Keeps track of last read cell, acts as a cursor for pagination
+    var testTime:Timestamp
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -43,6 +44,7 @@ class PostChain{
         if posts.count > 0{
             firstImageLink = posts[0].link
         }
+        self.testTime = Timestamp(date: self.birthDate)
     }
     
     init(chainName:String, load:Bool = true){
@@ -57,6 +59,7 @@ class PostChain{
         self.coordinate = CLLocationCoordinate2D()
         self.posts = []
         self.loaded = .NOT_LOADED
+        self.testTime = Timestamp(date: self.birthDate)
     }
     
     init(dict:[String:Any]){
@@ -68,6 +71,7 @@ class PostChain{
         self.count = dict["count"] as! Int
         self.tags = dict["tags"] as? [String] ?? []
         self.contributors = dict["contributors"] as? [String] ?? []
+        self.testTime = Timestamp(date: self.birthDate)
         //Posts will be appended to chain object from sub-collection seperately
         //let postsData = dict["posts"] as? [[String:Any]] ?? []
         /* for postData in postsData{
@@ -120,8 +124,6 @@ class PostChain{
     
     func loadPost(postSource: String, post: @escaping (ChainImage)->()){
         //chainSource -> global or general
-        let aTimestamp = Timestamp(date: self.lastReadBirthDate)
-        print(lastReadBirthDate)
         var postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
         switch postSource {
             case "global":
@@ -133,16 +135,15 @@ class PostChain{
             default: break
         }
         //Get next document/post
-        postRef.whereField("Time", isGreaterThan: aTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
+        
+        postRef.whereField("Time", isGreaterThan: self.testTime).limit(to: 1).getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {
                     for document in querySnapshot!.documents {
-                        print("\(document.documentID) => \(document.data())")
-                        print(document.get("user") as! String)
-                        self.lastReadBirthDate = (document.get("Time") as? Timestamp)?.dateValue() ?? Date()
+                        print(self.testTime.dateValue())
+                        self.testTime = (document.get("Time") as? Timestamp)!
                         post(ChainImage(dict: document.data() as [String : Any])!)
-                
                     }
                 }
             post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage())) //Empty post, needs error image
@@ -185,14 +186,11 @@ class PostChain{
                         print("Localized Desc.: \(err.localizedDescription)")
                     } else {
                         print("Success appending image")
-                        //self.posts.append(uploadImage)
-                        masterNav.popViewController(animated: false)
-                        let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-                        chainVC.mainChain = self
-                        masterNav.pushViewController(chainVC, animated: true)
-                        /* masterFire.updateFriendsFeed(chain: self) { (error) in
-                            
-                        } */
+                        self.posts.append(uploadImage)
+                        //Loading indicator
+                        self.lastReadBirthDate = uploadImage.time
+                        self.testTime = Timestamp(date: uploadImage.time)
+                        masterNav.popViewController(animated: true)
                     }
                 }
                 

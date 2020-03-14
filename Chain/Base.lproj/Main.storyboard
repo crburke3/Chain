@@ -170,7 +170,7 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7S-fu-uYM" customClass="RoundView" customModule="Chain" customModuleProvider="target">
                                                     <rect key="frame" x="24" y="24" width="312" height="483"/>
                                                     <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="drC-NI-6dT">
+                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="drC-NI-6dT">
                                                             <rect key="frame" x="0.0" y="0.0" width="312" height="439"/>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleAspectFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbK-hP-ceq" customClass="RoundButton" customModule="Chain" customModuleProvider="target">

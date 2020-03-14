@@ -10,9 +10,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CameraViewController" customModule="Chain" customModuleProvider="target">
             <connections>
+                <outlet property="backButton" destination="Mpn-E7-F2h" id="vj8-xI-L1z"/>
                 <outlet property="cameraButton" destination="4HU-nP-6yM" id="nCn-8i-n4M"/>
+                <outlet property="flipCameraButton" destination="Kib-M4-zai" id="t18-Mg-aZx"/>
                 <outlet property="imageView" destination="pGe-E2-Gq1" id="J5V-Da-Dnb"/>
-                <outlet property="photosButton" destination="k3G-Us-hcK" id="jAT-cJ-Xxb"/>
+                <outlet property="photosButton" destination="65i-3A-AMq" id="uVe-cP-7hW"/>
                 <outlet property="previewView" destination="b1e-0T-EA6" id="ypE-wj-do7"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -43,16 +45,39 @@
                         <action selector="cameraTouched:" destination="-1" eventType="touchUpInside" id="zru-ZU-GHl"/>
                     </connections>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" adjustsImageSizeForAccessibilityContentSizeCategory="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="k3G-Us-hcK">
-                    <rect key="frame" x="293" y="581" width="50" height="37.5"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Kib-M4-zai">
+                    <rect key="frame" x="334" y="12" width="32" height="32"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="40" id="IA2-3u-DKY"/>
-                        <constraint firstAttribute="width" constant="50" id="xkX-c3-ZU9"/>
+                        <constraint firstAttribute="height" constant="32" id="X5A-ec-vSy"/>
+                        <constraint firstAttribute="width" constant="32" id="uc5-Yv-gZI"/>
                     </constraints>
-                    <color key="tintColor" red="0.94229608769999995" green="0.4164805412" blue="0.36561489110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                    <state key="normal" backgroundImage="photo" catalog="system"/>
+                    <state key="normal" image="flipCamera"/>
                     <connections>
-                        <action selector="tappedPhotos:" destination="-1" eventType="touchUpInside" id="lFK-QE-wkn"/>
+                        <action selector="flipCamera:" destination="-1" eventType="touchUpInside" id="agS-zh-0Gy"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65i-3A-AMq">
+                    <rect key="frame" x="311" y="576" width="48" height="48"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="Jmr-dI-1SQ"/>
+                        <constraint firstAttribute="width" constant="48" id="hgB-em-b2Q"/>
+                    </constraints>
+                    <color key="tintColor" systemColor="systemOrangeColor" red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <state key="normal" image="add2"/>
+                    <connections>
+                        <action selector="tappedPhotos:" destination="-1" eventType="touchUpInside" id="Fzy-dg-v4I"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mpn-E7-F2h">
+                    <rect key="frame" x="16" y="20" width="30" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="Tpm-XP-C0M"/>
+                        <constraint firstAttribute="width" constant="30" id="kGd-tP-sMJ"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="back"/>
+                    <connections>
+                        <action selector="goBack:" destination="-1" eventType="touchUpInside" id="yaQ-zi-BCt"/>
                     </connections>
                 </button>
             </subviews>
@@ -60,6 +85,7 @@
             <constraints>
                 <constraint firstItem="4HU-nP-6yM" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="57o-Es-Pg6"/>
                 <constraint firstAttribute="trailing" secondItem="b1e-0T-EA6" secondAttribute="trailing" id="5KI-dS-gqb"/>
+                <constraint firstItem="Kib-M4-zai" firstAttribute="leading" secondItem="pGe-E2-Gq1" secondAttribute="trailing" constant="-41" id="ABQ-Su-vfJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="4HU-nP-6yM" secondAttribute="bottom" constant="32" id="DCz-ET-fUV"/>
                 <constraint firstItem="pGe-E2-Gq1" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="ITB-48-q4N"/>
                 <constraint firstAttribute="bottom" secondItem="b1e-0T-EA6" secondAttribute="bottom" id="NCU-8Q-F6x"/>
@@ -67,16 +93,21 @@
                 <constraint firstAttribute="bottom" secondItem="pGe-E2-Gq1" secondAttribute="bottom" id="REF-k6-FW2"/>
                 <constraint firstItem="b1e-0T-EA6" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="TFs-1a-OEK"/>
                 <constraint firstItem="b1e-0T-EA6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="TkN-be-Ajx"/>
-                <constraint firstItem="k3G-Us-hcK" firstAttribute="centerY" secondItem="4HU-nP-6yM" secondAttribute="centerY" id="cEu-2z-0a8"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="k3G-Us-hcK" secondAttribute="trailing" constant="32" id="gLd-Wg-xAp"/>
+                <constraint firstItem="65i-3A-AMq" firstAttribute="leading" secondItem="pGe-E2-Gq1" secondAttribute="trailing" constant="-64" id="dfn-yN-IPn"/>
+                <constraint firstItem="pGe-E2-Gq1" firstAttribute="leading" secondItem="Mpn-E7-F2h" secondAttribute="trailing" constant="-46" id="oOY-oS-l9M"/>
+                <constraint firstItem="pGe-E2-Gq1" firstAttribute="top" secondItem="Mpn-E7-F2h" secondAttribute="bottom" constant="-50" id="p4C-xl-Lmy"/>
+                <constraint firstItem="65i-3A-AMq" firstAttribute="top" secondItem="pGe-E2-Gq1" secondAttribute="bottom" constant="-91" id="p8X-Pf-FcB"/>
                 <constraint firstAttribute="trailing" secondItem="pGe-E2-Gq1" secondAttribute="trailing" id="s4M-WT-77w"/>
+                <constraint firstItem="pGe-E2-Gq1" firstAttribute="top" secondItem="Kib-M4-zai" secondAttribute="bottom" constant="-44" id="ykK-7t-aN7"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="138.40000000000001" y="103.89805097451276"/>
         </view>
     </objects>
     <resources>
+        <image name="add2" width="50" height="50"/>
+        <image name="back" width="100" height="100"/>
         <image name="camera_button" width="100" height="100"/>
-        <image name="photo" catalog="system" width="64" height="46"/>
+        <image name="flipCamera" width="64" height="64"/>
     </resources>
 </document>

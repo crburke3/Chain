@@ -63,6 +63,7 @@ class MainCell: UITableViewCell {
         }
     }
     
+    
     func cellDidLoad(){
         profilePicImage.layer.borderWidth = 1
         profilePicImage.layer.masksToBounds = false
@@ -70,6 +71,7 @@ class MainCell: UITableViewCell {
         profilePicImage.layer.cornerRadius = profilePicImage.frame.height/2
         profilePicImage.clipsToBounds = true
         profilePicImage.contentMode = .scaleAspectFill
+        user.text = self.post.user
     }
 }
 //Load Image? Might need to reload image if post is in cache but not image
