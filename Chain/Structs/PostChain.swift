@@ -92,20 +92,15 @@ class PostChain{
         
         //let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
         
-        var retDict:[String:Any] = ["chainName" : self.chainName,
+        let retDict:[String:Any] = ["chainName" : self.chainName,
                                     "chainUUID" : self.chainUUID,
                                     "birthDate" : self.birthDate,
                                     "deathDate" : self.deathDate,
                                     "likes" : self.likes,
                                     "count": self.count,
                                     "tags" : self.tags,
-                                    "contributors" : self.contributors]
-        if self.firstImageLink != nil{
-            retDict["firstImageLink"] = self.firstImageLink!
-        }
-        /*
-        "l" : geoData["l"] as! [Double],
-        "g" : geoData["g"] as! String] */
+                                    "contributors" : self.contributors,
+                                    "firstImageLink" : self.firstImageLink]
         return retDict
     }
     
@@ -130,7 +125,7 @@ class PostChain{
                 postRef = masterFire.db.collection("globalFeed").document(self.chainUUID).collection("posts")
                 break
             case "general": //For user feed and general
-                postRef = masterFire.db.collection("chains").document("umsIv3SnQolqT6nCCW8o").collection("posts")
+                postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
                 break
             default: break
         }
@@ -152,8 +147,7 @@ class PostChain{
     }
     
     func append(image:UIImage, source:String, completion: @escaping (String?, ChainImage?)->()) {
-        var urlString = "" //Will hold URL string to create Chain Image
-        //let firestoreRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
+        var urlString = ""
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
         let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -167,19 +161,13 @@ class PostChain{
                 urlString = url!.absoluteString //Hold URL
                 print(urlString)
                 let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
-                //Set index of uploadImage
                 let dict = uploadImage.toDict(height: image.size.height, width: image.size.width)
-                //Add to sub-collection
-                print("Appending to this chain: \(self.chainUUID)")
-                self.chainUUID = "umsIv3SnQolqT6nCCW8o" //Hard coded
                 var postRef: CollectionReference
-                //Function to set postRef based on source
                 if source == "general" {
                     postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
                 } else {
                     postRef = Firestore.firestore().collection("globalFeed").document(self.chainUUID).collection("posts")
                 }
-                
                 postRef.addDocument(data: dict) { (error) in
                     if let err = error {
                         print("Error when adding doc: \(err)")
@@ -187,14 +175,19 @@ class PostChain{
                     } else {
                         print("Success appending image")
                         self.posts.append(uploadImage)
+                        if self.posts.count == 1 {
+                            self.firstImageLink = uploadImage.link
+                        }
                         //Loading indicator
                         self.lastReadBirthDate = uploadImage.time
                         self.testTime = Timestamp(date: uploadImage.time)
                         masterNav.popViewController(animated: true)
+                        masterFire.updateFriendsFeed(chain: self) { (error) in
+                            //
+                        }
                     }
                 }
-                
-                })
+            })
             }
     }
     

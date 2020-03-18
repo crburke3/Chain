@@ -24,7 +24,8 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             switchFeeds.setTitle("Switch to Global Feed", for: .normal)
             //Reload bottom collection view
             print("Reloading bottom collection view to show Friend's feed")
-            loadUserFeed { (chains) in
+            loadFriendsFeed { (chains) in
+                self.otherChains.removeAll()
                 self.otherChains = chains
                 print("Retrieved User Feed")
                 self.collectionViewA.reloadData() //A is bottom collection view
@@ -34,6 +35,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             //Reload bottom collection view
             print("Reloading bottom collection view to show Global feed")
             loadUserFeed { (chains) in
+                self.otherChains.removeAll()
                 self.otherChains = chains
                 print("Retrieved Global Feed")
                 self.collectionViewA.reloadData()

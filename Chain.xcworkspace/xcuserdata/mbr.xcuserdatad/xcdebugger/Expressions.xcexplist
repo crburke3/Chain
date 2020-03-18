@@ -3,6 +3,22 @@
    version = "1.0">
    <ContextStates>
       <ContextState
+         contextName = "closure #1 in MainCell.cellDidLoad():MainCell.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "post.userProfile">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "ChainViewController.viewDidLoad():ChainViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mainChain.chainUUID">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "ChainViewController.tableView(_:didSelectRowAt:):MainTableView.swift">
          <PersistentStrings>
             <PersistentString
@@ -10,6 +26,14 @@
             </PersistentString>
             <PersistentString
                value = "currentUser">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #3 in ChainViewController.tableView(_:cellForRowAt:):MainTableView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "mainChain.posts.count">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -170,7 +194,7 @@
                value = "self.tableView.indexPathsForVisibleRows?.last?.row">
             </PersistentString>
             <PersistentString
-               value = "mainChain.posts[2].heightImage">
+               value = "self.mainChain.posts[0].link">
             </PersistentString>
          </PersistentStrings>
       </ContextState>
@@ -186,7 +210,10 @@
          contextName = "closure #1 in ChainViewController.viewDidLoad():ChainViewController.swift">
          <PersistentStrings>
             <PersistentString
-               value = "mainChain.posts[1]">
+               value = "self.mainChain.posts[0]">
+            </PersistentString>
+            <PersistentString
+               value = "chainSource">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

@@ -18,7 +18,7 @@ extension ChainViewController{
         var postUser = ""
         let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
         let givenPost = givenCell.post.toDict(height: post_image.size.height, width: post_image.size.width) as [String:Any]
-        postUser = givenPost["user"] as! String
+        postUser = givenPost["userPhone"] as! String
         let indexPath = NSIndexPath(row: post_row, section: 0)
         tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
@@ -28,20 +28,6 @@ extension ChainViewController{
         let cancelButton = CancelButton(title: "CANCEL") {
             print("Canceled")
         }
-        /*
-        let shareButton = DefaultButton(title: "Share Chain from this Image") {
-            
-            self.fpc = FloatingPanelController()
-            self.fpc.delegate = self // Optional
-            let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
-            //Set conentVC array to hold currentUsers friends
-            self.fpc.set(contentViewController: contentVC)
-            self.fpc.track(scrollView: contentVC.tableView)
-            self.fpc.isRemovalInteractionEnabled = true
-            self.fpc.addPanel(toParent: self)
-            
-        }
-        */
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Report Image")
             masterFire.reportImage(chainName: self.mainChain.chainName, image: ChainImage(dict: givenPost)!) { (error) in
@@ -65,7 +51,7 @@ extension ChainViewController{
             self.tableView.reloadData()
         }
         //
-        if postUser == "mbrutkow" {
+        if postUser == currentUser.phoneNumber {
             popup.addButtons([reportButton, removeButton, cancelButton])
         } else {
             popup.addButtons([reportButton, cancelButton])
@@ -166,20 +152,39 @@ extension ChainViewController{
                     break
                 case "jumpToRandom":
                     print("Jumping to random position in chain")
-                    self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: true) //Might need to set to false
+                    //Show animation of some sort here
+                    self.tableView.scrollToRow(at: IndexPath(row: Int.random(in: 0...(self.mainChain.posts.count-1)), section: 0), at: .middle, animated: false) //Might need to set to false
                     break
             case "jumpToEnd":
                 print("Jumping to end of chain")
-                self.tableView.scrollToRow(at: IndexPath(row: (self.mainChain.posts.count - 1), section: 0), at: .middle, animated: true)
+                //Show annimation of some sort here
+                self.tableView.scrollToRow(at: IndexPath(row: (self.mainChain.posts.count - 1), section: 0), at: .middle, animated: false)
                 break
             case "jumpToNextFriendsPost":
                 print("Finding next next friend's post")
+                //
+                let currentlyViewedIndex = self.tableView.indexPathsForVisibleRows?.last?.row ?? 0
+                for index in (currentlyViewedIndex+1...self.mainChain.posts.count-1) {
+                    if self.aPostByFriend(phone: self.mainChain.posts[index].userPhone) {
+                        self.tableView.scrollToRow(at: IndexPath(row: index, section: 0), at: .middle, animated: false) //Jump to post
+                        break //Exit loop
+                    }
+                }
                 break
             default:
                 break
             }
         
         }
+    }
+    
+    func aPostByFriend(phone: String) -> Bool {
+        for friend in currentUser.friends {
+            if friend.phoneNumber == phone { //Is there a faster way to do this
+                return true
+            }
+        }
+        return false
     }
     
     func listenToDate(){

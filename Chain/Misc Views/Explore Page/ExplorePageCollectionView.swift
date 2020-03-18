@@ -65,6 +65,8 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             chainVC.mainChain = chainSelected
             chainVC.chainSource = "global"
+            
+            //if doesn't have chain
             masterCache.allChains.insert(chainSelected, at: 0) //Will need to find new way to store chains in cache, perhaps two chain collections, one for explore page and one for viewed ch
             masterNav.pushViewController(chainVC, animated: true)
         }

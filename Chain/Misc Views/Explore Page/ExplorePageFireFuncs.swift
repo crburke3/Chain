@@ -16,13 +16,13 @@ extension ExploreViewController{
         //Add listener
         var chainArray = [PostChain]()
         
-        masterFire.db.collection("globalFeed").getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("globalFeed").limit(to: 8).getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
             for document in querySnapshot!.documents {
                 chainArray.append(PostChain(dict: document.data() as [String : Any]))
-                masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
+                //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
             }
             chains(chainArray)
         }
@@ -33,16 +33,33 @@ extension ExploreViewController{
         //Add listener
         var chainArray = [PostChain]()
         //masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").getDocuments()
-        masterFire.db.collection("chains").getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("chains").limit(to: 8).getDocuments() { (querySnapshot, err) in
            if let err = err {
                print("Error getting documents: \(err)")
            } else {
                for document in querySnapshot!.documents {
                    chainArray.append(PostChain(dict: document.data() as [String : Any]))
-                   masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
+                   //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
             }
             chains(chainArray)
             }
             }
        }
+    
+    func loadFriendsFeed(chains: @escaping ([PostChain])->()){
+     //Add listener
+        var chainArray = [PostChain]()
+        masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").limit(to: 8).getDocuments() { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in querySnapshot!.documents {
+                    chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
+                }
+             chains(chainArray)
+             }
+         }
+    }
+    
 }

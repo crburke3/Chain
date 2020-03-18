@@ -32,7 +32,7 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     var backgroundColor : UIColor!
     let colorSensitivity:CGFloat  = 2 //Lower = more change
     var cameraVC:CameraViewController!
-
+    var imageHolder: UIImage = UIImage()
     
     let animationView = AnimationView(frame: CGRect(x: 0, y: 0, width: 300, height: 300))
     var displayLink: CADisplayLink?
@@ -59,6 +59,7 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     
     func didFinishImage(image: UIImage) {
         postImageView.image = image
+        imageHolder = image
         masterNav.popViewController(animated: true)
     }
 
@@ -87,19 +88,28 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             let postChain = PostChain(_chainName: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
             if postImageView.image == nil{
                 postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
+                postChain.posts[0].heightImage = 100
+                postChain.posts[0].heightImage = 100
             }else{
                 postChain.posts.append(ChainImage(image: postImageView.image!))
+                postChain.posts[0].widthImage = imageHolder.size.width
+                postChain.posts[0].heightImage = imageHolder.size.height
             }
-            postChain.append(image: postImageView.image ?? UIImage(), source: "general") { (err, imageUploaded) in
-                self.animationView.stop()
-                if err != nil{
-                    self.animateCancel()
-                    self.showPopUp(_title: "Error Posting Chain", _message: err!)
-                }else{
-                    masterNav.popViewController(animated: false)
-                    masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+                
+            masterFire.uploadChain(chain: postChain) { (error) in
+                postChain.append(image: self.postImageView.image ?? UIImage(), source: "general") { (err, imageUploaded) in
+                    self.animationView.stop()
+                    if err != nil{
+                        self.animateCancel()
+                        self.showPopUp(_title: "Error Posting Chain", _message: err!)
+                    }else{
+                        //Upload chain
+                        masterNav.popViewController(animated: false)
+                        masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+                    }
                 }
             }
+            
         }
     }
 }

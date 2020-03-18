@@ -28,7 +28,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                                            self.tableView.reloadData()
                                        }
                                    }
-            } 
+            }
         }
         
         if (masterCache.allChains[0].posts.count <= (indexPath.row + 1)) {
@@ -73,7 +73,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     break
                 }
             }
+            cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
             cell.user.text = self.mainChain.posts[indexPath.row].user
+            cell.post = self.mainChain.posts[indexPath.row]
+            cell.cellDidLoad()
             return cell
         } else { //In cahce, load cell from cache
              let url = URL(string: self.mainChain.posts[indexPath.row].link) //Need to store dimensions in Firestore doc
@@ -88,7 +91,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                 }
             
             print("At \(indexPath.row) use \(self.mainChain.posts[indexPath.row].link)")
+            cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
             cell.user.text = self.mainChain.posts[indexPath.row].user
+            cell.post = self.mainChain.posts[indexPath.row]
+            cell.cellDidLoad()
             return cell
         }
         
@@ -104,6 +110,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let post = mainChain.posts[indexPath.row]
         if post.loadState == .LOADED{
+            if (self.mainChain.posts[indexPath.row].heightImage == 0) && (self.mainChain.posts[indexPath.row].widthImage == 0) {
+                self.mainChain.posts[indexPath.row].heightImage = 400
+                self.mainChain.posts[indexPath.row].widthImage = 400
+            }
             let aspectRatio = self.mainChain.posts[indexPath.row].heightImage / self.mainChain.posts[indexPath.row].widthImage
             let cellWidth = UIScreen.main.bounds.width - (24 * 2)
             let imgHeight = cellWidth * aspectRatio

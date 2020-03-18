@@ -74,7 +74,9 @@ class ChainCache {
     }
     
     func addChainToCache(chain: PostChain) {
+        if !chainAlreadyLoaded(requestedChain: chain) {
             self.allChains.append(chain)
+        }
             checkSizeOfChain()
     }
     

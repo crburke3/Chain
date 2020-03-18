@@ -22,9 +22,10 @@ class ChainFireStore {
 
     //If error comes back as nil, then nothing went wrong
     func uploadChain(chain:PostChain, error: @escaping (String?)->()) {
-        //Add sub-collections
-        let firestoreRef = Firestore.firestore().collection("chains").document(chain.chainName)
-        //  firestoreRef.collection("posts")
+        //Generate UUID
+        let newChainRef = db.collection("chains").document()
+        let firestoreRef = Firestore.firestore().collection("chains").document(newChainRef.documentID)
+        chain.chainUUID = newChainRef.documentID
         firestoreRef.setData(chain.toDict()) { (err1) in
             if let error1 = err1{
                 masterNav.showPopUp(_title: "Error Uploading Chain", _message: error1.localizedDescription)
@@ -173,10 +174,16 @@ class ChainFireStore {
     func updateFriendsFeed(chain: PostChain, error: @escaping (String?)->()) {
         //userID = phone number
         for user in currentUser.friends {
-            let postRef = db.collection("userFeeds").document(user.phoneNumber).collection("posts")
-            postRef.document(chain.chainName).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
+            let postRef = db.collection("userFeeds").document(user.phoneNumber).collection("feed")
+            postRef.document(chain.chainUUID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
                     //Consider only uploading to top friends
                 }
+            }
+        }
+        //Add chain to Current Chains
+        let currentUserRef = db.collection("users").document(currentUser.phoneNumber).collection("currentChains")
+        currentUserRef.document(chain.chainUUID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
+                //Consider only uploading to top friends
             }
         }
     }

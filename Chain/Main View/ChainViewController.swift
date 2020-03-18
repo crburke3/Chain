@@ -77,8 +77,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         profileView.layer.cornerRadius = profileView.frame.height/2
         profileView.clipsToBounds = true
         profileView.contentMode = .scaleAspectFill
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -119,8 +117,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     func chainDidLoad(chain: PostChain) {}
     
     @objc func buttonClicked(sender:UIButton) {
-        //ViewController.swift
-        //
         let buttonRow = sender.tag
         print(sender.tag)
         self.fpc = FloatingPanelController()
