@@ -95,18 +95,14 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
                 postChain.posts[0].widthImage = imageHolder.size.width
                 postChain.posts[0].heightImage = imageHolder.size.height
             }
-                
-            masterFire.uploadChain(chain: postChain) { (error) in
-                postChain.append(image: self.postImageView.image ?? UIImage(), source: "general") { (err, imageUploaded) in
-                    self.animationView.stop()
-                    if err != nil{
-                        self.animateCancel()
-                        self.showPopUp(_title: "Error Posting Chain", _message: err!)
-                    }else{
-                        //Upload chain
-                        masterNav.popViewController(animated: false)
-                        masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
-                    }
+              
+            //Upload first image
+            postChain.uploadChain(chain: postChain, image:  imageHolder) { (error) in
+                if error != nil {
+                masterNav.popViewController(animated: false)
+                masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
+                } else {
+                    //error uploading
                 }
             }
             

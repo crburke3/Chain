@@ -20,33 +20,44 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == self.collectionViewA {
+            if (self.otherChains.count - (self.collectionViewA.indexPathsForVisibleItems.last?.row ?? 0) == 2) { //At bottom of feed so load more chains
+                loadUserFeed(returnNumber: 2) { (chainArray) in
+                    if chainArray.count > 0 {
+                        print("Loading 2 more chains after index \(String(describing: self.collectionViewA.indexPathsForVisibleItems.last?.row))")
+                        let firstChain = chainArray[0]
+                        self.otherChains.append(firstChain)
+                        self.otherChains.last?.loaded = .LOADED
+                        if chainArray.count == 2 {
+                            let secondChain = chainArray[1]
+                            self.otherChains.append(secondChain)
+                            self.otherChains.last?.loaded = .LOADED
+                        }
+                        self.collectionViewA.reloadData()
+                    }
+                }
+            }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExplorePageCell", for: indexPath) as! ExplorePageCell
             cell.roundView.addShadow() //Custom function defined in extensions
-            let chain = otherChains[indexPath.row]
-            if chain.loaded == .LOADED{
-                //cell.loadingView.isHidden = true
-                if chain.firstImageLink != nil{
-                   cell.previewImageView.downloaded(from: chain.firstImageLink!)
-                }
-                cell.titleLabel.text = chain.chainName
-                cell.deathDate = chain.deathDate
+            if otherChains[indexPath.row].loaded == .LOADED {
+                cell.chain = otherChains[indexPath.row]
+                cell.cellDidLoad()
+                cell.titleLabel.text = otherChains[indexPath.row].chainName
+                cell.deathDate = otherChains[indexPath.row].deathDate
                 cell.listenToDate()
             }
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChain", for: indexPath) as! ExplorePageCell
-            let chain = topChains[indexPath.row]
-            if chain.loaded == .LOADED{
-                //cell.loadingView.isHidden = true
-                if chain.firstImageLink != nil{
-                    cell.previewImageView.downloaded(from: chain.firstImageLink!)
-                }
-                cell.titleLabel.text = chain.chainName
-                cell.deathDate = chain.deathDate
+            if otherChains[indexPath.row].loaded == .LOADED {
+                cell.chain = otherChains[indexPath.row]
+                cell.cellDidLoad()
+                cell.titleLabel.text = otherChains[indexPath.row].chainName
+                cell.deathDate = otherChains[indexPath.row].deathDate
                 cell.listenToDate()
             }
             return cell
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -88,10 +88,34 @@ class PostChain{
         }
     }
     
+    func uploadChain(chain:PostChain, image:UIImage, error: @escaping (String?)->()) {
+        //Upload first image
+        //Get url
+        //Edit chain object
+        //Upload to FS
+        //Append image
+        let db = Firestore.firestore()
+        let newChainRef = db.collection("chains").document()
+        let firestoreRef = Firestore.firestore().collection("chains").document(newChainRef.documentID)
+        chain.chainUUID = newChainRef.documentID
+        firestoreRef.setData(chain.toDict()) { (err1) in
+            if let error1 = err1{
+                masterNav.showPopUp(_title: "Error Uploading Chain", _message: error1.localizedDescription)
+                error(error1.localizedDescription)
+            }else{
+                self.append(image: image, source: "general") { (err, postedImage) in
+                    if err != nil { print(err) } else {
+                        self.firstImageLink = postedImage?.link
+                        db.collection("chains").document(self.chainUUID).updateData(["firstImageLink" : self.firstImageLink])
+                    }
+                }
+                error(nil)
+            }
+        }
+    }
+
+    
     func toDict(withPosts:Bool = true)->[String:Any]{
-        
-        //let geoData = GeoFirestore.getFirestoreData(for: self.coordinate)!
-        
         let retDict:[String:Any] = ["chainName" : self.chainName,
                                     "chainUUID" : self.chainUUID,
                                     "birthDate" : self.birthDate,
@@ -185,6 +209,7 @@ class PostChain{
                         masterFire.updateFriendsFeed(chain: self) { (error) in
                             //
                         }
+                        completion(nil, uploadImage)
                     }
                 }
             })

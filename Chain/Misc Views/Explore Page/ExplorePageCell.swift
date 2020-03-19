@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class ExplorePageCell: UICollectionViewCell {
     
@@ -14,6 +15,7 @@ class ExplorePageCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var previewImageView: UIImageView!
+    var chain: PostChain = PostChain(chainName: "")
     var deathDate:Date = Date()
     private var loaded = false
     
@@ -33,4 +35,24 @@ class ExplorePageCell: UICollectionViewCell {
         }
     }
     
+    func cellDidLoad(){
+        let url = URL(string: chain.firstImageLink ?? "")
+        previewImageView.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "fakeImg"),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                break//
+            case .failure(let error):
+                print("Loading chain preview image failed: \(error.localizedDescription)")
+            }
+        }
+    }
 }

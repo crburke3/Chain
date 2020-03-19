@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ExploreViewController: UIViewController, PostChainDelegate {
     
@@ -24,7 +25,8 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             switchFeeds.setTitle("Switch to Global Feed", for: .normal)
             //Reload bottom collection view
             print("Reloading bottom collection view to show Friend's feed")
-            loadFriendsFeed { (chains) in
+            masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+            loadFriendsFeed(returnNumber: 4) { (chains) in
                 self.otherChains.removeAll()
                 self.otherChains = chains
                 print("Retrieved User Feed")
@@ -34,7 +36,8 @@ class ExploreViewController: UIViewController, PostChainDelegate {
             switchFeeds.setTitle("Switch to Friend's Feed", for: .normal)
             //Reload bottom collection view
             print("Reloading bottom collection view to show Global feed")
-            loadUserFeed { (chains) in
+            masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+            loadUserFeed(returnNumber: 4) { (chains) in
                 self.otherChains.removeAll()
                 self.otherChains = chains
                 print("Retrieved Global Feed")
@@ -59,25 +62,12 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         collectionViewA.dataSource = self
         collectionViewB.dataSource = self
         collectionViewB.delegate = self
-        
-        loadUserFeed { (chains) in
+        masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+        loadUserFeed(returnNumber: 4) { (chains) in
             self.otherChains = chains
             print("Retrieved User Feed")
             self.collectionViewA.reloadData() //A is bottom collection view
         }
-        /*
-        loadTopChainIDs { (topChainIDs) in
-            var chainCount = 0
-            for chainName in topChainIDs{
-                let chain = PostChain(chainName: chainName)
-                self.collViewIndexReference[chainName] = IndexPath(row: chainCount, section: 0)
-                chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
-                self.topChains.append(chain)
-                chainCount += 1
-            }
-            self.collectionViewA.reloadData()
-        } */
-        
         loadGlobalChainsID { (postChains) in
             self.topChains = postChains
             //chain.addDelegate(delegateID: "ExploreViewController", delegate: self)

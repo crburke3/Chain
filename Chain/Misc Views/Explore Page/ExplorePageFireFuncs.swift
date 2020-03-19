@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Firebase
 
 extension ExploreViewController{
     
@@ -16,7 +17,7 @@ extension ExploreViewController{
         //Add listener
         var chainArray = [PostChain]()
         
-        masterFire.db.collection("globalFeed").limit(to: 8).getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("globalFeed").getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
@@ -29,37 +30,44 @@ extension ExploreViewController{
         }
     }
     
-    func loadUserFeed(chains: @escaping ([PostChain])->()){
+    func loadUserFeed(returnNumber: Int, chains: @escaping ([PostChain])->()){
         //Add listener
         var chainArray = [PostChain]()
         //masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").getDocuments()
-        masterFire.db.collection("chains").limit(to: 8).getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("chains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).getDocuments() { (querySnapshot, err) in
            if let err = err {
                print("Error getting documents: \(err)")
            } else {
                for document in querySnapshot!.documents {
-                   chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
                    //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
-            }
+                }
             chains(chainArray)
             }
-            }
-       }
+        }
+    }
     
-    func loadFriendsFeed(chains: @escaping ([PostChain])->()){
+    func loadFriendsFeed(returnNumber: Int, chains: @escaping ([PostChain])->()){
      //Add listener
         var chainArray = [PostChain]()
-        masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").limit(to: 8).getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
                     chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
                     //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
                 }
              chains(chainArray)
              }
          }
+    }
+    
+    func loadChainPreviewForVisibleCell() {
+        self.collectionViewA.indexPathsForVisibleItems
+        self.collectionViewA.reloadData()
     }
     
 }

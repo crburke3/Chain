@@ -60,6 +60,14 @@
          contextName = "ChainImage.init(dict:):ChainImage.swift">
       </ContextState>
       <ContextState
+         contextName = "ExploreViewController.collectionView(_:cellForItemAt:):ExplorePageCollectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.collectionViewA.indexPathsForVisibleItems.last">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in CameraViewController.captureImage():CameraViewController.swift">
       </ContextState>
       <ContextState
@@ -123,6 +131,22 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ExploreViewController.collectionView(_:didSelectItemAt:):ExplorePageCollectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.collectionViewA.indexPathsForVisibleItems.last?.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in ExploreViewController.collectionView(_:cellForItemAt:):ExplorePageCollectionView.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "self.collectionViewA.indexPathsForVisibleItems.last?.row">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in PostChain.loadPost(postSource:post:):PostChain.swift">
          <PersistentStrings>
             <PersistentString
@@ -148,6 +172,9 @@
                value = "otherChains">
             </PersistentString>
          </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in closure #1 in PostChain.uploadChain(chain:image:error:):PostChain.swift">
       </ContextState>
       <ContextState
          contextName = "closure #1 in closure #1 in closure #1 in EditProfileViewController.uploadImage(image:completion:):EditProfileViewController.swift">

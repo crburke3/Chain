@@ -17,25 +17,10 @@ class ChainFireStore {
     let locationManager = CLLocationManager()
     let db = Firestore.firestore()
     var allChains:[PostChain] = []
-    
+    var lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
     
 
     //If error comes back as nil, then nothing went wrong
-    func uploadChain(chain:PostChain, error: @escaping (String?)->()) {
-        //Generate UUID
-        let newChainRef = db.collection("chains").document()
-        let firestoreRef = Firestore.firestore().collection("chains").document(newChainRef.documentID)
-        chain.chainUUID = newChainRef.documentID
-        firestoreRef.setData(chain.toDict()) { (err1) in
-            if let error1 = err1{
-                masterNav.showPopUp(_title: "Error Uploading Chain", _message: error1.localizedDescription)
-                error(error1.localizedDescription)
-            }else{
-                error(nil)
-            }
-        }
-    }
-    
     func removeFromChain(chainName: String, post:[String:Any], completion: @escaping (String?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
         let firestoreRef = Firestore.firestore().collection("chains").document(chainName)
@@ -221,4 +206,15 @@ class ChainFireStore {
             }
         }
     }
+    
+    func deleteChainFromFirestore(path: String, uuid: String, deathDate: Timestamp) {
+        let db = Firestore.firestore()
+        let documentDeathDate = deathDate.dateValue()
+        if Date() > documentDeathDate {
+            print("Triggering delete function")//Delete posts sub-collection
+            //Delete function out of Current User Chains, Chains, User Feeds
+        }
+        
+    }
+    
 }

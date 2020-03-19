@@ -21,3 +21,8 @@ enum LoadState:String{
     case LOADING
     case LOADED
 }
+
+enum FirestorePath:String{
+    case GENERAL
+    case GLOBAL
+}
