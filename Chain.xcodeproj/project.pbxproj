@@ -37,6 +37,7 @@
 		68BDBD3A241ACE3700613A93 /* UIViewExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BDBD39241ACE3700613A93 /* UIViewExtensions.swift */; };
 		68BDBD3E242094BE00613A93 /* SearchUsersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BDBD3C242094BE00613A93 /* SearchUsersViewController.swift */; };
 		68BDBD3F242094BE00613A93 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BDBD3D242094BE00613A93 /* SearchUsersViewController.xib */; };
+		68BDBD41242422AD00613A93 /* UserMenuSupportingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BDBD40242422AD00613A93 /* UserMenuSupportingFunctions.swift */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
@@ -124,6 +125,7 @@
 		68BDBD39241ACE3700613A93 /* UIViewExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtensions.swift; sourceTree = "<group>"; };
 		68BDBD3C242094BE00613A93 /* SearchUsersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchUsersViewController.swift; sourceTree = "<group>"; };
 		68BDBD3D242094BE00613A93 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
+		68BDBD40242422AD00613A93 /* UserMenuSupportingFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuSupportingFunctions.swift; sourceTree = "<group>"; };
 		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
 		68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFirestoreExtensions.swift; sourceTree = "<group>"; };
 		68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerExtensions.swift; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				6878BBA323C7957200C75B2E /* UserMenuCell.swift */,
 				6878BBA523C8FD5200C75B2E /* UserMenuTableViewController.swift */,
+				68BDBD40242422AD00613A93 /* UserMenuSupportingFunctions.swift */,
 				68813EDB23E0B8100057F7AA /* SearchFunction.swift */,
 			);
 			path = "User Menu";
@@ -655,6 +658,7 @@
 				FA867FDF23CEC4D100B638F8 /* ChainBreakLoader.swift in Sources */,
 				FAAF0A3E23C1960600838B0E /* ExplorePageCollectionView.swift in Sources */,
 				68CE9B8C2391002E00E8483D /* Invite.swift in Sources */,
+				68BDBD41242422AD00613A93 /* UserMenuSupportingFunctions.swift in Sources */,
 				FA06BC6A23CF9411002055AD /* CameraViewPhotos.swift in Sources */,
 				FA9C5B4D23C5547B00F1B41A /* NewChainViewController.swift in Sources */,
 				68BDBD3E242094BE00613A93 /* SearchUsersViewController.swift in Sources */,

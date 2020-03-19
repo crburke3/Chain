@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FirebaseFirestore
 
 class SearchUsersViewController: UIViewController {
     
@@ -23,6 +24,15 @@ class SearchUsersViewController: UIViewController {
     
     func searchUser() {
         //Matching or contains query
+        let db = Firestore.firestore()
+        
+        db.collection("users").whereField("username", isEqualTo: searchText.text).getDocuments() { (querySnapshot, error) in
+            if let error = error { print(error) } else {
+                for document in querySnapshot!.documents {
+                    //Push results to table view
+                }
+            }
+        }
     }
     
 }

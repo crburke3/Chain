@@ -43,9 +43,12 @@ class ChainUser{
     init(dict: [String:Any]) {
         self.username = dict["username"] as? String ?? ""
         self.name = dict["name"] as? String ?? ""
-        self.phoneNumber = dict["phoneNumber"] as? String ?? ""
-        self.profile = dict["profile"] as? String ?? ""
+        self.phoneNumber = dict["phone"] as? String ?? ""
+        self.profile = dict["profilePhoto"] as? String ?? ""
+        self.bio = dict["bio"] as? String ?? ""
+        //Current chains will be loaded seperately
     }
+    
     static func initFromFirestore(with phoneNumber:String, user: @escaping(ChainUser?)->()){
         
     }
@@ -53,16 +56,7 @@ class ChainUser{
     func toDict() -> [String:Any] { //To be expanded/more detailed later
         return ["name" : self.name, "phone" : self.phoneNumber, "posts" : self.posts, "blocked": []]
     }
-    /*
-    func userArray() -> [ChainUser] {
-        var userArray = [ChainUser]()
-        for friend in friends {
-            let user = ChainUser(_username: friend["username"] as? String ?? "", _phoneNumber: friend["phone"] as? String ?? "", _profile: friend["profile"] as? String ?? "", _name: "", _bio: "", _topPosts: [[:]])
-            userArray.append(user)
-        }
-        return userArray
-    }
-    */
+    
     func getFriends() {
         let db = Firestore.firestore()
         var userArray = [ChainUser]()
