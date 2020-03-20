@@ -16,13 +16,16 @@ class VerifyNumberViewController: UIViewController {
     
     let auth = ChainAuth()
     var phone: String = ""
-    var changingPassword: Bool = false
-    var password: String = ""
+    var delegates:[String:VerifyNumberViewControllerDelegate] = [:]
     
     @IBOutlet weak var codeEntered: KKPinCodeTextField!
     @IBOutlet weak var verifyCode: UILabel!
+    @IBOutlet var submitButton: RoundButton!
     
-    var signUpUser = ChainUser(_username: "", _phoneNumber: "", _name: "")
+    convenience init(phoneNumber:String) {
+        self.init()
+        self.phone = phoneNumber
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,27 +43,19 @@ class VerifyNumberViewController: UIViewController {
     }
     
     @IBAction func signUp(_ sender: Any) {
+        submitButton.startSpinner()
         if codeEntered.digitsCount == 6 {
             print("All digits entered (6)")
-            //Verify
-            
-            if changingPassword {
-                auth.continueToChangePassword(verificationCode: codeEntered?.text ?? "", phone: phone, error: { error in
+                auth.verifyCode(verificationCode: codeEntered?.text ?? "", error: { error in
+                    self.submitButton.stopSpinner()
                     if let error = error {
-                        
-                    } else {
-                        
-                    }
-                })
-            } else {
-                auth.logInUserAfterVerification(verificationCode: codeEntered?.text ?? "", phone: phone, password: password, error: { error in
-                    if let error = error {
-                        //Wrong code entered?
+                        self.dismissAndFail()
                         print(error)
                     } else {
+                        self.dismissAndSuccess()
                     }
                 })
-            }
+        //}
         } else {
             //Not all digits entered
             let alert = UIAlertController(title: "Alert", message: "Please enter the verification code", preferredStyle: UIAlertController.Style.alert)
@@ -70,5 +65,32 @@ class VerifyNumberViewController: UIViewController {
         
     }
     
+    func addDelegate(key:String, delegate:VerifyNumberViewControllerDelegate){
+        self.delegates[key] = delegate
+    }
     
+    @IBAction func cancel(_ sender: Any) {
+        dismissAndFail()
+    }
+    
+    func dismissAndFail(){
+        self.dismiss(animated: true) {
+            for delegate in self.delegates.values{
+                delegate.verifyViewControllerDidDismiss(success: false)
+            }
+        }
+    }
+    
+    func dismissAndSuccess(){
+        self.dismiss(animated: true) {
+            for delegate in self.delegates.values{
+                delegate.verifyViewControllerDidDismiss(success: true)
+            }
+        }
+    }
+}
+
+
+protocol VerifyNumberViewControllerDelegate{
+    func verifyViewControllerDidDismiss(success:Bool)
 }

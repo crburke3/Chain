@@ -326,6 +326,14 @@ class roundLabel:UILabel{
 
 class RoundView:UIView{
      
+    @IBInspectable var addShadow: Bool = false
+
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        if self.addShadow{
+            self.addShadow()
+        }
+    }
     
     @IBInspectable var cornerRadius: Int = 0 {
         didSet{
@@ -430,6 +438,30 @@ class BorderTextView:UITextView{
 }
 
 @IBDesignable class RoundButton: UIButton{
+    
+    private var spinner:UIActivityIndicatorView?
+    private var previousTitle:String?
+    
+    func startSpinner(){
+        if spinner == nil{
+            spinner = UIActivityIndicatorView(style: .white)
+            spinner!.hidesWhenStopped = true
+            self.addSubview(spinner!)
+            spinner!.centerXAnchor.constraint(equalTo: self.centerXAnchor, constant: 0).isActive = true
+            spinner!.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 0).isActive = true
+            spinner!.translatesAutoresizingMaskIntoConstraints = false
+        }
+        spinner!.startAnimating()
+        self.setInactive()
+        self.previousTitle = self.titleLabel?.text
+        self.setTitle(nil, for: .normal)
+    }
+    
+    func stopSpinner(){
+        spinner?.stopAnimating()
+        self.setTitle(previousTitle, for: .normal)
+        self.setActive()
+    }
     
     @IBInspectable var cornerRadius: Int = 0 {
         didSet{
@@ -634,8 +666,12 @@ extension UIColor{
     }
     
     struct Chain{
-        static var mainBlue: UIColor  { return UIColor(red: 242/255, green: 101/255, blue: 34/255, alpha: 1) }
-        static var mainOrange: UIColor  { return UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1) }
+        static var mainOrange: UIColor  { return UIColor(red: 240/255, green: 106/255, blue: 93/225, alpha: 1) }
+        static var mainBlue: UIColor  { return UIColor(red: 0/255, green: 174/255, blue: 239/255, alpha: 1) }
+        static var lightTan: UIColor  { return UIColor(red: 239/255, green: 242/255, blue: 220/255, alpha: 1) }
+        static var mediumBlue: UIColor  { return UIColor(red: 80/255, green: 99/255, blue: 101/255, alpha: 1) }
+        static var lightBlue: UIColor  { return UIColor(red: 126/255, green: 157/255, blue: 157/255, alpha: 1) }
+
     }
 }
 

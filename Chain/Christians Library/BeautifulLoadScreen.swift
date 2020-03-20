@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Lottie
 
 class BeautifulLoadScreen: UIView {
     private var screenFrame = CGRect(x: UIScreen.main.bounds.origin.x, y: UIScreen.main.bounds.origin.y, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.height)
@@ -14,6 +15,12 @@ class BeautifulLoadScreen: UIView {
     var label = roundLabel()
     var labelHeight:CGFloat = 30
     var labelWidth:CGFloat = UIScreen.main.bounds.width
+    var animView = AnimationView(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+    
+    init(lottieAnimation:LottieAnimations){
+        super.init(frame: UIScreen.main.bounds)
+        setupLottie(animName: lottieAnimation.rawValue)
+    }
     
     init(fullScreen:Bool = true){
         super.init(frame: UIScreen.main.bounds)
@@ -26,6 +33,7 @@ class BeautifulLoadScreen: UIView {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
         refreshElementPosition()
     }
     
@@ -45,6 +53,21 @@ class BeautifulLoadScreen: UIView {
         } else {
             self.backgroundColor = .black
         }
+        
+        label = roundLabel(frame: CGRect(x: self.frame.midX, y: self.frame.midY, width: self.frame.width, height: labelHeight))
+        label.cornerRadius = 5
+        label.textAlignment = .center
+        label.text = "Loading..."
+        label.textColor = UIColor.white
+        label.numberOfLines = 0
+        self.addSubview(label)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        label.centerYAnchor.constraint(equalTo: self.centerYAnchor, constant: 40).isActive = true
+        label.heightAnchor.constraint(equalToConstant: 30).isActive = true
+        guard let customFont = UIFont(name: "ChaloopsW00-Reg", size: UIFont.labelFontSize) else {return}
+        label.font = UIFontMetrics.default.scaledFont(for: customFont)
+        label.adjustsFontForContentSizeCategory = true
     }
     
     //common func to init our view
@@ -52,26 +75,38 @@ class BeautifulLoadScreen: UIView {
         setupBlur()
         spinner.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         spinner.frame = spinner.frame.offsetBy(dx: 0, dy: -40)  //Shift the spinner up 20 units
-        //backgroundColor = UIColor(red: 162/255, green: 163/255, blue: 1, alpha: 0.7)
         spinner.rotate()
-        
-        label = roundLabel(frame: CGRect(x: self.frame.midX, y: self.frame.midY, width: self.frame.width, height: labelHeight))
-        label.center =  CGPoint(x: self.frame.width/2, y: self.frame.height/2 + 20)
-        label.cornerRadius = 5
-        label.textAlignment = .center
-        label.text = "Loading..."
-        label.textColor = UIColor.white
-        label.numberOfLines = 0
-        
-        self.addSubview(label)
         self.addSubview(spinner)
     }
     
     func refreshElementPosition(){
-        label.center =  CGPoint(x: self.frame.width/2, y: self.frame.height/2 + 20)
         spinner.center = CGPoint(x: self.frame.width/2, y: self.frame.height/2)
         spinner.frame = spinner.frame.offsetBy(dx: 0, dy: -40)  //Shift the spinner up 20 units
-        print(label.frame)
     }
         
+    func setupLottie(animName:String){
+        setupBlur()
+        if let animation = Animation.named(animName, subdirectory: nil){
+            animView.animation = animation
+            animView.contentMode = .scaleAspectFit
+        }else{
+            print("couldnt find the animation!")
+        }
+        self.addSubview(animView)
+        animView.translatesAutoresizingMaskIntoConstraints = false
+        animView.widthAnchor.constraint(equalToConstant: 150).isActive = true
+        animView.heightAnchor.constraint(equalToConstant: 150).isActive = true
+        animView.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        animView.bottomAnchor.constraint(equalTo: label.topAnchor, constant: 16).isActive = true
+        animView.backgroundBehavior = .pauseAndRestore
+        animView.play(fromProgress: 0, toProgress: 1, loopMode: .loop, completion: nil)
+    }
+    
+}
+
+enum LottieAnimations:String{
+    case FluffLoading = "FluffLoading"
+    case FluffLoadingColored = "FluffLoadingColored"
+    case ChainBreak = "ChainBreak"
+    case UglyChain = "uglyChain"
 }

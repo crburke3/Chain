@@ -22,7 +22,7 @@ class UserMenuCell: UITableViewCell {
     @IBAction func goToProfile(_ sender: Any) {
         let db = Firestore.firestore()
         let friendVC = ProfileViewController()
-        db.collection("users").whereField("phone", isEqualTo: phone)
+        db.collection("users").whereField("phone", isEqualTo: user.phoneNumber)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {print("Error getting documents: \(err)")} else{
                     for document in querySnapshot!.documents {

@@ -11,92 +11,115 @@ import SkyFloatingLabelTextField
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import CTKFlagPhoneNumber
 
-class SignUpViewController: UIViewController {
-    let db = Firestore.firestore()
-    let auth = ChainAuth()
-    /*
-    @IBOutlet weak var phoneNumber: SkyFloatingLabelTextField?
-    @IBOutlet weak var fullName: SkyFloatingLabelTextField?
-    @IBOutlet weak var userName: SkyFloatingLabelTextField?
-    @IBOutlet weak var verificationCode: SkyFloatingLabelTextField?
+class SignUpViewController: UIViewController, VerifyNumberViewControllerDelegate {
     
-    
-    @IBAction func signUp(_ sender: Any) {
-        auth.sendVerificationCode(phoneNumber: "+19802550653", error: { error in
-            if let error = error {
-                print(error)
-            } else {
-                //Segue to next view to enter code
-            }
-        })
-    }
-    
-    @IBAction func verifyAccount(_ sender: Any) {
-        auth.verifyCode(verificationCode: verificationCode?.text ?? "", error: { error in
-            if let error = error {
-                print(error)
-            } else {
-                //Segue to main once verified
-            }
-        })
-        //performSegue(withIdentifier: "signUpToMain".. once complete
-    }
-    
-    
-    */
-    @IBOutlet weak var phoneNumber: SkyFloatingLabelTextFieldWithIcon!
+    @IBOutlet var emailField: SkyFloatingLabelTextFieldWithIcon!
+    @IBOutlet var phoneNumber: CTKFlagPhoneNumberTextField!
     @IBOutlet weak var name: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet weak var username: SkyFloatingLabelTextFieldWithIcon!
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var confirmPassword: UITextField!
+    @IBOutlet var allOtherObjects: [Any]!
     
+    let db = Firestore.firestore()
+    let loader = BeautifulLoadScreen(lottieAnimation: .ChainBreak)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        setAlpha(alpha: 0.0)
+        view.addSubview(loader)
+        loader.isHidden = true
     }
-
-    @IBAction func nextStep(_ sender: Any) {
-        if !checkPassword() {
-            return
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseIn], animations: {
+            self.setAlpha(alpha: 1.0)
+        }, completion: nil)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        UIView.animate(withDuration: 0.25, delay: 0, options: [.curveEaseIn], animations: {
+            self.setAlpha(alpha: 0.0)
+        }, completion: nil)
+    }
+    
+    func setAlpha(alpha:CGFloat){
+        for object in allOtherObjects{
+            switch object{
+            case is UIButton:
+                (object as! UIButton).alpha = alpha
+            case is UILabel:
+                (object as! UILabel).alpha = alpha
+            case is SkyFloatingLabelTextField:
+                (object as! SkyFloatingLabelTextField).alpha = alpha
+            case is CTKFlagPhoneNumberTextField:
+                (object as! SkyFloatingLabelTextField).alpha = alpha
+            default:
+                return
+            }
         }
-        if password.text != confirmPassword.text {
-            return
-        }
-        
-        if phoneNumber.text?.count != 0 && name.text?.count != 0 && username.text?.count != 0 {
-            //Set label in next view
-            //Push next view
-            db.collection("users").whereField("phone", isEqualTo: formatPhone())
-            .getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-            
-                    }
-                    print(self.formatPhone())
-                    if querySnapshot?.count == 0 {
-                        let phoneNumber = self.formatPhone()
-                        let verifyVC = VerifyNumberViewController()
-                        verifyVC.phone = self.formatPhone()
-                        verifyVC.password = self.password.text!
-                        masterNav.pushViewController(verifyVC, animated: true) //Push verify page
-                    } else {
-                        let alert = UIAlertController(title: "Alert", message: "Number has already been taken", preferredStyle: UIAlertController.Style.alert)
-                        alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
-                        self.present(alert, animated: true, completion: nil)
-                    }
-                }
-            } //Close query
-        } else {
-            let alert = UIAlertController(title: "Alert", message: "Please fill out all fields", preferredStyle: UIAlertController.Style.alert)
+    }
+    
+    func goodFields()->Bool{
+        if true{
+            return true
+        }else{
+            let alert = UIAlertController(title: "Alert", message: "Number has already been taken", preferredStyle: UIAlertController.Style.alert)
             alert.addAction(UIAlertAction(title: "Ok", style: UIAlertAction.Style.default, handler: nil))
             self.present(alert, animated: true, completion: nil)
+            return false
         }
     }
+    
+    @IBAction func back(_ sender: Any) {
+        masterNav.popViewController(animated: true)
+    }
+    
+    @IBAction func nextStep(_ sender: Any) {
+        if !goodFields(){return}
+        loader.fadeIn()
+        let phone =  phoneNumber.getFormattedPhoneNumber()!
+        let verifyVC = VerifyNumberViewController(phoneNumber: phone)
+        verifyVC.addDelegate(key: "SignUpViewController", delegate: self)
+        masterNav.present(verifyVC, animated: true, completion: nil)
+    }
+    
+    func verifyViewControllerDidDismiss(success: Bool) {
+        loader.fadeOut()
+        if success{
+            saveString(str: password.text!, location: .password)
+            saveString(str: emailField.text!, location: .email)
+            saveString(str: phoneNumber.getFormattedPhoneNumber()!, location: .phoneNumber)
+            let phone =  phoneNumber.getFormattedPhoneNumber()!
+            let db = Firestore.firestore()
+            let emptyStrArr:[String] = []
+            let emptyDict:[[String:Any]] = [[:]]
+            let userData:[String:Any] = ["bio": "",
+                            "blocked": emptyStrArr,
+                            "invites": emptyDict,
+                            "phone": phone,
+                            "profilePhoto": "",
+                            "topPhotos": emptyStrArr,
+                            "password": password.text!,
+                            "friends": emptyDict,
+                            "email" : emailField.text!]
+        
+            let userFeed = ["posts": emptyDict]
+            db.collection("users").document(phone).setData(userData) //What if this fails?
+            db.collection("userFeeds").document(phone).setData(userFeed)
+            let additionalInfoVC = AdditionalInfoViewController()
+            additionalInfoVC.phone = phone
+            masterNav.pushViewController(additionalInfoVC, animated: true)
+        }else{
+            
+        }
+    }
+    
+
     func formatPhone() -> String {
         return "+1\(phoneNumber?.text ?? "")" //Will vary by country
     }

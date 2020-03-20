@@ -48,9 +48,13 @@ class ChainUser{
         self.bio = dict["bio"] as? String ?? ""
         //Current chains will be loaded seperately
     }
-    
-    static func initFromFirestore(with phoneNumber:String, user: @escaping(ChainUser?)->()){
         
+    static func initFromFirestore(with phoneNumber:String, user: @escaping(ChainUser?)->()){
+        let ref = masterFire.db.collection("users").document(phoneNumber)
+        ref.getDocument { (snap, err) in
+            guard let data = snap?.data() else{user(nil); return}
+            user(ChainUser(dict: data))
+        }
     }
     
     func toDict() -> [String:Any] { //To be expanded/more detailed later

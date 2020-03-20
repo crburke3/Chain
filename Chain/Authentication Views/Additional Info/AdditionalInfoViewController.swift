@@ -11,31 +11,33 @@ import PopupDialog
 import FirebaseFirestore
 import Firebase
 
-class AdditionalInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class AdditionalInfoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate, UITextViewDelegate {
 
     @IBOutlet weak var profilePic: UIImageView!
-    //@IBOutlet weak var userBio: UITextView!
     @IBOutlet weak var characterCounter: UILabel!
     @IBOutlet weak var bioText: UITextView!
+    @IBOutlet var saveButton: RoundButton!
     
     var phone: String = ""
+    let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //profilePic.image = "user icon"
+        view.addSubview(loader)
+        bioText.delegate = self
+        loader.isHidden = true
+        profilePic.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(imageTapped(sender:))))
+        profilePic.isUserInteractionEnabled = true
         profilePic.layer.borderWidth = 1
         profilePic.layer.masksToBounds = false
         profilePic.layer.borderColor = UIColor.black.cgColor
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         profilePic.clipsToBounds = true
-        // Do any additional setup after loading the view.
     }
 
-    @IBAction func setPic(_ sender: Any) {
+    @objc func imageTapped(sender: UIImageView){
         let popup = PopupDialog(title: "Set Profile Photo", message: "Where do you want to get your profile picture from?")
-        let cancelButton = CancelButton(title: "CANCEL") {
-            print("Canceled")
-        }
+        let cancelButton = CancelButton(title: "CANCEL") {}
         let imageLibraryButton = DefaultButton(title: "Phone Library") {
             self.getImage(source: "imageLibrary")
         }
@@ -45,22 +47,53 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
         popup.addButtons([imageLibraryButton, cameraButton, cancelButton])
         present(popup, animated: true, completion: nil)
     }
+        
+    @IBAction func skip(_ sender: Any) {
+        let firstChain = PostChain(chainName: "firstChain", load: true)
+        let mainVC = ChainViewController.initFrom(chain: firstChain)
+        masterNav.pushViewController(mainVC, animated: true)
+    }
     
-    
-    
-    @IBAction func nextPage(_ sender: Any) {
+    @IBAction func save(_ sender: Any) {
+        loader.fadeIn()
         let db = Firestore.firestore()
-        db.collection("users").document(phone).updateData(["bio" : bioText.text])
-        //Upload profile picture to database and then push vc
+        db.collection("users").document(phone).updateData(["bio" : bioText.text ?? "No Bio Yet"])
         if profilePic.image != nil {
             uploadImage(image: profilePic.image!) { (error) in
+                if error != nil{
+                    self.loader.fadeOut()
+                    self.showPopUp(_title: "Error Uploading Image", _message: "please try again")
+                    return
+                }else{
+                    masterFire.getCurrentUsersData(phone: self.phone) { (error) in
+                        self.loader.fadeOut()
+                        let firstChain = PostChain(chainName: "firstChain", load: true)
+                        let mainVC = ChainViewController.initFrom(chain: firstChain)
+                        masterNav.pushViewController(mainVC, animated: true)
+                    }
+                }
             }
         } else {
+            loader.fadeOut()
             masterFire.getCurrentUsersData(phone: phone) { (error) in
-                //Get users data
+                self.loader.fadeOut()
+                let firstChain = PostChain(chainName: "firstChain", load: true)
+                let mainVC = ChainViewController.initFrom(chain: firstChain)
+                masterNav.pushViewController(mainVC, animated: true)
             }
         }
     }
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text.count <= 250{
+            print(text.count)
+            characterCounter.text = "\(text.count)/250"
+            return true
+        }else{
+            return false
+        }
+    }
+    
 }
 extension AdditionalInfoViewController {
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
@@ -88,7 +121,7 @@ extension AdditionalInfoViewController {
     }
     
     //Upload Image
-    func uploadImage(image: UIImage, completion: @escaping (String)->()) {
+    func uploadImage(image: UIImage, completion: @escaping (String?)->()) {
         var urlString = "" //Will hold URL string to create Chain Image
         let firestoreRef = Firestore.firestore().collection("users").document("+19802550653")
         let data = image.jpegData(compressionQuality: 1.0)!
@@ -110,16 +143,10 @@ extension AdditionalInfoViewController {
                         masterNav.showPopUp(_title: "Error Uploading Image to Chain", _message: error1.localizedDescription)
                         completion(error1.localizedDescription)
                     } else{
-                        completion("Uploaded Profile Pic")
-                        masterFire.getCurrentUsersData(phone: self.phone) { (error) in
-                            //Get users data
-                        }
-                        let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-                        mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
-                        masterNav.pushViewController(mainVC, animated: true)
+                        completion(nil)
                     }
-                   }
-                })
-            }
+               }
+            })
+        }
     }
 }

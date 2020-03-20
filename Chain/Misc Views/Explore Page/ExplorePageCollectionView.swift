@@ -48,6 +48,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChain", for: indexPath) as! ExplorePageCell
+            if otherChains.count < indexPath.row{return UICollectionViewCell()}
             if otherChains[indexPath.row].loaded == .LOADED {
                 cell.chain = otherChains[indexPath.row]
                 cell.cellDidLoad()

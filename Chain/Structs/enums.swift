@@ -13,7 +13,7 @@ enum SaveKeys:String{
     case username
     case password
     case phoneNumber
-    
+    case email
 }
 
 enum LoadState:String{

@@ -26,7 +26,6 @@ class ExplorePageCell: UICollectionViewCell {
             roundView.addGradient(colorScheme: .ChainOriginal)
             previewImageView.roundCorners(corners: [.allCorners], radius: 5)
         }
-
     }
     
     func listenToDate(){

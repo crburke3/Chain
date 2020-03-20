@@ -32,6 +32,34 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHg-J2-b4G" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
+                                <rect key="frame" x="87.5" y="474.5" width="200" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="1kX-pJ-5Cy"/>
+                                    <constraint firstAttribute="width" constant="200" id="Ye8-NJ-Udo"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
+                                <state key="normal" title="Sign Up">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="signUpTappe:" destination="kCQ-PP-hcI" eventType="touchUpInside" id="7EV-D6-mAD"/>
+                                </connections>
+                            </button>
+                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LGY-Un-qHA" customClass="RoundView" customModule="Chain" customModuleProvider="target">
+                                <rect key="frame" x="157" y="414" width="49" height="35"/>
+                                <color key="backgroundColor" red="0.94229608769999995" green="0.4164805412" blue="0.36561489110000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Chain" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="djX-3j-M7T">
                                 <rect key="frame" x="113.5" y="201.5" width="148" height="64"/>
                                 <constraints>
@@ -50,7 +78,7 @@
                                     <constraint firstAttribute="height" constant="50" id="7td-rM-0PN"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
-                                <state key="normal" title="Enter">
+                                <state key="normal" title="Sign In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
@@ -59,27 +87,32 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="enterTapped:" destination="kCQ-PP-hcI" eventType="touchUpInside" id="TsK-rE-xdl"/>
+                                    <action selector="signInTapped:" destination="kCQ-PP-hcI" eventType="touchUpInside" id="NWx-5U-LO8"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.49435305595397949" green="0.61614203453063965" blue="0.616829514503479" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="Vaa-2b-Efm" firstAttribute="centerY" secondItem="cxZ-lZ-nPa" secondAttribute="centerY" constant="100" id="70p-59-sBY"/>
+                            <constraint firstItem="LGY-Un-qHA" firstAttribute="centerY" secondItem="Vaa-2b-Efm" secondAttribute="centerY" id="D2w-eJ-JYi"/>
                             <constraint firstItem="djX-3j-M7T" firstAttribute="centerX" secondItem="cxZ-lZ-nPa" secondAttribute="centerX" id="OOR-Nz-qJZ"/>
+                            <constraint firstItem="aHg-J2-b4G" firstAttribute="top" secondItem="Vaa-2b-Efm" secondAttribute="bottom" constant="16" id="ScH-Mj-bJJ"/>
+                            <constraint firstItem="LGY-Un-qHA" firstAttribute="centerX" secondItem="Vaa-2b-Efm" secondAttribute="centerX" id="beW-aY-Qx8"/>
                             <constraint firstItem="Vaa-2b-Efm" firstAttribute="centerX" secondItem="cxZ-lZ-nPa" secondAttribute="centerX" id="cUI-uH-5Ww"/>
+                            <constraint firstItem="aHg-J2-b4G" firstAttribute="centerX" secondItem="cxZ-lZ-nPa" secondAttribute="centerX" id="gKr-xE-tui"/>
                             <constraint firstItem="djX-3j-M7T" firstAttribute="centerY" secondItem="cxZ-lZ-nPa" secondAttribute="centerY" constant="-100" id="j7M-dG-bah"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cxZ-lZ-nPa"/>
                     </view>
                     <navigationItem key="navigationItem" id="syh-Ta-Mrc"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="show" identifier="toMain" id="ZrV-zP-eqN"/>
+                        <outlet property="expensiveView" destination="LGY-Un-qHA" id="6oP-KA-KXX"/>
+                        <outlet property="signInButton" destination="Vaa-2b-Efm" id="6ka-pZ-Gep"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HAg-JN-8jF" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-874.39999999999998" y="103.89805097451276"/>
+            <point key="canvasLocation" x="-722.39999999999998" y="103.89805097451276"/>
         </scene>
         <!--Chain View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -383,7 +416,7 @@
             <objects>
                 <viewController storyboardIdentifier="ExploreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U8T-YC-rZl" customClass="ExploreViewController" customModule="Chain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="sKH-Sl-BLf">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="647"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Explore Page" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DXB-Lf-5cn">
@@ -491,7 +524,7 @@
                                 </cells>
                             </collectionView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="p9f-Sg-pHK">
-                                <rect key="frame" x="0.0" y="278" width="375" height="389"/>
+                                <rect key="frame" x="0.0" y="278" width="375" height="369"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="tIC-42-o2T">
                                     <size key="itemSize" width="150" height="150"/>

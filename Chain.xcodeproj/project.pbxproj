@@ -51,6 +51,8 @@
 		FA63C884238DF4D800B30312 /* ChainUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C883238DF4D800B30312 /* ChainUser.swift */; };
 		FA63C886238E07A400B30312 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C885238E07A400B30312 /* MainTableView.swift */; };
 		FA63C888238E084200B30312 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C887238E084200B30312 /* MainCell.swift */; };
+		FA6ED2FE242557F800F3F30E /* FluffLoadingColored.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */; };
+		FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FD242557F800F3F30E /* FluffLoading.json */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
 		FA7E366F238DB12A00488000 /* ChainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366E238DB12A00488000 /* ChainViewController.swift */; };
 		FA7E3672238DB12A00488000 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FA7E3670238DB12A00488000 /* Main.storyboard */; };
@@ -138,6 +140,8 @@
 		FA63C883238DF4D800B30312 /* ChainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUser.swift; sourceTree = "<group>"; };
 		FA63C885238E07A400B30312 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		FA63C887238E084200B30312 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoadingColored.json; sourceTree = "<group>"; };
+		FA6ED2FD242557F800F3F30E /* FluffLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoading.json; sourceTree = "<group>"; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FA7E366A238DB12A00488000 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		FA7E366E238DB12A00488000 /* ChainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainViewController.swift; sourceTree = "<group>"; };
@@ -341,6 +345,17 @@
 			path = "New Chain View";
 			sourceTree = "<group>";
 		};
+		FA6ED2FB242557F800F3F30E /* LottieAnimations */ = {
+			isa = PBXGroup;
+			children = (
+				FA867FDC23CEC44A00B638F8 /* ChainBreak.json */,
+				FA9C5B5323C5793600F1B41A /* uglyChain.json */,
+				FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */,
+				FA6ED2FD242557F800F3F30E /* FluffLoading.json */,
+			);
+			path = LottieAnimations;
+			sourceTree = "<group>";
+		};
 		FA7E365E238DB12A00488000 = {
 			isa = PBXGroup;
 			children = (
@@ -465,6 +480,7 @@
 		FA9C5B3723C553C500F1B41A /* Christians Library */ = {
 			isa = PBXGroup;
 			children = (
+				FA6ED2FB242557F800F3F30E /* LottieAnimations */,
 				FA9C5B3823C553C500F1B41A /* DecodableObject.swift */,
 				FA9C5B3923C553C500F1B41A /* ChristiansLibrary.swift */,
 				FA9C5B3A23C553C500F1B41A /* BeautifulLoadScreen.swift */,
@@ -481,8 +497,6 @@
 		FA9C5B5223C5790B00F1B41A /* Animations */ = {
 			isa = PBXGroup;
 			children = (
-				FA867FDC23CEC44A00B638F8 /* ChainBreak.json */,
-				FA9C5B5323C5793600F1B41A /* uglyChain.json */,
 				FA867FDE23CEC4D100B638F8 /* ChainBreakLoader.swift */,
 				FA06BC6723CF776B002055AD /* ChainBreakLoader.xib */,
 			);
@@ -577,8 +591,10 @@
 				FA7E36B1238DCD5C00488000 /* SignUpViewController.xib in Resources */,
 				FA7E3672238DB12A00488000 /* Main.storyboard in Resources */,
 				689E93D623DE136B00EED90F /* InviteTableViewCell.xib in Resources */,
+				FA6ED2FE242557F800F3F30E /* FluffLoadingColored.json in Resources */,
 				686B15B723DB846A00FB31DC /* FriendTableViewCell.xib in Resources */,
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
+				FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */,
 				FA9CB63823EE661E00D43F04 /* GoogleService-Info.plist in Resources */,
 				68BDBD3F242094BE00613A93 /* SearchUsersViewController.xib in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,

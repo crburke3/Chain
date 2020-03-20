@@ -123,35 +123,31 @@ class ChainFireStore {
     func getCurrentUsersData(phone: String, error: @escaping (String?)->()) {
         //When user signs in, gather their data
         db.collection("users").whereField("phone", isEqualTo: phone).getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
-                print("\(document.documentID) => \(document.data())")
-                //currentUser.friends = document.get("friends") as? [[String:Any]] ?? [[:]]
-                let blocked = document.get("blocked") as? [String] ?? [""]
-                let invites = document.get("invites") as? [[String:Any]] ?? [[:]]
-                let phone = document.get("phone") as? String ?? ""
-                let profilePhoto = document.get("profilePhoto") as? String ?? ""
-                let topPhotos = document.get("topPhotos") as? [[String:Any]] ?? [[:]]
-                currentUser.bio = document.get("bio") as? String ?? ""
-                currentUser.name = document.get("name") as? String ?? ""
-                currentUser.username = document.get("username") as? String ?? ""
-                currentUser.blocked = blocked
-                currentUser.invites = invites
-                currentUser.phoneNumber = phone
-                currentUser.profile = profilePhoto
-                currentUser.topPosts = topPhotos
-                //Need to save chains, friends, and blocked as well
-                
-            }
-            currentUser.getFriends()
-            
-            //let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-            let mainVC = ExploreViewController()
-            //mainVC.mainChain = PostChain(chainName: "firstChain", load: true)
-            //mainVC.mainChain.chainUUID = "firstChain"
-            masterNav.pushViewController(mainVC, animated: true) //Push MainChain
+            if let err = err {
+                print("Error getting documents: \(err)")
+                error(err.localizedDescription)
+            } else {
+                for document in querySnapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    //currentUser.friends = document.get("friends") as? [[String:Any]] ?? [[:]]
+                    let blocked = document.get("blocked") as? [String] ?? [""]
+                    let invites = document.get("invites") as? [[String:Any]] ?? [[:]]
+                    let phone = document.get("phone") as? String ?? ""
+                    let profilePhoto = document.get("profilePhoto") as? String ?? ""
+                    let topPhotos = document.get("topPhotos") as? [[String:Any]] ?? [[:]]
+                    currentUser.bio = document.get("bio") as? String ?? ""
+                    currentUser.name = document.get("name") as? String ?? ""
+                    currentUser.username = document.get("username") as? String ?? ""
+                    currentUser.blocked = blocked
+                    currentUser.invites = invites
+                    currentUser.phoneNumber = phone
+                    currentUser.profile = profilePhoto
+                    currentUser.topPosts = topPhotos
+                    //Need to save chains, friends, and blocked as well
+                    
+                }
+                currentUser.getFriends()
+                error(nil)
             }
         }
     }

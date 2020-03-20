@@ -37,48 +37,32 @@ class ChainAuth {
     //Have one successful loging/verify before creating user doc
     
     func verifyCode(verificationCode: String, error: @escaping (String?)->()) {
-        let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
+        guard let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") else{error("No saved Code"); return}
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode) //Load object
         //Sign In
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-          if let error = error {
-               print(error.localizedDescription) //Failed to sign in
-               return
-          } else {
-                print("Signed in successfully")//Signed In
-                self.signUpUser(create: ChainUser(_username: "mbr", _phoneNumber: "+19802550653", _name: "Michael Rutkowksi")) { (error) in
-                        if let err = error {
-                            print(err)
-                            return
-                        } else {
-                           //self.currUser = create //Set current user object to sign up user //Signed user up
-                        }
-                  //auth.signUpUser(create: user))
-                }
+        Auth.auth().signIn(with: credential) { (authResult, err1) in
+            if let error1 = err1 {
+                print(error1.localizedDescription) //Failed to sign in
+                error(error1.localizedDescription)
+                return
+            }else{
+                print("Authenticated in successfully")//Signed In
+                error(nil)
             }
         }
     }
     
-    func logInUserAfterVerification(verificationCode: String, phone: String, password: String, error: @escaping (String?)->()) {
+    func verifyCodeAndLogin(verificationCode: String, phone: String, error: @escaping (String?)->()) {
         let verificationID = UserDefaults.standard.string(forKey: "authVerificationID") ?? "" //Retrieve ID
         let credential = PhoneAuthProvider.provider().credential(withVerificationID: verificationID, verificationCode: verificationCode) //Load object
         //Sign In
-        Auth.auth().signInAndRetrieveData(with: credential) { (authResult, error) in
-          if let error = error {
-               print(error.localizedDescription) //Failed to sign in
+        Auth.auth().signIn(with: credential) { (authResult, err1) in
+          if let error1 = err1 {
+               print(error1.localizedDescription) //Failed to sign in
                return
           } else {
                 print("Signed in successfully")//Signed In
-                //Segue to additional info view
-                //Create users, userFeeds docs
-                let db = Firestore.firestore()
-            let userData = ["bio": "","blocked": [""], "invites": [[:]], "phone": phone, "profilePhoto": "", "topPhotos": [""], "password": password, "friends": [[:]]] as [String:Any]
-                let userFeed = ["posts": [[:]]]
-                db.collection("users").document(phone).setData(userData) //What if this fails?
-                db.collection("userFeeds").document(phone).setData(userFeed)
-                let additionalInfoVC = AdditionalInfoViewController()
-                additionalInfoVC.phone = phone
-                masterNav.pushViewController(additionalInfoVC, animated: true)
+                error(nil)
             }
         }
     }
@@ -95,10 +79,6 @@ class ChainAuth {
     }
     
     func checkUsernameAvailability() {
-        
-    }
-    
-    func signInWithPassword(phone: String, password: String) {
         
     }
     
@@ -134,6 +114,33 @@ class ChainAuth {
                 print("Document successfully updated")
                 masterFire.getCurrentUsersData(phone: phone) { (error) in
                     //
+                }
+            }
+        }
+    }
+    
+    static func emailFromPhone(phone:String, email: @escaping (String?)->()){
+        let ref = masterFire.db.collection("users").document(phone)
+        ref.getDocument { (snap, err) in
+            guard let _email = snap?.data()?["email"] as? String else{email(nil); return}
+            email(_email)
+        }
+    }
+    
+    static func initFrom(phone:String, password:String, chainAuth: @escaping(ChainAuth?)->()){
+        let retAuth = ChainAuth()
+        ChainAuth.emailFromPhone(phone: phone) { (email) in
+            if email == nil{chainAuth(nil); return}
+            Auth.auth().signIn(withEmail: email!, password: password) { (result, error) in
+                if result == nil || error != nil{
+                    print("Login Error \(error?.localizedDescription)")
+                    chainAuth(nil); return
+                }
+                ChainUser.initFromFirestore(with: phone) { (user) in
+                    if user != nil{
+                        retAuth.currUser = user!
+                        chainAuth(retAuth)
+                    }
                 }
             }
         }
