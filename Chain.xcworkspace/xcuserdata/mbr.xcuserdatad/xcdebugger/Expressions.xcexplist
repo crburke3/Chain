@@ -139,6 +139,14 @@
          </PersistentStrings>
       </ContextState>
       <ContextState
+         contextName = "ChainFireStore.deleteChainFromFirestore(path:chain:user:deathDate:):ChainFireStore.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "documentDeathDate">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
          contextName = "closure #1 in ExploreViewController.collectionView(_:cellForItemAt:):ExplorePageCollectionView.swift">
          <PersistentStrings>
             <PersistentString
@@ -241,6 +249,14 @@
             </PersistentString>
             <PersistentString
                value = "chainSource">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "closure #1 in CurrentUserProfileViewController.getCurrentChains():CurrentUserProfileViewController.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "currentChains">
             </PersistentString>
          </PersistentStrings>
       </ContextState>

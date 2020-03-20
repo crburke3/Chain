@@ -22,7 +22,7 @@ class UserMenuCell: UITableViewCell {
     @IBAction func goToProfile(_ sender: Any) {
         let db = Firestore.firestore()
         let friendVC = ProfileViewController()
-        db.collection("users").whereField("phone", isEqualTo: phone)
+        db.collection("users").whereField("phone", isEqualTo: user.phoneNumber)
             .getDocuments() { (querySnapshot, err) in
                 if let err = err {print("Error getting documents: \(err)")} else{
                     for document in querySnapshot!.documents {
@@ -42,7 +42,6 @@ class UserMenuCell: UITableViewCell {
         self.profilePic.layer.borderColor = UIColor.black.cgColor
         self.profilePic.layer.cornerRadius = self.profilePic.frame.height/2
         self.profilePic.clipsToBounds = true
-        
         self.selectedIcon.layer.borderWidth = 0.5
         self.selectedIcon.layer.masksToBounds = false
         self.selectedIcon.layer.borderColor = UIColor.lightGray.cgColor

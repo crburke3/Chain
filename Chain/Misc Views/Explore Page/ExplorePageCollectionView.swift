@@ -48,11 +48,11 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChain", for: indexPath) as! ExplorePageCell
-            if otherChains[indexPath.row].loaded == .LOADED {
-                cell.chain = otherChains[indexPath.row]
+            if topChains[indexPath.row].loaded == .LOADED {
+                cell.chain = topChains[indexPath.row]
                 cell.cellDidLoad()
-                cell.titleLabel.text = otherChains[indexPath.row].chainName
-                cell.deathDate = otherChains[indexPath.row].deathDate
+                cell.titleLabel.text = topChains[indexPath.row].chainName
+                cell.deathDate = topChains[indexPath.row].deathDate
                 cell.listenToDate()
             }
             return cell

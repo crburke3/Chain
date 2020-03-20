@@ -207,12 +207,20 @@ class ChainFireStore {
         }
     }
     
-    func deleteChainFromFirestore(path: String, uuid: String, deathDate: Timestamp) {
+    func deleteChainFromFirestore(path: String, chain: String, user: String, deathDate: Timestamp) {
         let db = Firestore.firestore()
         let documentDeathDate = deathDate.dateValue()
+        print(documentDeathDate)
+        print(Date())
         if Date() > documentDeathDate {
             print("Triggering delete function")//Delete posts sub-collection
             //Delete function out of Current User Chains, Chains, User Feeds
+            let functions = Functions.functions()
+            let callData:[String:Any] = ["chain":chain, "user": user]
+            functions.httpsCallable("deleteChain").call(callData) { (result, error) in
+                //
+            }
+            
         }
         
     }
