@@ -40,6 +40,7 @@ extension ExploreViewController{
            } else {
                for document in querySnapshot!.documents {
                     chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                masterFire.deleteChainFromFirestore(path: "general", chain: document.get("chainUUID") as! String, user: currentUser.phoneNumber, deathDate: document.get("deathDate") as! Timestamp)
                     masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
                    //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
                 }

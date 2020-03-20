@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class CurrentUserProfileViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -15,12 +16,33 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     @IBOutlet weak var userBio: UILabel!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    var currentChains = [PostChain]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //Grab info from currentUser
+        collectionView.register(UINib(nibName: "ChainsCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ChainsCollectionViewCell")
         setUpImage() //Gets profile photo and formats it correctly
         username.text = currentUser.username
         userBio.text = currentUser.bio
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        getCurrentChains()
+        self.collectionView.reloadData()
+    }
+    
+    func getCurrentChains() {
+        let db = Firestore.firestore()
+        db.collection("users").document(currentUser.phoneNumber).collection("currentChains").getDocuments() { (querySnapshot, error) in
+            if let error = error {
+                print("Error getting documents: \(error)")
+            } else {
+                for document in querySnapshot!.documents {
+                    self.currentChains.append(PostChain(dict: document.data()))
+                }
+                self.collectionView.reloadData()
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) { //Called after child view controller is popped from stack
@@ -56,7 +78,12 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     }
     
     
+    
    //
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+       return currentChains.count
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
          let height = view.frame.size.height
@@ -68,22 +95,13 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
          return 1
      }
      
-     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-         return 10
-     }
+     
      
      func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
          //Edit cell here
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChainsCollectionViewCell", for: indexPath) as! ChainsCollectionViewCell
-         cell.imagePreview.image = UIImage()
-         //cell.imagePreview.frame.height = collectionView.frame.height
-         //cell.imagePreview.frame.width = collectionView.frame.height
-         cell.imagePreview.layer.borderWidth = 1
-         cell.imagePreview.layer.masksToBounds = false
-         cell.imagePreview.layer.borderColor = UIColor.black.cgColor
-         cell.imagePreview.layer.cornerRadius = 3
-         cell.imagePreview.clipsToBounds = true
-         collectionView.collectionViewLayout.collectionViewContentSize.width
+         cell.chain = currentChains[indexPath.row]
+         cell.cellDidLoad()
          return cell
      }
      

@@ -42,7 +42,6 @@ class UserMenuCell: UITableViewCell {
         self.profilePic.layer.borderColor = UIColor.black.cgColor
         self.profilePic.layer.cornerRadius = self.profilePic.frame.height/2
         self.profilePic.clipsToBounds = true
-        
         self.selectedIcon.layer.borderWidth = 0.5
         self.selectedIcon.layer.masksToBounds = false
         self.selectedIcon.layer.borderColor = UIColor.lightGray.cgColor
