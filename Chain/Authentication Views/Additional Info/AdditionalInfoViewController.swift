@@ -67,9 +67,8 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
                 }else{
                     masterFire.getCurrentUsersData(phone: self.phone) { (error) in
                         self.loader.fadeOut()
-                        let firstChain = PostChain(chainName: "firstChain", load: true)
-                        let mainVC = ChainViewController.initFrom(chain: firstChain)
-                        masterNav.pushViewController(mainVC, animated: true)
+                        let explore = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                        masterNav.pushViewController(explore, animated: true)
                     }
                 }
             }
@@ -77,9 +76,8 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
             loader.fadeOut()
             masterFire.getCurrentUsersData(phone: phone) { (error) in
                 self.loader.fadeOut()
-                let firstChain = PostChain(chainName: "firstChain", load: true)
-                let mainVC = ChainViewController.initFrom(chain: firstChain)
-                masterNav.pushViewController(mainVC, animated: true)
+                let explore = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                masterNav.pushViewController(explore, animated: true)
             }
         }
     }

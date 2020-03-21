@@ -66,6 +66,8 @@ class SignInViewController: UIViewController {
     }
     
     func goodFields()->Bool{
+        guard let phone = phoneNumber.getFormattedPhoneNumber(),
+            let pass = password.text else{ return false}
         return true
     }
     

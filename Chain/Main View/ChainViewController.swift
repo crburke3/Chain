@@ -12,6 +12,7 @@ import FloatingPanel
 import FanMenu
 import Kingfisher
 import Firebase
+import ParallaxHeader
 
 //import SideMenuSwift
 
@@ -27,9 +28,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         masterNav.pushViewController(currentUserProfileVC, animated: true) //Push Profile
         
     }
-    @IBOutlet weak var profileView: UIImageView!
     
-  
+    let userHeader = UserHeaderView(frame: .zero)
     var fpc: FloatingPanelController!
     let sendButton = UIButton()
     let cameraVC = CameraViewController()
@@ -52,7 +52,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         mainChain.loadPost(postSource: chainSource) { (post) in //chainSource -> global or general
             if self.mainChain.posts.count == 0 {
                 self.mainChain.posts.append(post)
-                //self.mainChain.posts[0].widthImage = 400
+//                self.mainChain.posts[0].widthImage = 400
                 //self.mainChain.posts[0].heightImage = 400
                 self.tableView.reloadData()
             }
@@ -62,17 +62,23 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         cameraVC.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
+
+        tableView.parallaxHeader.view = userHeader
+        tableView.parallaxHeader.height = 140
+        tableView.parallaxHeader.minimumHeight = 0
+        tableView.parallaxHeader.mode = .bottomFill
+        tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
+            print(parallaxHeader.progress)
+            if parallaxHeader.progress > 1{
+                let dif = (parallaxHeader.progress - 1) * 100
+                self.userHeader.specialHeight.constant = dif
+            }
+        }
         tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) {
             self.reloadChain()
         }
+
         self.reloadChain()
-        profileView.kf.setImage(with: URL(string: currentUser.profile ))
-        profileView.layer.borderWidth = 1
-        profileView.layer.masksToBounds = false
-        profileView.layer.borderColor = UIColor.black.cgColor
-        profileView.layer.cornerRadius = profileView.frame.height/2
-        profileView.clipsToBounds = true
-        profileView.contentMode = .scaleAspectFill
     }
     
     override func viewWillDisappear(_ animated: Bool) {

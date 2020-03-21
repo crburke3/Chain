@@ -2,6 +2,7 @@ ${PODS_ROOT}/Target Support Files/Pods-Chain/Pods-Chain-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework
 ${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework
 ${BUILT_PRODUCTS_DIR}/BoringSSL-GRPC/openssl_grpc.framework
+${BUILT_PRODUCTS_DIR}/BouncyLayout/BouncyLayout.framework
 ${BUILT_PRODUCTS_DIR}/CRRefresh/CRRefresh.framework
 ${BUILT_PRODUCTS_DIR}/CTKFlagPhoneNumber/CTKFlagPhoneNumber.framework
 ${BUILT_PRODUCTS_DIR}/CameraKit-iOS/CameraKit_iOS.framework
@@ -17,6 +18,7 @@ ${BUILT_PRODUCTS_DIR}/KKPinCodeTextField/KKPinCodeTextField.framework
 ${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework
 ${BUILT_PRODUCTS_DIR}/MBRadioCheckboxButton/MBRadioCheckboxButton.framework
 ${BUILT_PRODUCTS_DIR}/Macaw/Macaw.framework
+${BUILT_PRODUCTS_DIR}/ParallaxHeader/ParallaxHeader.framework
 ${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework
 ${BUILT_PRODUCTS_DIR}/PopupDialog/PopupDialog.framework
 ${BUILT_PRODUCTS_DIR}/Protobuf/protobuf.framework

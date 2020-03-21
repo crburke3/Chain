@@ -8,61 +8,31 @@
 
 import UIKit
 import Firebase
+import BouncyLayout
 
 class ExploreViewController: UIViewController, PostChainDelegate {
     
     @IBOutlet weak var collectionViewA: UICollectionView!
-    @IBOutlet weak var collectionViewB: UICollectionView!
-    @IBOutlet weak var switchFeeds: UIButton!
-    
+    var topChains:[PostChain] = []
+    var otherChains:[PostChain] = [] //Will hold Friend's or Global feed
+    var collViewIndexReference:[String:IndexPath] = [:]
+
     @IBAction func goBack(_ sender: Any) {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
         }
     }
-    @IBAction func switchFeedsAction(_ sender: Any) {
-        if switchFeeds.titleLabel?.text == "Switch to Friend's Feed" {
-            switchFeeds.setTitle("Switch to Global Feed", for: .normal)
-            //Reload bottom collection view
-            print("Reloading bottom collection view to show Friend's feed")
-            masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
-            loadFriendsFeed(returnNumber: 4) { (chains) in
-                self.otherChains.removeAll()
-                self.otherChains = chains
-                print("Retrieved User Feed")
-                self.collectionViewA.reloadData() //A is bottom collection view
-            }
-        } else {
-            switchFeeds.setTitle("Switch to Friend's Feed", for: .normal)
-            //Reload bottom collection view
-            print("Reloading bottom collection view to show Global feed")
-            masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
-            loadUserFeed(returnNumber: 4) { (chains) in
-                self.otherChains.removeAll()
-                self.otherChains = chains
-                print("Retrieved Global Feed")
-                self.collectionViewA.reloadData()
-            }
-        }
-    }
-    
-    
-    var topChains:[PostChain] = []
-    var otherChains:[PostChain] = [] //Will hold Friend's or Global feed
-    //var friendsChains:[PostChain] = []
-    
-    var collViewIndexReference:[String:IndexPath] = [:]
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        switchFeeds.setTitle("Switch to Global Feed", for: .normal)
-        //By default show friend's feed
+        //collectionViewA.collectionViewLayout = BouncyLayout(style: .prominent)
+        let collectionViewLayout = collectionViewA.collectionViewLayout as? UICollectionViewFlowLayout
+        collectionViewLayout?.sectionInset = .init(top: 4, left: 24, bottom: 24, right: 24)
+        collectionViewLayout?.invalidateLayout()
         collectionViewA.delegate = self
         collectionViewA.dataSource = self
-        collectionViewB.dataSource = self
-        collectionViewB.delegate = self
         masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+
         loadUserFeed(returnNumber: 4) { (chains) in
             self.otherChains = chains
             print("Retrieved User Feed")
@@ -70,9 +40,15 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         }
         loadGlobalChainsID { (postChains) in
             self.topChains = postChains
-            //chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
-            //self.globalChains.append(chain)
-            self.collectionViewB.reloadData()
+            self.collectionViewA.reloadData() //A is bottom collection view
+        }
+        
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            for cell in self.collectionViewA.visibleCells{
+                if let castCell = cell as? ExplorePageCell{
+                    castCell.updateTimeLabel()
+                }
+            }
         }
     }
     
@@ -81,9 +57,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         collectionViewA.reloadItems(at: [chainIndex])
     }
     
-    func chainGotNewPost(post: ChainImage) {
-        
-    }
+    func chainGotNewPost(post: ChainImage) {}
     
     @IBAction func addChain(_ sender: Any) {
         masterNav.pushViewController(NewChainViewController(), animated: true)

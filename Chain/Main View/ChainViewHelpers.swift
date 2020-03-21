@@ -101,6 +101,7 @@ extension ChainViewController{
  
     
     func reloadChain(){
+        tableView.cr.endHeaderRefresh()
         /*
         mainChain.loadPost { (err) in
             if err != nil{

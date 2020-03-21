@@ -57,5 +57,9 @@ target 'Chain' do
   pod 'CameraKit-iOS'
   pod 'iOSPhotoEditor'
   pod 'FloatingPanel'
+  pod "BouncyLayout"
+  pod 'ParallaxHeader', '~> 3.0.0'
+
+
   
 end

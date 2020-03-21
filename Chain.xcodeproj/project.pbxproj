@@ -51,6 +51,9 @@
 		FA63C884238DF4D800B30312 /* ChainUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C883238DF4D800B30312 /* ChainUser.swift */; };
 		FA63C886238E07A400B30312 /* MainTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C885238E07A400B30312 /* MainTableView.swift */; };
 		FA63C888238E084200B30312 /* MainCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA63C887238E084200B30312 /* MainCell.swift */; };
+		FA6D483F2425A94300EEC8E8 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6D483E2425A94300EEC8E8 /* UserHeaderView.xib */; };
+		FA6D48412425A94F00EEC8E8 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */; };
+		FA6D48432425C6F100EEC8E8 /* ExploreHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */; };
 		FA6ED2FE242557F800F3F30E /* FluffLoadingColored.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */; };
 		FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FD242557F800F3F30E /* FluffLoading.json */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
@@ -140,6 +143,9 @@
 		FA63C883238DF4D800B30312 /* ChainUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainUser.swift; sourceTree = "<group>"; };
 		FA63C885238E07A400B30312 /* MainTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableView.swift; sourceTree = "<group>"; };
 		FA63C887238E084200B30312 /* MainCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCell.swift; sourceTree = "<group>"; };
+		FA6D483E2425A94300EEC8E8 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserHeaderView.xib; sourceTree = "<group>"; };
+		FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
+		FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderReusableView.swift; sourceTree = "<group>"; };
 		FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoadingColored.json; sourceTree = "<group>"; };
 		FA6ED2FD242557F800F3F30E /* FluffLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoading.json; sourceTree = "<group>"; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -345,6 +351,15 @@
 			path = "New Chain View";
 			sourceTree = "<group>";
 		};
+		FA6D483D2425A8F300EEC8E8 /* EmbeddedVews */ = {
+			isa = PBXGroup;
+			children = (
+				FA6D483E2425A94300EEC8E8 /* UserHeaderView.xib */,
+				FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */,
+			);
+			path = EmbeddedVews;
+			sourceTree = "<group>";
+		};
 		FA6ED2FB242557F800F3F30E /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
@@ -402,6 +417,7 @@
 		FA7E367E238DB91100488000 /* Main View */ = {
 			isa = PBXGroup;
 			children = (
+				FA6D483D2425A8F300EEC8E8 /* EmbeddedVews */,
 				FA7E366E238DB12A00488000 /* ChainViewController.swift */,
 				FA9C5BC723C648A000F1B41A /* ChainViewHelpers.swift */,
 				FA63C885238E07A400B30312 /* MainTableView.swift */,
@@ -510,6 +526,7 @@
 				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
 				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
 				FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */,
+				FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */,
 			);
 			path = "Explore Page";
 			sourceTree = "<group>";
@@ -578,6 +595,7 @@
 				6892BD6323D23AF30021A3E2 /* VerifyNumberViewController.xib in Resources */,
 				6848594923D65C4200AFEB7C /* ChangePasswordViewController.xib in Resources */,
 				689E93D223DE125300EED90F /* InvitesViewController.xib in Resources */,
+				FA6D483F2425A94300EEC8E8 /* UserHeaderView.xib in Resources */,
 				686B15A523D8E58000FB31DC /* CurrentUserProfileViewController.xib in Resources */,
 				FA7E36B7238DD20400488000 /* CameraViewController.xib in Resources */,
 				FA7E36AB238DCD3B00488000 /* SignInViewController.xib in Resources */,
@@ -657,6 +675,7 @@
 				FA63C87D238DE92B00B30312 /* PostChain.swift in Sources */,
 				686B15A423D8E58000FB31DC /* CurrentUserProfileViewController.swift in Sources */,
 				FA63C884238DF4D800B30312 /* ChainUser.swift in Sources */,
+				FA6D48412425A94F00EEC8E8 /* UserHeaderView.swift in Sources */,
 				FA9C5BC823C648A000F1B41A /* ChainViewHelpers.swift in Sources */,
 				686B15B623DB846A00FB31DC /* FriendTableViewCell.swift in Sources */,
 				FA9C5B4923C553C500F1B41A /* LoadingView.swift in Sources */,
@@ -696,6 +715,7 @@
 				FA9C5B4E23C5547B00F1B41A /* NewChainAnimators.swift in Sources */,
 				FA9C5B4523C553C500F1B41A /* EmptyTableView.swift in Sources */,
 				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
+				FA6D48432425C6F100EEC8E8 /* ExploreHeaderReusableView.swift in Sources */,
 				6892BD6223D23AF30021A3E2 /* VerifyNumberViewController.swift in Sources */,
 				FA63C888238E084200B30312 /* MainCell.swift in Sources */,
 				FA7E36B9238DD55800488000 /* FirstViewController.swift in Sources */,

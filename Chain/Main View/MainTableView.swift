@@ -15,19 +15,20 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
+        cell.selectionStyle = .none
         cell.backView.addShadow() //Custom function defined in extension
         
         if (indexPath.row == (self.mainChain.posts.count - 1)) && (mainChain.posts.count != 1) {
             //Load a post(s)
             
              if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
-                                   mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
-                                       if (post.link != "noLink") {
-                                           self.mainChain.posts.append(post)
-                                           self.mainChain.posts.last?.loadState = .LOADED
-                                           self.tableView.reloadData()
-                                       }
-                                   }
+               mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
+                   if (post.link != "noLink") {
+                       self.mainChain.posts.append(post)
+                       self.mainChain.posts.last?.loadState = .LOADED
+                       self.tableView.reloadData()
+                   }
+               }
             }
         }
         
@@ -133,6 +134,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
             print("Menu not set yet")
         }
     }
+    
     //Currently posts are in dict and don't need to be queried
     //Switching to sub-collection and posts need to be queried as their respective cells become visible
     

@@ -691,6 +691,16 @@ extension UIViewController{
 
 extension UIView {
     
+    public func constrainToSuperview(withOffset:CGFloat = 0.0){
+        if let superView = self.superview{
+            self.topAnchor.constraint(equalTo: superView.topAnchor, constant: withOffset).isActive = true
+            self.leftAnchor.constraint(equalTo: superView.leftAnchor, constant: withOffset).isActive = true
+            self.rightAnchor.constraint(equalTo: superView.rightAnchor, constant: -withOffset).isActive = true
+            self.bottomAnchor.constraint(equalTo: superView.bottomAnchor, constant: -withOffset).isActive = true
+            self.translatesAutoresizingMaskIntoConstraints = false
+        }
+    }
+    
     func fadeIn(_ duration: TimeInterval? = 0.2, onCompletion: (() -> Void)? = nil) {
         self.alpha = 0
         self.isHidden = false
@@ -854,3 +864,4 @@ extension Date{
         return add(years: -years, months: -months, days: -days, hours: -hours, minutes: -minutes, seconds: -seconds)
     }
 }
+

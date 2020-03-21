@@ -19,13 +19,8 @@ class ExplorePageCell: UICollectionViewCell {
     var deathDate:Date = Date()
     private var loaded = false
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        if !loaded{
-            roundView.addShadow()
-            roundView.addGradient(colorScheme: .ChainOriginal)
-            previewImageView.roundCorners(corners: [.allCorners], radius: 5)
-        }
+    func updateTimeLabel(){
+        self.timerLabel.text = chain.deathDate.timeTillDeath()
     }
     
     func listenToDate(){
@@ -35,6 +30,10 @@ class ExplorePageCell: UICollectionViewCell {
     }
     
     func cellDidLoad(){
+        previewImageView.roundCorners(corners: [.allCorners], radius: 5)
+        roundView.addShadow()
+        titleLabel.text = chain.chainName
+        timerLabel.text = chain.deathDate.timeTillDeath()
         let url = URL(string: chain.firstImageLink ?? "")
         previewImageView.kf.setImage(
             with: url,
