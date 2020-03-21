@@ -31,6 +31,7 @@ class SignInViewController: UIViewController {
         phoneNumber.textColor = .white
         setAlpha(alpha: 0.0)
         view.addSubview(loader)
+        loader.isHidden = true
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -128,9 +129,6 @@ class SignInViewController: UIViewController {
         
     }
     
-    @IBAction func signUp(_ sender: Any) {
-        masterNav.pushViewController(SignUpViewController(), animated: true) //Load Sign Up View
-    }
     
     @IBAction func forgotPassword(_ sender: Any) {
         if phoneNumber.text?.count == 0 {
