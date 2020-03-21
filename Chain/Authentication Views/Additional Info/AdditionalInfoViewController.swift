@@ -85,9 +85,9 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-        if text.count <= 250{
-            print(text.count)
-            characterCounter.text = "\(text.count)/250"
+        if textView.text.count <= 250{
+            print(textView.text.count)
+            characterCounter.text = "\(textView.text.count)/250"
             return true
         }else{
             return false

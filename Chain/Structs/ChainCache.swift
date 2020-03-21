@@ -23,6 +23,15 @@ class ChainCache {
     init() {
         allChains = []
     }
+    
+    subscript(chainUUID: String)->PostChain?{
+        for chain in allChains {
+            if chain.chainUUID == chainUUID {
+                return chain
+            }
+        }
+        return nil
+    }
    
     func chainAlreadyLoaded(requestedChain: PostChain) -> Bool {
         for chain in allChains {
@@ -49,7 +58,6 @@ class ChainCache {
     }
     
     func isAbleToTakeAnotherPost(sizeOfPost: Int) -> Bool {
-        
         if ((self.sizeInPosts + 1) <= cachePostLimit) {
                 return true
         } else {

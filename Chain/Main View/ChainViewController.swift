@@ -16,12 +16,6 @@ import Firebase
 //import SideMenuSwift
 
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate, PostChainDelegate {
-
-    var lastDoc: QueryDocumentSnapshot?
-    var nextQuery: Query?
-    var counter: Int = 0 //Remove
-    var chainSource = "" //Should be either Global or Regular
-    let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
@@ -38,12 +32,15 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
   
     var fpc: FloatingPanelController!
     let sendButton = UIButton()
-    var mainChain:PostChain!{
-        didSet{
-            self.mainChain.listenForChanges()
-        }
-    }
     let cameraVC = CameraViewController()
+    var lastDoc: QueryDocumentSnapshot?
+    var nextQuery: Query?
+    var counter: Int = 0 //Remove
+    var chainSource = "" //Should be either Global or Regular
+    let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
+    var mainChain:PostChain!{
+        didSet{ self.mainChain.listenForChanges() }
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         self.mainChain.posts.last?.loadState = .LOADING
@@ -69,8 +66,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             self.reloadChain()
         }
         self.reloadChain()
-        let url = URL(string: currentUser.profile ?? "")
-        profileView.kf.setImage(with: url)
+        profileView.kf.setImage(with: URL(string: currentUser.profile ))
         profileView.layer.borderWidth = 1
         profileView.layer.masksToBounds = false
         profileView.layer.borderColor = UIColor.black.cgColor

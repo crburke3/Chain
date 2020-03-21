@@ -89,7 +89,6 @@ class SignUpViewController: UIViewController, VerifyNumberViewControllerDelegate
     }
     
     func verifyViewControllerDidDismiss(success: Bool) {
-        loader.fadeOut()
         if success{
             saveString(str: password.text!, location: .password)
             saveString(str: emailField.text!, location: .email)
@@ -111,11 +110,19 @@ class SignUpViewController: UIViewController, VerifyNumberViewControllerDelegate
             let userFeed = ["posts": emptyDict]
             db.collection("users").document(phone).setData(userData) //What if this fails?
             db.collection("userFeeds").document(phone).setData(userFeed)
-            let additionalInfoVC = AdditionalInfoViewController()
-            additionalInfoVC.phone = phone
-            masterNav.pushViewController(additionalInfoVC, animated: true)
+            Auth.auth().createUser(withEmail: emailField.text!, password: password.text!) { (result, err) in
+                self.loader.fadeOut()
+                if result == nil || err != nil{
+                    self.showPopUp(_title: "Error Creating Your Account", _message: "check your connection and try again")
+                    print("Create account error: \(err?.localizedDescription)"); return
+                }
+                let additionalInfoVC = AdditionalInfoViewController()
+                additionalInfoVC.phone = phone
+                masterNav.pushViewController(additionalInfoVC, animated: true)
+            }
         }else{
-            
+            loader.fadeOut()
+            print("User canceled the phoen auth")
         }
     }
     

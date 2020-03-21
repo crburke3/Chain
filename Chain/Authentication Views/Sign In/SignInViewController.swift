@@ -23,7 +23,7 @@ class SignInViewController: UIViewController {
     
     let db = Firestore.firestore()
     let auth = ChainAuth()
-    let loader = BeautifulLoadScreen(fullScreen: true)
+    let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     
     
     override func viewDidLoad() {
@@ -70,12 +70,13 @@ class SignInViewController: UIViewController {
     
     @IBAction func signIn(_ sender: Any) {
         if !goodFields(){return}
-        loader.isHidden = false
+        loader.fadeIn()
         let phone = phoneNumber.getFormattedPhoneNumber()!
         let pass = password.text!
         saveString(str: phone, location: .phoneNumber)
         saveString(str: pass, location: .password)
         ChainAuth.initFrom(phone: phone, password: pass) { (auth) in
+            self.loader.fadeOut()
             if auth != nil{
                 masterAuth = auth!
                 let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
