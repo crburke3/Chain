@@ -14,9 +14,13 @@ class UserHeaderView:UIView{
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var contentView: UIView!
-    @IBOutlet var specialHeight: NSLayoutConstraint!
+    @IBOutlet var likesLabel: UILabel!
+    @IBOutlet var commentLabel: UILabel!
+    @IBOutlet var commentHeight: NSLayoutConstraint!
+    @IBOutlet var likesHeight: NSLayoutConstraint!
+    @IBOutlet var nameHeight: NSLayoutConstraint!
     
-    private let colorSensitivity:CGFloat  = 80 //Lower = more change
+    private let colorSensitivity:CGFloat  = 60 //Lower = more change
     private var h: CGFloat = 0
     private var s: CGFloat = 0
     private var b: CGFloat = 0
@@ -26,9 +30,7 @@ class UserHeaderView:UIView{
             let height = self.bounds.height
             let posPercent = abs((height) / colorSensitivity)
             let hueVal = h  * posPercent
-            self.imgView.roundCorners(corners: [.allCorners], radius: height/2)
             self.contentView.backgroundColor = UIColor(hue: hueVal, saturation: s, brightness: b, alpha: 1.0)
-            //bottomLabel.textColor = UIColor.darkGray.withAlphaComponent(posPercent)
         }
     }
     

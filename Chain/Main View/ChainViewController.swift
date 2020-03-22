@@ -29,6 +29,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         
     }
     
+    let imageView = UIImageView()
     let userHeader = UserHeaderView(frame: .zero)
     var fpc: FloatingPanelController!
     let sendButton = UIButton()
@@ -63,23 +64,37 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         tableView.delegate = self
         tableView.dataSource = self
 
+
         tableView.parallaxHeader.view = userHeader
-        tableView.parallaxHeader.height = 140
+        tableView.parallaxHeader.height = 100
         tableView.parallaxHeader.minimumHeight = 0
         tableView.parallaxHeader.mode = .bottomFill
+        userHeader.likesLabel.text = "likes: \(mainChain.likes)"
+        userHeader.commentLabel.text = "comments: \(25)"
+        tableView.parallaxHeader.view.heightAnchor.constraint(lessThanOrEqualToConstant: 150).isActive = true
         tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
-            print(parallaxHeader.progress)
-            if parallaxHeader.progress > 1{
-                let dif = (parallaxHeader.progress - 1) * 100
-                self.userHeader.specialHeight.constant = dif
+            let progress = parallaxHeader.progress
+            let height = self.userHeader.bounds.height
+            //self.userHeader.likesHeight.constant = progress/80
+            //self.userHeader.commentHeight.constant = progress/80
+            if parallaxHeader.progress > 1 && parallaxHeader.progress < 1.5{
+                print(progress)
+                self.userHeader.likesLabel.alpha = (progress - 1.0) * 2
+                self.userHeader.commentLabel.alpha = (progress - 1.0) * 2
+                self.userHeader.nameHeight.constant = (progress - 1.0) * 50
+                self.userHeader.commentHeight.constant = (progress - 1.0) * 50
+                self.userHeader.likesHeight.constant = (progress - 1.0) * 50
+                self.userHeader.imgView.roundCorners(corners: [.allCorners], radius: height/2)
+                self.tableView.backgroundColor = self.userHeader.contentView.backgroundColor
             }
         }
-        tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) {
-            self.reloadChain()
-        }
-
+        //tableView.parallaxHeader..layoutIfNeeded()
+        
+        tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) { self.reloadChain() }
+        tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -150)
         self.reloadChain()
     }
+
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
