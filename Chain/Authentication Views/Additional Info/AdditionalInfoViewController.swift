@@ -67,7 +67,7 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
                 }else{
                     masterFire.getCurrentUsersData(phone: self.phone) { (error) in
                         self.loader.fadeOut()
-                        let explore = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                        let explore = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
                         masterNav.pushViewController(explore, animated: true)
                     }
                 }
@@ -76,7 +76,7 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
             loader.fadeOut()
             masterFire.getCurrentUsersData(phone: phone) { (error) in
                 self.loader.fadeOut()
-                let explore = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                let explore = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
                 masterNav.pushViewController(explore, animated: true)
             }
         }

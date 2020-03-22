@@ -21,6 +21,7 @@ class ChainUser{
     var topPosts:[[String:Any]] = [[:]] //Use chain objects and sub-collection for posts
     var profile:String = ""
     var friends:[ChainUser] = [ChainUser]()
+    var currentChains:[PostChain] = []
     // let userData = ["blocked": [""], "invites": [[:]], "phone": "", "profilePhoto": "", "topPhotos": [""]] as [String:Any]
     var bio: String = ""
     

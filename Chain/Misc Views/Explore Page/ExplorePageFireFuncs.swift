@@ -20,7 +20,7 @@ extension ExploreViewController{
             guard let docs = snap?.documents else{ chains([]); return }
             var chainArray = [PostChain]()
             for document in docs {
-                chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                chainArray.append(PostChain(dict: document.data() as [String : Any])!)
             }
             chains(chainArray)
         }
@@ -35,7 +35,7 @@ extension ExploreViewController{
                print("Error getting documents: \(err)")
            } else {
                for document in querySnapshot!.documents {
-                    chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    chainArray.append(PostChain(dict: document.data() as [String : Any])!)
                 masterFire.deleteChainFromFirestore(path: "general", chain: document.get("chainUUID") as! String, user: currentUser.phoneNumber, deathDate: document.get("deathDate") as! Timestamp)
                     masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
                    //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
@@ -53,7 +53,7 @@ extension ExploreViewController{
                 print("Error getting documents: \(err)")
             } else {
                 for document in querySnapshot!.documents {
-                    chainArray.append(PostChain(dict: document.data() as [String : Any]))
+                    chainArray.append(PostChain(dict: document.data() as [String : Any])!)
                     masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
                     //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
                 }

@@ -55,6 +55,9 @@
 		FA6D48412425A94F00EEC8E8 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */; };
 		FA6D48432425C6F100EEC8E8 /* ExploreHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */; };
 		FA6D484A2427E6D400EEC8E8 /* DoubleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48492427E6D400EEC8E8 /* DoubleCollectionViewCell.swift */; };
+		FA6D484D2427F88A00EEC8E8 /* ChainProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D484C2427F88A00EEC8E8 /* ChainProfileViewController.swift */; };
+		FA6D484F2427F96500EEC8E8 /* ChainProfileCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D484E2427F96500EEC8E8 /* ChainProfileCollectionView.swift */; };
+		FA6D48512427FCF600EEC8E8 /* ChainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48502427FCF600EEC8E8 /* ChainCollectionViewCell.swift */; };
 		FA6ED2FE242557F800F3F30E /* FluffLoadingColored.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */; };
 		FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FD242557F800F3F30E /* FluffLoading.json */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
@@ -148,6 +151,9 @@
 		FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderReusableView.swift; sourceTree = "<group>"; };
 		FA6D48492427E6D400EEC8E8 /* DoubleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCollectionViewCell.swift; sourceTree = "<group>"; };
+		FA6D484C2427F88A00EEC8E8 /* ChainProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainProfileViewController.swift; sourceTree = "<group>"; };
+		FA6D484E2427F96500EEC8E8 /* ChainProfileCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainProfileCollectionView.swift; sourceTree = "<group>"; };
+		FA6D48502427FCF600EEC8E8 /* ChainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChainCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoadingColored.json; sourceTree = "<group>"; };
 		FA6ED2FD242557F800F3F30E /* FluffLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoading.json; sourceTree = "<group>"; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -362,6 +368,16 @@
 			path = EmbeddedVews;
 			sourceTree = "<group>";
 		};
+		FA6D484B2427F87100EEC8E8 /* ChainProfileView */ = {
+			isa = PBXGroup;
+			children = (
+				FA6D484C2427F88A00EEC8E8 /* ChainProfileViewController.swift */,
+				FA6D484E2427F96500EEC8E8 /* ChainProfileCollectionView.swift */,
+				FA6D48502427FCF600EEC8E8 /* ChainCollectionViewCell.swift */,
+			);
+			path = ChainProfileView;
+			sourceTree = "<group>";
+		};
 		FA6ED2FB242557F800F3F30E /* LottieAnimations */ = {
 			isa = PBXGroup;
 			children = (
@@ -479,6 +495,7 @@
 		FA7E36B2238DD1EB00488000 /* Misc Views */ = {
 			isa = PBXGroup;
 			children = (
+				FA6D484B2427F87100EEC8E8 /* ChainProfileView */,
 				FA6A862123C536A500E57413 /* New Chain View */,
 				FAAF0A3623C18E0400838B0E /* Explore Page */,
 				FA7E36B3238DD1F600488000 /* Camera View */,
@@ -712,10 +729,13 @@
 				FAAF0A3A23C1913200838B0E /* ExplorePageCell.swift in Sources */,
 				FA7E36B6238DD20400488000 /* CameraViewController.swift in Sources */,
 				6848594423D62FC700AFEB7C /* ChainFriend.swift in Sources */,
+				FA6D484F2427F96500EEC8E8 /* ChainProfileCollectionView.swift in Sources */,
 				686B15A823D8EB6500FB31DC /* EditProfileViewController.swift in Sources */,
 				FA9C5B4723C553C500F1B41A /* MemoryHelp.swift in Sources */,
+				FA6D48512427FCF600EEC8E8 /* ChainCollectionViewCell.swift in Sources */,
 				6892BD5B23CFB18F0021A3E2 /* ChainsCollectionViewCell.swift in Sources */,
 				FA9C5B4E23C5547B00F1B41A /* NewChainAnimators.swift in Sources */,
+				FA6D484D2427F88A00EEC8E8 /* ChainProfileViewController.swift in Sources */,
 				FA9C5B4523C553C500F1B41A /* EmptyTableView.swift in Sources */,
 				FAAF0A3C23C192DC00838B0E /* ExplorePageFireFuncs.swift in Sources */,
 				FA6D48432425C6F100EEC8E8 /* ExploreHeaderReusableView.swift in Sources */,

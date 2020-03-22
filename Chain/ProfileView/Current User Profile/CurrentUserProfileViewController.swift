@@ -38,7 +38,7 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
                 print("Error getting documents: \(error)")
             } else {
                 for document in querySnapshot!.documents {
-                    self.currentChains.append(PostChain(dict: document.data()))
+                    self.currentChains.append(PostChain(dict: document.data())!)
                 }
                 self.collectionView.reloadData()
             }
