@@ -21,13 +21,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
-    @IBOutlet weak var profileButton: UIButton!
-    @IBAction func profileActions(_ sender: Any) {
-        //Push currentUser Profile VC
-        let currentUserProfileVC = CurrentUserProfileViewController()
-        masterNav.pushViewController(currentUserProfileVC, animated: true) //Push Profile
-        
-    }
     
     let imageView = UIImageView()
     let userHeader = UserHeaderView(frame: .zero)
@@ -52,7 +45,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         super.viewDidLoad()
         mainChain.loadPost(postSource: chainSource) { (post) in //chainSource -> global or general
             if self.mainChain.posts.count == 0 {
-                self.mainChain.posts.append(post)
+                self.mainChain.localAppend(post: post)
 //                self.mainChain.posts[0].widthImage = 400
                 //self.mainChain.posts[0].heightImage = 400
                 self.tableView.reloadData()
@@ -60,6 +53,14 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         }
         fanMenuSetUp()
         view.bringSubviewToFront(fanMenu)
+        setupTableView()
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
+            self.timerLabel.text = self.mainChain.deathDate.timeTillDeath()
+        }
+        
+    }
+
+    func setupTableView(){
         cameraVC.delegate = self
         tableView.delegate = self
         tableView.dataSource = self
@@ -94,7 +95,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -150)
         self.reloadChain()
     }
-
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
@@ -103,6 +103,10 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
             fpc.removePanelFromParent(animated: true)
         }
         sendButton.isHidden = true
+    }
+    
+    @IBAction func back(_ sender: Any) {
+        masterNav.popViewController(animated: true)
     }
     
     @IBAction func plusClicked(_ sender: Any) {

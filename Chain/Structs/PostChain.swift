@@ -162,10 +162,14 @@ class PostChain{
                     for document in querySnapshot!.documents {
                         print(self.testTime.dateValue())
                         self.testTime = (document.get("Time") as? Timestamp)!
-                        post(ChainImage(dict: document.data() as [String : Any])!)
+                        var dict = document.data() as [String : Any]
+                        dict["uuid"] = document.documentID
+                        if let _post = ChainImage(dict: dict, parentChain: self){
+                            post(_post)
+                        }
                     }
                 }
-            post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage())) //Empty post, needs error image
+            post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage(named: "fakeImg")!)) //Empty post, needs error image
         }
         
     }
@@ -198,7 +202,7 @@ class PostChain{
                         print("Localized Desc.: \(err.localizedDescription)")
                     } else {
                         print("Success appending image")
-                        self.posts.append(uploadImage)
+                        self.localAppend(post: uploadImage)
                         if self.posts.count == 1 {
                             self.firstImageLink = uploadImage.link
                         }
@@ -213,7 +217,7 @@ class PostChain{
                     }
                 }
             })
-            }
+        }
     }
     
     private var listener: ListenerRegistration?
@@ -246,6 +250,11 @@ class PostChain{
         if birthDate > self.lastReadBirthDate {
             self.lastReadBirthDate = birthDate
         }
+    }
+    
+    func localAppend(post:ChainImage){
+        post.parentChain = self
+        self.posts.append(post)
     }
 }
 

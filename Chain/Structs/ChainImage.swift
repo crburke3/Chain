@@ -18,12 +18,15 @@ class ChainImage{
     var userProfile:String
     var userPhone:String
     var time:Date
+    var uuid:String
     var image:UIImage?
     var loadState = LoadState.NOT_LOADED
     var delegate:ChainImageDelegate?
     var localIndex:Int = 0
     var widthImage:CGFloat = 0.0
     var heightImage:CGFloat = 0.0
+    var isLiked:Bool = false
+    var parentChain:PostChain?
     
     //When created by user locally after image is uploaded
     init(link:String, user:String, userProfile:String, userPhone:String, image:UIImage){
@@ -34,6 +37,7 @@ class ChainImage{
         self.userProfile = userProfile
         self.userPhone = userPhone
         self.time = Date() //Convert to string
+        self.uuid = UUID().uuidString
     }
     
     /// Local Init, the user will need to be very careful using this. Make sure you upload it to the chain
@@ -46,33 +50,71 @@ class ChainImage{
         self.time = Date()
         self.userPhone = ""
         self.userProfile = ""
+        self.uuid = ""
     }
     
     //When pulled from firestore
-    init?(dict:[String:Any]){
-        if (dict["Link"] as? String) == nil{return nil}
-        if (dict["Time"] as? Timestamp) == nil{return nil}
-        if (dict["user"] as? String) == nil{return nil}
-
-        self.link = dict["Link"] as! String
-        self.time = (dict["Time"] as! Timestamp).dateValue()
-        self.user = dict["user"] as! String
+    init?(dict:[String:Any], parentChain:PostChain){
+        guard let _link = (dict["Link"] as? String),
+            let _time = (dict["Time"] as? Timestamp),
+            let _user = (dict["user"] as? String),
+            let _uuid = (dict["uuid"] as? String)
+        else{ return nil}
+        
+        self.link = _link
+        self.time = _time.dateValue()
+        self.user = _user
+        self.uuid = _uuid
         self.userPhone = dict["userPhone"] as? String ?? ""
         self.userProfile = dict["userProfile"] as? String ?? ""
         self.widthImage = CGFloat(dict["width"] as? Double ?? 400.0)
         self.heightImage = CGFloat(dict["height"] as? Double ?? 400.0)
         self.loadState = .NOT_LOADED
+        self.didUserLike { (didLike) in }
     }
     
     func toDict(height: CGFloat, width: CGFloat)->[String:Any]{
         self.widthImage = width
         self.heightImage = height
-        let retDict:[String:Any] = ["Link": self.link, "Time": self.time, "user": self.user, "userProfile": self.userProfile, "userPhone": self.userPhone, "index": self.localIndex, "width": self.widthImage, "height": self.heightImage]
+        let retDict:[String:Any] = ["Link": self.link,
+                                    "Time": self.time,
+                                    "user": self.user,
+                                    "userProfile": self.userProfile,
+                                    "userPhone": self.userPhone,
+                                    "index": self.localIndex,
+                                    "width": self.widthImage,
+                                    "height": self.heightImage,
+                                    "uuid": self.uuid]
         
         return retDict
     }
     
+    func like(success: @escaping(Bool)->()){
+        if parentChain == nil {print("No parent chain, cant load likes"); return}
+        let ref = masterFire.db.collection("chains").document(self.parentChain!.chainUUID).collection("posts").document(self.uuid).collection("likes").document(masterAuth.currUser.phoneNumber)
+        ref.setData(["user": masterAuth.currUser.phoneNumber]) { (err) in
+            if err == nil{
+                self.isLiked = true
+                success(true)
+            }else{
+                success(false)
+            }
+        }
+    }
     
+    func didUserLike(yes: @escaping(Bool)->()){
+        if parentChain == nil {print("No parent chain, cant load likes"); return}
+        let ref = masterFire.db.collection("chains").document(self.parentChain!.chainUUID).collection("posts").document(self.uuid).collection("likes")
+        ref.whereField("user", isEqualTo: masterAuth.currUser.phoneNumber).getDocuments { (snap, err) in
+            guard let docs = snap?.documents else {yes(false); return}
+            if docs.count >= 1{
+                self.isLiked = true
+                yes(true)
+            }else{
+                yes(false)
+            }
+        }
+    }
     
     func load(){ //Switch to Kingfisher
         if (loadState == .LOADING) || (loadState == .LOADED){

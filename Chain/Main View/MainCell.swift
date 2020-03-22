@@ -17,12 +17,18 @@ class MainCell: UITableViewCell {
     @IBOutlet var user: UILabel!
     @IBOutlet var backView: RoundView!
     @IBOutlet weak var profilePicImage: UIImageView!
+    @IBOutlet var infoView: UIView!
+    @IBOutlet var infoViewHeight: NSLayoutConstraint!
+    @IBOutlet var heartButton: RoundButton!
+    
     var phone: String = ""
+    var isExpanded = false
+    var post: ChainImage!
+    var row: Int = 0
+    var isPostLoaded = false
     
     @IBAction func shareButton(_ sender: Any) {
         //Called on button press
-        
-        
     }
     
     @IBAction func goToProfile(_ sender: Any) {
@@ -46,15 +52,8 @@ class MainCell: UITableViewCell {
         }
         print("Pushing VC") //
     }
-    @IBOutlet weak var profilePic: UIButton!
     
     @IBOutlet weak var share: UIButton!
-    
-    
-    
-    var post: ChainImage!
-    var row: Int = 0
-    var isPostLoaded = false
     
     @IBAction func popUpMenu(_ sender: Any) {
         //Center or pass image
@@ -64,8 +63,39 @@ class MainCell: UITableViewCell {
         }
     }
     
+    @IBAction func heartTapped(_ sender: Any) {
+        heartButton.startSpinner()
+        self.post.like { (succ) in
+            self.heartButton.stopSpinner()
+            if succ{
+                self.heartButton.tintColor = UIColor.Chain.mainOrange
+            }else{
+                self.heartButton.tintColor = .white
+            }
+        }
+    }
+    
+    func moveExpansion(){
+        if isExpanded{
+            infoViewHeight.constant = 0
+        }else{
+            infoViewHeight.constant = 100
+        }
+        isExpanded = !isExpanded
+        UIView.animate(withDuration: 0.5) {
+            self.contentView.layoutIfNeeded()
+        }
+    }
+    
     
     func cellDidLoad(){
+        infoViewHeight.constant = 100
+        infoView.clipsToBounds = true
+        infoView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 5)
+        imgView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(imgTapped(sender:))))
+        let doubleGesture = UITapGestureRecognizer(target: self, action: #selector(imgDoubleTapped(sender:)))
+        doubleGesture.numberOfTapsRequired = 2
+        imgView.addGestureRecognizer(doubleGesture)
         self.backView.addShadow()
         self.profilePicImage?.kf.setImage(with: URL(string: post.userProfile)) { result in
             switch result {
@@ -77,8 +107,19 @@ class MainCell: UITableViewCell {
                 self.profilePicImage?.clipsToBounds = true
                 break
             case .failure(let error):
+                self.profilePicImage.image = UIImage(named: "fakeImg")
                 print(error)
             }
         }
     }
+    
+    @objc func imgDoubleTapped(sender: UIImageView){
+        print("double tapped")
+    }
+    
+    @objc func imgTapped(sender: UIImageView){
+        moveExpansion()
+    }
+
+    
 }

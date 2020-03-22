@@ -30,7 +30,7 @@ extension ChainViewController{
         }
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Report Image")
-            masterFire.reportImage(chainName: self.mainChain.chainName, image: ChainImage(dict: givenPost)!) { (error) in
+            masterFire.reportImage(chainName: self.mainChain.chainName, image: ChainImage(dict: givenPost, parentChain: self.mainChain)!) { (error) in
                 if let error = error {
                     print(error)
                 } else {

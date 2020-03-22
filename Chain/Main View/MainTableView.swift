@@ -24,7 +24,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
              if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
                mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
                    if (post.link != "noLink") {
-                       self.mainChain.posts.append(post)
+                    self.mainChain.localAppend(post: post)
                        self.mainChain.posts.last?.loadState = .LOADED
                        self.tableView.reloadData()
                    }
@@ -45,7 +45,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
                         mainChain.loadPost(postSource: self.chainSource) { (post) in //chainSource -> global or general
                             if (post.link != "noLink") {
-                                self.mainChain.posts.append(post)
+                                self.mainChain.localAppend(post: post)
                                 self.mainChain.posts.last?.loadState = .LOADED
                                 self.tableView.reloadData()
                             }
@@ -70,6 +70,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                 case .success(let value):
                     break
                 case .failure(let error):
+                    cell.imgView.image = UIImage(named: "fakeImg")!
                     print(error)
                     break
                 }
@@ -86,6 +87,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     case .success(let value):
                         break
                     case .failure(let error):
+                        cell.imgView.image = UIImage(named: "fakeImg")!
                         print(error)
                         break
                     }
@@ -127,6 +129,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        if let castCell = tableView.cellForRow(at: indexPath) as? MainCell{
+//            castCell.moveExpansion()
+//        }
+        
         if fpc != nil {
             self.fpc.removePanelFromParent(animated: true)
             print("Removing Menu")

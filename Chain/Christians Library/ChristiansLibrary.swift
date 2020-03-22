@@ -327,11 +327,33 @@ class roundLabel:UILabel{
 class RoundView:UIView{
      
     @IBInspectable var addShadow: Bool = false
+    @IBInspectable var makeBlur: Bool = false
 
     override func layoutSubviews() {
         super.layoutSubviews()
         if self.addShadow{
             self.addShadow()
+        }
+        if self.makeBlur{
+            self.makeBlurView()
+        }
+    }
+
+    var blurView:UIVisualEffectView?
+    func makeBlurView(){
+        //only apply the blur if the user hasn't disabled transparency effects
+        if !UIAccessibility.isReduceTransparencyEnabled {
+            if blurView != nil{
+                self.backgroundColor = .clear
+                let blurEffect = UIBlurEffect(style: .regular)
+                let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                blurEffectView.frame = self.bounds
+                blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+                blurView = blurEffectView
+                self.addSubview(blurEffectView)
+            }
+        } else {
+            self.backgroundColor = .green
         }
     }
     

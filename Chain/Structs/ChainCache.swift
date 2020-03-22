@@ -91,7 +91,7 @@ class ChainCache {
     func addPostToCache(chainUUID: String, birthDate: Date, post: ChainImage) {
         //Viewed chain should be in first index of allChains
         if !postAlreadyLoaded(chainUUID: chainUUID, birthDate: birthDate) {
-            self.allChains[0].posts.append(post)
+            self.allChains[0].localAppend(post: post)
             self.allChains[0].lastReadBirthDate = post.time
             self.sizeInPosts += 1
             self.checkSizeOfChain()

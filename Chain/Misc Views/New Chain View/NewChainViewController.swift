@@ -87,11 +87,11 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             }
             let postChain = PostChain(_chainName: name, _birthDate: Date(), _deathDate: death!, _tags: tags)
             if postImageView.image == nil{
-                postChain.posts.append(ChainImage(image: UIImage(named: "fakeImg")!))
+                postChain.localAppend(post: ChainImage(image: UIImage(named: "fakeImg")!))
                 postChain.posts[0].heightImage = 100
                 postChain.posts[0].heightImage = 100
             }else{
-                postChain.posts.append(ChainImage(image: postImageView.image!))
+                postChain.localAppend(post: ChainImage(image: postImageView.image!))
                 postChain.posts[0].widthImage = imageHolder.size.width
                 postChain.posts[0].heightImage = imageHolder.size.height
             }
