@@ -26,9 +26,9 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         //collectionViewA.collectionViewLayout = BouncyLayout(style: .prominent)
-        let collectionViewLayout = collectionViewA.collectionViewLayout as? UICollectionViewFlowLayout
-        collectionViewLayout?.sectionInset = .init(top: 4, left: 24, bottom: 24, right: 24)
-        collectionViewLayout?.invalidateLayout()
+        //let collectionViewLayout = collectionViewA.collectionViewLayout as? UICollectionViewFlowLayout
+        //collectionViewLayout?.sectionInset = .init(top: 4, left: 24, bottom: 24, right: 24)
+        //collectionViewLayout?.invalidateLayout()
         collectionViewA.delegate = self
         collectionViewA.dataSource = self
         masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
