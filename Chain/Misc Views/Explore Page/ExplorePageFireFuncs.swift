@@ -15,18 +15,14 @@ extension ExploreViewController{
     
     func loadGlobalChainsID(chains: @escaping ([PostChain])->()){
         //Add listener
-        var chainArray = [PostChain]()
-        
-        masterFire.db.collection("globalFeed").getDocuments() { (querySnapshot, err) in
-        if let err = err {
-            print("Error getting documents: \(err)")
-        } else {
-            for document in querySnapshot!.documents {
+        let ref = masterFire.db.collection("chains").whereField("isGlobal", isEqualTo: true).limit(to: 25)
+        ref.getDocuments { (snap, err) in
+            guard let docs = snap?.documents else{ chains([]); return }
+            var chainArray = [PostChain]()
+            for document in docs {
                 chainArray.append(PostChain(dict: document.data() as [String : Any]))
-                //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
             }
             chains(chainArray)
-        }
         }
     }
     

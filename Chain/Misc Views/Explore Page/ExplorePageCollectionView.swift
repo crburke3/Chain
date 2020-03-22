@@ -89,13 +89,14 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         let screen = UIScreen.main.bounds
         let screenWidth = screen.width
         let screenHeight = screen.height
-        let width = (screen.width / 2) - 36
+        let width = (screen.width / 2) - 10
         let height = (screenHeight/screenWidth) * width
         
         if indexPath.section == 1{
             return CGSize(width: width, height: height)
         }else{
-            return CGSize(width: width, height: width)
+            return CGSize(width: screenWidth/4, height: screenWidth/4)
+
         }
     }
     
@@ -135,8 +136,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.frame.width, height: 50)
+        return CGSize(width: collectionView.frame.width, height: 20)
     }
-
     
 }

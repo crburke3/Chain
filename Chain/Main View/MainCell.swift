@@ -89,7 +89,9 @@ class MainCell: UITableViewCell {
     
     
     func cellDidLoad(){
-        infoViewHeight.constant = 100
+        isExpanded = false
+        infoViewHeight.constant = 0
+        moveExpansion()
         infoView.clipsToBounds = true
         infoView.roundCorners(corners: [.bottomLeft, .bottomRight], radius: 5)
         imgView.addGestureRecognizer( UITapGestureRecognizer(target: self, action: #selector(imgTapped(sender:))))

@@ -18,6 +18,7 @@ import ParallaxHeader
 
 class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelControllerDelegate, ChainCameraDelegate, PostChainDelegate {
     
+    @IBOutlet var titleLabel: UILabel!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet weak var fanMenu: FanMenu!
@@ -33,7 +34,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     var chainSource = "" //Should be either Global or Regular
     let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     var mainChain:PostChain!{
-        didSet{ self.mainChain.listenForChanges() }
+        didSet{
+            self.mainChain.listenForChanges() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -43,6 +45,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        titleLabel.text = mainChain.chainName
         mainChain.loadPost(postSource: chainSource) { (post) in //chainSource -> global or general
             if self.mainChain.posts.count == 0 {
                 self.mainChain.localAppend(post: post)

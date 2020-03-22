@@ -54,6 +54,7 @@
 		FA6D483F2425A94300EEC8E8 /* UserHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FA6D483E2425A94300EEC8E8 /* UserHeaderView.xib */; };
 		FA6D48412425A94F00EEC8E8 /* UserHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */; };
 		FA6D48432425C6F100EEC8E8 /* ExploreHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */; };
+		FA6D484A2427E6D400EEC8E8 /* DoubleCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA6D48492427E6D400EEC8E8 /* DoubleCollectionViewCell.swift */; };
 		FA6ED2FE242557F800F3F30E /* FluffLoadingColored.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */; };
 		FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */ = {isa = PBXBuildFile; fileRef = FA6ED2FD242557F800F3F30E /* FluffLoading.json */; };
 		FA7E366B238DB12A00488000 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA7E366A238DB12A00488000 /* AppDelegate.swift */; };
@@ -146,6 +147,7 @@
 		FA6D483E2425A94300EEC8E8 /* UserHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = UserHeaderView.xib; sourceTree = "<group>"; };
 		FA6D48402425A94F00EEC8E8 /* UserHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserHeaderView.swift; sourceTree = "<group>"; };
 		FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExploreHeaderReusableView.swift; sourceTree = "<group>"; };
+		FA6D48492427E6D400EEC8E8 /* DoubleCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoubleCollectionViewCell.swift; sourceTree = "<group>"; };
 		FA6ED2FC242557F800F3F30E /* FluffLoadingColored.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoadingColored.json; sourceTree = "<group>"; };
 		FA6ED2FD242557F800F3F30E /* FluffLoading.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = FluffLoading.json; sourceTree = "<group>"; };
 		FA7E3667238DB12A00488000 /* Chain.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Chain.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -422,6 +424,7 @@
 				FA9C5BC723C648A000F1B41A /* ChainViewHelpers.swift */,
 				FA63C885238E07A400B30312 /* MainTableView.swift */,
 				FA63C887238E084200B30312 /* MainCell.swift */,
+				FA6D48492427E6D400EEC8E8 /* DoubleCollectionViewCell.swift */,
 			);
 			path = "Main View";
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				686B15AE23DB75D500FB31DC /* FriendsViewController.swift in Sources */,
 				FA9C5B4623C553C500F1B41A /* CustomSpinner.swift in Sources */,
 				6848594823D65C4200AFEB7C /* ChangePasswordViewController.swift in Sources */,
+				FA6D484A2427E6D400EEC8E8 /* DoubleCollectionViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
