@@ -10,6 +10,7 @@ import Foundation
 import PopupDialog
 import FloatingPanel
 import FanMenu
+import UIKit
 
 extension ChainViewController{
     func showOptionsPopup(post_row: Int, post_image: UIImage){
@@ -118,29 +119,30 @@ extension ChainViewController{
     }
     
     func fanMenuSetUp() {
-        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
-        //fanMenu.
-        fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
-        //(0, -(Double.pi))
-        //(1.25*(Double.pi), (1.75*(Double.pi)))
+        fanMenu.button = FanMenuButton(id: "Main", image: "smallImg", color: .white)
+        fanMenu.menuRadius = 70.0
+        fanMenu.radius = 20.0 //Controls button radius
+        fanMenu.duration = 0.35
+        fanMenu.interval = (0.75*(Double.pi), (1.25*(Double.pi))) //In radians
         fanMenu.menuBackground = .clear
         fanMenu.layer.backgroundColor = UIColor.clear.cgColor
         fanMenu.backgroundColor = UIColor.clear
-        //May add append chain
+        //Image("room.thumbnailImage").resizable().frame(width: 32.0, height: 32.0)
+        //24x24 pixel images work well with 20 button radius
         fanMenu.items = [
             FanMenuButton(
                 id: "jumpToEnd",
-                image: "end",
+                image: "smallImg",
                 color: .white
             ),
             FanMenuButton(
                 id: "jumpToRandom",
-                image: "random",
+                image: "smallImg",
                 color: .white
             ),
             FanMenuButton(
                 id: "jumpToNextFriendsPost",
-                image: "friends",
+                image: "smallImg",
                 color: .white
             )
         ]

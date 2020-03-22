@@ -122,11 +122,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" id="SGc-9t-OpB" customClass="FanMenu" customModule="FanMenu">
-                                <rect key="frame" x="0.0" y="500" width="375" height="254"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dg-hd-BfR" customClass="RoundView" customModule="Chain" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="85"/>
                                 <subviews>
@@ -200,7 +195,7 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-aV-Jsl">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-aV-Jsl">
                                 <rect key="frame" x="0.0" y="85" width="375" height="582"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
@@ -329,9 +324,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" id="SGc-9t-OpB" customClass="FanMenu" customModule="FanMenu">
+                                <rect key="frame" x="240" y="85" width="200" height="175"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.84171026945114136" green="0.90847665071487427" blue="0.76305967569351196" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="SGc-9t-OpB" firstAttribute="top" secondItem="5Dg-hd-BfR" secondAttribute="bottom" id="0Yw-DY-V5Z"/>
                             <constraint firstItem="rVc-Fp-hKH" firstAttribute="trailing" secondItem="qM2-aV-Jsl" secondAttribute="trailing" id="ACP-jJ-Bl2"/>
                             <constraint firstItem="rVc-Fp-hKH" firstAttribute="trailing" secondItem="5Dg-hd-BfR" secondAttribute="trailing" id="FGC-Wj-S5b"/>
                             <constraint firstItem="5Dg-hd-BfR" firstAttribute="top" secondItem="rVc-Fp-hKH" secondAttribute="top" id="Ihr-qP-s6N"/>
