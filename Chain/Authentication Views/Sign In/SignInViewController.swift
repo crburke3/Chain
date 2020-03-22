@@ -82,7 +82,7 @@ class SignInViewController: UIViewController {
             self.loader.fadeOut()
             if auth != nil{
                 masterAuth = auth!
-                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
                 masterNav.pushViewController(mainVC, animated: true)
             }else{
                 self.showPopUp(_title: "Error Logging In", _message: "please try again")

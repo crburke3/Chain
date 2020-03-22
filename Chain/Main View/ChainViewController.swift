@@ -34,8 +34,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     var chainSource = "" //Should be either Global or Regular
     let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     var mainChain:PostChain!{
-        didSet{
-            self.mainChain.listenForChanges() }
+        didSet{self.mainChain.listenForChanges() }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,11 +45,9 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     override func viewDidLoad() {
         super.viewDidLoad()
         titleLabel.text = mainChain.chainName
-        mainChain.loadPost(postSource: chainSource) { (post) in //chainSource -> global or general
+        mainChain.loadPost() { (post) in //chainSource -> global or general
             if self.mainChain.posts.count == 0 {
                 self.mainChain.localAppend(post: post)
-//                self.mainChain.posts[0].widthImage = 400
-                //self.mainChain.posts[0].heightImage = 400
                 self.tableView.reloadData()
             }
         }
@@ -79,8 +76,6 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             let progress = parallaxHeader.progress
             let height = self.userHeader.bounds.height
-            //self.userHeader.likesHeight.constant = progress/80
-            //self.userHeader.commentHeight.constant = progress/80
             if parallaxHeader.progress > 1 && parallaxHeader.progress < 1.5{
                 print(progress)
                 self.userHeader.likesLabel.alpha = (progress - 1.0) * 2
@@ -95,7 +90,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         //tableView.parallaxHeader..layoutIfNeeded()
         
         tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) { self.reloadChain() }
-        tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -150)
+        tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -130)
         self.reloadChain()
     }
     

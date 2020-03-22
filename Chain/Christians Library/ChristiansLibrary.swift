@@ -809,8 +809,10 @@ extension UINavigationController{
     func findViewController(with className: String)->Any?{
         for viewcontroller in self.viewControllers{
             var vcName = String(describing: viewcontroller)
-            vcName = String(vcName.split(separator: ".")[1])
-            vcName = String(vcName.split(separator: ":")[0])
+            let parts = vcName.split(separator: ".")
+            if parts.count < 2{return nil}
+            vcName = String(parts[1])
+            vcName = String(parts[0])
             if vcName == className{
                 return viewcontroller
             }

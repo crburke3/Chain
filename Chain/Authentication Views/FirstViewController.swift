@@ -13,6 +13,7 @@ import FirebaseAuth
 import Pastel
 import FirebaseFunctions
 
+let mainVcName = "tabView"
 
 class FirstViewController : UIViewController, CLLocationManagerDelegate{
     
@@ -40,7 +41,7 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
             self.loader.fadeOut()
             if auth != nil{
                 masterAuth = auth!
-                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+                let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
                 masterNav.pushViewController(mainVC, animated: true)
             }
         }
@@ -75,7 +76,7 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
         currentUser.phoneNumber = "+19802550653"
         currentUser.profile = "https://firebasestorage.googleapis.com/v0/b/chain-3ad1e.appspot.com/o/Fitwork%20Images%2FD2F69E6E-47D8-4307-A91F-C4E1A737B3B1?alt=media&token=4fbfa3b6-c775-4935-b1de-ab12e98c940b"
         currentUser.topPosts = []
-        let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ExploreViewController") as! ExploreViewController
+        let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
         masterNav.pushViewController(mainVC, animated: true)
     }
     

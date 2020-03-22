@@ -62,7 +62,7 @@ class PostChain{
         self.testTime = Timestamp(date: self.birthDate)
     }
     
-    init(dict:[String:Any]){
+    init?(dict:[String:Any]){
         self.chainName = dict["chainName"] as! String   //want this to fail if it doesnt exist
         self.chainUUID = dict["chainUUID"] as! String 
         self.birthDate = (dict["birthDate"] as! Timestamp).dateValue()
@@ -141,7 +141,7 @@ class PostChain{
         return postsData
     }
     
-    func loadPost(postSource: String, post: @escaping (ChainImage)->()){
+    func loadPost(postSource: String = "chains", post: @escaping (ChainImage)->()){
         //chainSource -> global or general
         var postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
         switch postSource {
