@@ -32,27 +32,28 @@ extension ChainProfileViewController: UICollectionViewDelegate, UICollectionView
        }
        
        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-           if indexPath.section == 1 { //Bottom
+           if indexPath.section == 0 { //Bottom
                let chainSelected = masterAuth.currUser.currentChains[indexPath.row]
                let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-               chainVC.mainChain = chainSelected
+                chainVC.mainChain = masterCache[chainSelected.chainUUID]
                masterNav.pushViewController(chainVC, animated: true)
            }
        }
        
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
            let screen = UIScreen.main.bounds
-           let screenWidth = screen.width
+           let screenWidth = collectionView.frame.width
            let screenHeight = screen.height
-           let width = (screen.width / 2) - 50
+           let width = (screen.width / 2) - 10
            let height = (screenHeight/screenWidth) * width
-           
+
            if indexPath.section == 0{
                return CGSize(width: width, height: height)
            }else{
-               return CGSize(width: 200, height: 200)
+               return CGSize(width: 50, height: 50)
            }
        }
+    
        
        func numberOfSections(in collectionView: UICollectionView) -> Int {
            return 1
@@ -84,4 +85,5 @@ extension ChainProfileViewController: UICollectionViewDelegate, UICollectionView
        func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
            return CGSize(width: collectionView.frame.width, height: 300)
        }
+    
 }

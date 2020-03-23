@@ -60,4 +60,8 @@ class UserHeaderView:UIView{
         }
     }
     
+    func setForChain(chain:PostChain){
+        
+    }
+    
 }

@@ -12,12 +12,9 @@ import UIKit
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section{
-        case 0:
-            return topChains.count
-        case 1:
-            return otherChains.count //Something is wrong here and below
-        default:
-            return 0
+        case 0: return topChains.count
+        case 1: return otherChains.count //Something is wrong here and below
+        default: return 0
         }
     }
     

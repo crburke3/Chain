@@ -114,7 +114,7 @@
             </objects>
             <point key="canvasLocation" x="-722.39999999999998" y="103.89805097451276"/>
         </scene>
-        <!--Item 1-->
+        <!--Origin Chain-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController storyboardIdentifier="ChainViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="ChainViewController" customModule="Chain" customModuleProvider="target" sceneMemberID="viewController">
@@ -347,7 +347,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rVc-Fp-hKH"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item 1" id="3oS-TP-hAD"/>
+                    <tabBarItem key="tabBarItem" title="Origin Chain" image="australsign.circle" catalog="system" id="3oS-TP-hAD"/>
                     <navigationItem key="navigationItem" id="gIt-D3-ALs"/>
                     <connections>
                         <outlet property="fanMenu" destination="SGc-9t-OpB" id="W7A-Iy-E2Q"/>
@@ -478,7 +478,7 @@
             </objects>
             <point key="canvasLocation" x="1191" y="-664"/>
         </scene>
-        <!--item 2-->
+        <!--Explore Page-->
         <scene sceneID="rrK-0w-KbM">
             <objects>
                 <viewController storyboardIdentifier="ExploreViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="U8T-YC-rZl" customClass="ExploreViewController" customModule="Chain" customModuleProvider="target" sceneMemberID="viewController">
@@ -699,7 +699,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="PCd-Wc-l2c"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="item 2" id="dus-FX-Gwc"/>
+                    <tabBarItem key="tabBarItem" title="Explore Page" image="plus.magnifyingglass" catalog="system" selectedImage="plus.magnifyingglass" id="dus-FX-Gwc"/>
                     <navigationItem key="navigationItem" id="wbw-sb-ZkF"/>
                     <connections>
                         <outlet property="collectionViewA" destination="p9f-Sg-pHK" id="h5K-y7-TbB"/>
@@ -720,7 +720,7 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="9V3-EL-LBO">
                                 <rect key="frame" x="0.0" y="61" width="375" height="557"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zxa-4i-clK">
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zxa-4i-clK">
                                     <size key="itemSize" width="160" height="231"/>
                                     <size key="headerReferenceSize" width="50" height="339"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -832,9 +832,9 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FXa-Z3-GQC" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
-                                            <rect key="frame" x="188" y="291" width="179" height="40"/>
+                                            <rect key="frame" x="188" y="281" width="179" height="50"/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="40" id="v74-cv-7NM"/>
+                                                <constraint firstAttribute="height" constant="50" id="v74-cv-7NM"/>
                                             </constraints>
                                             <state key="normal" title="Following"/>
                                             <userDefinedRuntimeAttributes>
@@ -932,11 +932,13 @@
     </scenes>
     <resources>
         <image name="UM" width="21" height="15"/>
+        <image name="australsign.circle" catalog="system" width="64" height="60"/>
         <image name="back" width="100" height="100"/>
         <image name="fakeImg" width="892" height="1252"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="menu" width="90" height="90"/>
         <image name="plus" width="250" height="250"/>
+        <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="share" width="100" height="100"/>
         <image name="user" width="16" height="16"/>
     </resources>

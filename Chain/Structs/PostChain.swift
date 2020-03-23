@@ -31,6 +31,7 @@ class PostChain{
     var chainUUID:String = ""
     var lastReadBirthDate =  Date(timeIntervalSinceReferenceDate: -123456789.0) //Keeps track of last read cell, acts as a cursor for pagination
     var testTime:Timestamp
+    var isDead:Bool = false
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -49,9 +50,9 @@ class PostChain{
         self.testTime = Timestamp(date: self.birthDate)
     }
     
-    init(chainName:String, load:Bool = true){
-        self.chainName = chainName
-        self.chainUUID = chainName
+    init(chainUUID:String){
+        self.chainName = "not loaded"
+        self.chainUUID = chainUUID
         self.birthDate = Date()
         self.deathDate = Date()
         self.likes = 0
@@ -169,6 +170,38 @@ class PostChain{
             index += 1
         }
         return postsData
+    }
+    
+    func load(err: @escaping(String?)->()){
+        let ref = masterFire.db.collection("chains").document(self.chainUUID)
+        ref.getDocument { (snap, err1) in
+            guard let dict = snap?.data() else{ err("bad dict"); return }
+            guard let _chainName = dict["chainName"] as? String,
+                let _chainUUID = dict["chainUUID"] as? String,
+                let _birthDate = dict["birthDate"] as? Timestamp,
+                let _deathDate = dict["deathDate"] as? Timestamp
+                else{ err("bad data"); return }
+            
+            self.chainName = _chainName
+            self.chainUUID = _chainUUID
+            self.birthDate = _birthDate.dateValue()
+            self.deathDate = _deathDate.dateValue()
+            self.likes = dict["likes"] as? Int ?? 0
+            self.count = dict["count"] as? Int ?? 1
+            self.tags = dict["tags"] as? [String] ?? []
+            self.contributors = dict["contributors"] as? [String] ?? []
+            self.testTime = Timestamp(date: self.birthDate)
+            self.loaded = .LOADED
+            let latLong = dict["l"] as? [Double] ?? [0.0, 0.0]
+            self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
+            self.firstImageLink = dict["firstImageLink"] as? String
+            if (self.firstImageLink == nil) && (self.posts.count > 0){
+                self.firstImageLink = self.posts[0].link
+            }
+            for delegate in self.delegates.values{
+                delegate.chainDidLoad(chain: self)
+            }
+        }
     }
     
     func loadPost(postSource: String = "chains", post: @escaping (ChainImage)->()){
@@ -291,4 +324,5 @@ class PostChain{
 protocol PostChainDelegate {
     func chainGotNewPost(post: ChainImage)
     func chainDidLoad(chain: PostChain)
+    func chainDidDie(chain: PostChain)
 }

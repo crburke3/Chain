@@ -18,19 +18,56 @@ class ChainCache {
     //This will lead to around 20 Mb of data @ 40K posts
     //Seperate pod will handle image cacheing
     var cacheByteLimit: Int = 25000000 //25 Mb
-    
+    var timer = Timer()
     
     init() {
-        allChains = []
+        allChains = [PostChain(chainUUID: "1b0LCcjiVh53Kb89xD8Q")]
+        allChains[0].load { (err) in}
+        timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(checkChainsDeathDate), userInfo: nil, repeats: true)
     }
     
-    subscript(chainUUID: String)->PostChain?{
-        for chain in allChains {
-            if chain.chainUUID == chainUUID {
-                return chain
+    @objc func checkChainsDeathDate(){
+        for chain in allChains{
+            if chain.deathDate < Date() && chain.isDead == false{
+                chain.isDead = true
+                print("killing chain: \(chain.chainName)")
+                for delegate in chain.delegates.values{
+                    delegate.chainDidDie(chain: chain)
+                }
+                
+//                masterFire.deleteChainFromFirestore(chain: chain) { (err) in
+//                    print(err)
+//                }
             }
         }
-        return nil
+    }
+    
+    subscript(chainUUID: String)->PostChain{
+        set(newValue){
+            var existIndex:Int? = nil
+            var counter = 0
+            for chain in allChains{
+                if chain.chainUUID == chainUUID{
+                    existIndex = counter
+                }
+                counter += 1
+            }
+            if existIndex != nil{
+                allChains[existIndex!] = newValue
+            }else{
+                allChains.append(newValue)
+            }
+        }
+        get{
+            for chain in allChains {
+                if chain.chainUUID == chainUUID {
+                    return chain
+                }
+            }
+            let newChain = PostChain(chainUUID: chainUUID)
+            allChains.append(newChain)
+            return newChain
+        }
     }
    
     func chainAlreadyLoaded(requestedChain: PostChain) -> Bool {

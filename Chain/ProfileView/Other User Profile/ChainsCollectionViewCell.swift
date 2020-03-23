@@ -15,7 +15,7 @@ class ChainsCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var chainTitle: UILabel!
     @IBOutlet weak var timeTilDeath: UILabel!
     
-    var chain = PostChain(chainName: "")
+    var chain = PostChain(chainUUID: "1b0LCcjiVh53Kb89xD8Q")
     @IBOutlet weak var mainView: UIView!
     
     override func awakeFromNib() {
