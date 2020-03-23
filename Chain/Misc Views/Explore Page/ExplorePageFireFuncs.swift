@@ -35,12 +35,13 @@ extension ExploreViewController{
                print("Error getting documents: \(err)")
            } else {
                for document in querySnapshot!.documents {
-                    chainArray.append(PostChain(dict: document.data() as [String : Any])!)
-                masterFire.deleteChainFromFirestore(path: "general", chain: document.get("chainUUID") as! String, user: currentUser.phoneNumber, deathDate: document.get("deathDate") as! Timestamp)
-                    masterFire.lastReadTimestamp = document.get("birthDate") as! Timestamp
-                   //masterCache.allChains.append(PostChain(dict: document.data() as [String : Any]))
+                let chain = PostChain(dict: document.data() as [String : Any])!
+                chainArray.append(chain)
+//                masterFire.deleteChainFromFirestore(chain: chain) { (err) in
+//
+//                }
                 }
-            chains(chainArray)
+                chains(chainArray)
             }
         }
     }

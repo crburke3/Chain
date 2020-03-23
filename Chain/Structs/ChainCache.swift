@@ -34,12 +34,12 @@ class ChainCache {
     }
    
     func chainAlreadyLoaded(requestedChain: PostChain) -> Bool {
+        if allChains.count == 0{return false}
         for chain in allChains {
             if chain.chainUUID == requestedChain.chainUUID {
                 return true
             }
         }
-        addChainToCache(chain: requestedChain)
         return false
     }
     
@@ -85,7 +85,7 @@ class ChainCache {
         if !chainAlreadyLoaded(requestedChain: chain) {
             self.allChains.append(chain)
         }
-            checkSizeOfChain()
+        checkSizeOfChain()
     }
     
     func addPostToCache(chainUUID: String, birthDate: Date, post: ChainImage) {

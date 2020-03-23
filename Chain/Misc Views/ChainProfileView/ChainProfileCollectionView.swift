@@ -23,7 +23,7 @@ extension ChainProfileViewController: UICollectionViewDelegate, UICollectionView
                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ChainCollectionViewCell", for: indexPath) as! ChainCollectionViewCell
                let post = masterAuth.currUser.currentChains[indexPath.row]
                cell.setForChain(_chain: post)
-               c
+               collViewIndexReference[post.chainUUID] = indexPath
                return cell
                
            default:    //whatever

@@ -60,6 +60,10 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     func chainGotNewPost(post: ChainImage) {}
     
     @IBAction func addChain(_ sender: Any) {
+        let functions = Functions.functions()
+        functions.httpsCallable("helloWorld").call { (resutlt, err) in
+            
+        }
         masterNav.pushViewController(NewChainViewController(), animated: true)
     }
 }
