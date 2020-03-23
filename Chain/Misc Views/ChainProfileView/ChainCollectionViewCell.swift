@@ -25,23 +25,7 @@ class ChainCollectionViewCell: UICollectionViewCell {
         titleLabel.text = chain.chainName
         timerLabel.text = chain.deathDate.timeTillDeath()
         let url = URL(string: chain.firstImageLink ?? "")
-        mainImage.kf.setImage(
-            with: url,
-            placeholder: UIImage(named: "fakeImg"),
-            options: [
-                .scaleFactor(UIScreen.main.scale),
-                .transition(.fade(1)),
-                .cacheOriginalImage
-            ])
-        {
-            result in
-            switch result {
-            case .success(let value):
-                break//
-            case .failure(let error):
-                print("Loading chain preview image failed: \(error.localizedDescription)")
-            }
-        }
+        mainImage.kf.setImage(with: url)
     }
     
     func updateTimeLabel(){

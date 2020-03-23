@@ -60,9 +60,11 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
     func chainGotNewPost(post: ChainImage) {}
     
     func chainDidLoad(chain: PostChain) {
-        //let chainIndex = collViewIndexReference[chain.chainName]!
-        //collectionView.reloadItems(at: [chainIndex])
-        collectionView.reloadData()
+        if let index = collViewIndexReference[chain.chainName]{
+            collectionView.reloadItems(at: [index])
+        }else{
+            collectionView.reloadData()
+        }
     }
 }
 

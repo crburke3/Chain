@@ -44,13 +44,13 @@ extension ChainProfileViewController: UICollectionViewDelegate, UICollectionView
            let screen = UIScreen.main.bounds
            let screenWidth = screen.width
            let screenHeight = screen.height
-           let width = (screen.width / 2) - 10
+           let width = (screen.width / 2) - 50
            let height = (screenHeight/screenWidth) * width
            
            if indexPath.section == 0{
                return CGSize(width: width, height: height)
            }else{
-                return .zero
+               return CGSize(width: 200, height: 200)
            }
        }
        
