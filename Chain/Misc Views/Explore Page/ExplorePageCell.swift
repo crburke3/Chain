@@ -15,21 +15,21 @@ class ExplorePageCell: UICollectionViewCell {
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var timerLabel: UILabel!
     @IBOutlet var previewImageView: UIImageView!
-    var chain: PostChain = PostChain(chainName: "")
+    var chain: PostChain = PostChain(chainUUID: "1b0LCcjiVh53Kb89xD8Q")
     var deathDate:Date = Date()
     private var loaded = false
     
     func updateTimeLabel(){
         self.timerLabel.text = chain.deathDate.timeTillDeath()
-    }
-    
-    func listenToDate(){
-        deathDate.timeTillDeath { (timeLeft) in
-            self.timerLabel.text = timeLeft
+        if chain.isDead{
+            timerLabel.textColor = .red
         }
     }
     
     func cellDidLoad(){
+        if chain.isDead{
+            timerLabel.textColor = .red
+        }
         previewImageView.roundCorners(corners: [.allCorners], radius: 5)
         roundView.addShadow()
         titleLabel.text = chain.chainName

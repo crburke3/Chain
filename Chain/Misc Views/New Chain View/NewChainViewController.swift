@@ -97,15 +97,14 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
             }
               
             //Upload first image
-            postChain.uploadChain(chain: postChain, image:  imageHolder) { (error) in
-                if error != nil {
-                masterNav.popViewController(animated: false)
-                masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
-                } else {
-                    //error uploading
+            postChain.uploadChain() { (err) in
+                if err != nil{
+                    self.showPopUp(_title: "Error Uploading", _message: err!)
+                    return
                 }
+                masterCache.addChainToCache(chain: postChain)
+                masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
             }
-            
         }
     }
 }

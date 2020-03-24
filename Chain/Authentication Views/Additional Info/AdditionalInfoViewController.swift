@@ -49,7 +49,7 @@ class AdditionalInfoViewController: UIViewController, UINavigationControllerDele
     }
         
     @IBAction func skip(_ sender: Any) {
-        let firstChain = PostChain(chainName: "firstChain", load: true)
+        let firstChain = PostChain(chainUUID: "firstChain")
         let mainVC = ChainViewController.initFrom(chain: firstChain)
         masterNav.pushViewController(mainVC, animated: true)
     }

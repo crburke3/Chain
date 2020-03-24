@@ -35,6 +35,13 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
             self.loader.fadeOut()
             self.collectionView.reloadData()
         }
+        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+            for cell in self.collectionView.visibleCells{
+                if let castCell = cell as? ChainCollectionViewCell{
+                    castCell.updateTimeLabel()
+                }
+            }
+        }
     }
     
     func loadUserChains(succ: @escaping (Bool)->()){
@@ -60,10 +67,21 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
     func chainGotNewPost(post: ChainImage) {}
     
     func chainDidLoad(chain: PostChain) {
-        //let chainIndex = collViewIndexReference[chain.chainName]!
-        //collectionView.reloadItems(at: [chainIndex])
-        collectionView.reloadData()
+        if let index = collViewIndexReference[chain.chainName]{
+            collectionView.reloadItems(at: [index])
+        }else{
+            collectionView.reloadData()
+        }
     }
+    
+    func chainDidDie(chain: PostChain) {
+        if let index = collViewIndexReference[chain.chainName]{
+            collectionView.reloadItems(at: [index])
+        }else{
+            collectionView.reloadData()
+        }
+    }
+    
 }
 
 class MainProfileView: UICollectionReusableView{
@@ -80,5 +98,9 @@ class MainProfileView: UICollectionReusableView{
         profileImageView.kf.setImage(with: URL(string: user.profile))
         bioField.text = user.bio
         followingButton.setTitle("Followers (\(user.friends.count))", for: .normal)
+    }
+    
+    func chainDidDie(chain: PostChain) {
+        
     }
 }

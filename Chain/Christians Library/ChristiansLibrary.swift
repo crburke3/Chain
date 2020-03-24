@@ -850,6 +850,13 @@ extension Double{
 
 
 extension Date{
+    func toISO()->String{
+        let iso8601DateFormatter = ISO8601DateFormatter()
+        iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let string = iso8601DateFormatter.string(from: self)
+        return string
+    }
+    
     func toChainString()->String{
         let dateFormat = "yyyy/MM/dd HH:mm:ss"
         let seconds = -TimeInterval(TimeZone.current.secondsFromGMT())

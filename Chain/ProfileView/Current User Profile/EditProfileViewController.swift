@@ -71,7 +71,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
 
 
     
-    func uploadImage(image: UIImage, completion: @escaping (String)->()) {
+    func uploadImage(image: UIImage, completion: @escaping (String?)->()) {
             var urlString = "" //Will hold URL string to create Chain Image
             let firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
             let data = image.jpegData(compressionQuality: 1.0)!
@@ -138,6 +138,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         profilePic.layer.cornerRadius = profilePic.frame.height/2
         profilePic.clipsToBounds = true
     }
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
 

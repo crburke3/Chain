@@ -11,7 +11,7 @@ import Firebase
 import BouncyLayout
 
 class ExploreViewController: UIViewController, PostChainDelegate {
-    
+
     @IBOutlet weak var collectionViewA: UICollectionView!
     var topChains:[PostChain] = []
     var otherChains:[PostChain] = [] //Will hold Friend's or Global feed
@@ -34,11 +34,19 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
 
         loadUserFeed(returnNumber: 4) { (chains) in
+            for chain in chains{
+                chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
+                masterCache[chain.chainUUID] = chain
+            }
             self.otherChains = chains
             print("Retrieved User Feed")
             self.collectionViewA.reloadData() //A is bottom collection view
         }
         loadGlobalChainsID { (postChains) in
+            for chain in postChains{
+                chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
+                masterCache[chain.chainUUID] = chain
+            }
             self.topChains = postChains
             self.collectionViewA.reloadData() //A is bottom collection view
         }
@@ -53,13 +61,27 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     }
     
     func chainDidLoad(chain: PostChain) {
-        let chainIndex = collViewIndexReference[chain.chainName]!
-        collectionViewA.reloadItems(at: [chainIndex])
+        if let chainIndex = collViewIndexReference[chain.chainName]{
+            collectionViewA.reloadItems(at: [chainIndex])
+        }else{
+            collectionViewA.reloadData()
+        }
     }
     
     func chainGotNewPost(post: ChainImage) {}
+    func chainDidDie(chain: PostChain) {
+        if let chainIndex = collViewIndexReference[chain.chainName]{
+            collectionViewA.reloadItems(at: [chainIndex])
+        }else{
+            collectionViewA.reloadData()
+        }
+    }
     
     @IBAction func addChain(_ sender: Any) {
+        let functions = Functions.functions()
+        functions.httpsCallable("helloWorld").call { (resutlt, err) in
+            
+        }
         masterNav.pushViewController(NewChainViewController(), animated: true)
     }
 }

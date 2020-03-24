@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import MapKit
 import FirebaseFirestore
+import FirebaseFunctions
 import FirebaseStorage
 //import Geofirestore
 
@@ -30,6 +31,7 @@ class PostChain{
     var chainUUID:String = ""
     var lastReadBirthDate =  Date(timeIntervalSinceReferenceDate: -123456789.0) //Keeps track of last read cell, acts as a cursor for pagination
     var testTime:Timestamp
+    var isDead:Bool = false
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -41,15 +43,16 @@ class PostChain{
         self.contributors = ["cburke"]
         self.coordinate = CLLocation().coordinate //masterLocator.getCurrentLocation()!.coordinate
         self.loaded = .LOADED
+        self.chainUUID = UUID().uuidString
         if posts.count > 0{
             firstImageLink = posts[0].link
         }
         self.testTime = Timestamp(date: self.birthDate)
     }
     
-    init(chainName:String, load:Bool = true){
-        self.chainName = chainName
-        self.chainUUID = chainName
+    init(chainUUID:String){
+        self.chainName = "not loaded"
+        self.chainUUID = chainUUID
         self.birthDate = Date()
         self.deathDate = Date()
         self.likes = 0
@@ -63,12 +66,18 @@ class PostChain{
     }
     
     init?(dict:[String:Any]){
-        self.chainName = dict["chainName"] as! String   //want this to fail if it doesnt exist
-        self.chainUUID = dict["chainUUID"] as! String 
-        self.birthDate = (dict["birthDate"] as! Timestamp).dateValue()
-        self.deathDate = (dict["deathDate"] as! Timestamp).dateValue()
-        self.likes = dict["likes"] as! Int
-        self.count = dict["count"] as! Int
+        guard let _chainName = dict["chainName"] as? String,
+            let _chainUUID = dict["chainUUID"] as? String,
+            let _birthDate = dict["birthDate"] as? Timestamp,
+            let _deathDate = dict["deathDate"] as? Timestamp
+        else{ return nil }
+        
+        self.chainName = _chainName
+        self.chainUUID = _chainUUID
+        self.birthDate = _birthDate.dateValue()
+        self.deathDate = _deathDate.dateValue()
+        self.likes = dict["likes"] as? Int ?? 0
+        self.count = dict["count"] as? Int ?? 1
         self.tags = dict["tags"] as? [String] ?? []
         self.contributors = dict["contributors"] as? [String] ?? []
         self.testTime = Timestamp(date: self.birthDate)
@@ -88,47 +97,69 @@ class PostChain{
         }
     }
     
-    func uploadChain(chain:PostChain, image:UIImage, error: @escaping (String?)->()) {
-        //Upload first image
-        //Get url
-        //Edit chain object
-        //Upload to FS
-        //Append image
-        let db = Firestore.firestore()
-        let newChainRef = db.collection("chains").document()
-        let firestoreRef = Firestore.firestore().collection("chains").document(newChainRef.documentID)
-        chain.chainUUID = newChainRef.documentID
-        firestoreRef.setData(chain.toDict()) { (err1) in
-            if let error1 = err1{
-                masterNav.showPopUp(_title: "Error Uploading Chain", _message: error1.localizedDescription)
-                error(error1.localizedDescription)
-            }else{
-                self.append(image: image, source: "general") { (err, postedImage) in
-                    if err != nil { print(err) } else {
-                        self.firstImageLink = postedImage?.link
-                        db.collection("chains").document(self.chainUUID).updateData(["firstImageLink" : self.firstImageLink])
+    func uploadChain(error: @escaping (String?)->()) {
+        if self.posts.count <= 0{ error("posts are empty"); return }
+        let image = posts[0].image!
+        let functions = Functions.functions()
+        let data = image.jpegData(compressionQuality: 1.0)!
+        let imageName = UUID().uuidString
+        let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
+        let metaDataForImage = StorageMetadata() //
+        metaDataForImage.contentType = "image/jpeg" //
+        imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
+            if err1 != nil {error("Error uploading to cloud: \(err1!.localizedDescription)"); return}
+            imageReference.downloadURL(completion: { (url, err2) in
+                if err2 != nil {error("Error getting URL"); return}
+                if url == nil {error("Error loading URL"); return}
+                let urlString = url!.absoluteString //Hold URL
+                self.firstImageLink = urlString
+                self.posts[0].link = urlString
+                let callData:[String:Any] = ["chainData" : self.toFunctionsDict(),
+                                             "firstPost" : self.posts[0].toFunctionsDict(),
+                                             "userID"    : masterAuth.currUser!.phoneNumber]
+                
+                functions.httpsCallable("helloWorld").call(callData) { (result, err2) in
+                    if err2 != nil{error(err2?.localizedDescription); return}
+                    if result == nil{error("No Result"); return}
+                    if let data = result!.data as? [String:Any]{
+                        if let message = data["message"] as? String{
+                            if message.contains(find: "success"){
+                                error(nil)
+                            }else{
+                                error(message)
+                            }
+                        }else{
+                            error("Messaging Error")
+                        }
+                    }else{
+                        error("Data Error")
                     }
                 }
-                error(nil)
-            }
+            })
         }
     }
-
     
-    func toDict(withPosts:Bool = true)->[String:Any]{
-        let retDict:[String:Any] = ["chainName" : self.chainName,
-                                    "chainUUID" : self.chainUUID,
-                                    "birthDate" : self.birthDate,
-                                    "deathDate" : self.deathDate,
-                                    "likes" : self.likes,
-                                    "count": self.count,
-                                    "tags" : self.tags,
-                                    "contributors" : self.contributors,
-                                    "firstImageLink" : self.firstImageLink]
+    func toFunctionsDict()->[String:Any]{
+        var retDict = self.toDict()
+        retDict["birthDate"] = self.birthDate.toISO()
+        retDict["deathDate"] = self.deathDate.toISO()
         return retDict
     }
     
-    
+    func toDict()->[String:Any]{
+        var retDict:[String:Any] = ["chainName" : self.chainName,
+                                    "chainUUID" : self.chainUUID,
+                                    "birthDate" : Timestamp(date: birthDate),
+                                    "deathDate" : Timestamp(date: deathDate),
+                                    "likes" : self.likes,
+                                    "count": self.count,
+                                    "tags" : self.tags,
+                                    "contributors" : self.contributors]
+        if firstImageLink != nil{
+           retDict["firstImageLink"] = self.firstImageLink!
+        }
+        return retDict
+    }
     
     func postsData()->[[String:Any]]{
         var postsData:[[String:Any]] = []
@@ -139,6 +170,38 @@ class PostChain{
             index += 1
         }
         return postsData
+    }
+    
+    func load(err: @escaping(String?)->()){
+        let ref = masterFire.db.collection("chains").document(self.chainUUID)
+        ref.getDocument { (snap, err1) in
+            guard let dict = snap?.data() else{ err("bad dict"); return }
+            guard let _chainName = dict["chainName"] as? String,
+                let _chainUUID = dict["chainUUID"] as? String,
+                let _birthDate = dict["birthDate"] as? Timestamp,
+                let _deathDate = dict["deathDate"] as? Timestamp
+                else{ err("bad data"); return }
+            
+            self.chainName = _chainName
+            self.chainUUID = _chainUUID
+            self.birthDate = _birthDate.dateValue()
+            self.deathDate = _deathDate.dateValue()
+            self.likes = dict["likes"] as? Int ?? 0
+            self.count = dict["count"] as? Int ?? 1
+            self.tags = dict["tags"] as? [String] ?? []
+            self.contributors = dict["contributors"] as? [String] ?? []
+            self.testTime = Timestamp(date: self.birthDate)
+            self.loaded = .LOADED
+            let latLong = dict["l"] as? [Double] ?? [0.0, 0.0]
+            self.coordinate = CLLocationCoordinate2D(latitude: latLong[0], longitude: latLong[1])
+            self.firstImageLink = dict["firstImageLink"] as? String
+            if (self.firstImageLink == nil) && (self.posts.count > 0){
+                self.firstImageLink = self.posts[0].link
+            }
+            for delegate in self.delegates.values{
+                delegate.chainDidLoad(chain: self)
+            }
+        }
     }
     
     func loadPost(postSource: String = "chains", post: @escaping (ChainImage)->()){
@@ -261,4 +324,5 @@ class PostChain{
 protocol PostChainDelegate {
     func chainGotNewPost(post: ChainImage)
     func chainDidLoad(chain: PostChain)
+    func chainDidDie(chain: PostChain)
 }

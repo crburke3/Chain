@@ -46,11 +46,11 @@ class ChainImage{
         self.loadState = .NOT_LOADED
         self.image = image
         self.link = ""
-        self.user = ""
+        self.user = masterAuth.currUser.phoneNumber
         self.time = Date()
-        self.userPhone = ""
-        self.userProfile = ""
-        self.uuid = ""
+        self.userPhone = masterAuth.currUser.phoneNumber
+        self.userProfile = masterAuth.currUser.phoneNumber
+        self.uuid = UUID().uuidString
     }
     
     //When pulled from firestore
@@ -73,11 +73,34 @@ class ChainImage{
         self.didUserLike { (didLike) in }
     }
     
+    func toFunctionsDict()->[String:Any]{
+        var retDict = self.toDict()
+        retDict["Time"] = self.time.toISO()
+        return retDict
+    }
+    
+    func toDict()->[String:Any]{
+        if widthImage == 0.0 || heightImage == 0.0{
+            fatalError("No Width/heithgt")
+        }
+        let retDict:[String:Any] = ["Link": self.link,
+                                    "Time": Timestamp(date: self.time),
+                                    "user": self.user,
+                                    "userProfile": self.userProfile,
+                                    "userPhone": self.userPhone,
+                                    "index": self.localIndex,
+                                    "width": self.widthImage,
+                                    "height": self.heightImage,
+                                    "uuid": self.uuid]
+        
+        return retDict
+    }
+    
     func toDict(height: CGFloat, width: CGFloat)->[String:Any]{
         self.widthImage = width
         self.heightImage = height
         let retDict:[String:Any] = ["Link": self.link,
-                                    "Time": self.time,
+                                    "Time": self.time.timeIntervalSince1970,
                                     "user": self.user,
                                     "userProfile": self.userProfile,
                                     "userPhone": self.userPhone,
