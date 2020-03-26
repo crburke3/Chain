@@ -50,59 +50,20 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         super.viewDidLoad()
         if mainChain.loaded == .LOADED{chainDidLoad(chain: mainChain)}
         titleLabel.text = mainChain.chainName
-//        mainChain.loadPost() { (post) in //chainSource -> global or general
-//            if self.mainChain.posts.count == 0 {
-//                self.mainChain.localAppend(post: post)
-//                self.tableView.reloadData()
-//            }
-//        }
+        mainChain.loadPost() { (post) in //chainSource -> global or general
+            if self.mainChain.posts.count == 0 {
+                self.mainChain.localAppend(post: post)
+                self.tableView.reloadData()
+            }
+        }
         fanMenuSetUp()
         view.bringSubviewToFront(fanMenu)
         setupTableView()
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             self.timerLabel.text = self.mainChain.deathDate.timeTillDeath()
         }
-        
-        tableView.addInfiniteScroll { (tableview) in
-            self.loadMorePosts()
-        }
-        loadMorePosts()
     }
-    
-    func loadMorePosts(){
-        let prevCount = mainChain.posts.count
-        mainChain.loadPosts(count: 5) { (posts) in
-            self.tableView.reloadData()
-            var indexes:[IndexPath] = []
-            var newCount = prevCount
-            for post in posts{
-                if newCount < posts.count{
-                    indexes.append(IndexPath(row: newCount, section: 0))
-                    newCount += 1
-                }
-            }
-            if prevCount == 0{
-                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath(row: prevCount, section: 0), at: .middle, animated: false)
-                //self.reloadTableView(self.tableView)
-            }else{
-                self.tableView.reloadData()
-                self.tableView.scrollToRow(at: IndexPath(row: prevCount, section: 0), at: .bottom, animated: false)
-//                self.tableView.beginUpdates()
-//                self.tableView.insertRows(at: indexes, with: .bottom)
-//                self.tableView.endUpdates()
-                //self.reloadTableView(self.tableView)
-            }
-            self.tableView.finishInfiniteScroll(completion: nil)
-        }
-    }
-    
-    func reloadTableView(_ tableView: UITableView) {
-        let contentOffset = tableView.contentOffset
-        tableView.reloadData()
-        tableView.layoutIfNeeded()
-        tableView.setContentOffset(contentOffset, animated: false)
-    }
+
 
     func setupTableView(){
         cameraVC.delegate = self
