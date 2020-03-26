@@ -155,10 +155,6 @@
                                             <action selector="plusClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zWR-DC-4Wp"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fxh-rC-ZCK">
-                                        <rect key="frame" x="307" y="-196" width="52" height="30"/>
-                                        <state key="normal" title="Explore"/>
-                                    </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-f7-dHb">
                                         <rect key="frame" x="16" y="17.5" width="35" height="35"/>
                                         <constraints>
@@ -183,7 +179,6 @@
                                 <color key="backgroundColor" red="0.93708091969999996" green="0.95056837800000005" blue="0.86310297250000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="l48-9u-ABw" firstAttribute="top" secondItem="5Dg-hd-BfR" secondAttribute="top" constant="8" id="3Yh-Fu-FSy"/>
-                                    <constraint firstAttribute="trailing" secondItem="fxh-rC-ZCK" secondAttribute="trailing" constant="16" id="79h-uf-YCe"/>
                                     <constraint firstItem="lOP-f7-dHb" firstAttribute="centerY" secondItem="5Dg-hd-BfR" secondAttribute="centerY" id="EXf-U1-DWl"/>
                                     <constraint firstAttribute="bottom" secondItem="mB4-dw-CID" secondAttribute="bottom" constant="8" id="Fsn-Wk-iJ2"/>
                                     <constraint firstItem="l48-9u-ABw" firstAttribute="centerX" secondItem="5Dg-hd-BfR" secondAttribute="centerX" id="LE3-Fd-AjF"/>
@@ -213,13 +208,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v7S-fu-uYM" customClass="RoundView" customModule="Chain" customModuleProvider="target">
-                                                    <rect key="frame" x="0.0" y="24" width="375" height="484"/>
+                                                    <rect key="frame" x="0.0" y="4" width="375" height="524"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="fakeImg" translatesAutoresizingMaskIntoConstraints="NO" id="drC-NI-6dT">
-                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="484"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="375" height="524"/>
                                                         </imageView>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="idi-cf-NSJ" userLabel="infoView" customClass="RoundView" customModule="Chain" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="384" width="375" height="100"/>
+                                                            <rect key="frame" x="0.0" y="424" width="375" height="100"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fbK-hP-ceq" customClass="RoundButton" customModule="Chain" customModuleProvider="target">
                                                                     <rect key="frame" x="24" y="18" width="30" height="30"/>
@@ -313,8 +308,8 @@
                                             <constraints>
                                                 <constraint firstItem="v7S-fu-uYM" firstAttribute="leading" secondItem="ieR-RF-gdu" secondAttribute="leading" id="6vq-zg-Y9R"/>
                                                 <constraint firstAttribute="trailing" secondItem="v7S-fu-uYM" secondAttribute="trailing" id="lFB-gx-c8Y"/>
-                                                <constraint firstAttribute="bottom" secondItem="v7S-fu-uYM" secondAttribute="bottom" constant="24" id="oL8-FP-oAz"/>
-                                                <constraint firstItem="v7S-fu-uYM" firstAttribute="top" secondItem="ieR-RF-gdu" secondAttribute="top" constant="24" id="uWM-sH-Heh"/>
+                                                <constraint firstAttribute="bottom" secondItem="v7S-fu-uYM" secondAttribute="bottom" constant="4" id="oL8-FP-oAz"/>
+                                                <constraint firstItem="v7S-fu-uYM" firstAttribute="top" secondItem="ieR-RF-gdu" secondAttribute="top" constant="4" id="uWM-sH-Heh"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
