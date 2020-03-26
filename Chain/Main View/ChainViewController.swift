@@ -130,14 +130,14 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         }
     }
     
-    @objc func buttonClicked(sender:UIButton) {
-        let buttonRow = sender.tag
-        print(sender.tag)
+    func shareFromPost(index: Int) {
+        //let buttonRow = sender.tag
+        //print(sender.tag)
         self.fpc = FloatingPanelController()
         self.fpc.delegate = self // Optional
         let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
-        contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain.deathDate.toChainString() ?? "", _sentByUsername: currentUser.username, _sentByPhone: currentUser.phoneNumber, _sentByProfile: currentUser.profile, _receivedBy: "", _index: buttonRow)
-        contentVC.index = buttonRow
+        contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain.deathDate.toChainString() ?? "", _sentByUsername: currentUser.username, _sentByPhone: currentUser.phoneNumber, _sentByProfile: currentUser.profile, _receivedBy: "", _index: index)
+        contentVC.index = index
         contentVC.chain = mainChain.chainName
         contentVC.userArray = currentUser.friends
         //Set conentVC array to hold currentUsers friends

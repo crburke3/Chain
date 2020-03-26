@@ -10,27 +10,22 @@ import Foundation
 import PopupDialog
 import FloatingPanel
 import FanMenu
+import UIKit
 
 extension ChainViewController{
-    func showOptionsPopup(post_row: Int, post_image: UIImage){
+    func showOptionsPopup(){
         let title = "Image Options"
         let message = "Select one of the actions below or press cancel"
         var postUser = ""
-        let givenCell = self.tableView.cellForRow(at: IndexPath(row: post_row, section: 0)) as! MainCell
-        let givenPost = givenCell.post.toDict(height: post_image.size.height, width: post_image.size.width) as [String:Any]
-        postUser = givenPost["userPhone"] as! String
-        let indexPath = NSIndexPath(row: post_row, section: 0)
-        tableView.scrollToRow(at: indexPath as IndexPath, at: .top, animated: true)
         //Resize/Crop
-        let image = cropToBounds(image: post_image, width: 100, height: 100)
-        let popup = PopupDialog(title: title, message: message, image: image) //Image arguement is optional
+        let popup = PopupDialog(title: title, message: message) //Image arguement is optional
         // Create buttons
         let cancelButton = CancelButton(title: "CANCEL") {
             print("Canceled")
         }
         let reportButton = DefaultButton(title: "Report Image", height: 60) {
             print("Report Image")
-            masterFire.reportImage(chainName: self.mainChain.chainName, image: ChainImage(dict: givenPost, parentChain: self.mainChain)!) { (error) in
+            masterFire.reportImage(chainName: self.mainChain.chainName, image: self.mainChain.posts[(self.tableView.indexPathsForVisibleRows?.last!.row)!]) { (error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -39,9 +34,8 @@ extension ChainViewController{
             }
         }
         let removeButton = DefaultButton(title: "Remove your Image") {
-            print("Photo: \(post_row)")
             print("Chain Removed")
-            masterFire.removeFromChain(chainName: "firstChain", post: givenPost) { (error) in
+            masterFire.removeFromChain(chainName: "firstChain", post: self.mainChain.posts[(self.tableView.indexPathsForVisibleRows?.last!.row)!].toDict()) { (error) in
                 if let error = error {
                     print(error)
                 } else {
@@ -50,11 +44,14 @@ extension ChainViewController{
             }
             self.tableView.reloadData()
         }
+        let shareButton = DefaultButton(title: "Share from Post") {
+            self.shareFromPost(index: (self.tableView.indexPathsForVisibleRows?.last!.row)!) //Needs index
+        }
         //
         if postUser == currentUser.phoneNumber {
-            popup.addButtons([reportButton, removeButton, cancelButton])
+            popup.addButtons([shareButton, reportButton, removeButton, cancelButton])
         } else {
-            popup.addButtons([reportButton, cancelButton])
+            popup.addButtons([shareButton, reportButton, cancelButton])
         }
         present(popup, animated: true, completion: nil)
     }
@@ -118,29 +115,30 @@ extension ChainViewController{
     }
     
     func fanMenuSetUp() {
-        fanMenu.button = FanMenuButton(id: "Main", image: "infinity", color: .white)
-        //fanMenu.
-        fanMenu.interval = (1.25*(Double.pi), (1.75*(Double.pi))) //In radians
-        //(0, -(Double.pi))
-        //(1.25*(Double.pi), (1.75*(Double.pi)))
+        fanMenu.button = FanMenuButton(id: "Main", image: "smallImg", color: .white)
+        fanMenu.menuRadius = 70.0
+        fanMenu.radius = 20.0 //Controls button radius
+        fanMenu.duration = 0.35
+        fanMenu.interval = (0.75*(Double.pi), (1.25*(Double.pi))) //In radians
         fanMenu.menuBackground = .clear
         fanMenu.layer.backgroundColor = UIColor.clear.cgColor
         fanMenu.backgroundColor = UIColor.clear
-        //May add append chain
+        //Image("room.thumbnailImage").resizable().frame(width: 32.0, height: 32.0)
+        //24x24 pixel images work well with 20 button radius
         fanMenu.items = [
             FanMenuButton(
                 id: "jumpToEnd",
-                image: "end",
+                image: "smallImg",
                 color: .white
             ),
             FanMenuButton(
                 id: "jumpToRandom",
-                image: "random",
+                image: "smallImg",
                 color: .white
             ),
             FanMenuButton(
                 id: "jumpToNextFriendsPost",
-                image: "friends",
+                image: "smallImg",
                 color: .white
             )
         ]
@@ -203,5 +201,10 @@ extension ChainViewController{
             //KingFisher load function
             newIndex += 1
         }
+    }
+    
+    @objc func optionsClicked(sender: UIButton) {
+        //Present menu
+        self.showOptionsPopup()
     }
 }

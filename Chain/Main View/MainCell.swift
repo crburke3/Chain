@@ -27,6 +27,8 @@ class MainCell: UITableViewCell {
     var row: Int = 0
     var isPostLoaded = false
     
+    @IBOutlet weak var optionsMenu: RoundButton!
+    
     @IBAction func shareButton(_ sender: Any) {
         //Called on button press
     }
@@ -58,8 +60,12 @@ class MainCell: UITableViewCell {
     @IBAction func popUpMenu(_ sender: Any) {
         //Center or pass image
         if isPostLoaded{
+            
+            //Delegate
+            /*
             let chainVC = masterNav.findViewController(with: "ChainViewController") as! ChainViewController
             chainVC.showOptionsPopup(post_row: self.row, post_image: self.imgView.image ?? UIImage())
+             */
         }
     }
     
@@ -88,8 +94,7 @@ class MainCell: UITableViewCell {
     }
     
     
-    func setForPost(post:ChainImage){
-        self.post = post
+    func cellDidLoad(){
         isExpanded = false
         infoViewHeight.constant = 0
         moveExpansion()
@@ -103,21 +108,31 @@ class MainCell: UITableViewCell {
         //self.profilePicImage.downloadWithHolder(_url: post.link, _placeholder: UIImage(named: "flipCamera")!)
         profilePicImage.downloaded(from: post.userProfile)
         imgView.downloadWithHolder(_url: post.link, _placeholder: UIImage(named: "flipCamera")!)
-//        self.profilePicImage?.kf.setImage(with: URL(string: post.userProfile)) { result in
-//            switch result {
-//            case .success(let value):
-//                self.profilePicImage?.layer.borderWidth = 1
-//                self.profilePicImage?.layer.masksToBounds = false
-//                self.profilePicImage?.layer.borderColor = UIColor.black.cgColor
-//                self.profilePicImage?.layer.cornerRadius = (self.profilePicImage?.frame.height)!/2
-//                self.profilePicImage?.clipsToBounds = true
-//                break
-//            case .failure(let error):
-//                self.profilePicImage.image = UIImage(named: "fakeImg")
-//                print("failed image load: \(self.post.link)")
-//                //print(error)
-//            }
-//        }
+        self.profilePicImage?.kf.setImage(with: URL(string: post.userProfile)) { result in
+            switch result {
+            case .success(let value):
+                self.profilePicImage?.layer.borderWidth = 1
+                self.profilePicImage?.layer.masksToBounds = false
+                self.profilePicImage?.layer.borderColor = UIColor.black.cgColor
+                self.profilePicImage?.layer.cornerRadius = (self.profilePicImage?.frame.height)!/2
+                self.profilePicImage?.clipsToBounds = true
+                break
+            case .failure(let error):
+                self.profilePicImage.image = UIImage(named: "fakeImg")
+                print("failed image load: \(self.post.link)")
+                //print(error)
+            }
+        }
+        self.profilePicImage?.kf.setImage(with: URL(string: post.link)) { result in
+            switch result {
+            case .success(let value):
+                break
+            case .failure(let error):
+                self.profilePicImage.image = UIImage(named: "fakeImg")
+                print("failed image load: \(self.post.link)")
+                //print(error)
+            }
+        }
     }
     
     @objc func imgDoubleTapped(sender: UIImageView){
