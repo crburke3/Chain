@@ -217,7 +217,7 @@ class PostChain{
             } else {
                 for document in querySnapshot!.documents {
                     //print(self.testTime.dateValue())
-                    //self.testTime = (document.get("Time") as? Timestamp)!
+                    self.testTime = (document.get("Time") as? Timestamp)!
                     var dict = document.data() as [String : Any]
                     dict["uuid"] = document.documentID
                     if let _post = ChainImage(dict: dict, parentChain: self){

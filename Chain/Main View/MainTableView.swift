@@ -15,7 +15,7 @@ import Kingfisher
 extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "post") as! MainCell
 //        cell.selectionStyle = .none
 //        let post = mainChain.posts[indexPath.row]
 //        cell.setForPost(post: post)
@@ -27,9 +27,10 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
              if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
                mainChain.loadPost() { (post) in //chainSource -> global or general
                    if (post.link != "noLink") {
-                    self.mainChain.localAppend(post: post)
-                       self.mainChain.posts.last?.loadState = .LOADED
-                       self.tableView.reloadData()
+                    //self.mainChain.localAppend(post: post)
+                        self.mainChain.localAppend(post: post)
+                        self.mainChain.posts.last?.loadState = .LOADED
+                        self.tableView.reloadData()
                    }
                }
             }
@@ -45,7 +46,7 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     //Don't call Firestore if already in cache
                     print(self.tableView.indexPathsForVisibleRows?.last?.row) //Prints highest value
 
-                    if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) == 1) {
+                    if ((self.mainChain.posts.count - (self.tableView.indexPathsForVisibleRows?.last?.row ?? 0)) <= 1) {
                         mainChain.loadPost() { (post) in //chainSource -> global or general
                             if (post.link != "noLink") {
                                 self.mainChain.localAppend(post: post)
@@ -78,7 +79,8 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                     break
                 }
             }
-            cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
+            //cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
+            cell.optionsMenu.addTarget(self, action: #selector(optionsClicked(sender:)), for: .touchUpInside)
             cell.user.text = self.mainChain.posts[indexPath.row].user
             cell.post = self.mainChain.posts[indexPath.row]
             cell.cellDidLoad()
@@ -97,7 +99,8 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
                 }
 
             print("At \(indexPath.row) use \(self.mainChain.posts[indexPath.row].link)")
-            cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
+            //cell.share.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
+            cell.optionsMenu.addTarget(self, action: #selector(optionsClicked(sender:)), for: .touchUpInside)
             cell.user.text = self.mainChain.posts[indexPath.row].user
             cell.post = self.mainChain.posts[indexPath.row]
             cell.cellDidLoad()
