@@ -13,6 +13,7 @@ import FanMenu
 import Kingfisher
 import Firebase
 import ParallaxHeader
+import UIScrollView_InfiniteScroll
 
 //import SideMenuSwift
 
@@ -31,12 +32,12 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     var lastDoc: QueryDocumentSnapshot?
     var nextQuery: Query?
     var counter: Int = 0 //Remove
-    var chainSource = "" //Should be either Global or Regular
     let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     var mainChain:PostChain = masterCache["1b0LCcjiVh53Kb89xD8Q"]{
         didSet{
             self.mainChain.addDelegate(delegateID: "ChainViewController", delegate: self)
             self.mainChain.listenForChanges()
+            self.mainChain.load { (err) in }
         }
     }
     
@@ -61,8 +62,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { (timer) in
             self.timerLabel.text = self.mainChain.deathDate.timeTillDeath()
         }
-        
     }
+
 
     func setupTableView(){
         cameraVC.delegate = self
@@ -117,7 +118,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     //Called when the camera view arrow has been tapped
     func didFinishImage(image: UIImage) {
         print("Appending Chain")
-        mainChain.append(image: image, source: self.chainSource) { (err, finalImage) in
+        mainChain.append(image: image) { (err, finalImage) in
             if err != nil{ return}  //Will show popups automatically
         }
         

@@ -88,7 +88,8 @@ class MainCell: UITableViewCell {
     }
     
     
-    func cellDidLoad(){
+    func setForPost(post:ChainImage){
+        self.post = post
         isExpanded = false
         infoViewHeight.constant = 0
         moveExpansion()
@@ -99,20 +100,24 @@ class MainCell: UITableViewCell {
         doubleGesture.numberOfTapsRequired = 2
         imgView.addGestureRecognizer(doubleGesture)
         self.backView.addShadow()
-        self.profilePicImage?.kf.setImage(with: URL(string: post.userProfile)) { result in
-            switch result {
-            case .success(let value):
-                self.profilePicImage?.layer.borderWidth = 1
-                self.profilePicImage?.layer.masksToBounds = false
-                self.profilePicImage?.layer.borderColor = UIColor.black.cgColor
-                self.profilePicImage?.layer.cornerRadius = (self.profilePicImage?.frame.height)!/2
-                self.profilePicImage?.clipsToBounds = true
-                break
-            case .failure(let error):
-                self.profilePicImage.image = UIImage(named: "fakeImg")
-                print(error)
-            }
-        }
+        //self.profilePicImage.downloadWithHolder(_url: post.link, _placeholder: UIImage(named: "flipCamera")!)
+        profilePicImage.downloaded(from: post.userProfile)
+        imgView.downloadWithHolder(_url: post.link, _placeholder: UIImage(named: "flipCamera")!)
+//        self.profilePicImage?.kf.setImage(with: URL(string: post.userProfile)) { result in
+//            switch result {
+//            case .success(let value):
+//                self.profilePicImage?.layer.borderWidth = 1
+//                self.profilePicImage?.layer.masksToBounds = false
+//                self.profilePicImage?.layer.borderColor = UIColor.black.cgColor
+//                self.profilePicImage?.layer.cornerRadius = (self.profilePicImage?.frame.height)!/2
+//                self.profilePicImage?.clipsToBounds = true
+//                break
+//            case .failure(let error):
+//                self.profilePicImage.image = UIImage(named: "fakeImg")
+//                print("failed image load: \(self.post.link)")
+//                //print(error)
+//            }
+//        }
     }
     
     @objc func imgDoubleTapped(sender: UIImageView){
@@ -122,6 +127,4 @@ class MainCell: UITableViewCell {
     @objc func imgTapped(sender: UIImageView){
         moveExpansion()
     }
-
-    
 }

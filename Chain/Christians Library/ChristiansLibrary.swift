@@ -252,6 +252,8 @@ extension UIImageView {
                     self.stopSpinner()
                 }
             }
+        }else{
+            print("URL could not be convereted")
         }
     }
     

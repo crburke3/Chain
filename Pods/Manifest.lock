@@ -166,6 +166,7 @@ PODS:
   - SWXMLHash (5.0.1)
   - UICircularProgressRing (6.3.0)
   - UIEmptyState (4.0.1)
+  - UIScrollView-InfiniteScroll (1.0.2)
 
 DEPENDENCIES:
   - Alamofire
@@ -200,6 +201,7 @@ DEPENDENCIES:
   - SwipeMenuViewController
   - UICircularProgressRing
   - UIEmptyState
+  - UIScrollView-InfiniteScroll (~> 1.0.0)
 
 SPEC REPOS:
   trunk:
@@ -251,6 +253,7 @@ SPEC REPOS:
     - SWXMLHash
     - UICircularProgressRing
     - UIEmptyState
+    - UIScrollView-InfiniteScroll
 
 EXTERNAL SOURCES:
   CTKFlagPhoneNumber:
@@ -311,7 +314,8 @@ SPEC CHECKSUMS:
   SWXMLHash: 9cc0c2e4807926c74377724aa8722ee5707a0485
   UICircularProgressRing: e700fb0505328e88ee53c4ed92bee6d1a5b8bbe3
   UIEmptyState: 767376694d9402452fb3c0a5a5283176c6a53c92
+  UIScrollView-InfiniteScroll: c132d6d5851daff229ab4a1060ccf70a05a051c9
 
-PODFILE CHECKSUM: d8700f3e4c50809c69a04af7a93caafa6e5e8c5f
+PODFILE CHECKSUM: fc728096255609b4dcd4922785cedb16af7360f0
 
 COCOAPODS: 1.8.4

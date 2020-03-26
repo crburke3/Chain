@@ -47,6 +47,7 @@ target 'Chain' do
   pod 'CountdownLabel'
   pod 'FloatingPanel'
   pod "Pastel"
+  pod 'UIScrollView-InfiniteScroll', '~> 1.0.0'
 
   # pod 'Mapbox-iOS-SDK'
   # pod 'MapboxNavigation', '~> 0.38.0'

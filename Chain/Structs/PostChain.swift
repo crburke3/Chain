@@ -30,6 +30,7 @@ class PostChain{
     var firstImageLink:String?
     var chainUUID:String = ""
     var lastReadBirthDate =  Date(timeIntervalSinceReferenceDate: -123456789.0) //Keeps track of last read cell, acts as a cursor for pagination
+    var lastPostLoaded:QueryDocumentSnapshot?
     var testTime:Timestamp
     var isDead:Bool = false
     
@@ -204,40 +205,64 @@ class PostChain{
         }
     }
     
-    func loadPost(postSource: String = "chains", post: @escaping (ChainImage)->()){
+    func loadPost(post: @escaping (ChainImage)->()){
         //chainSource -> global or general
-        var postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
-        switch postSource {
-            case "global":
-                postRef = masterFire.db.collection("globalFeed").document(self.chainUUID).collection("posts")
-                break
-            case "general": //For user feed and general
-                postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
-                break
-            default: break
-        }
-        //Get next document/post
+        let postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
         
         postRef.whereField("Time", isGreaterThan: self.testTime).limit(to: 1).getDocuments() { (querySnapshot, err) in
-                if let err = err {
-                    print("Error getting documents: \(err)")
-                } else {
-                    for document in querySnapshot!.documents {
-                        print(self.testTime.dateValue())
-                        self.testTime = (document.get("Time") as? Timestamp)!
-                        var dict = document.data() as [String : Any]
-                        dict["uuid"] = document.documentID
-                        if let _post = ChainImage(dict: dict, parentChain: self){
-                            post(_post)
+        //postRef.limit(to: 1).getDocuments { (querySnapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+                post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage(named: "fakeImg")!)) //Empty post, needs error image
+            } else {
+                for document in querySnapshot!.documents {
+                    //print(self.testTime.dateValue())
+                    //self.testTime = (document.get("Time") as? Timestamp)!
+                    var dict = document.data() as [String : Any]
+                    dict["uuid"] = document.documentID
+                    if let _post = ChainImage(dict: dict, parentChain: self){
+                        post(_post)
+                    }
+                }
+            }
+        }
+    }
+    
+    private var isLoadingPosts = false
+    func loadPosts(count:Int = 10, posts: @escaping ([ChainImage])->()){
+        if isLoadingPosts{posts([]); return}
+        isLoadingPosts = true
+        let postRef = masterFire.db.collection("chains").document(self.chainUUID).collection("posts")
+        var query = postRef.order(by: "Time").limit(to: count)
+        if lastPostLoaded != nil{
+            query = postRef.order(by: "Time").start(afterDocument: self.lastPostLoaded!).limit(to: count)
+        }
+        query.getDocuments { (querySnapshot, err) in
+            self.isLoadingPosts = false
+            if let err = err {
+                print("Error getting documents: \(err)")
+                let retPosts = [ChainImage.emptyPost] //Empty post, needs error image
+                posts(retPosts)
+            } else {
+                var retPosts:[ChainImage] = []
+                for document in querySnapshot!.documents {
+                    var dict = document.data() as [String : Any]
+                    dict["uuid"] = document.documentID
+                    if let _post = ChainImage(dict: dict, parentChain: self){
+                        if self.localAppend(post: _post){
+                            retPosts.append(_post)
                         }
                     }
                 }
-            post(ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage(named: "fakeImg")!)) //Empty post, needs error image
+                if let lastPost = querySnapshot!.documents.last{
+                    self.lastPostLoaded = lastPost
+                }
+                posts(retPosts)
+            }
         }
-        
     }
     
-    func append(image:UIImage, source:String, completion: @escaping (String?, ChainImage?)->()) {
+    func append(image:UIImage, completion: @escaping (String?, ChainImage?)->()) {
         var urlString = ""
         let data = image.jpegData(compressionQuality: 1.0)!
         let imageName = UUID().uuidString
@@ -254,11 +279,7 @@ class PostChain{
                 let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
                 let dict = uploadImage.toDict(height: image.size.height, width: image.size.width)
                 var postRef: CollectionReference
-                if source == "general" {
-                    postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
-                } else {
-                    postRef = Firestore.firestore().collection("globalFeed").document(self.chainUUID).collection("posts")
-                }
+                postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")
                 postRef.addDocument(data: dict) { (error) in
                     if let err = error {
                         print("Error when adding doc: \(err)")
@@ -315,9 +336,27 @@ class PostChain{
         }
     }
     
-    func localAppend(post:ChainImage){
+    func localAppend(post:ChainImage)->Bool{
         post.parentChain = self
+        for locpost in self.posts{
+            if post.uuid == locpost.uuid{
+                return false
+            }
+        }
         self.posts.append(post)
+        return true
+    }
+    
+    var viewController:ChainViewController{
+        get{
+            if let existingVC = masterNav.findViewController(with: "ChainViewController") as? ChainViewController{
+                existingVC.mainChain = self
+                return existingVC
+            }else{
+                let newVC = ChainViewController.initFrom(chain: self)
+                return newVC
+            }
+        }
     }
 }
 

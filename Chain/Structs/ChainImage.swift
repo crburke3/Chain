@@ -28,6 +28,10 @@ class ChainImage{
     var isLiked:Bool = false
     var parentChain:PostChain?
     
+    static var emptyPost:ChainImage{
+        get{return ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage(named: "fakeImg")!)}
+    }
+    
     //When created by user locally after image is uploaded
     init(link:String, user:String, userProfile:String, userPhone:String, image:UIImage){
         self.loadState = .NOT_LOADED
