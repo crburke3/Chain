@@ -30,8 +30,8 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
         }()
 
         func setupViews() {
-            //backgroundColor = .clear
             addSubview(appsCollectionView)
+            appsCollectionView.showsHorizontalScrollIndicator = false
             appsCollectionView.delegate = self
             appsCollectionView.dataSource = self
             appsCollectionView.backgroundColor = UIColor.clear

@@ -85,7 +85,7 @@ class MainCell: UITableViewCell {
         if isExpanded{
             infoViewHeight.constant = 0
         }else{
-            infoViewHeight.constant = 100
+            infoViewHeight.constant = 50
         }
         isExpanded = !isExpanded
         UIView.animate(withDuration: 0.5) {
