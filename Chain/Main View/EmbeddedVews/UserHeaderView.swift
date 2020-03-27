@@ -11,6 +11,7 @@ import UIKit
 
 class UserHeaderView:UIView{
     
+    @IBOutlet var createdByLabel: UILabel!
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var userNameLabel: UILabel!
     @IBOutlet var contentView: UIView!
@@ -52,7 +53,7 @@ class UserHeaderView:UIView{
         contentView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         contentView.constrainToSuperview()
         backgroundColor = .clear
-        contentView.backgroundColor = UIColor.Chain.lightTan
+        contentView.backgroundColor = .darkGray
         if contentView.backgroundColor!.getHue(&h, saturation: &s, brightness: &b, alpha: nil) {
             print("got it")
         } else {
