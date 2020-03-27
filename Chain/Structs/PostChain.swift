@@ -283,7 +283,7 @@ class PostChain{
                 if url == nil {completion("Error loading URL", nil); return}
                 urlString = url!.absoluteString //Hold URL
                 print(urlString)
-                let uploadImage = ChainImage(link: urlString, user: currentUser.username, userProfile: currentUser.profile, userPhone: currentUser.phoneNumber, image: image)
+                let uploadImage = ChainImage(link: urlString, user: masterAuth.currUser.username, userProfile: masterAuth.currUser.profile, userPhone: masterAuth.currUser.phoneNumber, image: image)
                 let dict = uploadImage.toDict(height: image.size.height, width: image.size.width)
                 var postRef: CollectionReference
                 postRef = Firestore.firestore().collection("chains").document(self.chainUUID).collection("posts")

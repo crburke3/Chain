@@ -30,7 +30,7 @@ class FriendTableViewCell: UITableViewCell {
     @IBAction func changeFriendStatus(_ sender: Any) {
         if buttonState.titleLabel?.text == "Remove" {
             print("Removing Friend")
-            currentUser.removeFriend(friend: givenFriend) { (error) in
+            masterAuth.currUser.removeFriend(friend: givenFriend) { (error) in
                 if let err = error {
                     print(err)
                 } else {
@@ -41,7 +41,7 @@ class FriendTableViewCell: UITableViewCell {
             print("exited")
         } else {
             print("Readding Friend")
-            currentUser.addFriend(friend: givenFriend) { (error) in
+            masterAuth.currUser.addFriend(friend: givenFriend) { (error) in
                 if let err = error {
                     print(err)
                 } else {

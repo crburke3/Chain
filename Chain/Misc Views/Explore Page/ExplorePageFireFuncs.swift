@@ -49,7 +49,7 @@ extension ExploreViewController{
     func loadFriendsFeed(returnNumber: Int, chains: @escaping ([PostChain])->()){
      //Add listener
         var chainArray = [PostChain]()
-        masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("users").document(masterAuth.currUser.phoneNumber).collection("feed").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {

@@ -68,14 +68,14 @@ class FirstViewController : UIViewController, CLLocationManagerDelegate{
     }
     
     @IBAction func enterTapped(_ sender: Any) {
-        currentUser.bio = "What's up guys!"
-        currentUser.name = "Mike R"
-        currentUser.username = "bigDawg"
-        currentUser.blocked = []
-        currentUser.invites = []
-        currentUser.phoneNumber = "+19802550653"
-        currentUser.profile = "https://firebasestorage.googleapis.com/v0/b/chain-3ad1e.appspot.com/o/Fitwork%20Images%2FD2F69E6E-47D8-4307-A91F-C4E1A737B3B1?alt=media&token=4fbfa3b6-c775-4935-b1de-ab12e98c940b"
-        currentUser.topPosts = []
+        masterAuth.currUser.bio = "What's up guys!"
+        masterAuth.currUser.name = "Mike R"
+        masterAuth.currUser.username = "bigDawg"
+        masterAuth.currUser.blocked = []
+        masterAuth.currUser.invites = []
+        masterAuth.currUser.phoneNumber = "+19802550653"
+        masterAuth.currUser.profile = "https://firebasestorage.googleapis.com/v0/b/chain-3ad1e.appspot.com/o/Fitwork%20Images%2FD2F69E6E-47D8-4307-A91F-C4E1A737B3B1?alt=media&token=4fbfa3b6-c775-4935-b1de-ab12e98c940b"
+        masterAuth.currUser.topPosts = []
         let mainVC = masterStoryBoard.instantiateViewController(withIdentifier: mainVcName)
         masterNav.pushViewController(mainVC, animated: true)
     }

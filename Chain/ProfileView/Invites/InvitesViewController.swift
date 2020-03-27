@@ -20,14 +20,14 @@ class InvitesViewController: UIViewController, UITableViewDelegate, UITableViewD
     override func viewDidLoad() {
         super.viewDidLoad()
         inviteArray.removeAll()
-        let invitesRef = db.collection("users").document(currentUser.phoneNumber).collection("invites")
+        let invitesRef = db.collection("users").document(masterAuth.currUser.phoneNumber).collection("invites")
         let nibCell = UINib(nibName: "InviteTableViewCell", bundle: nil)
                tableView.register(nibCell, forCellReuseIdentifier: "InviteTableViewCell")
                tableView.dataSource = self
                tableView.delegate = self
                self.tableView.reloadData()
         //Paginate by date sent
-        db.collection("users").document(currentUser.phoneNumber).collection("invites").getDocuments() { (querySnapshot, err) in
+        db.collection("users").document(masterAuth.currUser.phoneNumber).collection("invites").getDocuments() { (querySnapshot, err) in
                 if let err = err {
                     print("Error getting documents: \(err)")
                 } else {

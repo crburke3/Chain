@@ -48,7 +48,7 @@ extension ChainViewController{
             self.shareFromPost(index: (self.tableView.indexPathsForVisibleRows?.last!.row)!) //Needs index
         }
         //
-        if postUser == currentUser.phoneNumber {
+        if postUser == masterAuth.currUser.phoneNumber {
             popup.addButtons([shareButton, reportButton, removeButton, cancelButton])
         } else {
             popup.addButtons([shareButton, reportButton, cancelButton])
@@ -178,7 +178,7 @@ extension ChainViewController{
     }
     
     func aPostByFriend(phone: String) -> Bool {
-        for friend in currentUser.friends {
+        for friend in masterAuth.currUser.friends {
             if friend.phoneNumber == phone { //Is there a faster way to do this
                 return true
             }

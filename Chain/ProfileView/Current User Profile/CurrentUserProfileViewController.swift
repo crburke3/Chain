@@ -23,8 +23,8 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
         //Grab info from currentUser
         collectionView.register(UINib(nibName: "ChainsCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ChainsCollectionViewCell")
         setUpImage() //Gets profile photo and formats it correctly
-        username.text = currentUser.username
-        userBio.text = currentUser.bio
+        username.text = masterAuth.currUser.username
+        userBio.text = masterAuth.currUser.bio
         self.collectionView.delegate = self
         self.collectionView.dataSource = self
         getCurrentChains()
@@ -33,7 +33,7 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     
     func getCurrentChains() {
         let db = Firestore.firestore()
-        db.collection("users").document(currentUser.phoneNumber).collection("currentChains").getDocuments() { (querySnapshot, error) in
+        db.collection("users").document(masterAuth.currUser.phoneNumber).collection("currentChains").getDocuments() { (querySnapshot, error) in
             if let error = error {
                 print("Error getting documents: \(error)")
             } else {
@@ -46,7 +46,7 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     }
     
     override func viewWillAppear(_ animated: Bool) { //Called after child view controller is popped from stack
-        let url = URL(string: currentUser.profile)
+        let url = URL(string: masterAuth.currUser.profile)
         self.profilePic.kf.setImage(with: url)
         /* profilePic.layer.borderWidth = 1
         profilePic.layer.masksToBounds = false
@@ -57,7 +57,7 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
     }
     
     @IBAction func signOut(_ sender: Any) {
-        currentUser = ChainUser(_username: "", _phoneNumber: "", _name: "")
+        //currentUser = ChainUser(_username: "", _phoneNumber: "", _name: "")
         let signInVC = SignInViewController()
         masterNav.pushViewController(signInVC, animated: true)
         
@@ -122,7 +122,7 @@ class CurrentUserProfileViewController: UIViewController, UICollectionViewDelega
 
 extension CurrentUserProfileViewController {
     func setUpImage() {
-        let url = URL(string: currentUser.profile)
+        let url = URL(string: masterAuth.currUser.profile)
         profilePic.kf.setImage(with: url)
         profilePic.layer.borderWidth = 1
         profilePic.layer.masksToBounds = false

@@ -70,7 +70,7 @@ class Invite {
         //Need to set documentID before deleting
         self.documentID = invitationID
         let db = Firestore.firestore()
-        let inviteRef = db.collection("users").document(currentUser.phoneNumber).collection("invites")
+        let inviteRef = db.collection("users").document(masterAuth.currUser.phoneNumber).collection("invites")
         inviteRef.document(self.documentID).delete { (error) in
             if let err = error {print(err.localizedDescription)}
             else {

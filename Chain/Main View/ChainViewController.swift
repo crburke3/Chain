@@ -144,10 +144,10 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         self.fpc = FloatingPanelController()
         self.fpc.delegate = self // Optional
         let contentVC = masterStoryBoard.instantiateViewController(withIdentifier: "UserMenuTableViewController") as! UserMenuTableViewController
-        contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain.deathDate.toChainString() ?? "", _sentByUsername: currentUser.username, _sentByPhone: currentUser.phoneNumber, _sentByProfile: currentUser.profile, _receivedBy: "", _index: index)
+        contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain.deathDate.toChainString() ?? "", _sentByUsername: masterAuth.currUser.username, _sentByPhone: masterAuth.currUser.phoneNumber, _sentByProfile: masterAuth.currUser.profile, _receivedBy: "", _index: index)
         contentVC.index = index
         contentVC.chain = mainChain.chainName
-        contentVC.userArray = currentUser.friends
+        contentVC.userArray = masterAuth.currUser.friends
         //Set conentVC array to hold currentUsers friends
         self.fpc.set(contentViewController: contentVC)
         self.fpc.track(scrollView: contentVC.tableView)

@@ -33,8 +33,8 @@ class ChainFireStore {
     
     func addFriend(friend: [String:Any], error: @escaping (String?)->()) {
         //Add other user to current user's friend list
-        let currentUserBasicInfo = ["phone": currentUser.phoneNumber, "profile": currentUser.profile, "username": currentUser.username] as [String:Any]
-        var firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
+        let currentUserBasicInfo = ["phone": masterAuth.currUser.phoneNumber, "profile": masterAuth.currUser.profile, "username": masterAuth.currUser.username] as [String:Any]
+        var firestoreRef = Firestore.firestore().collection("users").document(masterAuth.currUser.phoneNumber)
         firestoreRef.updateData([
             "friends": FieldValue.arrayUnion([friend])
         ]) { (err1) in
@@ -48,7 +48,7 @@ class ChainFireStore {
         //Add current user to other user's friends list
         firestoreRef = Firestore.firestore().collection("users").document(friend["phone"] as? String ?? "")
         firestoreRef.updateData([
-            "friends": FieldValue.arrayUnion([currentUser])
+            "friends": FieldValue.arrayUnion([masterAuth.currUser])
         ]) { (err1) in
                    if let error1 = err1{
                        masterNav.showPopUp(_title: "Error adding you to friends list", _message: error1.localizedDescription)
@@ -60,8 +60,8 @@ class ChainFireStore {
     }
     
     func removeFriend(friend: [String:Any], error: @escaping (String?)->()) {
-        let currentUserBasicInfo = ["phone": currentUser.phoneNumber, "profile": currentUser.profile, "username": currentUser.username] as [String:Any]
-        var firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
+        let currentUserBasicInfo = ["phone": masterAuth.currUser.phoneNumber, "profile": masterAuth.currUser.profile, "username": masterAuth.currUser.username] as [String:Any]
+        var firestoreRef = Firestore.firestore().collection("users").document(masterAuth.currUser.phoneNumber)
         firestoreRef.updateData([
             "friends": FieldValue.arrayRemove([friend])
         ]) { (err1) in
@@ -75,7 +75,7 @@ class ChainFireStore {
         //Add current user to other user's friends list
         firestoreRef = Firestore.firestore().collection("users").document(friend["phone"] as? String ?? "")
         firestoreRef.updateData([
-            "friends": FieldValue.arrayRemove([currentUser])
+            "friends": FieldValue.arrayRemove([masterAuth.currUser])
         ]) { (err1) in
                    if let error1 = err1{
                        masterNav.showPopUp(_title: "Error removing you from friends list", _message: error1.localizedDescription)
@@ -135,18 +135,18 @@ class ChainFireStore {
                     let phone = document.get("phone") as? String ?? ""
                     let profilePhoto = document.get("profilePhoto") as? String ?? ""
                     let topPhotos = document.get("topPhotos") as? [[String:Any]] ?? [[:]]
-                    currentUser.bio = document.get("bio") as? String ?? ""
-                    currentUser.name = document.get("name") as? String ?? ""
-                    currentUser.username = document.get("username") as? String ?? ""
-                    currentUser.blocked = blocked
-                    currentUser.invites = invites
-                    currentUser.phoneNumber = phone
-                    currentUser.profile = profilePhoto
-                    currentUser.topPosts = topPhotos
+                    masterAuth.currUser.bio = document.get("bio") as? String ?? ""
+                    masterAuth.currUser.name = document.get("name") as? String ?? ""
+                    masterAuth.currUser.username = document.get("username") as? String ?? ""
+                    masterAuth.currUser.blocked = blocked
+                    masterAuth.currUser.invites = invites
+                    masterAuth.currUser.phoneNumber = phone
+                    masterAuth.currUser.profile = profilePhoto
+                    masterAuth.currUser.topPosts = topPhotos
                     //Need to save chains, friends, and blocked as well
                     
                 }
-                currentUser.getFriends()
+                masterAuth.currUser.getFriends()
                 error(nil)
             }
         }
@@ -154,7 +154,7 @@ class ChainFireStore {
     
     func updateFriendsFeed(chain: PostChain, error: @escaping (String?)->()) {
         //userID = phone number
-        for user in currentUser.friends {
+        for user in masterAuth.currUser.friends {
             let postRef = db.collection("userFeeds").document(user.phoneNumber).collection("feed")
             postRef.document(chain.chainUUID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
                     //Consider only uploading to top friends

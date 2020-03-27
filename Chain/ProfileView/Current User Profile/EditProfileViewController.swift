@@ -24,9 +24,9 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         setUpImage()
-        username.text = currentUser.username
-        name.text = currentUser.name
-        bio.text = currentUser.bio
+        username.text = masterAuth.currUser.username
+        name.text = masterAuth.currUser.name
+        bio.text = masterAuth.currUser.bio
     }
     
     func getImage(source: String) {
@@ -73,7 +73,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     func uploadImage(image: UIImage, completion: @escaping (String?)->()) {
             var urlString = "" //Will hold URL string to create Chain Image
-            let firestoreRef = Firestore.firestore().collection("users").document(currentUser.phoneNumber)
+            let firestoreRef = Firestore.firestore().collection("users").document(masterAuth.currUser.phoneNumber)
             let data = image.jpegData(compressionQuality: 1.0)!
             let imageName = UUID().uuidString
             let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
@@ -104,18 +104,18 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     
     
     func changedInfo() {
-        if currentUser.name != name.text || currentUser.bio != bio.text || currentUser.username != username.text || currentUser.profile != currentProfilePhotoURL {
+        if masterAuth.currUser.name != name.text || masterAuth.currUser.bio != bio.text || masterAuth.currUser.username != username.text || masterAuth.currUser.profile != currentProfilePhotoURL {
             //Something has changed, upload changes
             let db = Firestore.firestore()
-            db.collection("users").document(currentUser.phoneNumber).updateData(["username" : username.text, "bio": bio.text, "name": name.text]) { err in
+            db.collection("users").document(masterAuth.currUser.phoneNumber).updateData(["username" : username.text, "bio": bio.text, "name": name.text]) { err in
                 if let err = err {
                     print("Error updating document: \(err)")
                 } else {
                     print("Document successfully updated")
                     //Update currentUser object
-                    currentUser.username = self.username.text ?? ""
-                    currentUser.bio = self.bio.text
-                    currentUser.name = self.name.text ?? ""
+                    masterAuth.currUser.username = self.username.text ?? ""
+                    masterAuth.currUser.bio = self.bio.text
+                    masterAuth.currUser.name = self.name.text ?? ""
                     self.navigationController?.popViewController(animated: true)
                     self.uploadImage(image: self.profilePic.image!) { (error) in
                         //
@@ -130,7 +130,7 @@ class EditProfileViewController: UIViewController, UINavigationControllerDelegat
     }
     
     func setUpImage() {
-        let url = URL(string: currentUser.profile)
+        let url = URL(string: masterAuth.currUser.profile)
         profilePic.kf.setImage(with: url)
         profilePic.layer.borderWidth = 1
         profilePic.layer.masksToBounds = false

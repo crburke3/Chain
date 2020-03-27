@@ -69,7 +69,7 @@ class ChainUser{
         let db = Firestore.firestore()
         var userArray = [ChainUser]()
         
-        db.collection("users").whereField("phone", isEqualTo: currentUser.phoneNumber).getDocuments() { (querySnapshot, err) in
+        db.collection("users").whereField("phone", isEqualTo: masterAuth.currUser.phoneNumber).getDocuments() { (querySnapshot, err) in
         if let err = err {
             print("Error getting documents: \(err)")
         } else {
@@ -85,7 +85,7 @@ class ChainUser{
     
     func addFriend(friend: ChainUser, error: @escaping (String?)->()) {
         let db = Firestore.firestore()
-        var friendRef = db.collection("users").document(currentUser.phoneNumber).collection("friends")
+        var friendRef = db.collection("users").document(masterAuth.currUser.phoneNumber).collection("friends")
         //friendRef.addDocument(data: friend.toDict())
         friendRef.document(friend.phoneNumber).setData(friend.toDict()) { (error) in
             if let err = error {
@@ -97,19 +97,19 @@ class ChainUser{
             }
         }
         friendRef = db.collection("users").document(friend.phoneNumber).collection("friends")
-        friendRef.document(currentUser.phoneNumber).setData(currentUser.toDict()) { (error) in
+        friendRef.document(masterAuth.currUser.phoneNumber).setData(masterAuth.currUser.toDict()) { (error) in
             if let err = error {
                 print(error)
             } else {
                 print("Successfully added friend! You and \(friend.username) are now friends.") //
-                currentUser.friends.append(friend)
+                masterAuth.currUser.friends.append(friend)
             }
         }
     }
     
     func removeFriend(friend: ChainUser, error: @escaping (String?)->()) {
         let db = Firestore.firestore()
-        var friendRef = db.collection("users").document(currentUser.phoneNumber).collection("friends")
+        var friendRef = db.collection("users").document(masterAuth.currUser.phoneNumber).collection("friends")
         friendRef.document(friend.phoneNumber).delete { (error) in
             if let err = error {
                 print("Couldn't remove friend")
@@ -119,14 +119,14 @@ class ChainUser{
             }
         }
         friendRef = db.collection("users").document(friend.phoneNumber).collection("friends")
-        friendRef.document(currentUser.phoneNumber).delete { (error) in
+        friendRef.document(masterAuth.currUser.phoneNumber).delete { (error) in
             if let err = error {
                 print("Couldn't remove friend")
             } else {
                 var i: Int = 0
                 for user in self.friends {
                     if user.phoneNumber == friend.phoneNumber {
-                        currentUser.friends.remove(at: i)
+                        masterAuth.currUser.friends.remove(at: i)
                     }
                     i += 1
                 }

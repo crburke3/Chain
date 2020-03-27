@@ -22,7 +22,7 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.delegate = self
         self.tableView.reloadData()
         //Get initial 10 friends
-        friendHolder = currentUser.friends
+        friendHolder = masterAuth.currUser.friends
     }
     @IBAction func goBack(_ sender: Any) {
         masterNav.popViewController(animated: true)
@@ -39,8 +39,8 @@ class FriendsViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "FriendTableViewCell", for: indexPath) as! FriendTableViewCell
-        cell.username.text = currentUser.friends[indexPath.row].username
-        let url = URL(string: currentUser.friends[indexPath.row].profile ?? "")
+        cell.username.text = masterAuth.currUser.friends[indexPath.row].username
+        let url = URL(string: masterAuth.currUser.friends[indexPath.row].profile ?? "")
         cell.profilePic.kf.setImage(with: url)
         cell.profilePic.layer.borderWidth = 1
         cell.profilePic.layer.masksToBounds = false

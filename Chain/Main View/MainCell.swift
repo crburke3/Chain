@@ -79,6 +79,7 @@ class MainCell: UITableViewCell {
     
     
     func cellDidLoad(){
+        user.text = post.user
         user.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToProfile(_:))))
         user.isUserInteractionEnabled = true
         profilePicImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToProfile(_:))))

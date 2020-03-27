@@ -31,7 +31,7 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
         super.viewDidLoad()
         textBox.delegate = self
         textBox.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        userArray = currentUser.friends //Base on enum
+        userArray = masterAuth.currUser.friends //Base on enum
     }
 
     @IBAction func sendInvites(_ sender: Any) {
@@ -64,7 +64,7 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     @objc func textFieldDidChange(_ textField: UITextField) {
         userArray = []
         if let text = textField.text{
-            for friend in currentUser.friends{
+            for friend in masterAuth.currUser.friends{
                 if friend.username.contains(find: text){
                     userArray.append(friend)
                 }
