@@ -36,6 +36,7 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
         appsCollectionView.delegate = self
         appsCollectionView.dataSource = self
         appsCollectionView.backgroundView?.backgroundColor = .orange
+        appsCollectionView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/3)
         //appsCollectionView.register(ExplorePageCell.self, forCellWithReuseIdentifier: cellId)
         self.appsCollectionView.reloadData()
         //addConstrainstWithFormat("H:|-8-[v0]-8-|", views: appsCollectionView)
@@ -71,6 +72,6 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
         let screenHeight = screen.height
         let width = (screen.width / 2) - 10
         let height = (screenHeight/screenWidth) * width
-        return CGSize(width: screenWidth/3, height: screenWidth/3)
+        return CGSize(width: screenWidth/4, height: screenWidth/4)
     }
 }
