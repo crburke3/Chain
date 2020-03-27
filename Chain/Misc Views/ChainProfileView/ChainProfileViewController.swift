@@ -14,6 +14,10 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
     @IBOutlet var nameLabel: UILabel!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
+    
+    @IBOutlet weak var profileImageBackView: UIView!
+    
+    
     @IBOutlet var collectionView: UICollectionView!
     
     var ref:Query!
@@ -62,7 +66,7 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
     
     func setForUser(){
         collectionView.reloadData()
-        nameLabel.text = "@\(user.username)"
+        titleLabel.text = "@\(user.username)"
     }
     
     func loadUserChains(succ: @escaping (Bool)->()){
@@ -122,6 +126,15 @@ class MainProfileView: UICollectionReusableView{
         if let url = URL(string: user.profile){
             profileImageView.kf.setImage(with: url)
         }
+        //Set up profile image frame
+        profileImageView.layer.borderWidth = 2.5
+        profileImageView.layer.masksToBounds = false
+        profileImageView.layer.borderColor = UIColor.Chain.mainOrange.cgColor //Using global color
+        profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        profileImageView.clipsToBounds = true
+        //Add circular shadow to profile image
+        
+        //
         bioField.text = user.bio
         followingButton.setTitle("Followers (\(user.friends.count))", for: .normal)
     }
