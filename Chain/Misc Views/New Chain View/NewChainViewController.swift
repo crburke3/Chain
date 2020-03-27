@@ -138,6 +138,8 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
                     self.showPopUp(_title: "Error Uploading", _message: err!)
                     return
                 }
+                masterNav.popViewController(animated: false)
+                masterNav.popViewController(animated: false)
                 masterCache.addChainToCache(chain: postChain)
                 masterNav.pushViewController(ChainViewController.initFrom(chain: postChain), animated: true)
             }
