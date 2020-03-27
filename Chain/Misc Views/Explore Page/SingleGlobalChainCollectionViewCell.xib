@@ -17,15 +17,62 @@
                 <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YjX-kK-Vt9">
+                    <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fet-zD-Hcl" customClass="RoundView" customModule="Chain" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                    </imageView>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YjX-kK-Vt9">
+                                <rect key="frame" x="0.0" y="0.0" width="134" height="134"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gJI-i3-Jc5" customClass="RoundView" customModule="Chain" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="74" width="134" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bi2-SB-xTT">
+                                        <rect key="frame" x="4" y="6" width="126" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="SKd-Gz-PLe">
+                                        <rect key="frame" x="4" y="31" width="126" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" weight="thin" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="bi2-SB-xTT" secondAttribute="trailing" constant="4" id="5z6-4h-FUZ"/>
+                                    <constraint firstItem="SKd-Gz-PLe" firstAttribute="leading" secondItem="gJI-i3-Jc5" secondAttribute="leading" constant="4" id="CHh-zl-HBp"/>
+                                    <constraint firstAttribute="bottom" secondItem="SKd-Gz-PLe" secondAttribute="bottom" constant="8" id="Xqf-Xs-nRz"/>
+                                    <constraint firstItem="SKd-Gz-PLe" firstAttribute="top" secondItem="bi2-SB-xTT" secondAttribute="bottom" constant="4" id="aaq-x2-fyf"/>
+                                    <constraint firstItem="bi2-SB-xTT" firstAttribute="leading" secondItem="gJI-i3-Jc5" secondAttribute="leading" constant="4" id="fcu-x8-Z9q"/>
+                                    <constraint firstAttribute="trailing" secondItem="SKd-Gz-PLe" secondAttribute="trailing" constant="4" id="pix-hn-wI6"/>
+                                    <constraint firstAttribute="height" constant="60" id="xOe-Dl-wRj"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                        <constraints>
+                            <constraint firstItem="gJI-i3-Jc5" firstAttribute="leading" secondItem="fet-zD-Hcl" secondAttribute="leading" id="Am5-Rl-Jh6"/>
+                            <constraint firstAttribute="trailing" secondItem="gJI-i3-Jc5" secondAttribute="trailing" id="ooc-3a-MMy"/>
+                            <constraint firstAttribute="bottom" secondItem="gJI-i3-Jc5" secondAttribute="bottom" id="sh2-cg-Q2n"/>
+                        </constraints>
+                    </view>
                 </subviews>
             </view>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="fet-zD-Hcl" secondAttribute="bottom" id="2oV-MX-ceb"/>
+                <constraint firstItem="fet-zD-Hcl" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="FPQ-Co-ePV"/>
+                <constraint firstItem="fet-zD-Hcl" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="jbC-x1-dSu"/>
+                <constraint firstAttribute="trailing" secondItem="fet-zD-Hcl" secondAttribute="trailing" id="lr0-wY-cqL"/>
+            </constraints>
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <connections>
+                <outlet property="chainName" destination="bi2-SB-xTT" id="dvM-i5-b2b"/>
+                <outlet property="deathDate" destination="SKd-Gz-PLe" id="NoH-Ww-ft2"/>
                 <outlet property="previewImage" destination="YjX-kK-Vt9" id="0gk-sV-gGp"/>
+                <outlet property="roundView" destination="gJI-i3-Jc5" id="dz7-HS-B1K"/>
             </connections>
             <point key="canvasLocation" x="92.753623188405811" y="111.83035714285714"/>
         </collectionViewCell>

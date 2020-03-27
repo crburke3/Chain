@@ -30,11 +30,11 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
         }()
 
         func setupViews() {
-            backgroundColor = .green
             addSubview(appsCollectionView)
+            appsCollectionView.showsHorizontalScrollIndicator = false
             appsCollectionView.delegate = self
             appsCollectionView.dataSource = self
-            appsCollectionView.backgroundView?.backgroundColor = .orange
+            appsCollectionView.backgroundColor = UIColor.clear
             appsCollectionView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/3)
             //appsCollectionView.register(ExplorePageCell.self, forCellWithReuseIdentifier: "GlobalChain")
             appsCollectionView.register(UINib(nibName: "SingleGlobalChainCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ChainCell")
@@ -53,33 +53,8 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
 
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = self.appsCollectionView.dequeueReusableCell(withReuseIdentifier: "ChainCell", for: indexPath) as! SingleGlobalChainCollectionViewCell
-            let url = URL(string: chainArray[indexPath.row].firstImageLink ?? "")
-            cell.previewImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "placeholderImage"),
-                options: [
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
-            {
-                result in
-                switch result {
-                case .success(let value):
-                    print("Task done for: \(value.source.url?.absoluteString ?? "")")
-                case .failure(let error):
-                    print("Job failed: \(error.localizedDescription)")
-                }
-            }
-            //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExplorePageCell", for: indexPath) as! ExplorePageCell
-            //cell.chain = chainArray[indexPath.row]
-            //cell.cellDidLoad()
-            /*
-            if chainArray[indexPath.row].loaded == .LOADED {
-                cell.chain = chainArray[indexPath.row]
-                cell.cellDidLoad()
-            }
-            */
+            cell.chain = chainArray[indexPath.row]
+            cell.cellDidLoad()
             return cell
         }
         
