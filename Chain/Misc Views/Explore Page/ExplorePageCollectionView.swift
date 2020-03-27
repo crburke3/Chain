@@ -12,7 +12,7 @@ import UIKit
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section{
-        case 0: return topChains.count
+        case 0: return 1 //Return one cell
         case 1: return otherChains.count //Something is wrong here and below
         default: return 0
         }
@@ -21,11 +21,15 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section{
         case 0: //Top Chains
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChain", for: indexPath) as! ExplorePageCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChains", for: indexPath) as! GlobalChainsCollectionViewCell
+            /*
             if topChains[indexPath.row].loaded == .LOADED {
                 cell.chain = topChains[indexPath.row]
                 cell.cellDidLoad()
             }
+             */
+            cell.chainArray = topChains
+            cell.globalChainsLoaded()
             return cell
         
         case 1:  //The other chains
@@ -62,10 +66,6 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if indexPath.section == 1 { //Bottom
             let chainSelected = otherChains[indexPath.row]
-//            let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
-//            chainVC.mainChain = chainSelected
-//            chainVC.chainSource = "general" //Need to switch to enum
-            //Ways to remove interdependencies from VC to VC
             masterCache.allChains.insert(chainSelected, at: 0) //Will need to find new way to store chains in cache, perhaps two chain collections, one for explore page and one for viewed ch
             
             masterNav.pushViewController(chainSelected.viewController, animated: true)
@@ -74,9 +74,6 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             //let chainVC = ChainViewController()
             let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             chainVC.mainChain = chainSelected
-            //chainVC.chainSource = "global"
-            
-            //if doesn't have chain
             masterCache.allChains.insert(chainSelected, at: 0) //Will need to find new way to store chains in cache, perhaps two chain collections, one for explore page and one for viewed ch
             masterNav.pushViewController(chainSelected.viewController, animated: true)
         }
@@ -92,7 +89,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
         if indexPath.section == 1{
             return CGSize(width: width, height: height)
         }else{
-            return CGSize(width: screenWidth/4, height: screenWidth/4)
+            return CGSize(width: screenWidth, height: screenWidth/3)
 
         }
     }
