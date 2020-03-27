@@ -33,6 +33,7 @@ class PostChain{
     var lastPostLoaded:QueryDocumentSnapshot?
     var testTime:Timestamp
     var isDead:Bool = false
+    var creator:ChainUser?
     
     init(_chainName:String, _birthDate:Date, _deathDate:Date, _tags:[String]?){
         self.chainName = _chainName
@@ -41,7 +42,7 @@ class PostChain{
         self.likes = 0
         self.count = 1
         self.tags = _tags ?? []
-        self.contributors = ["cburke"]
+        self.contributors = [masterAuth.currUser.phoneNumber]
         self.coordinate = CLLocation().coordinate //masterLocator.getCurrentLocation()!.coordinate
         self.loaded = .LOADED
         self.chainUUID = UUID().uuidString
@@ -49,6 +50,7 @@ class PostChain{
             firstImageLink = posts[0].link
         }
         self.testTime = Timestamp(date: self.birthDate)
+        self.creator = masterAuth.currUser
     }
     
     init(chainUUID:String){
@@ -59,7 +61,7 @@ class PostChain{
         self.likes = 0
         self.count = 0
         self.tags = []
-        self.contributors = []
+        self.contributors = ["+17048062009"]
         self.coordinate = CLLocationCoordinate2D()
         self.posts = []
         self.loaded = .NOT_LOADED
@@ -73,6 +75,9 @@ class PostChain{
             let _deathDate = dict["deathDate"] as? Timestamp
         else{ return nil }
         
+        if let _creatorDict = dict["creator"] as? [String:Any]{
+            self.creator = ChainUser(dict: _creatorDict)
+        }
         self.chainName = _chainName
         self.chainUUID = _chainUUID
         self.birthDate = _birthDate.dateValue()
@@ -80,9 +85,8 @@ class PostChain{
         self.likes = dict["likes"] as? Int ?? 0
         self.count = dict["count"] as? Int ?? 1
         self.tags = dict["tags"] as? [String] ?? []
-        self.contributors = dict["contributors"] as? [String] ?? []
-        self.testTime = Timestamp(date: self.birthDate)
-        //Posts will be appended to chain object from sub-collection seperately
+        self.contributors = dict["contributors"] as? [String] ?? ["+17048062009"]
+        self.testTime = Timestamp(date: self.birthDate)        //Posts will be appended to chain object from sub-collection seperately
         //let postsData = dict["posts"] as? [[String:Any]] ?? []
         /* for postData in postsData{
             if let img = ChainImage(dict: postData){
@@ -156,6 +160,9 @@ class PostChain{
                                     "count": self.count,
                                     "tags" : self.tags,
                                     "contributors" : self.contributors]
+        if creator != nil{
+            retDict["creator"] = self.creator!.toDict()
+        }
         if firstImageLink != nil{
            retDict["firstImageLink"] = self.firstImageLink!
         }
@@ -293,7 +300,6 @@ class PostChain{
                         //Loading indicator
                         self.lastReadBirthDate = uploadImage.time
                         self.testTime = Timestamp(date: uploadImage.time)
-                        masterNav.popViewController(animated: true)
                         masterFire.updateFriendsFeed(chain: self) { (error) in
                             //
                         }

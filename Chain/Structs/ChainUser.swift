@@ -146,13 +146,11 @@ class ChainUser{
             }
             guard let _username = dict["username"] as? String,
                    let _name = dict["name"] as? String,
-                   let _phoneNumber = dict["phone"] as? String,
                    let _profile = dict["profilePhoto"] as? String,
                    let _bio = dict["bio"] as? String
                 else{ error("failed parse"); return }
             self.username = _username
             self.name = _name
-            self.phoneNumber = _phoneNumber
             self.profile = _profile
             self.bio = _bio
             self.loaded = .LOADED

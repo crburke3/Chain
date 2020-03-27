@@ -25,9 +25,11 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     let session = CKFPhotoSession()
     var chainName: String = ""
     var delegate:ChainCameraDelegate?
+    let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(loader)
         imagePicker.delegate = self
         constrainPreviewView()
         previewView.session = session

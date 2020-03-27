@@ -105,7 +105,8 @@ class SignUpViewController: UIViewController, VerifyNumberViewControllerDelegate
                             "topPhotos": emptyStrArr,
                             "password": password.text!,
                             "friends": emptyDict,
-                            "email" : emailField.text!]
+                            "email" : emailField.text!,
+                            "username": username.text!]
         
             let userFeed = ["posts": emptyDict]
             db.collection("users").document(phone).setData(userData) //What if this fails?

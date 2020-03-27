@@ -31,6 +31,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     let cameraVC = CameraViewController()
     var lastDoc: QueryDocumentSnapshot?
     var nextQuery: Query?
+    let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     var counter: Int = 0 //Remove
     let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
     var mainChain:PostChain = masterCache["1b0LCcjiVh53Kb89xD8Q"]{
@@ -48,6 +49,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.addSubview(loader)
+        loader.isHidden = true
         if mainChain.loaded == .LOADED{chainDidLoad(chain: mainChain)}
         titleLabel.text = mainChain.chainName
         mainChain.loadPost() { (post) in //chainSource -> global or general
@@ -119,7 +122,11 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     //Called when the camera view arrow has been tapped
     func didFinishImage(image: UIImage) {
         print("Appending Chain")
+        loader.fadeIn()
+        masterNav.popViewController(animated: true)
         mainChain.append(image: image) { (err, finalImage) in
+            self.loader.fadeOut()
+            self.tableView.reloadData()
             if err != nil{ return}  //Will show popups automatically
         }
         

@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class ChainProfileViewController: UIViewController, PostChainDelegate {
     
+    @IBOutlet var nameLabel: UILabel!
     @IBOutlet var backButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
@@ -43,6 +44,7 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
                 self.showPopUp(_title: "Error Loading User", _message: "nothin to see here")
                 return
             }
+            self.setForUser()
             self.ref = masterFire.db.collection("users").document(self.user.phoneNumber).collection("currentChains").limit(to: 25)
             self.loadUserChains { (succ) in
                 self.loader.fadeOut()
@@ -56,6 +58,11 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
                 }
             }
         }
+    }
+    
+    func setForUser(){
+        collectionView.reloadData()
+        nameLabel.text = "@\(user.username)"
     }
     
     func loadUserChains(succ: @escaping (Bool)->()){

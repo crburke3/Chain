@@ -890,7 +890,7 @@
                                         <constraint firstAttribute="bottom" secondItem="NXY-IW-oN2" secondAttribute="bottom" id="xtx-8W-bUF"/>
                                     </constraints>
                                     <connections>
-                                        <outlet property="bioField" destination="wMf-Yl-VWb" id="QCW-lr-DdI"/>
+                                        <outlet property="bioField" destination="wMf-Yl-VWb" id="JJQ-0U-kXS"/>
                                         <outlet property="followersButton" destination="vUT-Pw-HkR" id="kFq-C2-y8E"/>
                                         <outlet property="followingButton" destination="FXa-Z3-GQC" id="LBA-uu-8tF"/>
                                         <outlet property="profileImageView" destination="ILh-Ob-kpE" id="Cr7-PB-asu"/>
@@ -935,6 +935,7 @@
                     <connections>
                         <outlet property="backButton" destination="UcN-hj-XDJ" id="6KG-0J-xe5"/>
                         <outlet property="collectionView" destination="9V3-EL-LBO" id="64w-eg-1Z7"/>
+                        <outlet property="nameLabel" destination="XbL-Y5-hcu" id="2Ob-6b-pkv"/>
                         <outlet property="titleLabel" destination="XbL-Y5-hcu" id="f4D-Mz-qdb"/>
                     </connections>
                 </viewController>

@@ -162,7 +162,7 @@ class ChainFireStore {
             }
         }
         //Add chain to Current Chains
-        let currentUserRef = db.collection("users").document(currentUser.phoneNumber).collection("currentChains")
+        let currentUserRef = db.collection("users").document(masterAuth.currUser.phoneNumber).collection("currentChains")
         currentUserRef.document(chain.chainUUID).setData(chain.toDict()) { (error) in if let err = error {print(err.localizedDescription)} else {
                 //Consider only uploading to top friends
             }

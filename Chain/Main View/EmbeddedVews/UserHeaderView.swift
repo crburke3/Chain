@@ -62,7 +62,12 @@ class UserHeaderView:UIView{
     }
     
     func setForChain(chain:PostChain){
-        
+        if let creator = chain.creator{
+            imgView.downloadWithHolder(_url: creator.profile, _placeholder: UIImage(named: "profile")!)
+            userNameLabel.text = creator.username
+        }
+        likesLabel.text = "likes: \(chain.likes)"
+        commentLabel.text = "length: \(chain.count)"
     }
     
 }
