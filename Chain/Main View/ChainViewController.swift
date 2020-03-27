@@ -72,30 +72,31 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
 
 
         tableView.parallaxHeader.view = userHeader
-        tableView.parallaxHeader.height = 100
+        tableView.parallaxHeader.height = 40
         tableView.parallaxHeader.minimumHeight = 0
         tableView.parallaxHeader.mode = .bottomFill
         userHeader.likesLabel.text = "likes: \(mainChain.likes)"
         userHeader.commentLabel.text = "comments: \(25)"
-        tableView.parallaxHeader.view.heightAnchor.constraint(lessThanOrEqualToConstant: 150).isActive = true
+        tableView.parallaxHeader.view.heightAnchor.constraint(lessThanOrEqualToConstant: 70).isActive = true
         tableView.parallaxHeader.parallaxHeaderDidScrollHandler = { parallaxHeader in
             let progress = parallaxHeader.progress
-            let height = self.userHeader.bounds.height
+            let alphaConst:CGFloat = 1.2  //adustable for looks
+            let paralaxHeightConst:CGFloat = 13 //adustable for looks
             if parallaxHeader.progress > 1 && parallaxHeader.progress < 1.5{
-                print(progress)
-                self.userHeader.likesLabel.alpha = (progress - 1.0) * 2
-                self.userHeader.commentLabel.alpha = (progress - 1.0) * 2
-                self.userHeader.nameHeight.constant = (progress - 1.0) * 50
-                self.userHeader.commentHeight.constant = (progress - 1.0) * 50
-                self.userHeader.likesHeight.constant = (progress - 1.0) * 50
-                self.userHeader.imgView.roundCorners(corners: [.allCorners], radius: height/2)
+                self.userHeader.createdByLabel.alpha = (progress - 1.0) * alphaConst
+                self.userHeader.likesLabel.alpha = (progress - 1.0) * alphaConst
+                self.userHeader.commentLabel.alpha = (progress - 1.0) * alphaConst
+                self.userHeader.nameHeight.constant = (progress - 1.5) * paralaxHeightConst
+                self.userHeader.commentHeight.constant = (progress - 1.5) * paralaxHeightConst
+                self.userHeader.likesHeight.constant = (progress - 1.2) * paralaxHeightConst
+                //self.userHeader.imgView.roundCorners(corners: [.allCorners], radius: (height)/2)
                 self.tableView.backgroundColor = self.userHeader.contentView.backgroundColor
             }
         }
         //tableView.parallaxHeader..layoutIfNeeded()
         
         tableView.cr.addHeadRefresh(animator: ChainBreakLoader()) { self.reloadChain() }
-        tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -130)
+        tableView.cr.header!.frame = tableView.cr.header!.frame.offsetBy(dx: 0, dy: -70)
         self.reloadChain()
     }
     
