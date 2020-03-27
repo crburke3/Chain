@@ -37,7 +37,7 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
         appsCollectionView.dataSource = self
         appsCollectionView.backgroundView?.backgroundColor = .orange
         appsCollectionView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/3)
-        appsCollectionView.register(ExplorePageCell.self, forCellWithReuseIdentifier: cellId)
+        //appsCollectionView.register(ExplorePageCell.self, forCellWithReuseIdentifier: "GlobalChain")
         self.appsCollectionView.reloadData()
         //addConstrainstWithFormat("H:|-8-[v0]-8-|", views: appsCollectionView)
         //addConstrainstWithFormat("V:|[v0]|", views: appsCollectionView)
@@ -53,7 +53,7 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = self.appsCollectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChain", for: indexPath) as! ExplorePageCell
+        let cell = self.appsCollectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChains", for: indexPath) as! ExplorePageCell
         //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ExplorePageCell", for: indexPath) as! ExplorePageCell
         cell.chain = chainArray[indexPath.row]
         cell.cellDidLoad()

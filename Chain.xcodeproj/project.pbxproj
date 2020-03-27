@@ -39,7 +39,9 @@
 		68BDBD3F242094BE00613A93 /* SearchUsersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68BDBD3D242094BE00613A93 /* SearchUsersViewController.xib */; };
 		68BDBD41242422AD00613A93 /* UserMenuSupportingFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68BDBD40242422AD00613A93 /* UserMenuSupportingFunctions.swift */; };
 		68CE9B8C2391002E00E8483D /* Invite.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CE9B8B2391002E00E8483D /* Invite.swift */; };
-		68D18EA0242D845B00C6244A /* GlobalChainsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */; };
+		68D18EA5242DA29700C6244A /* GlobalChainsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D18EA4242DA29700C6244A /* GlobalChainsCollectionViewCell.swift */; };
+		68D18EA8242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68D18EA6242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift */; };
+		68D18EA9242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 68D18EA7242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib */; };
 		68F92F27238F820E000F05AA /* GeoFirestoreExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */; };
 		68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */; };
 		F8FA2FF7022E9567DE476E44 /* Pods_Chain.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D598370E0D7CDF870307C38C /* Pods_Chain.framework */; };
@@ -137,7 +139,9 @@
 		68BDBD3D242094BE00613A93 /* SearchUsersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SearchUsersViewController.xib; sourceTree = "<group>"; };
 		68BDBD40242422AD00613A93 /* UserMenuSupportingFunctions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserMenuSupportingFunctions.swift; sourceTree = "<group>"; };
 		68CE9B8B2391002E00E8483D /* Invite.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Invite.swift; sourceTree = "<group>"; };
-		68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalChainsCollectionViewCell.swift; sourceTree = "<group>"; };
+		68D18EA4242DA29700C6244A /* GlobalChainsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = GlobalChainsCollectionViewCell.swift; path = ../../../GlobalChainsCollectionViewCell.swift; sourceTree = "<group>"; };
+		68D18EA6242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleGlobalChainCollectionViewCell.swift; sourceTree = "<group>"; };
+		68D18EA7242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleGlobalChainCollectionViewCell.xib; sourceTree = "<group>"; };
 		68F92F26238F820E000F05AA /* GeoFirestoreExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GeoFirestoreExtensions.swift; sourceTree = "<group>"; };
 		68F92F28238F82F2000F05AA /* CLLocationManagerExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CLLocationManagerExtensions.swift; sourceTree = "<group>"; };
 		D598370E0D7CDF870307C38C /* Pods_Chain.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Chain.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -545,7 +549,12 @@
 			isa = PBXGroup;
 			children = (
 				FAAF0A3723C1911800838B0E /* ExploreViewController.swift */,
+				68D18EA4242DA29700C6244A /* GlobalChainsCollectionViewCell.swift */,
+				68D18EA6242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift */,
+				68D18EA7242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib */,
+				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
 				FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */,
+				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
 				FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */,
 				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
 				68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */,
@@ -637,6 +646,7 @@
 				FA9C5B5423C5793600F1B41A /* uglyChain.json in Resources */,
 				FA6ED2FF242557F800F3F30E /* FluffLoading.json in Resources */,
 				FA9CB63823EE661E00D43F04 /* GoogleService-Info.plist in Resources */,
+				68D18EA9242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib in Resources */,
 				68BDBD3F242094BE00613A93 /* SearchUsersViewController.xib in Resources */,
 				FA06BC6823CF776B002055AD /* ChainBreakLoader.xib in Resources */,
 				FA9C5B4F23C5547B00F1B41A /* NewChainViewController.xib in Resources */,
@@ -710,6 +720,7 @@
 				FA7E36BB238DDDB100488000 /* SceneDelegate.swift in Sources */,
 				68293A8323F30C1500A0D754 /* ChainCache.swift in Sources */,
 				FA63C886238E07A400B30312 /* MainTableView.swift in Sources */,
+				68D18EA8242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift in Sources */,
 				FAAF0A3823C1911800838B0E /* ExploreViewController.swift in Sources */,
 				FA63C87F238DEF1D00B30312 /* ChainFireStore.swift in Sources */,
 				68F92F29238F82F2000F05AA /* CLLocationManagerExtensions.swift in Sources */,
@@ -721,7 +732,7 @@
 				FA9C5B4D23C5547B00F1B41A /* NewChainViewController.swift in Sources */,
 				68BDBD3E242094BE00613A93 /* SearchUsersViewController.swift in Sources */,
 				FA9C5B4223C553C500F1B41A /* ChristiansLibrary.swift in Sources */,
-				68D18EA0242D845B00C6244A /* GlobalChainsCollectionViewCell.swift in Sources */,
+				68D18EA5242DA29700C6244A /* GlobalChainsCollectionViewCell.swift in Sources */,
 				FA9C5B5123C554B900F1B41A /* PanGestureExtensions.swift in Sources */,
 				6878BBA423C7957200C75B2E /* UserMenuCell.swift in Sources */,
 				FA63C87E238DEF1800B30312 /* ChainImage.swift in Sources */,
