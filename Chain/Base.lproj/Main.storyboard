@@ -127,12 +127,12 @@
                                 <color key="backgroundColor" red="0.93709182739257812" green="0.95063263177871704" blue="0.85899811983108521" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="SGc-9t-OpB" customClass="FanMenu" customModule="FanMenu">
-                                <rect key="frame" x="0.0" y="500" width="375" height="74"/>
+                                <rect key="frame" x="255" y="100" width="180" height="140"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Dg-hd-BfR" customClass="RoundView" customModule="Chain" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="70"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="71"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Origin" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="l48-9u-ABw">
                                         <rect key="frame" x="77" y="8" width="221" height="30"/>
@@ -145,7 +145,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pf3-Fj-cyv">
-                                        <rect key="frame" x="304" y="17.5" width="35" height="35"/>
+                                        <rect key="frame" x="304" y="18" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="35" id="K1y-NR-wDe"/>
                                             <constraint firstAttribute="width" constant="35" id="fyu-vM-uQx"/>
@@ -156,7 +156,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lOP-f7-dHb">
-                                        <rect key="frame" x="16" y="17.5" width="35" height="35"/>
+                                        <rect key="frame" x="16" y="18" width="35" height="35"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="35" id="mXg-xa-Ird"/>
                                             <constraint firstAttribute="height" constant="35" id="zeD-4R-UNX"/>
@@ -167,7 +167,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12:60:30" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="mB4-dw-CID">
-                                        <rect key="frame" x="85" y="46" width="205" height="16"/>
+                                        <rect key="frame" x="85" y="46" width="205" height="17"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="205" id="pWy-go-Ik6"/>
                                         </constraints>
@@ -197,7 +197,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qM2-aV-Jsl">
-                                <rect key="frame" x="0.0" y="70" width="375" height="548"/>
+                                <rect key="frame" x="0.0" y="71" width="375" height="547"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="post" rowHeight="532" id="clx-Iz-NuC" customClass="MainCell" customModule="Chain" customModuleProvider="target">
@@ -316,12 +316,14 @@
                             <constraint firstItem="rVc-Fp-hKH" firstAttribute="trailing" secondItem="qM2-aV-Jsl" secondAttribute="trailing" id="ACP-jJ-Bl2"/>
                             <constraint firstItem="MKd-XV-VDM" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="BxO-Ji-DSD"/>
                             <constraint firstItem="rVc-Fp-hKH" firstAttribute="trailing" secondItem="5Dg-hd-BfR" secondAttribute="trailing" id="FGC-Wj-S5b"/>
+                            <constraint firstItem="qM2-aV-Jsl" firstAttribute="top" secondItem="SGc-9t-OpB" secondAttribute="top" id="Gqs-Ed-Q3K"/>
                             <constraint firstItem="5Dg-hd-BfR" firstAttribute="top" secondItem="rVc-Fp-hKH" secondAttribute="top" id="Ihr-qP-s6N"/>
                             <constraint firstItem="MKd-XV-VDM" firstAttribute="trailing" secondItem="rVc-Fp-hKH" secondAttribute="trailing" id="LUK-Le-b9K"/>
                             <constraint firstItem="5Dg-hd-BfR" firstAttribute="top" secondItem="MKd-XV-VDM" secondAttribute="bottom" id="Mcr-HN-xCl"/>
                             <constraint firstItem="MKd-XV-VDM" firstAttribute="leading" secondItem="rVc-Fp-hKH" secondAttribute="leading" id="NjS-ua-Rrq"/>
                             <constraint firstItem="5Dg-hd-BfR" firstAttribute="leading" secondItem="rVc-Fp-hKH" secondAttribute="leading" id="g6E-RE-TE3"/>
                             <constraint firstItem="rVc-Fp-hKH" firstAttribute="bottom" secondItem="qM2-aV-Jsl" secondAttribute="bottom" id="o4F-2o-8EH"/>
+                            <constraint firstItem="SGc-9t-OpB" firstAttribute="leading" secondItem="MKd-XV-VDM" secondAttribute="trailing" constant="-120" id="tud-wr-7AM"/>
                             <constraint firstItem="qM2-aV-Jsl" firstAttribute="top" secondItem="5Dg-hd-BfR" secondAttribute="bottom" id="u8h-J4-EXQ"/>
                             <constraint firstItem="qM2-aV-Jsl" firstAttribute="leading" secondItem="rVc-Fp-hKH" secondAttribute="leading" id="yza-we-503"/>
                         </constraints>
@@ -889,6 +891,9 @@
                                     <constraint firstAttribute="width" constant="32" id="ksZ-mO-fbY"/>
                                 </constraints>
                                 <state key="normal" image="back"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="abD-Fp-vXc" eventType="touchUpInside" id="6nO-ZO-tur"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
