@@ -21,6 +21,7 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch indexPath.section{
         case 0: //Top Chains
+//            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChains", for: indexPath) as! GlobalChainsCollectionViewCell
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "GlobalChains", for: indexPath) as! GlobalChainsCollectionViewCell
             /*
             if topChains[indexPath.row].loaded == .LOADED {

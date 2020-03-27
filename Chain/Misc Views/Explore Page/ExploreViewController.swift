@@ -25,6 +25,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+       //ollectionView.register(UINib(nibName: "FeedCell", bundle: .main), forCellWithReuseIdentifier: "feedCell")
         collectionViewA?.register(GlobalChainsCollectionViewCell.self, forCellWithReuseIdentifier: "GlobalChains")
         collectionViewA.delegate = self
         collectionViewA.dataSource = self
