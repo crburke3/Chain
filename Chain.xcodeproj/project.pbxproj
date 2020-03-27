@@ -545,11 +545,11 @@
 			isa = PBXGroup;
 			children = (
 				FAAF0A3723C1911800838B0E /* ExploreViewController.swift */,
-				68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */,
-				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
-				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
 				FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */,
 				FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */,
+				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
+				68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */,
+				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
 			);
 			path = "Explore Page";
 			sourceTree = "<group>";

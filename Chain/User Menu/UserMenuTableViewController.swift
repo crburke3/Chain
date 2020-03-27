@@ -10,7 +10,7 @@ import UIKit
 import FloatingPanel
 import Kingfisher
 
-class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var textBox: UITextField!
@@ -23,13 +23,14 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     
     var invitation = Invite(_chainName: "", _chainPreview: "", _dateSent: "", _expirationDate: "", _sentByUsername: "", _sentByPhone: "", _sentByProfile: "", _receivedBy: "", _index: 0)
     var userArray = [ChainUser]()
-    var filteredUserArray = [ChainUser]() //
     //Load with currentUser.friends
     var index: Int = 0
     var chain: String = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textBox.delegate = self
+        textBox.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
         userArray = currentUser.friends //Base on enum
     }
 
@@ -60,6 +61,17 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
            
     }
     
+    @objc func textFieldDidChange(_ textField: UITextField) {
+        userArray = []
+        if let text = textField.text{
+            for friend in currentUser.friends{
+                if friend.username.contains(find: text){
+                    userArray.append(friend)
+                }
+            }
+        }
+        tableView.reloadData()
+    }
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -80,10 +92,12 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
-        print("Selected \(cell.userName.text)")
-        cell.contentView.backgroundColor = UIColor.white
-        cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
+//        let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
+//        print("Selected \(cell.userName.text)")
+//        cell.contentView.backgroundColor = UIColor.white
+//        cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
+        let user = userArray[indexPath.row]
+        masterNav.pushViewController(ChainProfileViewController.initFromSB(user: user), animated: true)
     }
     
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {

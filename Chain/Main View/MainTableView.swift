@@ -134,10 +134,6 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        if let castCell = tableView.cellForRow(at: indexPath) as? MainCell{
-//            castCell.moveExpansion()
-//        }
-        
         if fpc != nil {
             self.fpc.removePanelFromParent(animated: true)
             print("Removing Menu")
@@ -145,9 +141,6 @@ extension ChainViewController: UITableViewDataSource, UITableViewDelegate{
             print("Menu not set yet")
         }
     }
-    
     //Currently posts are in dict and don't need to be queried
     //Switching to sub-collection and posts need to be queried as their respective cells become visible
-    
-    
 }

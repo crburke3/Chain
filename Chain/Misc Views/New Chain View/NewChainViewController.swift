@@ -24,8 +24,9 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     @IBOutlet var backButtonHeight: NSLayoutConstraint!    
     @IBOutlet var animatorHolder: UIView!
     @IBOutlet var bottomLabel: UILabel!
+    @IBOutlet var textFields: [SkyFloatingLabelTextField]!
     
-    let submitLimit :CGFloat = 100
+    let submitLimit :CGFloat = 85
     var verticalLimit : CGFloat!
     var totalTranslation : CGFloat!
     var constraintHeight : CGFloat!
@@ -47,6 +48,11 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
         super.viewDidLoad()
         setupUI()
         setupAnimatorView()
+        let bottomPad = UIApplication.shared.windows.first?.safeAreaInsets.bottom ?? 0.0
+        let topPad = UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0.0
+        let screenHeight = UIScreen.main.bounds.height
+        let effectiveScreen = screenHeight - (topPad + bottomPad)
+        backButtonHeight.constant = effectiveScreen - (80 + 24) //button height + nice height
     }
 
     @objc func mainImageTapped(sender: Any){
@@ -72,8 +78,38 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
         masterNav.popViewController(animated: true)
     }
     
+    func goodFields()->Bool{
+        var isBad = false
+        for field in textFields{
+            if field.text == nil{
+                isBad = true
+            }
+            if field.text!.count < 4{
+                field.errorMessage = "Too Short"
+                isBad = true
+            }else{
+                field.errorMessage = nil
+            }
+        }
+        if postImageView.image == nil{
+            isBad = true
+        }
+        if isBad{
+            return false
+        }else{
+            return true
+        }
+    }
+    
     
     func willPostChain(){
+        if !goodFields(){
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                self.swipeableView.isUserInteractionEnabled = true
+                self.animateViewBackToLimit()
+            }
+            return
+        }
         animationView.play(fromProgress: 0, toProgress: 1, loopMode: LottieLoopMode.loop)
         functionCounter += 1
         print("\(functionCounter) Number of Times")

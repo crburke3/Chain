@@ -10,7 +10,7 @@ import UIKit
 
 class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //
-    private let cellId = "GlobalChain"
+    private let cellId = "GlobalChains"
     var chainArray = [PostChain]()
 
     override init(frame: CGRect) {

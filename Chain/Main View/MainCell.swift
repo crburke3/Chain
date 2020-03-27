@@ -33,26 +33,10 @@ class MainCell: UITableViewCell {
         //Called on button press
     }
     
-    @IBAction func goToProfile(_ sender: Any) {
-        print(phone)
-        if phone == currentUser.phoneNumber {
-            let profileVC = CurrentUserProfileViewController()
-            masterNav.pushViewController(profileVC, animated: true)
-        } else {
-            let profile = ProfileViewController()
-            let db = Firestore.firestore()
-            db.collection("users").whereField("phone", isEqualTo: self.phone).getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
-                    profile.user = ChainUser(dict: document.data() as [String : Any])
-                }
-                masterNav.pushViewController(profile, animated: true)
-                }
-            }
-        }
-        print("Pushing VC") //
+    @objc func goToProfile(_ sender: Any) {
+        let user = ChainUser(_username: "Not Loaded", _phoneNumber: post.user, _name: "Not Loaded")
+        let profileVC = ChainProfileViewController.initFromSB(user: user)
+        masterNav.pushViewController(profileVC, animated: true)
     }
     
     @IBOutlet weak var share: UIButton!
@@ -95,6 +79,10 @@ class MainCell: UITableViewCell {
     
     
     func cellDidLoad(){
+        user.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToProfile(_:))))
+        user.isUserInteractionEnabled = true
+        profilePicImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToProfile(_:))))
+        profilePicImage.isUserInteractionEnabled = true
         isExpanded = false
         infoViewHeight.constant = 0
         moveExpansion()

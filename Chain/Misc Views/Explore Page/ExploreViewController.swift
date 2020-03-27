@@ -59,7 +59,7 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     
     func chainDidLoad(chain: PostChain) {
         if let chainIndex = collViewIndexReference[chain.chainName]{
-            collectionViewA.reloadItems(at: [chainIndex])
+            //collectionViewA.reloadItemes(at: [chainIndex])
         }else{
             collectionViewA.reloadData()
         }
@@ -79,6 +79,10 @@ class ExploreViewController: UIViewController, PostChainDelegate {
         functions.httpsCallable("helloWorld").call { (resutlt, err) in
             
         }
+        masterNav.pushViewController(NewChainViewController(), animated: true)
+    }
+    
+    @IBAction func newChain(_ sender: Any) {
         masterNav.pushViewController(NewChainViewController(), animated: true)
     }
 }

@@ -11,6 +11,7 @@ import FirebaseFirestore
 
 class ChainProfileViewController: UIViewController, PostChainDelegate {
     
+    @IBOutlet var backButton: UIButton!
     @IBOutlet var titleLabel: UILabel!
     @IBOutlet var collectionView: UICollectionView!
     
@@ -19,26 +20,39 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
     var lastUserChainDoc:DocumentSnapshot?
     var user:ChainUser = masterAuth.currUser
     var collViewIndexReference:[String:IndexPath] = [:]
-
-    convenience init(user:ChainUser) {
-        self.init()
-        self.user = user
+    private var shouldShowBack = false
+    
+    static func initFromSB(user:ChainUser)->ChainProfileViewController{
+        let vc = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "ChainProfileViewController") as! ChainProfileViewController
+        vc.user = user
+        vc.shouldShowBack = true
+        return vc
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ref = masterFire.db.collection("users").document(user.phoneNumber).collection("currentChains").limit(to: 25)
-        view.addSubview(loader)
-        collectionView.delegate = self
-        collectionView.dataSource = self
-        loadUserChains { (succ) in
+        print(shouldShowBack)
+        backButton.isHidden = !shouldShowBack
+        self.collectionView.delegate = self
+        self.collectionView.dataSource = self
+        self.view.addSubview(self.loader)
+        
+        self.user.load { (error) in
             self.loader.fadeOut()
-            self.collectionView.reloadData()
-        }
-        Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
-            for cell in self.collectionView.visibleCells{
-                if let castCell = cell as? ChainCollectionViewCell{
-                    castCell.updateTimeLabel()
+            if error != nil{
+                self.showPopUp(_title: "Error Loading User", _message: "nothin to see here")
+                return
+            }
+            self.ref = masterFire.db.collection("users").document(self.user.phoneNumber).collection("currentChains").limit(to: 25)
+            self.loadUserChains { (succ) in
+                self.loader.fadeOut()
+                self.collectionView.reloadData()
+            }
+            Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true) { timer in
+                for cell in self.collectionView.visibleCells{
+                    if let castCell = cell as? ChainCollectionViewCell{
+                        castCell.updateTimeLabel()
+                    }
                 }
             }
         }
@@ -82,6 +96,9 @@ class ChainProfileViewController: UIViewController, PostChainDelegate {
         }
     }
     
+    @IBAction func backPressed(_ sender: Any) {
+        masterNav.popViewController(animated: true)
+    }
 }
 
 class MainProfileView: UICollectionReusableView{
@@ -95,7 +112,9 @@ class MainProfileView: UICollectionReusableView{
     
     func setForUser(_user:ChainUser){
         self.user = _user
-        profileImageView.kf.setImage(with: URL(string: user.profile))
+        if let url = URL(string: user.profile){
+            profileImageView.kf.setImage(with: url)
+        }
         bioField.text = user.bio
         followingButton.setTitle("Followers (\(user.friends.count))", for: .normal)
     }

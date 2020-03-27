@@ -472,9 +472,14 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="contactAdd" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dDC-iA-qdl">
-                                <rect key="frame" x="326" y="24.5" width="25" height="24"/>
+                                <rect key="frame" x="316" y="19" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="N5L-aQ-tr0"/>
+                                    <constraint firstAttribute="height" constant="35" id="f0k-55-nt8"/>
+                                </constraints>
                                 <connections>
                                     <action selector="addChain:" destination="U8T-YC-rZl" eventType="touchUpInside" id="KrC-9N-RDU"/>
+                                    <action selector="newChain:" destination="U8T-YC-rZl" eventType="touchUpInside" id="rRR-BB-7Ul"/>
                                 </connections>
                             </button>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="p9f-Sg-pHK">
@@ -691,7 +696,7 @@
         <!--profile-->
         <scene sceneID="g1x-BV-OqN">
             <objects>
-                <viewController id="abD-Fp-vXc" customClass="ChainProfileViewController" customModule="Chain" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChainProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="abD-Fp-vXc" customClass="ChainProfileViewController" customModule="Chain" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="K7Z-e0-tNj">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -788,12 +793,23 @@
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="339"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ILh-Ob-kpE">
-                                            <rect key="frame" x="108" y="16" width="159" height="159"/>
+                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="person.circle.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="ILh-Ob-kpE" customClass="RoundImageView" customModule="Chain" customModuleProvider="target">
+                                            <rect key="frame" x="108" y="16.5" width="159" height="158"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="ILh-Ob-kpE" secondAttribute="height" multiplier="1:1" id="clR-hR-HHM"/>
                                                 <constraint firstAttribute="width" relation="lessThanOrEqual" constant="200" id="vhm-Nc-72q"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <integer key="value" value="80"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                    <integer key="value" value="1"/>
+                                                </userDefinedRuntimeAttribute>
+                                                <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                    <color key="value" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" text="Christian, God of sex" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="wMf-Yl-VWb">
                                             <rect key="frame" x="24" y="191" width="327" height="40"/>
@@ -883,9 +899,22 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UcN-hj-XDJ">
+                                <rect key="frame" x="16" y="19" width="35" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="35" id="Ma7-OE-ly5"/>
+                                    <constraint firstAttribute="height" constant="35" id="g3r-Zz-mNy"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="back"/>
+                                <connections>
+                                    <action selector="backPressed:" destination="abD-Fp-vXc" eventType="touchUpInside" id="7c7-qO-VNq"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="UcN-hj-XDJ" firstAttribute="leading" secondItem="IjZ-QJ-XwT" secondAttribute="leading" constant="16" id="3Vu-SZ-W0t"/>
+                            <constraint firstItem="UcN-hj-XDJ" firstAttribute="centerY" secondItem="XbL-Y5-hcu" secondAttribute="centerY" id="As6-A3-4HS"/>
                             <constraint firstItem="IjZ-QJ-XwT" firstAttribute="trailing" secondItem="9V3-EL-LBO" secondAttribute="trailing" id="IOm-bn-QkA"/>
                             <constraint firstItem="IjZ-QJ-XwT" firstAttribute="trailing" secondItem="XbL-Y5-hcu" secondAttribute="trailing" constant="50" id="J9U-Ng-wh4"/>
                             <constraint firstItem="9V3-EL-LBO" firstAttribute="leading" secondItem="IjZ-QJ-XwT" secondAttribute="leading" id="XCG-zR-nmm"/>
@@ -900,6 +929,7 @@
                         <color key="badgeColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="backButton" destination="UcN-hj-XDJ" id="6KG-0J-xe5"/>
                         <outlet property="collectionView" destination="9V3-EL-LBO" id="64w-eg-1Z7"/>
                         <outlet property="titleLabel" destination="XbL-Y5-hcu" id="f4D-Mz-qdb"/>
                     </connections>
@@ -916,6 +946,7 @@
         <image name="fakeImg" width="892" height="1252"/>
         <image name="heart.fill" catalog="system" width="64" height="54"/>
         <image name="menu" width="90" height="90"/>
+        <image name="person.circle.fill" catalog="system" width="64" height="60"/>
         <image name="plus" width="250" height="250"/>
         <image name="plus.magnifyingglass" catalog="system" width="64" height="56"/>
         <image name="user" width="16" height="16"/>
