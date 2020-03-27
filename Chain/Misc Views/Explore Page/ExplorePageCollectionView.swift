@@ -12,7 +12,7 @@ import UIKit
 extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         switch section{
-        case 0: return 0 //Return one cell
+        case 0: return 1 //Return one cell
         case 1: return otherChains.count //Something is wrong here and below
         default: return 0
         }
@@ -91,7 +91,6 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             return CGSize(width: width, height: height)
         }else{
             return CGSize(width: screenWidth, height: screenWidth/3)
-
         }
     }
     

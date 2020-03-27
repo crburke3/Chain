@@ -24,31 +24,31 @@ class SingleGlobalChainCollectionViewCell: UICollectionViewCell {
     }
     
     func cellDidLoad() {
+        roundView.addShadow()
         if chain.isDead{
                 deathDate.textColor = .red
             }
-            previewImage.roundCorners(corners: [.allCorners], radius: 5)
-            roundView.addShadow()
-            chainName.text = chain.chainName
-            deathDate.text = chain.deathDate.timeTillDeath()
-            let url = URL(string: chain.firstImageLink ?? "")
-            previewImage.kf.setImage(
-                with: url,
-                placeholder: UIImage(named: "fakeImg"),
-                options: [
-                    .scaleFactor(UIScreen.main.scale),
-                    .transition(.fade(1)),
-                    .cacheOriginalImage
-                ])
-            {
-                result in
-                switch result {
-                case .success(let value):
-                    break//
-                case .failure(let error):
-                    print("Loading chain preview image failed: \(error.localizedDescription)")
-                }
+        previewImage.roundCorners(corners: [.allCorners], radius: 5)
+        chainName.text = chain.chainName
+        deathDate.text = chain.deathDate.timeTillDeath()
+        let url = URL(string: chain.firstImageLink ?? "")
+        previewImage.kf.setImage(
+            with: url,
+            placeholder: UIImage(named: "fakeImg"),
+            options: [
+                .scaleFactor(UIScreen.main.scale),
+                .transition(.fade(1)),
+                .cacheOriginalImage
+            ])
+        {
+            result in
+            switch result {
+            case .success(let value):
+                break//
+            case .failure(let error):
+                print("Loading chain preview image failed: \(error.localizedDescription)")
             }
+        }
         }
     }
 

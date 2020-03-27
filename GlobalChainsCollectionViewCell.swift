@@ -35,6 +35,7 @@ class GlobalChainsCollectionViewCell: UICollectionViewCell, UICollectionViewData
             appsCollectionView.delegate = self
             appsCollectionView.dataSource = self
             appsCollectionView.backgroundColor = UIColor.clear
+            appsCollectionView.contentInset = .init(top: 16, left: 16, bottom: 16, right: 16)
             appsCollectionView.frame = CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.width, height: UIScreen.main.bounds.width/3)
             //appsCollectionView.register(ExplorePageCell.self, forCellWithReuseIdentifier: "GlobalChain")
             appsCollectionView.register(UINib(nibName: "SingleGlobalChainCollectionViewCell", bundle: .main), forCellWithReuseIdentifier: "ChainCell")
