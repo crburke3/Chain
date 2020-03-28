@@ -69,14 +69,17 @@ extension ExploreViewController: UICollectionViewDelegate, UICollectionViewDataS
             let chainSelected = otherChains[indexPath.row]
             masterCache.allChains.insert(chainSelected, at: 0) //Will need to find new way to store chains in cache, perhaps two chain collections, one for explore page and one for viewed ch
             
-            masterNav.pushViewController(chainSelected.viewController, animated: true)
+            //masterNav.pushViewController(chainSelected.viewController, animated: true)
+            tabBarController?.selectedIndex = 1
+            //self.performSegue(withIdentifier: "reveal", sender: self)
         } else {
             let chainSelected = topChains[indexPath.row]
             //let chainVC = ChainViewController()
             let chainVC = masterStoryBoard.instantiateViewController(withIdentifier: "ChainViewController") as! ChainViewController
             chainVC.mainChain = chainSelected
             masterCache.allChains.insert(chainSelected, at: 0) //Will need to find new way to store chains in cache, perhaps two chain collections, one for explore page and one for viewed ch
-            masterNav.pushViewController(chainSelected.viewController, animated: true)
+            tabBarController?.selectedIndex = 1
+            
         }
     }
     
