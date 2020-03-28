@@ -353,36 +353,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ige-U1-KJV">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="47"/>
-                                <color key="backgroundColor" red="0.9882352941176471" green="0.72941176470588232" blue="0.011764705882352941" alpha="0.5" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="47" id="6PD-3K-iJv"/>
-                                </constraints>
-                                <state key="normal" title="Send Invites">
-                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                                <connections>
-                                    <action selector="sendInvites:" destination="qiI-KG-Mag" eventType="touchUpInside" id="yq0-zn-sBh"/>
-                                </connections>
-                            </button>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B1G-XU-Xdu">
-                                <rect key="frame" x="29" y="59" width="317" height="34"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Friends" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zbP-w6-8ey">
-                                        <rect key="frame" x="-25" y="-5" width="367" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" white="0.66666666666666663" alpha="0.28578895246478875" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                    </textField>
-                                </subviews>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
-                            </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-cI-hkO">
-                                <rect key="frame" x="0.0" y="101" width="375" height="574"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="K4T-cI-hkO">
+                                <rect key="frame" x="0.0" y="106" width="375" height="561"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="user" rowHeight="60" id="5RG-QY-vW6" customClass="UserMenuCell" customModule="Chain" customModuleProvider="target">
@@ -425,24 +397,44 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Invite Friends" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V2j-5e-ghT">
+                                <rect key="frame" x="94.5" y="20" width="186.5" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="36" id="ijg-fO-HI9"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="26"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Search Friends" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zbP-w6-8ey">
+                                <rect key="frame" x="6" y="64" width="363" height="34"/>
+                                <color key="backgroundColor" white="0.66666666666666663" alpha="0.28578895246478875" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="ige-U1-KJV" firstAttribute="leading" secondItem="3bX-K2-PLB" secondAttribute="leading" id="FSe-m6-ng0"/>
-                            <constraint firstItem="ige-U1-KJV" firstAttribute="trailing" secondItem="3bX-K2-PLB" secondAttribute="trailing" id="HyX-JJ-4zC"/>
-                            <constraint firstItem="ige-U1-KJV" firstAttribute="top" secondItem="3bX-K2-PLB" secondAttribute="top" id="PEd-wk-1GD"/>
+                            <constraint firstItem="K4T-cI-hkO" firstAttribute="leading" secondItem="3bX-K2-PLB" secondAttribute="leading" id="1hE-Be-NfS"/>
+                            <constraint firstAttribute="bottom" secondItem="K4T-cI-hkO" secondAttribute="bottom" id="GFd-D9-FhJ"/>
+                            <constraint firstItem="3bX-K2-PLB" firstAttribute="trailing" secondItem="zbP-w6-8ey" secondAttribute="trailing" constant="6" id="MVq-vy-5LC"/>
+                            <constraint firstItem="V2j-5e-ghT" firstAttribute="top" secondItem="3bX-K2-PLB" secondAttribute="top" constant="20" id="NSH-al-SgC"/>
+                            <constraint firstItem="K4T-cI-hkO" firstAttribute="top" secondItem="zbP-w6-8ey" secondAttribute="bottom" constant="8" id="SW8-lR-cih"/>
+                            <constraint firstItem="zbP-w6-8ey" firstAttribute="leading" secondItem="3bX-K2-PLB" secondAttribute="leading" constant="6" id="XJv-5E-bKW"/>
+                            <constraint firstItem="zbP-w6-8ey" firstAttribute="top" secondItem="V2j-5e-ghT" secondAttribute="bottom" constant="8" id="gOT-2s-7uA"/>
+                            <constraint firstItem="V2j-5e-ghT" firstAttribute="centerX" secondItem="aXU-3n-HqN" secondAttribute="centerX" id="pmH-Wc-dbA"/>
+                            <constraint firstItem="K4T-cI-hkO" firstAttribute="trailing" secondItem="3bX-K2-PLB" secondAttribute="trailing" id="qEb-7p-91s"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="3bX-K2-PLB"/>
                     </view>
                     <connections>
                         <outlet property="tableView" destination="K4T-cI-hkO" id="jTt-pf-KQb"/>
                         <outlet property="textBox" destination="zbP-w6-8ey" id="WVg-kO-q7S"/>
-                        <outlet property="textBoxHolder" destination="B1G-XU-Xdu" id="ica-by-V26"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AbQ-x4-A3A" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="238" y="837"/>
+            <point key="canvasLocation" x="237.59999999999999" y="836.13193403298362"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="Kb6-za-nRA">
@@ -836,7 +828,7 @@
                                                         <string key="content">Followers
 294</string>
                                                         <attributes>
-                                                            <font key="NSFont" metaFont="menu" size="14"/>
+                                                            <font key="NSFont" metaFont="system" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>
