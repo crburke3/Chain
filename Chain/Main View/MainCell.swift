@@ -37,6 +37,7 @@ class MainCell: UITableViewCell {
         let user = ChainUser(_username: "Not Loaded", _phoneNumber: post.userPhone, _name: "Not Loaded")
         let profileVC = ChainProfileViewController.initFromSB(user: user)
         masterNav.pushViewController(profileVC, animated: true)
+        //tabBarController?.selectedIndex = 1
     }
     
     @IBOutlet weak var share: UIButton!
