@@ -371,23 +371,40 @@
                                                         <action selector="goToProfile:" destination="5RG-QY-vW6" eventType="touchUpInside" id="Zfn-hd-GDf"/>
                                                     </connections>
                                                 </button>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="JvE-pG-p64">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JvE-pG-p64">
                                                     <rect key="frame" x="15" y="4" width="52" height="52"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="52" id="FKs-JS-y1V"/>
+                                                        <constraint firstAttribute="height" constant="52" id="dpf-5j-Yzt"/>
+                                                    </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBV-gA-x4j">
-                                                    <rect key="frame" x="127" y="20" width="195" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sBV-gA-x4j">
+                                                    <rect key="frame" x="88" y="20" width="248" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="21" id="NQ4-dZ-sDX"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-n9-I2C">
+                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cb6-n9-I2C">
                                                     <rect key="frame" x="344" y="22" width="16" height="16"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="16" id="dEf-qN-DQw"/>
+                                                        <constraint firstAttribute="height" constant="16" id="nsY-k3-yMM"/>
+                                                    </constraints>
                                                 </view>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="sBV-gA-x4j" firstAttribute="centerY" secondItem="ABe-zS-g7N" secondAttribute="centerY" id="Ehl-q6-HDY"/>
+                                                <constraint firstItem="sBV-gA-x4j" firstAttribute="leading" secondItem="JvE-pG-p64" secondAttribute="trailing" constant="21" id="G5P-An-gqo"/>
+                                                <constraint firstItem="JvE-pG-p64" firstAttribute="centerY" secondItem="ABe-zS-g7N" secondAttribute="centerY" id="HFL-KN-WnQ"/>
+                                                <constraint firstItem="cb6-n9-I2C" firstAttribute="leading" secondItem="sBV-gA-x4j" secondAttribute="trailing" constant="8" id="LTl-Vj-V4P"/>
+                                                <constraint firstAttribute="trailing" secondItem="cb6-n9-I2C" secondAttribute="trailing" constant="15" id="Um1-4Q-3Cf"/>
+                                                <constraint firstItem="cb6-n9-I2C" firstAttribute="centerY" secondItem="ABe-zS-g7N" secondAttribute="centerY" id="aUU-Vr-lmS"/>
+                                                <constraint firstItem="JvE-pG-p64" firstAttribute="leading" secondItem="ABe-zS-g7N" secondAttribute="leading" constant="15" id="tKO-gb-nvF"/>
+                                            </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="profilePic" destination="JvE-pG-p64" id="Jx7-cA-EQg"/>
@@ -828,7 +845,7 @@
                                                         <string key="content">Followers
 294</string>
                                                         <attributes>
-                                                            <font key="NSFont" metaFont="system" size="14"/>
+                                                            <font key="NSFont" metaFont="menu" size="14"/>
                                                             <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                                                         </attributes>
                                                     </fragment>

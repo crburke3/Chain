@@ -16,11 +16,11 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     @IBOutlet weak var textBox: UITextField!
     @IBOutlet weak var textBoxHolder: UIView!
     
-    enum purpose:String {
-        case FRIENDS
-        case SEARCH_USERS
+    enum Purpose:String {
+        case FRIENDS //Invite to chain or other
+        case SEARCH_USERS //Seach to add friends
     }
-    
+    var purposeOfUse = Purpose.FRIENDS //Set to show friends by default
     var invitation = Invite(_chainName: "", _chainPreview: "", _dateSent: "", _expirationDate: "", _sentByUsername: "", _sentByPhone: "", _sentByProfile: "", _receivedBy: "", _index: 0)
     var userArray = [ChainUser]()
     //Load with currentUser.friends
@@ -29,9 +29,18 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.userArray.removeAll()
+        tableView.dataSource = self
+        tableView.delegate = self
         textBox.delegate = self
         textBox.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControl.Event.editingChanged)
-        userArray = masterAuth.currUser.friends //Base on enum
+        purposeOfUse = .SEARCH_USERS //Remove
+        if purposeOfUse == .FRIENDS { //List friends
+            self.userArray = masterAuth.currUser.friends
+            self.tableView.reloadData()
+        } else { //Search for users
+            
+        }
     }
 
     @IBAction func sendInvites(_ sender: Any) {
@@ -62,16 +71,11 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     @objc func textFieldDidChange(_ textField: UITextField) {
-        userArray = []
-        if let text = textField.text{
-            for friend in masterAuth.currUser.friends{
-                if friend.username.contains(find: text){
-                    userArray.append(friend)
-                }
-            }
+        if purposeOfUse == .SEARCH_USERS { //Only call function if purpose of view controller is to search for users
+            searchUser()
         }
-        tableView.reloadData()
     }
+    
     //
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
@@ -92,10 +96,6 @@ class UserMenuTableViewController: UIViewController, UITableViewDataSource, UITa
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath) as! UserMenuCell
-//        print("Selected \(cell.userName.text)")
-//        cell.contentView.backgroundColor = UIColor.white
-//        cell.selectedIcon.layer.backgroundColor = UIColor(displayP3Red: 15/250, green: 239/250, blue: 224/250, alpha: 0.3).cgColor
         let user = userArray[indexPath.row]
         masterNav.pushViewController(ChainProfileViewController.initFromSB(user: user), animated: true)
     }

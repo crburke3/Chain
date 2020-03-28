@@ -147,7 +147,8 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
         contentVC.invitation = Invite(_chainName: mainChain.chainName, _chainPreview: mainChain.firstImageLink ?? "", _dateSent: "", _expirationDate: mainChain.deathDate.toChainString() ?? "", _sentByUsername: masterAuth.currUser.username, _sentByPhone: masterAuth.currUser.phoneNumber, _sentByProfile: masterAuth.currUser.profile, _receivedBy: "", _index: index)
         contentVC.index = index
         contentVC.chain = mainChain.chainName
-        contentVC.userArray = masterAuth.currUser.friends
+        //contentVC.userArray = masterAuth.currUser.friends
+        contentVC.purposeOfUse = .FRIENDS
         //Set conentVC array to hold currentUsers friends
         self.fpc.set(contentViewController: contentVC)
         self.fpc.track(scrollView: contentVC.tableView)

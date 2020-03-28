@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import Firebase
 
 extension UserMenuTableViewController {
     func setupUI() {
@@ -33,4 +34,24 @@ extension UserMenuTableViewController {
         for row in selected {tableView.deselectRow(at: row, animated: true)}
         return 1
     }
+    
+    func searchUser() {
+        //Matching or contains query
+        userArray.removeAll()
+        if purposeOfUse == .SEARCH_USERS {
+            let db = Firestore.firestore()
+            db.collection("users").whereField("username", isEqualTo: textBox.text).getDocuments() { (querySnapshot, error) in
+                if let error = error { print(error) } else {
+                    for document in querySnapshot!.documents {
+                        //Push results to table view
+                        self.userArray.append(ChainUser(dict: document.data()))
+                    }
+                    self.tableView.reloadData()
+                }
+            }
+        } else {
+            //Search through Friends
+        }
+    }
+
 }
