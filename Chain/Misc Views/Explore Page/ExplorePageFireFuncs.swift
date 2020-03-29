@@ -31,7 +31,7 @@ extension ExploreViewController{
         var chainArray = [PostChain]()
         masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
         //masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").getDocuments()
-        masterFire.db.collection("chains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).order(by: "birthDate").getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("chains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).order(by: "birthDate", descending: false).getDocuments() { (querySnapshot, err) in
            if let err = err {
                print("Error getting documents: \(err)")
            } else {
@@ -52,7 +52,7 @@ extension ExploreViewController{
         var chainArray = [PostChain]()
        //Switch currentChains to feed once done testing
         masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
-        masterFire.db.collection("users").document(masterAuth.currUser.phoneNumber).collection("currentChains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).order(by: "birthDate").getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("users").document(masterAuth.currUser.phoneNumber).collection("currentChains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).order(by: "birthDate", descending: false).getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
