@@ -16,7 +16,14 @@ class ExploreViewController: UIViewController, PostChainDelegate {
     var topChains:[PostChain] = []
     var otherChains:[PostChain] = [] //Will hold Friend's or Global feed
     var collViewIndexReference:[String:IndexPath] = [:]
-
+    
+    enum CurrentlyDisplayedFeed: String {
+        case FriendsFeed
+        case GeneralFeed
+    }
+    
+    var currentFeed = CurrentlyDisplayedFeed.GeneralFeed //Should be set to FriendsFeed after testing
+    
     @IBAction func goBack(_ sender: Any) {
         if let navController = self.navigationController {
             navController.popViewController(animated: true)
@@ -56,6 +63,17 @@ class ExploreViewController: UIViewController, PostChainDelegate {
                 }
             }
         }
+        
+        let leftSwipeGest = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+        leftSwipeGest.direction = .left
+        collectionViewA.addGestureRecognizer(leftSwipeGest)
+        let rightSwipeGest = UISwipeGestureRecognizer(target: self, action: #selector(funcForGesture))
+        rightSwipeGest.direction = .right
+        collectionViewA.addGestureRecognizer(rightSwipeGest)
+    }
+    
+    @objc func funcForGesture(sender: UISwipeGestureRecognizer){
+        changeFeed()
     }
     
     func chainDidLoad(chain: PostChain) {

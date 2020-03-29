@@ -29,8 +29,9 @@ extension ExploreViewController{
     func loadUserFeed(returnNumber: Int, chains: @escaping ([PostChain])->()){
         //Add listener
         var chainArray = [PostChain]()
+        masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
         //masterFire.db.collection("users").document(currentUser.phoneNumber).collection("feed").getDocuments()
-        masterFire.db.collection("chains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).getDocuments() { (querySnapshot, err) in
+        masterFire.db.collection("chains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: returnNumber).order(by: "birthDate").getDocuments() { (querySnapshot, err) in
            if let err = err {
                print("Error getting documents: \(err)")
            } else {
@@ -49,7 +50,9 @@ extension ExploreViewController{
     func loadFriendsFeed(returnNumber: Int, chains: @escaping ([PostChain])->()){
      //Add listener
         var chainArray = [PostChain]()
-        masterFire.db.collection("users").document(masterAuth.currUser.phoneNumber).collection("feed").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).getDocuments() { (querySnapshot, err) in
+       //Switch currentChains to feed once done testing
+        masterFire.lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+        masterFire.db.collection("users").document(masterAuth.currUser.phoneNumber).collection("currentChains").whereField("birthDate", isGreaterThan: masterFire.lastReadTimestamp).limit(to: 1).order(by: "birthDate").getDocuments() { (querySnapshot, err) in
             if let err = err {
                 print("Error getting documents: \(err)")
             } else {
@@ -66,6 +69,32 @@ extension ExploreViewController{
     func loadChainPreviewForVisibleCell() {
         self.collectionViewA.indexPathsForVisibleItems
         self.collectionViewA.reloadData()
+    }
+    
+    func changeFeed() { //Called once swipe gesture is performed
+        if self.currentFeed == .FriendsFeed {
+            self.currentFeed = .GeneralFeed
+            loadUserFeed(returnNumber: 4) { (chains) in
+                for chain in chains{
+                    chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
+                    masterCache[chain.chainUUID] = chain
+                }
+                self.otherChains = chains
+                print("Retrieved User Feed")
+                self.collectionViewA.reloadData() //A is bottom collection view
+            }
+        } else {
+            self.currentFeed = .FriendsFeed
+            loadFriendsFeed(returnNumber: 4) { (chains) in
+                for chain in chains{
+                    chain.addDelegate(delegateID: "ExploreViewController", delegate: self)
+                    masterCache[chain.chainUUID] = chain
+                }
+                self.otherChains = chains
+                print("Retrieved Friends Feed")
+                self.collectionViewA.reloadData() //A is bottom collection view
+            }
+        }
     }
     
 }
