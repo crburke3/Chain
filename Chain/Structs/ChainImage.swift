@@ -27,6 +27,9 @@ class ChainImage{
     var heightImage:CGFloat = 0.0
     var isLiked:Bool = false
     var parentChain:PostChain?
+    var lastReadTimestamp = Timestamp(date: Date(timeIntervalSinceReferenceDate: -123456789.0))
+    var responses = [ChainImage]()
+    var numberOfImagesInPost = 1 //Might need a listener
     
     static var emptyPost:ChainImage{
         get{return ChainImage(link: "noLink", user: "noUser", userProfile: "noProfile", userPhone: "noPhone", image: UIImage(named: "fakeImg")!)}
@@ -59,16 +62,18 @@ class ChainImage{
     
     //When pulled from firestore
     init?(dict:[String:Any], parentChain:PostChain){
-        guard let _link = (dict["Link"] as? String),
-            let _time = (dict["Time"] as? Timestamp),
-            let _user = (dict["user"] as? String),
-            let _uuid = (dict["uuid"] as? String)
-        else{ return nil}
         
-        self.link = _link
-        self.time = _time.dateValue()
+        let _time = (dict["Time"] as? Timestamp)
+        self.lastReadTimestamp = _time!
+        let _user = dict["user"] as? String ?? ""
+        let _uuid = (dict["uuid"] as? String)
+        let _countPosts = (dict["numberOfImages"] as? Int)
+        let _link = (dict["Link"] as? String)
+        self.link = _link ?? ""
+        self.time = (_time!.dateValue())
         self.user = _user
-        self.uuid = _uuid
+        self.uuid = _uuid ?? ""
+        self.numberOfImagesInPost = _countPosts ?? 1
         self.userPhone = dict["userPhone"] as? String ?? ""
         self.userProfile = dict["userProfile"] as? String ?? ""
         self.widthImage = CGFloat(dict["width"] as? Double ?? 400.0)
@@ -95,7 +100,8 @@ class ChainImage{
                                     "index": self.localIndex,
                                     "width": self.widthImage,
                                     "height": self.heightImage,
-                                    "uuid": self.uuid]
+                                    "uuid": self.uuid,
+                                    "numberOfImages": self.numberOfImagesInPost]
         
         return retDict
     }
@@ -111,7 +117,8 @@ class ChainImage{
                                     "index": self.localIndex,
                                     "width": self.widthImage,
                                     "height": self.heightImage,
-                                    "uuid": self.uuid]
+                                    "uuid": self.uuid,
+                                    "numberOfImages": self.numberOfImagesInPost]
         
         return retDict
     }
@@ -184,6 +191,22 @@ class ChainImage{
     func uploadImage(completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
         
     }
+    
+    func getNextPost(completion: @escaping (ChainImage) -> ()) { //
+        let responseRef = masterFire.db.collection("chains").document(self.parentChain?.chainUUID ?? "").collection("posts").document(self.uuid).collection("responses")
+        print(self.lastReadTimestamp.dateValue())
+        
+        responseRef.whereField("Time", isGreaterThan: self.lastReadTimestamp).limit(to: 1).getDocuments(){ (querySnapshot, err) in
+        if let err = err {print("Error getting documents: \(err)")} else {
+                for document in querySnapshot!.documents {
+                    self.responses.append(ChainImage(dict: document.data(), parentChain: self.parentChain!)!)
+                    self.lastReadTimestamp = document.get("Time") as? Timestamp ?? self.lastReadTimestamp
+                    completion(ChainImage(dict: document.data(), parentChain: self.parentChain!)!)
+                }
+            }
+        }
+    }
+    
 }
 
 

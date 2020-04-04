@@ -58,7 +58,7 @@ class NewChainViewController: UIViewController, ChainCameraDelegate {
     @objc func mainImageTapped(sender: Any){
         print("image tapped")
         cameraVC = CameraViewController()
-        cameraVC.delegate = self
+        cameraVC.addDelegate(key: "NewChainViewController", delegate: self)
         masterNav.pushViewController(cameraVC, animated: true)
         //self.present(cameraVC, animated: true, completion: nil)
     }

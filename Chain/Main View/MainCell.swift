@@ -11,7 +11,7 @@ import PopupDialog
 import FloatingPanel
 import Firebase
 
-class MainCell: UITableViewCell {
+class MainCell: UITableViewCell, ChainCameraDelegate {
     //var fpc: FloatingPanelController!
     @IBOutlet var imgView: UIImageView!
     @IBOutlet var user: UILabel!
@@ -26,6 +26,9 @@ class MainCell: UITableViewCell {
     var post: ChainImage!
     var row: Int = 0
     var isPostLoaded = false
+    var isLoaded = false
+    var cameraVisible = false
+    var viewingImageNumber = 1
     
     @IBOutlet weak var optionsMenu: RoundButton!
     
@@ -54,6 +57,10 @@ class MainCell: UITableViewCell {
         }
     }
     
+    @IBAction func respondToPost(_ sender: Any) {
+    }
+    
+    
     @IBAction func heartTapped(_ sender: Any) {
         heartButton.startSpinner()
         self.post.like { (succ) in
@@ -77,9 +84,16 @@ class MainCell: UITableViewCell {
             self.contentView.layoutIfNeeded()
         }
     }
-    
-    
+   
     func cellDidLoad(){
+        let tap = UITapGestureRecognizer(target: self, action: #selector(imgTapped(sender:)))
+        tap.numberOfTapsRequired = 2
+        imgView.isUserInteractionEnabled = true
+        imgView.addGestureRecognizer(tap)
+        let heldDown = UILongPressGestureRecognizer(target: self, action: #selector(imgHeldDown(sender:)))
+        heldDown.minimumPressDuration = 1.0 //Number of seconds to be held down
+        imgView.addGestureRecognizer(heldDown)
+        //
         user.text = post.user
         user.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToProfile(_:))))
         user.isUserInteractionEnabled = true
@@ -129,7 +143,65 @@ class MainCell: UITableViewCell {
         print("double tapped")
     }
     
+    @objc func imgHeldDown(sender: UIImageView) {
+        if !cameraVisible {
+            cameraVisible = true
+            print("Responding to post")
+            let cameraVC = CameraViewController()
+            cameraVC.addDelegate(key: post.uuid, delegate: self)
+            cameraVC.chainName = post.parentChain?.chainUUID ?? "" //Get chain ID from chain being viewed
+            masterNav.pushViewController(cameraVC, animated: true)
+            //Push camera vc
+        }
+    }
+    
     @objc func imgTapped(sender: UIImageView){
-        moveExpansion()
+        //moveExpansion()
+        print("Getting next response")
+        viewingImageNumber += 1
+        if viewingImageNumber < post.numberOfImagesInPost {
+            //
+            post.getNextPost { (image) in
+                let url = URL(string: image.link)
+                self.imgView.kf.setImage(with: url)
+            }
+        }
+        if viewingImageNumber == post.numberOfImagesInPost {viewingImageNumber = 0}
+    }
+    
+    func didFinishImage(image: UIImage) { //Called after photo has been taken
+        cameraVisible = false
+        print("Appending Chain")
+        masterNav.popViewController(animated: true)
+        //Create ChainImage
+        var urlString = ""
+        let data = image.jpegData(compressionQuality: 1.0)!
+        let imageName = UUID().uuidString
+        let imageReference = Storage.storage().reference().child("Fitwork Images").child(imageName)
+        let metaDataForImage = StorageMetadata() //
+        metaDataForImage.contentType = "image/jpeg" //
+        
+        imageReference.putData(data, metadata: metaDataForImage) { (meta, err1) in //metadata: nil to metaDataForImage
+            if err1 != nil {return}
+            imageReference.downloadURL(completion: { (url, err2) in
+                if err2 != nil {return}
+                if url == nil {return}
+                urlString = url!.absoluteString //Hold URL
+                print(urlString)
+                //
+                let uploadImage = ChainImage(link: urlString, user: masterAuth.currUser.username, userProfile: masterAuth.currUser.profile, userPhone: masterAuth.currUser.phoneNumber, image: image)
+                uploadImage.link = urlString
+                let dict = uploadImage.toDict(height: image.size.height, width: image.size.width)
+                //Add to responses collection
+                //self.post.uuid = "umsIv3SnQolqT6nCCW8o"
+                let chainUUID = self.post.parentChain?.chainUUID ?? ""  //"umsIv3SnQolqT6nCCW8o"
+                let imageUUID = self.post.uuid //"2OmMp4jbtk1Bie6VEixX"
+
+                masterFire.db.collection("chains").document(chainUUID).collection("posts").document(imageUUID).collection("responses").addDocument(data: dict)
+                //Increment parent image counter
+                masterFire.db.collection("chains").document(chainUUID).collection("posts").document(imageUUID).updateData(["numberOfImages": FieldValue.increment(Int64(1))])
+                //
+            })
+        }
     }
 }

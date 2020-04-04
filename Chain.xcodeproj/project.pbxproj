@@ -359,7 +359,6 @@
 			isa = PBXGroup;
 			children = (
 				FA9C5B4A23C5547B00F1B41A /* NewChainViewController.swift */,
-				FA9C5B4B23C5547B00F1B41A /* NewChainAnimators.swift */,
 				FA9C5B4C23C5547B00F1B41A /* NewChainViewController.xib */,
 			);
 			path = "New Chain View";
@@ -380,6 +379,7 @@
 				FA6D484C2427F88A00EEC8E8 /* ChainProfileViewController.swift */,
 				FA6D484E2427F96500EEC8E8 /* ChainProfileCollectionView.swift */,
 				FA6D48502427FCF600EEC8E8 /* ChainCollectionViewCell.swift */,
+				FA9C5B4B23C5547B00F1B41A /* NewChainAnimators.swift */,
 			);
 			path = ChainProfileView;
 			sourceTree = "<group>";
@@ -552,12 +552,9 @@
 				68D18EA4242DA29700C6244A /* GlobalChainsCollectionViewCell.swift */,
 				68D18EA6242DA85100C6244A /* SingleGlobalChainCollectionViewCell.swift */,
 				68D18EA7242DA85100C6244A /* SingleGlobalChainCollectionViewCell.xib */,
-				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
 				FAAF0A3923C1913200838B0E /* ExplorePageCell.swift */,
-				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
 				FA6D48422425C6F100EEC8E8 /* ExploreHeaderReusableView.swift */,
 				FAAF0A3D23C1960600838B0E /* ExplorePageCollectionView.swift */,
-				68D18E9F242D845B00C6244A /* GlobalChainsCollectionViewCell.swift */,
 				FAAF0A3B23C192DC00838B0E /* ExplorePageFireFuncs.swift */,
 			);
 			path = "Explore Page";

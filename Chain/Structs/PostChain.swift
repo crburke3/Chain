@@ -227,7 +227,7 @@ class PostChain{
                     self.testTime = (document.get("Time") as? Timestamp)!
                     var dict = document.data() as [String : Any]
                     dict["uuid"] = document.documentID
-                    if let _post = ChainImage(dict: dict, parentChain: self){
+                    if let _post = ChainImage(dict: dict, parentChain: self){ //Not successfully creating ChainImage
                         post(_post)
                     }
                 }
@@ -303,6 +303,9 @@ class PostChain{
                         masterFire.updateFriendsFeed(chain: self) { (error) in
                             //
                         }
+                        postRef.document(uploadImage.uuid).updateData([
+                            "numberOfImages": FieldValue.increment(Int64(1))
+                        ])
                         completion(nil, uploadImage)
                     }
                 }

@@ -24,7 +24,7 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     let imagePicker = UIImagePickerController()
     let session = CKFPhotoSession()
     var chainName: String = ""
-    var delegate:ChainCameraDelegate?
+    private var delegates:[String:ChainCameraDelegate] = [:]
     let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     
     override func viewDidLoad() {
@@ -82,8 +82,8 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     }
     
     func doneEditing(image: UIImage) {
-        if delegate != nil{
-            delegate?.didFinishImage(image: image); return
+        for delegate in self.delegates.values{
+            delegate.didFinishImage(image: image); return
         }
         self.presentingViewController?.dismiss(animated: true, completion:nil)
     }
@@ -100,6 +100,10 @@ class CameraViewController: UIViewController, PhotoEditorDelegate {
     
     func canceledEditing() {
         print("user canceled editor")
+    }
+    
+    func addDelegate(key:String, delegate: ChainCameraDelegate){
+        self.delegates[key] = delegate
     }
 }
 

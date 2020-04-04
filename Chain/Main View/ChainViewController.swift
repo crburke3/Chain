@@ -34,13 +34,15 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     let loader = BeautifulLoadScreen(lottieAnimation: .UglyChain)
     var counter: Int = 0 //Remove
     let loadRadius: Int = 3 //Once x rows away from bottom of loaded posts, begin loading a new one
-    var mainChain:PostChain = masterCache["1b0LCcjiVh53Kb89xD8Q"]{
+    var mainChain = PostChain(chainUUID: "")
+    /* var mainChain:PostChain = masterCache["1b0LCcjiVh53Kb89xD8Q"]{
         didSet{
             self.mainChain.addDelegate(delegateID: "ChainViewController", delegate: self)
             self.mainChain.listenForChanges()
             self.mainChain.load { (err) in }
         }
     }
+ */
     
     override func viewWillAppear(_ animated: Bool) {
         self.mainChain.posts.last?.loadState = .LOADING
@@ -49,6 +51,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.mainChain = masterCache.allChains[0]
         view.addSubview(loader)
         loader.isHidden = true
         if mainChain.loaded == .LOADED{chainDidLoad(chain: mainChain)}
@@ -69,7 +72,7 @@ class ChainViewController: UIViewController, ChainImageDelegate, FloatingPanelCo
 
 
     func setupTableView(){
-        cameraVC.delegate = self
+        cameraVC.addDelegate(key: "ChainViewController", delegate: self)
         tableView.delegate = self
         tableView.dataSource = self
 
